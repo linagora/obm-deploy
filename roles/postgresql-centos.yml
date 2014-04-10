@@ -3,11 +3,11 @@
   user: root
 
   tasks:
-  - name: Install Postgresql Server
-    yum: pkg={{ item }} state=present
-    with_items: 
-     - postgresql91-server
-     - obm-PostgreSQL
+#  - name: Install Postgresql Server
+#    yum: pkg={{ item }} state=present
+#    with_items: 
+#     - postgresql91-server
+#     - obm-PostgreSQL
 
   - name: Copying exported_variables files 
     copy: src=../var/{{ item }} dest=/tmp/{{ item }}
@@ -23,7 +23,7 @@
     shell: /bin/bash /tmp/generate_obm-admin.expect
 
   - name: Configuration OBM Database
-    shell: /usr/bin/expect -d /tmp/obm-admin.expect > /var/log/expect-obm-admin.log 2>&1
+    shell: /usr/bin/expect -f /tmp/obm-admin.expect > /var/log/expect-obm-admin.log 2>&1
     
     
 #  - name: Install OBM Database
