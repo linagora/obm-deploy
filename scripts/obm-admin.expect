@@ -1,0 +1,26 @@
+#!/usr/bin/expect
+
+spawn /usr/bin/obm-admin
+expect "o Please enter external url (IP): \c"
+send "{{ externalurl }}\r"
+expect "o Plese enter LDAP server name : \c"
+send "{{ obmldapserver }}\r"
+expect "o Please enter the DataBase hostname: \c"
+send "{{ obmhost }}\r"
+expect "o Please enter the DataBase type (MYSQL/PGSQL): \c"
+send "{{ obmdbtype }}\r"
+expect "o Enter the DataBase name: \c"
+send "{{ obmdbname }}\r"
+expect "o Enter the DataBase user: \c"
+send "{{ obmdbuser }}\r"
+expect "o Enter the DataBase user password: \c"
+send "{{ obmdbpassword }}\r"
+expect "o Enter the root ldap password [mdp3PaAl]\n"
+send "{{ rootpw }}\r"
+expect "o Enter the cyrus administrator password [cyrus]\n"
+send "{{ cyruspw }}\r"
+expect "o Enter the Samba user password [m#Pa!NtA]\n"
+send "{{ sambapw }}\r"
+expect "o Do you want to add a LDAP syncrepl user? (y)es,(n)o [n]\n"
+send "n\r"
+
