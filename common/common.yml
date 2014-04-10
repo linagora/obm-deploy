@@ -1,0 +1,32 @@
+---
+- hosts: all
+  user: root
+
+  tasks:
+  - name: Disable some system services
+    action: command /bin/sed -i s/SELINUX=.*/SELINUX\=disabled/g /etc/selinux/config
+    action: command /usr/sbin/setenforce 0
+  
+  - name: Add some utils
+    yum: pkg={{ item }} state=present
+    with_items:
+     - vim
+     - mlocate
+     - wget
+     - curl
+     - libselinux-python
+
+  - name: Add Postgresql repo
+    yum: name=http://yum.postgresql.org/9.1/redhat/rhel-6-x86_64/pgdg-centos91-9.1-4.noarch.rpm state=present
+  
+  - name: Add OBM repo
+    yum: name=http://packages.obm.org/rpm/26/release/obm-release.noarch.rpm state=present 
+
+  - name: Add EPEL repo
+    yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm state=present 
+
+  - name: Disable OBM repo
+    action: command /bin/sed -i '4s/enabled=1/enabled=0/' /etc/yum.repos.d/obm.repo
+    action: command /bin/sed -i 's?26/next?25?' /etc/yum.repos.d/obm.repo
+    action: command /bin/sed -i 's/26/25/' /etc/yum.repos.d/obm.repo
+
