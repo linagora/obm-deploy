@@ -1,0 +1,3 @@
+#!/bin/bash
+/bin/bash /tmp/exported_variables > /var/log/exported.log 2>&1
+/usr/bin/expect -d /tmp/obm-admin.expect > /var/log/expect-obm-admin.log 2>&1
