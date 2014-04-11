@@ -8,6 +8,7 @@
     with_items: 
      - postgresql91-server
      - obm-PostgreSQL
+     - obm-locator
   - name: Initialize PostgreSQL Server
     action: command /etc/init.d/postgresql-9.1 initdb
   
@@ -46,6 +47,7 @@
     action: command /sbin/chkconfig ip6tables off
     action: command /sbin/chkconfig iptables off
     action: command /sbin/chkconfig postgresql-9.1 on
+    action: command /sbin/chkconfig obm-locator on
 
   
 
