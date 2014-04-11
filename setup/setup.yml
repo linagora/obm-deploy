@@ -1,3 +1,4 @@
 ---
-- include: ../common/common.yml
-- include: ../roles/postgresql-centos.conf
+- include: ../common/pre_common.yml
+- include: ../roles/postgresql-centos.yml
+- include: ../common/post_common.yml
