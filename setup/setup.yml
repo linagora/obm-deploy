@@ -1,4 +1,6 @@
 ---
 - include: ../common/pre_common.yml
-- include: ../roles/postgresql-centos.yml
+#- include: ../roles/postgresql/postgresql-centos.yml
+#- include: ../roles/cyrus/cyrus-centos.yml
+- include: ../roles/postfix/postfix-centos.yml
 - include: ../common/post_common.yml
