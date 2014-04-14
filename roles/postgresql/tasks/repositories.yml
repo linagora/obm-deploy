@@ -1,0 +1,7 @@
+---
+# file: roles/postgresql/tasks/repositories.yml
+
+- name: Enable Postgresql 9.1 Repository
+  yum: name=http://yum.postgresql.org/9.1/redhat/rhel-6-x86_64/pgdg-centos91-9.1-4.noarch.rpm state=present
+  tags: repositories
+

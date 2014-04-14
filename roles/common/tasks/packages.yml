@@ -1,0 +1,16 @@
+---
+# file: roles/common/tasks/packages.yml
+
+- name: Install some common and usefull packages
+  yum: pkg={{ item }} state=present
+  with_items:
+   - vim
+   - mlocate
+   - wget
+   - curl
+   - libselinux-python
+   - policycoreutils-python
+   - expect
+   - tmux
+  tags: packages
+

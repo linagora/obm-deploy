@@ -1,0 +1,7 @@
+---
+# file: webservers.yml
+- hosts: dbservers
+  roles:
+    - common
+    - obm
+    - dbtier

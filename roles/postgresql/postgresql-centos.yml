@@ -21,12 +21,7 @@
      - exported_variables
 
   - name: Copying install and configuration scripts
-    copy: src=./scripts/{{ item }} dest=/tmp/{{ item }}
-    with_items:
-     - generate_obm-admin.expect
-
-  - name: Generate OBM scripts
-    shell: /bin/bash /tmp/generate_obm-admin.expect
+    template: src=./scripts/obm-admin.expect dest=/tmp/obm-admin.expect
 
   - name: Symlink for obm-admin
     action: file src={{ item.src }} dest={{ item.dest }} state=link
