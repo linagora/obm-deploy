@@ -1,0 +1,4 @@
+---
+- include: ../../common/pre_common.yml
+- include: postgresql-centos.yml
+- include: ../../common/post_common.yml

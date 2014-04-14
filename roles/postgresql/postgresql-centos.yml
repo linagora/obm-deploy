@@ -1,0 +1,53 @@
+---
+- hosts: all
+  user: root
+
+  tasks:
+  - name: Install Postgresql Server
+    yum: pkg={{ item }} state=present
+    with_items: 
+     - postgresql91-server
+     - obm-PostgreSQL
+     - obm-locator
+  - name: Initialize PostgreSQL Server
+    action: command /etc/init.d/postgresql-9.1 initdb
+  
+  - name: Start PostgreSQL Server
+    service: name=postgresql-9.1 state=started
+
+  - name: Copying exported_variables files 
+    copy: src=./var/{{ item }} dest=/tmp/{{ item }}
+    with_items:
+     - exported_variables
+
+  - name: Copying install and configuration scripts
+    copy: src=./scripts/{{ item }} dest=/tmp/{{ item }}
+    with_items:
+     - generate_obm-admin.expect
+
+  - name: Generate OBM scripts
+    shell: /bin/bash /tmp/generate_obm-admin.expect
+
+  - name: Symlink for obm-admin
+    action: file src={{ item.src }} dest={{ item.dest }} state=link
+    with_items:
+     - { src: '/etc/init.d/postgresql-9.1', dest: '/etc/init.d/postgresql' }
+     - { src: '/var/lib/pgsql/9.1/data', dest: '/var/lib/pgsql/data' }
+
+
+  - name: Configuration OBM Database
+    shell: /usr/bin/expect -f /tmp/obm-admin.expect > /var/log/expect-obm-admin.log 2>&1
+   
+   
+
+#  - name: Getting Env
+#    action: command logger -p LOCAL1.info $LANG
+
+  - name: Final Environment Tweaks
+    action: command /sbin/chkconfig {{ item.command }} {{ item.statut }}
+    with_items:
+     - { command: 'ip6tables', statut: 'off' }
+     - { command: 'iptables', statut: 'off' }
+     - { command: 'postgresql-9.1', statut: 'on' }
+     - { command: 'obm-locator', statut: 'on' }
+
