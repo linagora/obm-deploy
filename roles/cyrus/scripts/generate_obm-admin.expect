@@ -1,0 +1,66 @@
+#!/bin/bash
+
+var="/tmp/exported_variables"
+
+echo "#!/usr/bin/expect" > /tmp/obm-admin.expect
+echo "" >> /tmp/obm-admin.expect
+echo "spawn /usr/bin/obm-admin" >> /tmp/obm-admin.expect
+externalurl=`tail -1 $var|cut -d";" -f1`
+echo 'expect "o Please enter external url (IP): \c"' >> /tmp/obm-admin.expect
+echo 'send "'$externalurl'\r"' >> /tmp/obm-admin.expect
+
+obmldapserver=`tail -1 $var|cut -d";" -f2`
+echo 'expect "o Plese enter LDAP server name : \c"' >> /tmp/obm-admin.expect
+echo 'send "'$obmldapserver'\r"' >> /tmp/obm-admin.expect
+
+echo 'expect "o Enable module LDAP, (y)es (n)o \c"' >> /tmp/obm-admin.expect
+echo 'send "'y'\r"' >> /tmp/obm-admin.expect
+
+echo 'expect "o Enable module MAIL, (y)es (n)o \c"' >> /tmp/obm-admin.expect
+echo 'send "'y'\r"' >> /tmp/obm-admin.expect
+
+echo 'expect "o Enable module SAMBA, (y)es (n)o \c"' >> /tmp/obm-admin.expect
+echo 'send "'n'\r"' >> /tmp/obm-admin.expect
+
+echo 'expect "o Enable module WEB, (y)es (n)o \c"' >> /tmp/obm-admin.expect
+echo 'send "'n'\r"' >> /tmp/obm-admin.expect
+
+obmhost=`tail -1 $var|cut -d";" -f3`
+echo 'expect "o Please enter the DataBase hostname: \c"' >> /tmp/obm-admin.expect
+echo 'send "'$obmhost'\r"' >> /tmp/obm-admin.expect
+
+obmdbtype=`tail -1 $var|cut -d";" -f4`
+echo 'expect "o Please enter the DataBase type (MYSQL/PGSQL): \c"' >> /tmp/obm-admin.expect
+echo 'send "'$obmdbtype'\r"' >> /tmp/obm-admin.expect
+
+obmdbname=`tail -1 $var|cut -d";" -f5`
+echo 'expect "o Enter the DataBase name: \c"' >> /tmp/obm-admin.expect
+echo 'send "'$obmdbname'\r"' >> /tmp/obm-admin.expect
+
+obmdbuser=`tail -1 $var|cut -d";" -f6`
+echo 'expect "o Enter the DataBase user: \c"' >> /tmp/obm-admin.expect
+echo 'send "'$obmdbuser'\r"' >> /tmp/obm-admin.expect
+
+obmdbpassword=`tail -1 $var|cut -d";" -f7`
+echo 'expect "o Enter the DataBase user password: \c"' >> /tmp/obm-admin.expect
+echo 'send "'$obmdbpassword'\r"' >> /tmp/obm-admin.expect
+
+rootpw=`tail -1 $var|cut -d";" -f8`
+echo 'expect "o Enter the root ldap password \\\[mdp3PaAl\\\]\n"' >> /tmp/obm-admin.expect
+echo 'send "'$rootpw'\r"' >> /tmp/obm-admin.expect
+
+cyruspw=`tail -1 $var|cut -d";" -f9`
+echo 'expect "o Enter the cyrus administrator password \\\[cyrus\\\]\n"' >> /tmp/obm-admin.expect
+echo 'send "'$cyruspw'\r"' >> /tmp/obm-admin.expect
+
+sambapw=`tail -1 $var|cut -d";" -f10`
+echo 'expect "o Enter the Samba user password \\\[m#Pa!NtA\\\]\n"' >> /tmp/obm-admin.expect
+echo 'send "'$sambapw'\r"' >> /tmp/obm-admin.expect
+
+echo 'expect "o Do you want to add a LDAP syncrepl user? (y)es,(n)o \\\[n\\\]\n"' >> /tmp/obm-admin.expect
+echo 'send "'n'\r"' >> /tmp/obm-admin.expect
+
+replaceconf=`tail -1 $var|cut -d ";" -f11`
+echo 'expect "o Do you want replace configuration ? (y)es,(n)o \c "' >> /tmp/obm-admin.expect
+echo 'send "'$replaceconf'\r"' >> /tmp/obm-admin.expect
+echo 'expect eof ' >> /tmp/obm-admin.expect

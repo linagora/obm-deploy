@@ -1,0 +1,2 @@
+#externalurl;obmldapserver;obmhost;obmdbtype;obmdbname;obmdbuser;obmdbpassword;rootpw;cyruspw;sambapw;replaceconf
+toto.example.com;toto.example.com;127.0.0.1;PGSQL;obm;obm;obm;mdp3PaAL;cyrus;m#Pa!NtA;y
