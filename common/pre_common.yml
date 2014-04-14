@@ -4,9 +4,13 @@
 
   tasks:
   - name: Disable some system services
-    action: command /bin/sed -i s/SELINUX=.*/SELINUX\=disabled/g /etc/selinux/config
-    action: command /usr/sbin/setenforce 0
-    action: command echo -e "\n#Disable ipv6\nnet.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
+    shell: /bin/sed -i s/SELINUX=.*/SELINUX\=disabled/g /etc/selinux/config
+
+  - name: Disbale SELinux
+    shell: /usr/sbin/setenforce 0
+
+  - name: Disable ipv6
+    shell: echo -e "\n#Disable ipv6\nnet.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
   
   - name: Add some utils
     yum: pkg={{ item }} state=present
@@ -16,6 +20,7 @@
      - wget
      - curl
      - libselinux-python
+     - policycoreutils-python
      - expect
 
   - name: Add Postgresql repo
