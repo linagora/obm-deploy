@@ -1,0 +1,13 @@
+---
+# file: roles/obm-locator/tasks/obm-locator.yml
+
+- name: Start OBM-Locator service
+  service: name={{ item }} state=started
+  with_items:
+   - obm-locator
+
+- name: Configure OBM-Locator startup
+  action: command /sbin/chconfig {{ item.command }} {{ item.status }}
+  with_items:
+   - { command: 'obm-locator', status: 'on' }
+

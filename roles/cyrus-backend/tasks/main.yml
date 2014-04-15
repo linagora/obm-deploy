@@ -1,0 +1,7 @@
+---
+# file: roles/cyrus-backend/tasks/main.yml
+
+tasks:
+ - include: packages.yml
+ - include: cyrus-backend.yml
+

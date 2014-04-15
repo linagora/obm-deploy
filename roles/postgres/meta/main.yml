@@ -1,0 +1,7 @@
+---
+# file: roles/postgres/meta/main.yml
+
+dependencies:
+ - { role: common }
+ - { role: obm-locator }
+

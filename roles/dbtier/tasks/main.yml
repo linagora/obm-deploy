@@ -1,8 +1,0 @@
----
-# file: roles/dbtier/tasks/main.yml
-
-tasks:
-- include: repositories.yml
-- include: packages.yml
-- include: reboot.yml
-

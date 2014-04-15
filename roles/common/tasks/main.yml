@@ -2,8 +2,9 @@
 # file: roles/common/tasks/main.yml
 
 tasks:
-- include: repositories.yml
-- include: packages.yml
-- include: selinux.yml
-- include: sysctl.yml
+ - include: repositories.yml
+ - include: packages.yml
+ - include: selinux.yml
+ - include: sysctl.yml
+ - include: iptables.yml
 

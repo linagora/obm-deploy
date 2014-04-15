@@ -1,0 +1,6 @@
+---
+# file: roles/cyrus-common/tasks/main.yml
+
+tasks:
+ - include: packages.yml
+

@@ -1,0 +1,15 @@
+---
+# file: roles/common/tasks/iptables.yml
+
+- name: Stop IPTables services
+  service: name={{ item }} state=stopped
+  with_items:
+   - iptables
+   - ip6tables
+
+- name: Configure IPTables startup
+  action: command /sbin/chkconfig {{ item.command }} {{ item.status }}
+  with_items:
+   - { command: 'iptables', status: 'off' }
+   - { command: 'ip6tables', status: 'off' }
+

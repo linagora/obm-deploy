@@ -1,0 +1,7 @@
+---
+# file: pgservers.yml
+
+- hosts: pgservers
+  roles:
+    - postgres
+

@@ -1,0 +1,7 @@
+---
+# file: roles/cyrus-backend/meta/main.yml
+
+dependencies:
+ - { role: cyrus-common }
+ - { role: obm-satellite }
+

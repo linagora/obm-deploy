@@ -1,7 +1,6 @@
 ---
-# file: webservers.yml
-- hosts: dbservers
-  roles:
-    - common
-    - obm
-    - dbtier
+# file: site.yml
+
+- include: pgservers.yml
+- include: myservers.yml
+

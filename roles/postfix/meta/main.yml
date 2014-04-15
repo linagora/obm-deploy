@@ -1,0 +1,7 @@
+---
+# file: roles/postfix/meta/main.yml
+
+dependencies:
+ - { role: common }
+ - { role: obm-satellite }
+
