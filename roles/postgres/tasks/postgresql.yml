@@ -2,22 +2,13 @@
 ## TODO: UPDATE THESE TASKS TO MAKE THEM RE-RUNNABLE
 
 - name: Initialize PostgreSQL Server
-  action: command /etc/init.d/postgresql-9.1 initdb
+  command: /etc/init.d/postgresql-9.1 initdb
 
 - name: Start PostgreSQL service
-  service: name={{ item }} state=started
-  with_items:
-   - postgresql-9.1
-
-- name: Copy exported_variables file
-  copy: src=files/{{ item }} dest=/tmp/{{ item }}
-  with_items:
-   - exported_variables
+  service: name=postgresql-9.1 state=started enabled=yes
 
 - name: Copy install and configuration script
-  template: src=files/{{ item }} dest=/tmp/{{ item }}
-  with_items:
-   - obm-admin.expect
+  template: src=obm-admin.expect dest=/tmp/obm-admin.expect
 
 - name: Symlink for obm-admin
   action: file src={{ item.src }} dest={{ item.dest }} state=link
@@ -27,9 +18,4 @@
 
 - name: Configure OBM Database
   shell: expect -f /tmp/obm-admin.expect > /var/log/expect-obm-admin.log 2>&1
-
-- name: Configure PostgreSQL startup
-  action: command /sbin/chkconfig {{ item.command }} {{ item.status }}
-  with_items:
-   - { command: 'postgresql-9.1', status: 'on' }
 
