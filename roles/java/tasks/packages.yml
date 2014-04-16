@@ -1,0 +1,7 @@
+---
+# file: roles/java/tasks/packages.yml
+
+## TODO: UPDATE THESE TASKS TO MAKE THEM RE-RUNNABLE
+
+- name: Download Sun JDK
+  shell: /usr/bin/wget http://packages.obm.org/rpm/other/private/jdk-6u45-linux-x64-rpm.bin -O /tmp/jdk-6u45-linux-x64-rpm.bin

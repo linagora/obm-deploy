@@ -1,0 +1,7 @@
+---
+# file: roles/obm-locator/meta/main.yml
+
+dependencies:
+ - { role: obm }
+ - { role: java }
+
