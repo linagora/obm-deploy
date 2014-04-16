@@ -1,42 +1,35 @@
 ---
-- hosts: all
-  user: root
+- name: Install Cyrus Server
+  yum: pkg={{ item }} state=present
+  with_items: 
+   - obm-cyrus
+   - obm-satellite
 
-  tasks:
-  - name: Install Cyrus Server
-    yum: pkg={{ item }} state=present
-    with_items: 
-     - obm-cyrus
-     - obm-satellite
+- name: Copying exported_variables files 
+  copy: src=./var/{{ item }} dest=/tmp/{{ item }}
+  with_items:
+   - exported_variables
 
-  - name: Copying exported_variables files 
-    copy: src=./var/{{ item }} dest=/tmp/{{ item }}
-    with_items:
-     - exported_variables
+- name: Copying install and configuration scripts
+  copy: src=./scripts/{{ item }} dest=/tmp/{{ item }}
+  with_items:
+   - generate_obm-admin.expect
 
-  - name: Copying install and configuration scripts
-    copy: src=./scripts/{{ item }} dest=/tmp/{{ item }}
-    with_items:
-     - generate_obm-admin.expect
-
-  - name: Generate OBM scripts
-    shell: /bin/bash /tmp/generate_obm-admin.expect
+- name: Generate OBM scripts
+  shell: /bin/bash /tmp/generate_obm-admin.expect
 
 
-  - name: Configuration Cyrus Server
-    shell: /usr/bin/expect -f /tmp/obm-admin.expect > /var/log/expect-obm-admin.log 2>&1
-  
+- name: Configuration Cyrus Server
+  shell: /usr/bin/expect -f /tmp/obm-admin.expect > /var/log/expect-obm-admin.log 2>&1
+
 
 #  - name: Getting Env
 #    action: command logger -p LOCAL1.info $LANG
 
-  - name: Final Environment Tweaks
-    action: command /sbin/chkconfig {{ item.command }} {{ item.statut }}
-    with_items:
-     - { command: 'ip6tables', statut: 'off' }
-     - { command: 'iptables', statut: 'off' }
-     - { command: 'cyrus-imapd', statut: 'on' }
-     - { command: 'obm-satellite', statut: 'on' }
-
-  
-
+- name: Final Environment Tweaks
+  action: command /sbin/chkconfig {{ item.command }} {{ item.statut }}
+  with_items:
+   - { command: 'ip6tables', statut: 'off' }
+   - { command: 'iptables', statut: 'off' }
+   - { command: 'cyrus-imapd', statut: 'on' }
+   - { command: 'obm-satellite', statut: 'on' }

@@ -1,4 +1,3 @@
 ---
-tasks:
- - include: packages.yml
+- include: packages.yml
 

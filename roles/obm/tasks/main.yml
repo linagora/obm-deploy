@@ -1,4 +1,3 @@
 ---
-tasks:
- - include: repositories.yml
+- include: repositories.yml
 

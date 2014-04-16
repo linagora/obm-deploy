@@ -1,7 +1,4 @@
 ---
-# file: roles/obm-locator/tasks/main.yml
-
-tasks:
- - include: packages.yml
- - include: obm-locator.yml
+- include: packages.yml
+- include: obm-locator.yml
 

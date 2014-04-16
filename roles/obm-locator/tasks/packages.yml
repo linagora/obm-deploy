@@ -1,6 +1,4 @@
 ---
-# file: roles/obm-locator/tasks/packages.yml
-
 - name: Install OBM-Locator Server
   yum: pkg={{ item }} state=present
   with_items:

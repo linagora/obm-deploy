@@ -1,6 +1,4 @@
 ---
-# file: roles/obm-locator/tasks/obm-locator.yml
-
 - name: Start OBM-Locator service
   service: name={{ item }} state=started
   with_items:

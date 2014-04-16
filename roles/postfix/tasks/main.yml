@@ -1,5 +1,4 @@
 ---
-tasks:
- - include: packages.yml
- - include: postfix.yml
+- include: packages.yml
+- include: postfix.yml
 

@@ -1,6 +1,4 @@
 ---
-# file: roles/common/tasks/iptables.yml
-
 - name: Stop IPTables services
   service: name={{ item }} state=stopped
   with_items:

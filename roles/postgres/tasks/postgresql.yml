@@ -1,6 +1,4 @@
 ---
-# file: roles/postgres/tasks/postgresql.yml
-
 ## TODO: UPDATE THESE TASKS TO MAKE THEM RE-RUNNABLE
 
 - name: Initialize PostgreSQL Server

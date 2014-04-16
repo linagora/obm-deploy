@@ -1,8 +1,5 @@
 ---
-# file: roles/postgres/tasks/main.yml
-
-tasks:
- - include: repositories.yml
- - include: packages.yml
- - include: postgresql.yml
+- include: repositories.yml
+- include: packages.yml
+- include: postgresql.yml
 

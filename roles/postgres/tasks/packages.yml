@@ -1,6 +1,4 @@
 ---
-# file: roles/postgres/tasks/packages.yml
-
 - name: Install PostgreSQL Server
   yum: pkg={{ item }} state=present
   with_items:

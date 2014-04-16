@@ -1,6 +1,4 @@
 ---
-# file: roles/common/tasks/selinux.yml
-
 - name: Disable SELinux startup
   selinux: state=disabled
   tags: selinux
