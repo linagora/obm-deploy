@@ -2,10 +2,5 @@
 # file: roles/common/tasks/selinux.yml
 
 - name: Disable SELinux startup
-  lineinfile: dest=/etc/selinux/config regexp=^SELINUX= line=SELINUX=disable
+  selinux: state=disabled
   tags: selinux
-
-- name: Disable SELinux immediately
-  shell: /usr/sbin/setenforce 0
-  tags: selinux
-
