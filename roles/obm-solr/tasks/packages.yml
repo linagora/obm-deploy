@@ -2,8 +2,6 @@
 # file: roles/obm-solr/tasks/packages.yml
 
 - name: Install Solr Server
-  yum: pkg={{ item }} state=present
-  with_items:
-   - obm-solr
+  yum: pkg=obm-solr state=present
   tags: packages
 
