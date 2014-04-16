@@ -1,6 +1,0 @@
----
-# file: roles/dbtier/tasks/reboot.yml
-
-- name: Reboot server
-  action: command /sbin/shutdown -r 0 "Reboot is triggered by Ansible"
-  tags: reboot
