@@ -1,7 +1,4 @@
 ---
-# file: roles/java/tasks/main.yml
-
-tasks:
- - include: packages.yml
- - include: java.yml
+- include: packages.yml
+- include: java.yml
 
