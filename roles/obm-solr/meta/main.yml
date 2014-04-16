@@ -1,6 +1,4 @@
 ---
-# file: roles/obm-solr/meta/main.yml
-
 dependencies:
  - { role: obm }
  - { role: java }
