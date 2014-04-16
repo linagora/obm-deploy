@@ -1,7 +1,0 @@
----
-# file: javaservers.yml
-
-- hosts: javaservers
-  roles:
-    - java
-
