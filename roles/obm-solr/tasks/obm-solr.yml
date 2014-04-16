@@ -1,5 +1,6 @@
 ---
 # file: roles/obm-solr/tasks/obm-locator.yml
 
-- name: Configuration Postfix Server
+- name: Configure Solr server
   shell: /usr/bin/obm-tomcat-trigger > /var/log/obm-tomcat-trigger.log 2>&1
+

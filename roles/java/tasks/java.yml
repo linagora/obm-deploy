@@ -1,27 +1,25 @@
 ---
 # file: roles/java/tasks/java.yml
 
-## TODO: UPDATE THESE TASKS TO MAKE THEM RE-RUNNABLE
+- name: Make JDK 6 installer executable 
+  acl: name=/tmp/jdk-6u45-linux-x64-rpm.bin state=present permissions="x"
 
-- name: Chmod +x
-  shell: /bin/chmod +x /tmp/jdk-6u45-linux-x64-rpm.bin
-
-- name: Installing JDK 6
+- name: Run JDK 6 installer
   shell: y|/bin/sh /tmp/jdk-6u45-linux-x64-rpm.bin
 
-
-- name: Installing up the JAVA JDK6 package
+- name: Configure JAVA alternatives 
   shell: /usr/sbin/alternatives --install /usr/bin/{{ item.command }} {{ item.command }} /usr/java/jdk1.6.0_45/{{ item.path }} 20000
   with_items:
    - { command: 'java', path: 'jre/bin/java' }
    - { command: 'javaws', path: 'jre/bin/javaws' }
    - { command: 'javac', path: 'bin/javac' }
 
-- name: Installing jvm 1
-  shell: /bin/mkdir -p /usr/lib/jvm
+- name: Initialize JVM directory
+  file: path=/usr/lib/jvm state=directory
 
-- name: Installing jvm 2
+- name: Configure JVM  alternatives
   shell: /usr/sbin/alternatives --install /usr/lib/jvm/{{ item.command }} {{ item.bin }} /usr/java/{{ item.path }} 20000
   with_items:
    - { command: 'java', bin: 'java_sdk', path: 'jdk1.6.0_45/' }
    - { command: 'jre', bin: 'jre', path: 'jdk1.6.0_45/jre/' }
+
