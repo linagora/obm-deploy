@@ -3,15 +3,8 @@
 
 ## TODO: UPDATE THESE TASKS TO MAKE THEM RE-RUNNABLE
 
-- name: Copy exported_variables file
-  copy: src=files/{{ item }} dest=/tmp/{{ item }}
-  with_items:
-   - exported_variables
-
 - name: Copy install and configuration script
-  template: src=files/{{ item }} dest=/tmp/{{ item }}
-  with_items:
-   - obm-admin.expect
+  template: src=obm-admin.expect dest=/tmp/obm-admin.expect
 
 - name: Configure Cyrus Server
   shell: expect -f /tmp/obm-admin.expect > /var/log/expect-obm-admin.log 2>&1
