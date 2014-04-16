@@ -5,3 +5,6 @@
   lineinfile: dest=/etc/sysctl.conf regexp='^net\.ipv6\.conf\.all\.disable_ipv6' line='net.ipv6.conf.all.disable_ipv6 = 1'
   tags: sysctl ipv6
 
+- name: Reload sysctl configuration
+  command: sysctl -p
+  tags: sysctl ipv6
