@@ -1,6 +1,4 @@
 ---
-# file: roles/obm-satellite/meta/main.yml
-
 dependencies:
  - { role: obm }
 

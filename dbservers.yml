@@ -1,6 +1,4 @@
 ---
-# file: site.yml
-
 - include: pgservers.yml
 - include: myservers.yml
 

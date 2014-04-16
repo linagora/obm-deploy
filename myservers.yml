@@ -1,6 +1,4 @@
 ---
-# file: myservers.yml
-
 - hosts: myservers
   roles:
     - mysql

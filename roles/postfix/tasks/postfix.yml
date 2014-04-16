@@ -1,6 +1,4 @@
 ---
-# file: roles/postfix/tasks/postfix.yml
-
 ## TODO: UPDATE THESE TASKS TO MAKE THEM RE-RUNNABLE
 
 - name: Copy exported_variables file

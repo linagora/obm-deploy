@@ -1,6 +1,4 @@
 ---
-# file: roles/cyrus-backend/tasks/packages.yml
-
 - name: Install Cyrus-IMAPd Packages
   yum: pkg=obm-cyrus state=present
   tags: packages

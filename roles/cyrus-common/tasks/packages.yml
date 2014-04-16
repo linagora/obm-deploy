@@ -1,6 +1,4 @@
 ---
-# file: roles/cyrus-common/tasks/packages.yml
-
 - name: Install Cyrus-IMAPd Packages
   yum: pkg={{ item }} state=present
   with_items:

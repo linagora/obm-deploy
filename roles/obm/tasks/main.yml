@@ -1,6 +1,4 @@
 ---
-# file: roles/obm/tasks/main.yml
-
 tasks:
  - include: repositories.yml
 

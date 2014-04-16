@@ -1,6 +1,4 @@
 ---
-# file: roles/obm/tasks/repositories.yml
-
 - name: Enable OBM Repository
   yum: name=http://packages.obm.org/rpm/25/release/obm-release.noarch.rpm state=present
   tags: repositories

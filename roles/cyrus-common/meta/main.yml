@@ -1,6 +1,4 @@
 ---
-# file: roles/cyrus-common/meta/main.yml
-
 dependencies:
  - { role: common }
 

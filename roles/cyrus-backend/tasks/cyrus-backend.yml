@@ -1,6 +1,4 @@
 ---
-# file: roles/cyrus-backend/tasks/cyrus-backend.yml
-
 ## TODO: UPDATE THESE TASKS TO MAKE THEM RE-RUNNABLE
 
 - name: Copy install and configuration script

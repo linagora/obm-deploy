@@ -1,6 +1,4 @@
 ---
-# file: roles/postfix/tasks/main.yml
-
 tasks:
  - include: packages.yml
  - include: postfix.yml

@@ -1,6 +1,4 @@
 ---
-# file: roles/obm-satellite/tasks/obm-satellite.yml
-
 - name: Start OBM-Satellite service
   service: name={{ item }} state=started
   with_items:
