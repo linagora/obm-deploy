@@ -1,7 +1,5 @@
 ---
 - name: Install OBM-Locator Server
-  yum: pkg={{ item }} state=present
-  with_items:
-   - obm-locator
+  yum: pkg=obm-locator state=present
   tags: packages
 

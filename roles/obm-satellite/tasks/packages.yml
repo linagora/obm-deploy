@@ -1,7 +1,5 @@
 ---
 - name: Install OBM-Satellite Server
-  yum: pkg={{ item }} state=present
-  with_items:
-   - obm-satellite
+  yum: pkg=obm-satellite state=present
   tags: packages
 
