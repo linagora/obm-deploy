@@ -1,4 +1,0 @@
----
-- name: Configure Solr server
-  shell: /usr/bin/obm-tomcat-trigger > /var/log/obm-tomcat-trigger.log 2>&1
-

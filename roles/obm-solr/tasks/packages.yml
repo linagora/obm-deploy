@@ -4,3 +4,4 @@
   tags: packages
   notify:
     - Start Tomcat
+    - Update Tomcat

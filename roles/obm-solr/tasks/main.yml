@@ -1,3 +1,2 @@
 ---
 - include: packages.yml
-- include: obm-solr.yml
