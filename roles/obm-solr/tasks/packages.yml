@@ -3,5 +3,5 @@
   yum: pkg=obm-solr state=present
   tags: packages
   notify:
-    - Start Tomcat
     - Update Tomcat
+    - Start Tomcat
