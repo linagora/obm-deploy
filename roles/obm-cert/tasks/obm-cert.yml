@@ -1,0 +1,11 @@
+---
+- name: Create OBM certificate
+  command: >
+      creates=/etc/obm/certs/{{ obm_external_url }}_signed.pem
+      /usr/share/obm-ca/createcert.sh "{{ obm_external_url }}"
+
+- name: Set the OBM certificate symlink
+  file: >
+      src=/etc/obm/certs/{{ obm_external_url }}_signed.pem
+      dest=/etc/obm/certs/obm_cert.pem
+      state=link
