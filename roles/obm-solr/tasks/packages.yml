@@ -1,6 +1,4 @@
 ---
-# file: roles/obm-solr/tasks/packages.yml
-
 - name: Install Solr Server
   yum: pkg=obm-solr state=present
   tags: packages
