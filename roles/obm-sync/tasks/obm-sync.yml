@@ -2,4 +2,4 @@
 - name: Create obm-sync configuration file
   template: src=obm-sync.xml dest=/etc/obm-tomcat/applis/obm-sync.xml
   notify:
-    - Update obm-tomcat
+    - Update Tomcat
