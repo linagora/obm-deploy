@@ -1,0 +1,12 @@
+obm_db_type: postgres
+obm_db_host: localhost
+obm_db_user: obm
+obm_db_password: obm
+obm_db_name: obm
+obm_db_drivers:
+  mysql: com.mysql.jdbc.Driver
+  postgres: org.postgresql.Driver
+jdbc_urls:
+  mysql: jdbc:mysql://{{obm_db_host}}/{{obm_db_name}}?relaxAutocommit=true&zeroDateTimeBehavior=convertToNull&jdbcCompliantTruncation=false&interactiveClient=true&serverTimezone=GMT&useGmtMillisForDatetime=true&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&connectionCollation=utf8_general_ci
+  postgres: jdbc:postgresql://{{obm_db_host}}/{{obm_db_name}}
+ 
