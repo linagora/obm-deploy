@@ -1,0 +1,6 @@
+---
+dependencies:
+ - { role: obm }
+ - { role: java }
+ - { role: obm-tomcat }
+ - { role: obm-storage-vars }

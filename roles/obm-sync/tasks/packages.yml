@@ -1,0 +1,6 @@
+---
+- name: Install obm-sync server
+  yum: pkg=obm-sync state=present
+  tags: packages
+  notify:
+    - Start Tomcat
