@@ -3,4 +3,5 @@
   yum: pkg=obm-sync state=present
   tags: packages
   notify:
+    - Update Tomcat
     - Start Tomcat
