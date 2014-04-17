@@ -1,4 +1,4 @@
 ---
 - include: packages.yml
-- include: obm-locator.yml
+- include: obm-satellite.yml
 
