@@ -1,3 +1,13 @@
 ---
+- name: Enable Postfix SMTP module
+  command: >
+      creates=/etc/obm-satellite/mods-enabled/postfixSmtpInMaps
+      /usr/sbin/osenmod postfixSmtpInMaps
+
+- name: Enable Postfix access module
+  command: >
+      creates=/etc/obm-satellite/mods-enabled/postfixAccess
+      /usr/sbin/osenmod postfixAccess
+
 - name: Start OBM-Satellite service
   service: name=obm-satellite state=started enabled=yes
