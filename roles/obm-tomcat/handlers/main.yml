@@ -1,0 +1,5 @@
+---
+- name: Start Tomcat
+  service: name=obm-tomcat state=started enabled=yes
+- name: Update obm-tomcat
+  shell: /usr/bin/obm-tomcat-trigger > /var/log/obm-tomcat-trigger.log 2>&1
