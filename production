@@ -1,2 +1,5 @@
 # Please refer here to show what you can do with this file :
 # http://docs.ansible.com/playbooks_best_practices.html#how-to-arrange-inventory-stage-vs-production
+
+[ldapservers]
+toto.example.com

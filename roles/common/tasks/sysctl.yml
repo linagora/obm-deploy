@@ -1,5 +1,21 @@
 ---
+- name: Remove bridge-nf-call
+  sysctl: name=net.bridge.bridge-nf-call-{{ item }} state=absent reload=no
+  with_items:
+   - ip6tables
+   - iptables
+   - arptables
+  tags: sysctl ipv6
+
+#- name: Remove bridge-nf-call
+#  sysctl: name="net.bridge.bridge-nf-call-iptables" state=absent reload=no
+#  tags: sysctl ipv6
+#
+#- name: Remove bridge-nf-call
+#  sysctl: name="net.bridge.bridge-nf-call-arptables" state=absent reload=no
+#  tags: sysctl ipv6
+
 - name: Disable IPv6
-  sysctl: name="net.ipv6.conf.all.disable_ipv6" value=1 sysctl_set=yes state=present reload=yes
+  sysctl: name="net.ipv6.conf.all.disable_ipv6" value=1 sysctl_set=yes 
   tags: sysctl ipv6
 

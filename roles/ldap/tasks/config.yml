@@ -1,0 +1,6 @@
+---
+- name: Copy slapd.conf
+  template: src=slapd.conf dest=/etc/openldap/slapd.conf
+  notify:
+   - Restart LDAP
+

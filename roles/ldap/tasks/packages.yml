@@ -1,0 +1,9 @@
+---
+- name: Install OBM LDAP Server
+  yum: pkg={{ item }} state=present
+  with_items:
+   - openldap-servers
+   - openldap-clients
+  tags: packages
+  notify:
+    - Start LDAP

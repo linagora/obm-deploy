@@ -1,0 +1,6 @@
+---
+- name: Start LDAP 
+  service: name=slapd state=started enabled=yes
+
+- name: Restart LDAP 
+  service: name=slapd state=restarted enabled=yes sleep=2

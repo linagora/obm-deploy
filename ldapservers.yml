@@ -1,0 +1,5 @@
+---
+- hosts: ldapservers
+  roles:
+    - ldap
+
