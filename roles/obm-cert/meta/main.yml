@@ -1,5 +1,3 @@
 ---
 dependencies:
- - { role: common }
- - { role: java }
  - { role: obm-conf }

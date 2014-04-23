@@ -1,4 +1,4 @@
 ---
 dependencies:
- - { role: obm }
+ - { role: common }
  - { role: obm-cert }
