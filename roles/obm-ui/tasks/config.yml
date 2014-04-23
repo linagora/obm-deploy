@@ -1,0 +1,9 @@
+---
+- name: Deploy obm_conf.inc
+  file: src=obm_conf.inc dest=/etc/obm/obm_conf.inc
+
+- name: Deploy OBM Automaton configuration
+  template: src=01-automaton.ini dest=/etc/obm/conf/01-automaton.ini
+
+- name: Merge OBM configuration files
+  assemble: src=/etc/obm/conf dest=/etc/obm/obm_conf.ini

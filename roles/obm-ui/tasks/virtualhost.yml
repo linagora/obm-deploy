@@ -1,0 +1,5 @@
+---
+- name: Deploy OBM VirtualHost
+  template: src=obm.conf dest=/etc/httpd/conf.d/obm.conf
+  notify:
+   - Restart Apache

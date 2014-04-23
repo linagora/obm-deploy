@@ -1,0 +1,5 @@
+---
+# OBM LDAP server
+obm_ldap_host: localhost
+obm_sync_host: localhost
+opush_host: localhost

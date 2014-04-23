@@ -1,0 +1,7 @@
+---
+- name: Install Apache Server
+  yum: pkg={{ item }}
+  with_items:
+   - obm-ui
+   - mod_ssl
+  tags: packages
