@@ -1,0 +1,6 @@
+---
+- name: Start NTP Server
+  service: name=ntpd state=started enabled=yes
+
+- name: Restart NTP Server
+  service: name=ntpd state=restarted

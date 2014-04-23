@@ -1,0 +1,17 @@
+---
+- name: NTP Server configuration cleanup
+  lineinfile: dest=/etc/ntp.conf regexp="server {{ item }}" state=absent
+  with_items:
+   - 1
+   - 2
+   - 3
+  when: ntp_server is defined
+
+- name: NTP Server configuration update
+  lineinfile: dest=/etc/ntp.conf regexp="server 0" line="server {{ ntp_server }} iburst"
+  when: ntp_server is defined
+  notify:
+   - Restart NTP Server
+
+- name: Update system date
+  shell: ntpq -p

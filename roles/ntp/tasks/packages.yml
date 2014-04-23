@@ -1,0 +1,5 @@
+---
+- name: Install NTP server
+  yum: pkg=ntp
+  notify:
+   - Restart NTP Server

@@ -10,5 +10,6 @@
    - policycoreutils-python
    - expect
    - tmux
+   - man
   tags: packages
 
