@@ -1,7 +1,19 @@
 ---
+# OBM global configuration
 obm_external_url: obm.example.com
 obm_db_type: PGSQL
 obm_db_host: localhost
 obm_db_user: obm
 obm_db_password: obm
 obm_db_name: obm
+
+# OBM SSL certificates
+ca_path: /var/lib/obm-ca/cacert.pem
+cert_path: /etc/obm/certs/obm_cert.pem
+key_path: /etc/obm/certs/obm_cert.pem
+
+# Global NTP server (if needed)
+#ntp_server
+
+# OBM-Sync clients behind LemonLDAP
+lemonclients: ['127.0.0.1']

@@ -3,3 +3,4 @@
 - include: dbservers.yml
 - include: ldapservers.yml
 - include: webservers.yml
+- include: javaservers.yml
