@@ -1,0 +1,6 @@
+---
+- name: Create OBM configuration directory
+  file: path=/etc/obm/conf state=directory
+
+- name: Deploy OBM Global configuration
+  template: src=00-global.ini dest=/etc/obm/conf/00-global.ini

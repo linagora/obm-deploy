@@ -1,0 +1,3 @@
+---
+- include: repositories.yml
+- include: config.yml
