@@ -26,14 +26,33 @@ $ git clone https://github.com/ansible/ansible -b release1.5.5
 ```
 ### Activate Ansible environment
 ```.bash
-$ source ./hacking/env-setup
+$ source ansible/hacking/env-setup
 ```
 ### Make virtualenvwrapper to automatically setup ansible (_optional_)
 ```.bash
-# virtualenvwrapper must be installed on your OS
+# Do this only if you use virtualenvwrapper
+# It must be installed on your OS
 $ cat > ~/.virtualenvs/obm-deploy-env/bin/postactivate << EOF
 #!/bin/bash
 source $(pwd)/ansible/hacking/env-setup
 EOF
 $ chmod +x ~/.virtualenvs/obm-deploy-env/bin/postactivate
 ```
+### Install a virtual machine to test deployment
+
+You can use any kind of VM.
+
+Only make sure that you have access to it using SSH and user root.
+
+### Exit developpement environnement
+```.bash
+$ deactivate
+```
+
+### Next time you need to work on obm-deploy
+```.bash
+$ cd obm-deploy
+$ source obm-deploy-env/bin/activate
+$ source ansible/hacking/env-setup
+```
+
