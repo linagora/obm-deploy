@@ -42,6 +42,6 @@
    state=present
    dest={{ updatesdir }}/applied_updates.txt
   with_items: available_updates.stdout_lines
-  #when: "item not in applied_updates"
+  when: "item not in applied_updates.stdout_lines"
   delegate_to: "{{ obm_db_host }}"
   tags: obm-db
