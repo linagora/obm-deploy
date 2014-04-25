@@ -1,6 +1,7 @@
 ---
 - name: Start Apache service
   service: name=httpd state=started enabled=yes
+  tags: obm-ui
 
 - name: Deploy obm_conf.inc
   copy: src=obm_conf.inc dest=/etc/obm/obm_conf.inc
