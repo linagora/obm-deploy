@@ -1,5 +1,4 @@
 ---
 - include: repositories.yml
 - include: packages.yml
-- include: postgresql.yml
-
+- include: config.yml

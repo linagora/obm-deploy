@@ -1,9 +1,15 @@
 ---
+- name: Start Apache service
+  service: name=httpd state=started enabled=yes
+
 - name: Deploy obm_conf.inc
-  file: src=obm_conf.inc dest=/etc/obm/obm_conf.inc
+  copy: src=obm_conf.inc dest=/etc/obm/obm_conf.inc
+  tags: obm-ui
 
 - name: Deploy OBM Automaton configuration
   template: src=01-automaton.ini dest=/etc/obm/conf/01-automaton.ini
+  tags: obm-ui
 
 - name: Merge OBM configuration files
   assemble: src=/etc/obm/conf dest=/etc/obm/obm_conf.ini
+  tags: obm-ui

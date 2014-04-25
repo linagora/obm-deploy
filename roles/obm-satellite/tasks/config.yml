@@ -1,0 +1,4 @@
+---
+- name: Start OBM-Satellite service
+  service: name=obm-satellite state=started enabled=yes
+  tags: obm-satellite

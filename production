@@ -1,5 +1,20 @@
 # Please refer here to show what you can do with this file :
 # http://docs.ansible.com/playbooks_best_practices.html#how-to-arrange-inventory-stage-vs-production
 
+#[javaservers]
+#toto.example.com
+
 [ldapservers]
 toto.example.com
+
+[pgservers]
+toto.example.com
+
+[uiservers]
+toto.example.com
+
+[webmailservers]
+
+[javaservers]
+toto.example.com
+

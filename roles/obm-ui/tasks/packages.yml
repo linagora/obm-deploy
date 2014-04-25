@@ -4,4 +4,4 @@
   with_items:
    - obm-ui
    - mod_ssl
-  tags: packages
+  tags: obm-ui

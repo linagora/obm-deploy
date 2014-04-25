@@ -1,11 +1,18 @@
 ---
 - name: Deploy OBM Automaton configuration
   template: src=03-sync.ini dest=/etc/obm/conf/03-sync.ini
+  tags: obm-sync
 
 - name: Merge OBM configuration files
   assemble: src=/etc/obm/conf dest=/etc/obm/obm_conf.ini
+  tags: obm-sync
 
-- name: Create obm-sync configuration file
+- name: Create OBM-Sync configuration file
   template: src=obm-sync.xml dest=/etc/obm-tomcat/applis/obm-sync.xml
-  notify:
-    - Update Tomcat
+  register: command_result
+  tags: obm-sync
+
+- name: Update Tomcat
+  command: /usr/bin/obm-tomcat-trigger
+  when: command_result.changed
+  tags: obm-sync

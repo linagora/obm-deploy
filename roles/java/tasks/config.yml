@@ -1,17 +1,30 @@
 ---
-- name: Configure Java alternatives 
+- name: Create JVM directory
+  file: path=/usr/lib/jvm state=directory
+  tags: java
+
+- name: Run JDK 6 installer
+  shell: >
+      creates=/usr/java/jdk1.6.0_45/bin/java
+      free_form=true
+      echo ''|/bin/sh /tmp/jdk-6u45-linux-x64-rpm.bin
+  register: command_result
+  tags: java
+
+- name: Configure Java alternatives
   command: /usr/sbin/alternatives --install /usr/bin/{{ item.command }} {{ item.command }} /usr/java/jdk1.6.0_45/{{ item.path }} 20000
   with_items:
    - { command: 'java', path: 'jre/bin/java' }
    - { command: 'javaws', path: 'jre/bin/javaws' }
    - { command: 'javac', path: 'bin/javac' }
-
-- name: Create JVM directory
-  file: path=/usr/lib/jvm state=directory
+   - { command: 'jps', path: 'bin/jps' }
+  when: command_result.changed
+  tags: java
 
 - name: Configure JVM alternatives
   command: /usr/sbin/alternatives --install /usr/lib/jvm/{{ item.command }} {{ item.bin }} /usr/java/{{ item.path }} 20000
   with_items:
    - { command: 'java', bin: 'java_sdk', path: 'jdk1.6.0_45/' }
    - { command: 'jre', bin: 'jre', path: 'jdk1.6.0_45/jre/' }
-
+  when: command_result.changed
+  tags: java

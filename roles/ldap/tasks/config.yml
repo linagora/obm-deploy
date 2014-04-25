@@ -1,5 +1,14 @@
 ---
+- name: Start LDAP
+  service: name=slapd state=started enabled=yes
+  tags: ldap
+
 - name: Copy slapd.conf
   template: src=slapd.conf dest=/etc/openldap/slapd.conf
-  notify:
-   - Restart LDAP
+  register: command_result
+  tags: ldap
+
+- name: Restart LDAP
+  service: name=slapd state=restarted
+  when: command_result.changed
+  tags: ldap

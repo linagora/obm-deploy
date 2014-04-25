@@ -1,3 +1,4 @@
 ---
 - name: Start OBM-Locator service
   service: name=obm-locator state=started enabled=yes
+  tags: obm-locator

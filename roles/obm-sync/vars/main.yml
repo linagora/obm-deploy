@@ -1,7 +1,8 @@
-obm_db_drivers:
+---
+ obm_db_drivers:
   MYSQL: com.mysql.jdbc.Driver
   PGSQL: org.postgresql.Driver
-jdbc_urls:
+ jdbc_urls:
   MYSQL: jdbc:mysql://{{obm_db_host}}/{{obm_db_name}}?relaxAutocommit=true&zeroDateTimeBehavior=convertToNull&jdbcCompliantTruncation=false&interactiveClient=true&serverTimezone=GMT&useGmtMillisForDatetime=true&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&connectionCollation=utf8_general_ci
   PGSQL: jdbc:postgresql://{{obm_db_host}}/{{obm_db_name}}
- 
+ pgdatadir: /var/lib/pgsql/data

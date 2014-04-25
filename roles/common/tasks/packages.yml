@@ -1,15 +1,16 @@
 ---
 - name: Install some common and useful packages
-  yum: pkg={{ item }} state=present
+  yum: pkg={{ item }}
   with_items:
    - vim
    - mlocate
    - wget
    - curl
-   - libselinux-python
    - policycoreutils-python
-   - expect
    - tmux
    - man
+   - htop
+   - atop
+   - strace
+   - screen
   tags: packages
-

@@ -2,4 +2,3 @@
 - hosts: myservers
   roles:
     - mysql
-

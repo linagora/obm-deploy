@@ -1,5 +1,4 @@
 ---
 - name: Install OBM-Locator Server
-  yum: pkg=obm-locator state=present
-  tags: packages
-
+  yum: pkg=obm-locator
+  tags: obm-locator

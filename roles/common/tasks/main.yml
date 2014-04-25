@@ -4,4 +4,3 @@
 - include: selinux.yml
 - include: sysctl.yml
 - include: iptables.yml
-

@@ -2,3 +2,4 @@
 - include: packages.yml
 - include: config.yml
 - include: virtualhost.yml
+- include: pgperms.yml

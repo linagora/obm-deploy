@@ -1,4 +1,5 @@
 ---
 - name: Disable SELinux startup
   selinux: state=disabled
+  changed_when: False
   tags: selinux

@@ -1,5 +1,19 @@
 ---
 - name: Install OBM-Satellite Server
-  yum: pkg=obm-satellite state=present
-  tags: packages
+  yum: pkg=obm-satellite
+  register: command_result
+  tags: obm-satellite
 
+- name: Enable Postfix SMTP module
+  command: >
+      creates=/etc/obm-satellite/mods-enabled/postfixSmtpInMaps
+      /usr/sbin/osenmod postfixSmtpInMaps
+  when: command_result.changed
+  tags: obm-satellite
+
+- name: Enable Postfix access module
+  command: >
+      creates=/etc/obm-satellite/mods-enabled/postfixAccess
+      /usr/sbin/osenmod postfixAccess
+  when: command_result.changed
+  tags: obm-satellite

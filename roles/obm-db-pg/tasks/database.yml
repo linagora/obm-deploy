@@ -1,0 +1,84 @@
+---
+- name: Deploy local OBM PostgreSQL Permissions
+  template: src=01-local-obm dest={{ pgdatadir }}/pg_hba.d/01-local-obm
+  register: command_result
+  delegate_to: "{{ obm_db_host }}"
+  tags: obm-db
+
+- name: Merge PostgreSQL configuration files
+  assemble: src={{ pgdatadir }}/pg_hba.d dest={{ pgdatadir }}/pg_hba.conf
+  when: command_result.changed
+  delegate_to: "{{ obm_db_host }}"
+  tags: obm-db
+
+- name: Temporarily disable postgres password
+  lineinfile:
+   dest=/var/lib/pgsql/data/pg_hba.conf
+   regexp="^local.*all.*postgres.*ident"
+   line="local all postgres trust"
+  when: command_result.changed
+  delegate_to: "{{ obm_db_host }}"
+  tags: obm-db
+
+- name: Reload PostgreSQL
+  service: name=postgresql state=reloaded
+  when: command_result.changed
+  delegate_to: "{{ obm_db_host }}"
+  tags: obm-db
+
+- name: Create OBM postgres user
+  postgresql_user:
+   name={{ obm_db_user }}
+   password={{ obm_db_password }}
+   role_attr_flags=CREATEDB,NOSUPERUSER,NOCREATEROLE
+  when: command_result.changed
+  delegate_to: "{{ obm_db_host }}"
+  tags: obm-db
+
+- name: Create OBM database
+  postgresql_db:
+   name={{ obm_db_name }}
+   owner={{ obm_db_user }}
+   encoding='UTF-8'
+  when: command_result.changed
+  delegate_to: "{{ obm_db_host }}"
+  tags: obm-db
+
+- name: Reenable postgres password
+  lineinfile:
+   dest=/var/lib/pgsql/data/pg_hba.conf
+   regexp="^local.*all.*postgres.*trust"
+   line="local all postgres ident"
+  when: command_result.changed
+  delegate_to: "{{ obm_db_host }}"
+  tags: obm-db
+
+- name: Reload PostgreSQL
+  service: name=postgresql state=reloaded
+  when: command_result.changed
+  delegate_to: "{{ obm_db_host }}"
+  tags: obm-db
+
+- name: Deploy SQL scripts
+  template: src={{ item }} dest={{ scriptsdir }}/{{ item }}
+  with_items:
+   - setup.sql
+   - lang.sql
+  when: command_result.changed
+  delegate_to: "{{ obm_db_host }}"
+  tags: obm-db
+
+- name: Launch SQL scripts
+  command: psql -f {{ scriptsdir }}{{item}}
+  environment: pg_env
+  with_items:
+   - /setup.sql
+   - /create_obmdb_{{ obm_major_version }}.pgsql.sql
+   - /obmdb_default_values_{{ obm_major_version }}.sql
+   - /data-fr/obmdb_ref_{{ obm_major_version }}.sql
+   - /data-fr/obmdb_nafcode_{{ obm_major_version }}.sql
+   - /obmdb_prefs_values_{{ obm_major_version }}.sql
+   - /lang.sql
+  when: command_result.changed
+  delegate_to: "{{ obm_db_host }}"
+  tags: obm-db

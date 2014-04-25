@@ -1,5 +1,0 @@
----
-- name: Update Tomcat
-  command: /usr/bin/obm-tomcat-trigger
-- name: Start Tomcat
-  service: name=obm-tomcat state=started enabled=yes

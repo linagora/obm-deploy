@@ -1,0 +1,17 @@
+---
+- name: Deploy local OBM PostgreSQL Permissions
+  template: src=03-remote-obm-ui dest={{ pgdatadir }}/pg_hba.d/03-remote-obm-ui
+  delegate_to: "{{ obm_db_host }}"
+  tags: obm-ui
+
+- name: Merge PostgreSQL configuration files
+  assemble: src={{ pgdatadir }}/pg_hba.d dest={{ pgdatadir }}/pg_hba.conf
+  register: command_result
+  delegate_to: "{{ obm_db_host }}"
+  tags: obm-ui
+
+- name: Reload PostgreSQL
+  service: name=postgresql state=reloaded
+  when: command_result.changed
+  delegate_to: "{{ obm_db_host }}"
+  tags: obm-ui

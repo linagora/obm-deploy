@@ -3,4 +3,4 @@
   get_url: url=http://packages.obm.org/rpm/other/jdk-6u45-linux-x64-rpm.bin
            dest=/tmp/jdk-6u45-linux-x64-rpm.bin
            sha256sum=f432ce7dbc4ff7c104d67a967e28078ec50e084d1934e579ba6c7d6038d76cf9
-
+  tags: java

@@ -1,0 +1,4 @@
+---
+- name: Install OBM Core (db scripts)
+  yum: name=obm-core
+  tags: obm-db

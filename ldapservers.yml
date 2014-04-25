@@ -2,4 +2,3 @@
 - hosts: ldapservers
   roles:
     - ldap
-
