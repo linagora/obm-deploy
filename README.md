@@ -63,5 +63,7 @@ Get involved
 
 Please refer to [Contributing.md] to show how to contribute to this project.
 
-[Contributing.md](https://github.com/linagora/obm-deploy/blob/master/DOCUMENTATION.md)
+[Install.md]: https://github.com/linagora/obm-deploy/blob/master/INSTALL.md "Install.md"
+[Documentation.md]: https://github.com/linagora/obm-deploy/blob/master/DOCUMENTATION.md "Documentation.md"
+[Contributing.md]: https://github.com/linagora/obm-deploy/blob/master/CONTRIBUTING.md "Contributing.md"
 
