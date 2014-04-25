@@ -1,4 +1,5 @@
 ---
+- include: hosts.yml
 - include: repositories.yml
 - include: packages.yml
 - include: selinux.yml
