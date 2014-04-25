@@ -42,7 +42,18 @@ $ chmod +x ~/.virtualenvs/obm-deploy-env/bin/postactivate
 
 You can use any kind of VM.
 
-Only make sure that you have access to it using SSH and user root.
+Make sure that you have access to it using SSH and user root.
+
+If you want to use our test infrastructure, add this to you /etc/hosts :
+```.bash
+ip_of_your_vm toto.example.com
+ip_of_your_vm obm.example.com
+```
+
+### Launch deployement of your VM
+```.bash
+ansible-playbook -i production site.xml
+```
 
 ### Exit developpement environnement
 ```.bash
