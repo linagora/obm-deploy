@@ -1,1 +1,3 @@
-collected_files/*
+collected_files
+ansible
+obm-deploy-dev

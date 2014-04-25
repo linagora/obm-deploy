@@ -1,50 +1,67 @@
-#OBM-Deploy
-Obm-deploy is a tool to facilitate and automate the obm deploy on a server.
+OBM-Deploy
+==========
 
-##The aim goal
-This tool let install an obm-full or a distributed obm 
+Ansible based Open Business Management deployment tool
 
-### Content organization
-We choose the following layout to organize the playbook contents : 
+ _OBM Installations made easy_
 
-``` 
-production                # inventory file for production servers
-stage                     # inventory file for stage environment
-group_vars/
-   group1                 # here we assign variables to particular groups
-   group2                 # ...
-host_vars/
-   hostname1              # if systems need specific variables, put them here
-   hostname2              # ...
-site.yml                  # master playbook
-webservers.yml            # playbook for webserver tier
-dbservers.yml             # playbook for dbserver tier
+Disclaimer
+----------
 
-roles/
-    common/               # this hierarchy represents a "role"
-        tasks/            #
-            main.yml      #  <-- tasks file can include smaller files if warranted
-        handlers/         #
-            main.yml      #  <-- handlers file
-        templates/        #  <-- files for use with the template resource
-            ntp.conf.j2   #  <------- templates end in .j2
-        files/            #
-            bar.txt       #  <-- files for use with the copy resource
-            foo.sh        #  <-- script files for use with the script resource
-        vars/             #
-            main.yml      #  <-- variables associated with this role
-        meta/             #
-            main.yml      #  <-- role dependencies
-        scripts/          #
-            my_scripts    #  <-- script files
+At the moment, this tool is more a proof of concept than anything else.
 
+We discourage you to use in anything related to production environment.
 
-    cyrus/                # same kind of structure as "common" was above, done for the cyrus role
-    postgres/             # same kind of structure as "common" was above, done for the postgres role
-    postfix/              # same kind of structure as "common" was above, done for the postfix role
-    
-```
+Linagora SA or any of the developpers will give you any kind of support
+related to usage of this tool in real conditions.
 
-### Work in Progress
-Experimental Ansible-based deployment system.
-Only works on CentOS for now.
+Objectives
+----------
+
+ * Reduce cost of OBM installations
+ * Make OBM installations standardised
+ * Allow developpers to quickly build a developpement environnement
+ * Separate configuration management from packaging
+ * Improve continuous integration
+
+Current Status
+--------------
+
+ * Only CentOS/RHEL 6 is supported
+ * Foolowing roles can be installed using ansible :
+    - Tomcat based Java webapps : OBM-Sync, OBM-Solr
+    - Jetty based Java webapps : OBM-Locator
+    - PHP based webapps : OBM-UI
+    - Perl based webapp : OBM-Satellite
+    - OpenLDAP directory
+    - PostgreSQL database
+    - OBM CA and certificates management
+    - ... More will come
+
+Dreamed features
+----------------
+
+ * Corosync / Pacemaker
+ * PostgreSQL Streming Replication / PGPool
+ * OpenLDAP Sync Replication
+ * Better OBM database updates management
+ * Auto-generated documentation
+ * ... More will come :-)
+
+Installation
+------------
+
+Please refer to [Install.md] to show installation instructions for this project.
+
+Documentation
+-------------
+
+Please refer to [Documentation.md] to show full documentation for this project.
+
+Get involved
+------------
+
+Please refer to [Contributing.md] to show how to contribute to this project.
+
+[Contributing.md](https://github.com/linagora/obm-deploy/blob/master/DOCUMENTATION.md)
+
