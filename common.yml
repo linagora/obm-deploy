@@ -1,4 +1,4 @@
 ---
-- hosts: commonservers
+- hosts: all
   roles:
     - common 
