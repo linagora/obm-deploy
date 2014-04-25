@@ -1,7 +1,7 @@
 ---
-- include: hosts.yml
 - include: repositories.yml
 - include: packages.yml
 - include: selinux.yml
+- include: hosts.yml
 - include: sysctl.yml
 - include: iptables.yml
