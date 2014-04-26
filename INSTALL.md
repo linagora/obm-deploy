@@ -25,8 +25,8 @@ $ source obm-deploy-env/bin/activate
 ```
 
 ### Activate your virtual environment (alternative using virtualenvwrapper)
-# You must have created your virtualenv with virtualenvwrapper
 ```.bash
+# You must have created your virtualenv with virtualenvwrapper
 $ workon obm-deploy-env
 ```
 
