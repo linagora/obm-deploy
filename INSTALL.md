@@ -45,7 +45,7 @@ $ git clone https://github.com/ansible/ansible -b release1.5.5
 $ source ansible/hacking/env-setup
 ```
 
-### Make virtualenvwrapper to auto-setup ansible (only for virtualenvwrapper)
+### Make virtualenvwrapper to auto-setup ansible (only virtualenvwrapper)
 ```.bash
 $ cat > ~/.virtualenvs/obm-deploy-env/bin/postactivate << EOF
 #!/bin/bash
@@ -82,7 +82,7 @@ $ source obm-deploy-env/bin/activate
 $ source ansible/hacking/env-setup
 ```
 
-### Next time you need to work with obm-deploy (alternative using virtualenvwrapper)
+### Next time you need to work with obm-deploy (using virtualenvwrapper)
 ```.bash
 $ workon obm-deploy-env
 ```
