@@ -75,8 +75,8 @@
    - /setup.sql
    - /create_obmdb_{{ obm_major_version }}.pgsql.sql
    - /obmdb_default_values_{{ obm_major_version }}.sql
-   - /data-fr/obmdb_ref_{{ obm_major_version }}.sql
-   - /data-fr/obmdb_nafcode_{{ obm_major_version }}.sql
+   - /data-{{ obm_language }}/obmdb_ref_{{ obm_major_version }}.sql
+   - /data-{{ obm_language }}/obmdb_nafcode_{{ obm_major_version }}.sql
    - /obmdb_prefs_values_{{ obm_major_version }}.sql
    - /lang.sql
   when: command_result.changed
