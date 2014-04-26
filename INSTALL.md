@@ -8,7 +8,7 @@ First, you need to ensure that python2 with virtualenv and pip support is instal
 $ git clone https://github.com/linagora/obm-deploy
 $ cd obm-deploy
 ```
-### Create a virtual environment (use virtualenv2 in archlinux)
+### Create a virtual environment (please use virtualenv2 in archlinux)
 ```.bash
 $ virtualenv --no-site-packages obm-deploy-env
 ```
