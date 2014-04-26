@@ -12,7 +12,7 @@ At the moment, this tool is more a proof of concept than anything else.
 
 We discourage you to use in anything related to production environment.
 
-Linagora SA or any of the developpers will give you any kind of support
+Neither Linagora SA nor OBM devs will give you any kind of support
 related to usage of this tool in real conditions.
 
 Objectives
