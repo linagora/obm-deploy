@@ -3,3 +3,8 @@
   selinux: state=disabled
   changed_when: False
   tags: selinux
+
+- name: Disable SELinux now
+  shell: setenforce 0
+  changed_when: False
+  tags: selinux
