@@ -15,40 +15,40 @@ Ansible is a tool to automate tasks execution on remote hosts.
 Ansible terminology
 -------------------
 
-* ### [Inventory] : Infrastructure description files
+### [Inventory] : Infrastructure description files
 
 It is used to declare groups and hosts.
 
-* ### [Playbook] : Top-level container for deployments
+### [Playbook] : Top-level container for deployments
 
 It is used to associate groups to specific roles.
 
 The main plabook, site.yml, includes all other playbooks and is used to deploy a full infrastructure.
 
-* ### [Role]: List all tasks and variables related to the same feature
+### [Role]: List all tasks and variables related to the same feature
 
 There is a role for each OBM component.
 
-* ### Task: Action to execute on remote hosts
+### Task: Action to execute on remote hosts
 
 Tasks consists in a large variety of actions like:
-  -- Launch a command
-  -- Install a (set of) package(s)
-  -- Start a service
-  -- Upload or download a file
-  -- Set a sysctl parameter
-  -- ...
+  * Launch a command
+  * Install a (set of) package(s)
+  * Start a service
+  * Upload or download a file
+  * Set a sysctl parameter
+  * ...
 
 Each kind of task is called a [Module].
 There is a lot of [included modules] and write our own modules to extend ansible is not really painfull.
 
 Execution of a [Task] can be [conditonned] by success of another task, [delegated] to another host or be [iterated] over a list of elements.
 
-* ### [Handler]: Task called by its name by another task
+### [Handler]: Task called by its name by another task
 
 We discourage handlers usage because, to be factorised, they are only executed at the end of playbook. If you use site.xml to deploy you infrastructure, they will be all runned at the end of installation wich can cause problems.
 
-* ### [Variable]: Will I really define what is a variable ?
+### [Variable]: Will I really define what is a variable ?
 
 Variables can be used in [Jinja2] templates but also in all ansible YAML description files.
 
