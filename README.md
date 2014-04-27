@@ -56,7 +56,7 @@ Please refer to [Install.md] to show installation instructions for this project.
 Documentation
 -------------
 
-Please refer to [Documentation.md] to show full documentation for this project.
+Please refer to [docs/index.md] to show full documentation for this project.
 
 Get involved
 ------------
@@ -64,6 +64,6 @@ Get involved
 Please refer to [Contributing.md] to show how to contribute to this project.
 
 [Install.md]: https://github.com/linagora/obm-deploy/blob/master/INSTALL.md "Install.md"
-[Documentation.md]: https://github.com/linagora/obm-deploy/blob/master/DOCUMENTATION.md "Documentation.md"
+[docs/index.md]: https://github.com/linagora/obm-deploy/blob/master/docs/index.md "docs/index.md"
 [Contributing.md]: https://github.com/linagora/obm-deploy/blob/master/CONTRIBUTING.md "Contributing.md"
 
