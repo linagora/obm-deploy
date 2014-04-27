@@ -42,7 +42,7 @@ Tasks consists in a large variety of actions like:
 Each kind of task is called a [Module].
 There is a lot of [included modules] and write our own modules to extend ansible is not really painfull.
 
-Execution of a task can be [conditonned] by success of another task, [delegated] to another host or be [iterated] over a list of elements.
+Execution of a task can be [conditionned] by success of another task, [delegated] to another host or be [iterated] over a list of elements.
 
 ### [Handler]: Task called by its name by another task
 
