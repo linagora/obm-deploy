@@ -49,10 +49,20 @@ $ source ansible/hacking/env-setup
 
 ### Make virtualenvwrapper to auto-setup ansible (only virtualenvwrapper)
 ```.bash
+# If you only want to setup ansible environment on activation
 $ cat > ~/.virtualenvs/obm-deploy-env/bin/postactivate << EOF
 #!/bin/bash
 source $(pwd)/ansible/hacking/env-setup
 EOF
+
+# If you also want to automatically cd in to obm-deploy directory
+$ chmod +x ~/.virtualenvs/obm-deploy-env/bin/postactivate
+$ cat > ~/.virtualenvs/obm-deploy-env/bin/postactivate << EOF
+#!/bin/bash
+cd $(pwd)
+source ansible/hacking/env-setup
+EOF
+
 $ chmod +x ~/.virtualenvs/obm-deploy-env/bin/postactivate
 ```
 
