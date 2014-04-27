@@ -147,10 +147,10 @@ $ ansible-playbook -i dev common.xml --tags sysctl
 $ ansible-playbook -i dev site.xml --limit toto.example.com
 ```
 
-[Check Mode] dry run
+Dry run
 -------
 
-It is possible to run faked deployments without any change on remote servers.
+It is possible to use [Check Mode] to run faked deployments without any change on remote servers.
 
 ```.bash
 $ ansible-playbook -i dev site.xml --check
