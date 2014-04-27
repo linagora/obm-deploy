@@ -1,0 +1,33 @@
+---
+- name: Deploy OBM Autoconf configuration
+  template: src=02-autoconf.ini dest=/etc/obm/conf/02-autoconf.ini
+  tags: obm-autoconf
+
+- name: Merge OBM configuration files
+  assemble: src=/etc/obm/conf dest=/etc/obm/obm_conf.ini
+  tags: obm-autoconf
+
+- name: Create OBM Autoconf XPI directory
+  file: path=/usr/share/obm-autoconf/xpi state=directory
+  tags: obm-autoconf
+
+- name: Deploy XPIs
+  copy: src={{ item }} dest=/usr/share/obm-autoconf/xpi/{{ item }}
+  with_items:
+   - obm-connector.xpi
+   - lightning.xpi
+  tags: obm-autoconf
+
+- name: Create OBM-Autoconf configuration file
+  template: src=config.xml dest=/usr/share/obm-autoconf/
+  register: command_result
+  tags: obm-autoconf
+
+- name: Update Tomcat
+  command: /usr/bin/obm-tomcat-trigger
+  when: command_result.changed
+  tags: obm-autoconf
+
+- name: Fix perms on obm_conf.ini
+  file: path=/etc/obm/obm_conf.ini mode=0644
+  tags: obm-autoconf

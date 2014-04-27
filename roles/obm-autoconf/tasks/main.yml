@@ -1,0 +1,4 @@
+---
+- include: packages.yml
+- include: pgperms.yml
+- include: config.yml
