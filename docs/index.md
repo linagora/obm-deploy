@@ -42,7 +42,7 @@ Tasks consists in a large variety of actions like:
 Each kind of task is called a [Module].
 There is a lot of [included modules] and write our own modules to extend ansible is not really painfull.
 
-Execution of a [Task] can be [conditonned] by success of another task, [delegated] to another host or be [iterated] over a list of elements.
+Execution of a task can be [conditonned] by success of another task, [delegated] to another host or be [iterated] over a list of elements.
 
 ### [Handler]: Task called by its name by another task
 
@@ -179,9 +179,10 @@ Exhaustive roles documentation will be auto-generated as soon as possible.
 [Role]: http://docs.ansible.com/playbooks_roles.html "Role"
 [module]: http://docs.ansible.com/modules.html "module"
 [included modules]: http://docs.ansible.com/modules_by_category.html "included modules"
-[conditioned]: http://docs.ansible.com/playbooks_conditionals.html "conditionned"
+[conditionned]: http://docs.ansible.com/playbooks_conditionals.html "conditionned"
 [delegated]: http://docs.ansible.com/playbooks_delegation.html "delegated"
 [iterated]: http://docs.ansible.com/playbooks_loops.html "iterated"
 [Handler]: http://docs.ansible.com/glossary.html#handlers "handler"
+[Variable]: http://docs.ansible.com/playbooks_variables.html "variable"
 [Ansible best practices]: http://docs.ansible.com/playbooks_best_practices.html "Ansible best practices"
 
