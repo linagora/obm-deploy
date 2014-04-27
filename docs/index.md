@@ -184,5 +184,6 @@ Exhaustive roles documentation will be auto-generated as soon as possible.
 [iterated]: http://docs.ansible.com/playbooks_loops.html "iterated"
 [Handler]: http://docs.ansible.com/glossary.html#handlers "handler"
 [Variable]: http://docs.ansible.com/playbooks_variables.html "variable"
+[Check Mode]: http://docs.ansible.com/playbooks_checkmode.html "Check Mode"
 [Ansible best practices]: http://docs.ansible.com/playbooks_best_practices.html "Ansible best practices"
 
