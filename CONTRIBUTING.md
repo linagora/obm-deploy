@@ -1,18 +1,63 @@
 Contributing
 ============
 
-To contribute to this project, please fork this repository and follow this best practices :
+GIT rules
+---------
 
-* For those who have write access to the repository thanks to never push to it directly
+To contribute to this project, don't push directly to this repository.
+
+Instead, please fork this repository then make pull requests.
+
+Please follow this simple rules for your pull requests :
 
 * Try to always make explicit commit messages in english
+* Preffer multiple small atomic commits over a big one
+* If an issue already exists concerning you request, indicate it in your commit
 
-* Try to respect the syntax and structure used in already existing roles
+If you are a git beginner and need advises, please follow [our guide].
 
-* Always prefer changed tracking over handlers notification
+Ansible rules
+-------------
 
-All pull requests will be reviewed and commented.
+### Syntax
+
+We don't use specific syntax rules, but, for clarity, try to follow this recommendations :
+
+* Services names and OBM module names a in CamelCase
+* When using changed state tracking, variables, by default, are called command_result
+
+### Grammar
+
+* A task must have a name
+* A task must have at least a tag
+* Tags represents the role or, if role is common, a functionnality
+* Command module is better than shell module
+* Using a module is better than using a command
+* Using changed state tracking is better than using handlers
+
+### Variables
+
+* Variables are written in lowercase and use underscores to separate words
+* If you variable is a configuration key, place it in group_vars/all
+* If your variable is specific to a group and will never been update by users, place it in group_vars/your_group
+* If your variable is specific to a role and will never been update by users, place it role/you_role/vars
+
+Bug Report
+----------
+
+To make your lives better, respect following rules before creating a new issue :
+
+* Ensure you followed our [installation procedure]
+* Be sure that all dependencies for your role are satisfied (common ?)
+* Be sure your problem can be reproduced and indicate how we can do it
+* Provide us all usefull infos abour your environment (inventory file, configuration variables, ...)
+
+Support
+-------
 
 If you need support, please use [OBM mailing-list].
 
+[installation procedure]: https://github.com/linagora/obm-deploy/blob/master/INSTALL.md "installation procedure"
+[our guide]: https://github.com/linagora/obm-deploy/blob/master/docs/git_guide.md "our guide"
 [OBM mailing-list]: http://list.obm.org/mailman/listinfo/obm "OBM mailing-list"
+

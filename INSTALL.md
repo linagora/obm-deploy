@@ -5,9 +5,12 @@ This documentation is known to work with all Linux or BSD Flavors (including OSX
 
 First, you need to ensure that python2 with virtualenv and pip support is installed on your system. Please refer to your OS documentation.
 
+### Fork the repo using github
+I don't need to explain that.
+
 ### Clone OBM-Deploy repository
 ```.bash
-$ git clone https://github.com/linagora/obm-deploy
+$ git clone https://github.com/your_login/obm-deploy
 $ cd obm-deploy
 ```
 ### Create a virtual environment (please use virtualenv2 in archlinux)
