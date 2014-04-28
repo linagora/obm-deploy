@@ -59,62 +59,62 @@ The layout we use is described in [Ansible best practices].
 
 Roles detailed documentation will be auto-generated as soon as possible.
 
-```.bash
-production                # [Inventory] file for production servers
-stage                     # [Inventory] file for stage environment
-dev                       # [Inventory] file for dev env (toto.example.com)
-obm-full                  # [Inventory] file for obm-full on localhost
+<div class="highlight highlight-bash"><pre>
+production                <span class="c"># </span><a href="http://docs.ansible.com/intro_inventory.html" title="Inventory">Inventory</a><span class="c"> file for production servers</span>
+stage                     <span class="c"># </span><a href="http://docs.ansible.com/intro_inventory.html" title="Inventory">Inventory</a><span class="c"> file for stage environment</span>
+dev                       <span class="c"># </span><a href="http://docs.ansible.com/intro_inventory.html" title="Inventory">Inventory</a><span class="c"> file for dev env (toto.example.com)</span>
+obm-full                  <span class="c"># </span><a href="http://docs.ansible.com/intro_inventory.html" title="Inventory">Inventory</a><span class="c"> file for obm-full on localhost</span>
 
-group_vars/               # Here we assign variables to particular groups
-   all                    # Variables shared by all groups
-   webservers             # Variables specifics to the dbservers group
-   dbservers              # Variables specifics to the dbservers group
+group_vars/               <span class="c"># Here we assign variables to particular groups</span>
+   all                    <span class="c"># Variables shared by all groups</span>
+   webservers             <span class="c"># Variables specifics to the dbservers group</span>
+   dbservers              <span class="c"># Variables specifics to the dbservers group</span>
    ...
 
-host_vars/                # Here we assign variables to particular hosts
-   localhost              # localhost specific variables (eg. connection=local)
+host_vars/                <span class="c"># Here we assign variables to particular hosts</span>
+   localhost              <span class="c"># localhost specific variables (eg. connection=local)</span>
    toto.example.com
    ...
 
-site.yml                  # Master [Playbook]
-webservers.yml            # [Playbook] to manage webservers
-dbservers.yml             # [Playbook to manage dbservers
+site.yml                  <span class="c"># Master </span><a href="http://docs.ansible.com/playbooks.html" title="Playbook">Playbook</a>
+webservers.yml            <span class="c"># </span><a href="http://docs.ansible.com/playbooks.html" title="Playbook">Playbook</a><span class="c"> to manage webservers</span>
+dbservers.yml             <span class="c"># </span><a href="http://docs.ansible.com/playbooks.html" title="Playbook">Playbook</a><span class="c"> to manage dbservers</span>
 ...
 
-collected_files           # Here we store files fetched on hosts (convention)
-   toto.example.com       # Files are stored in a directory named like host
-      usr/                # Remote path is automatically replicated
+collected_files           <span class="c"># Here we store files fetched on hosts (convention)</span>
+   toto.example.com       <span class="c"># Files are stored in a directory named like host</span>
+      usr/                <span class="c"># Remote path is automatically replicated</span>
          share/
          ...
 
-roles/                    # This hierarchy represents a [Role]
-   common/                # Common [Role] used on all hosts
+roles/                    <span class="c"># This hierarchy represents a </span><a href="http://docs.ansible.com/playbooks_roles.html" title="Role">Role</a>
+   common/                <span class="c"># Common </span><a href="http://docs.ansible.com/playbooks_roles.html" title="Role">Role</a><span class="c"> used on all hosts</span>
 
-        tasks/            # Here we declare tasks dedicated to this role
-            main.yml      # Main tasks file can include smaller files
+        tasks/            <span class="c"># Here we declare tasks dedicated to this role</span>
+            main.yml      <span class="c"># Main tasks file can include smaller files</span>
             ...
 
-        handlers/         # Here we declare handlers dedicated to this role
-            main.yml      # Main handlers file can include smaller files
+        handlers/         <span class="c"># Here we declare handlers dedicated to this role</span>
+            main.yml      <span class="c"># Main handlers file can include smaller files</span>
             ...
 
-        templates/        # Here we store files used by template module
-            ntp.conf      # Templates can eventually ends with .j2 suffix
+        templates/        <span class="c"># Here we store files used by template module</span>
+            ntp.conf      <span class="c"># Templates can eventually ends with .j2 suffix</span>
             ...
 
-        files/            # Here we store files used by copy module
+        files/            <span class="c"># Here we store files used by copy module</span>
             bar.txt 
 
-        vars/             # Here we store variables dedicated to this role
+        vars/             <span class="c"># Here we store variables dedicated to this role</span>
             main.yml
 
-        meta/             # Here we store role metadad (eg. dependencies)
+        meta/             <span class="c"># Here we store role metadad (eg. dependencies)</span>
             main.yml
 
-    cyrus/                # Same kind of structure as "common" was above, done
-    ...                   # for obm-ui role.
+    cyrus/                <span class="c"># Same kind of structure as "common" was above, done</span>
+    ...                   <span class="c"># for obm-ui role.</span>
 
-```
+</pre></div>
 
 Basic usage
 -----------
