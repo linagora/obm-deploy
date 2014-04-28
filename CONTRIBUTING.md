@@ -14,7 +14,7 @@ Please follow this simple rules for your pull requests :
 * Preffer multiple small atomic commits over a big one
 * If an issue already exists concerning you request, indicate it in your commit
 
-If you are a git beginner and need advises, please follow [our guide].
+__If you are a GIT beginner and need advises, please follow [our guide]__.
 
 Ansible rules
 -------------

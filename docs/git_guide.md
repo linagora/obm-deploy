@@ -10,10 +10,9 @@ Here are the essentials steps of our GIT workflow :
 
 ### Read [contributing instructions]
 
-### Cd to your repo
-
 ### Add upstream repository to be able to refresh your fork
 ```.bash
+$ cd directoy/where/you/clone/repo
 $ git remote add upstream https://github.com/linagora/obm-deploy
 ```
 
@@ -31,9 +30,7 @@ $ git branch feature_name
 $ git checkout feature_name
 ```
 
-### Code your feature
-
-### Commit your changes
+### Code your feature and commit your changes
 ```.bash
 # If your commit is related to an issue please ad #issue_number to your commit message
 $ git commit -m "#n your commit message"
@@ -113,7 +110,7 @@ To go further
 
 [GIT reference]
 
-[installation instructions] https://github.com/linagora/obm-deploy/blob/master/INSTALL.md "installation instructions"
-[contributing instructions] https://github.com/linagora/obm-deploy/blob/master/CONTRIBUTING.md "contributing instructions"
+[installation instructions]: https://github.com/linagora/obm-deploy/blob/master/INSTALL.md "installation instructions"
+[contributing instructions]: https://github.com/linagora/obm-deploy/blob/master/CONTRIBUTING.md "contributing instructions"
 [GIT reference]: http://git-scm.com/docs "GIT reference"
 
