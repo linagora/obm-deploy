@@ -19,9 +19,9 @@ $ git remote add upstream https://github.com/linagora/obm-deploy
 ### Refresh your fork
 ```.bash
 # Be sure you have no unstaged changes
-$ git fetch
+$ git fetch upstream
 $ git checkout master
-$ git rebase upstream master
+$ git rebase upstream/master
 ```
 
 ### Create a branch and select it
