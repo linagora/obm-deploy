@@ -8,23 +8,16 @@
       creates=/usr/java/jdk1.6.0_45/bin/java
       free_form=true
       echo ''|/bin/sh /tmp/jdk-6u45-linux-x64-rpm.bin
-  register: command_result
+  tags: java
+
+- name: Copy alternatives script
+  copy: src=alternatives.sh dest=/tmp/alternatives.sh mode=0755
   tags: java
 
 - name: Configure Java alternatives
-  command: /usr/sbin/alternatives --install /usr/bin/{{ item.command }} {{ item.command }} /usr/java/jdk1.6.0_45/{{ item.path }} 20000
-  with_items:
-   - { command: 'java', path: 'jre/bin/java' }
-   - { command: 'javaws', path: 'jre/bin/javaws' }
-   - { command: 'javac', path: 'bin/javac' }
-   - { command: 'jps', path: 'bin/jps' }
-  when: command_result.changed
+  shell: /tmp/alternatives.sh "1.6.0_45"
+  register: command_result
+  failed_when: "'FAILED' in command_result.stdout"
+  changed_when: "'CHANGED' in command_result.stdout"
   tags: java
 
-- name: Configure JVM alternatives
-  command: /usr/sbin/alternatives --install /usr/lib/jvm/{{ item.command }} {{ item.bin }} /usr/java/{{ item.path }} 20000
-  with_items:
-   - { command: 'java', bin: 'java_sdk', path: 'jdk1.6.0_45/' }
-   - { command: 'jre', bin: 'jre', path: 'jdk1.6.0_45/jre/' }
-  when: command_result.changed
-  tags: java
