@@ -56,7 +56,6 @@ source $(pwd)/ansible/hacking/env-setup
 EOF
 
 # If you also want to automatically cd in to obm-deploy directory
-$ chmod +x ~/.virtualenvs/obm-deploy-env/bin/postactivate
 $ cat > ~/.virtualenvs/obm-deploy-env/bin/postactivate << EOF
 #!/bin/bash
 cd $(pwd)
@@ -79,7 +78,7 @@ ip_of_your_vm obm.example.com
 
 ### Launch deployement of your VM
 ```.bash
-ansible-playbook -i production site.xml
+ansible-playbook -i dev site.xml
 ```
 
 ### Exit developpement environnement
