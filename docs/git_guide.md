@@ -105,6 +105,13 @@ $ git reset second_commit_hash
 $ git push
 ```
 
+### I have made a lot of commits for the same functionnality and i want to merge them
+```.bash
+# Example if commits you want to merge are the last three ones
+$ git rebase -i HEAD~3
+# You will be prompted for what you want to do with them
+```
+
 To go further
 -------------
 
