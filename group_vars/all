@@ -8,6 +8,7 @@ obm_db_user: obm
 obm_db_password: obm
 obm_db_name: obm
 obm_language: fr
+obm_ldap_host: obm.example.com
 
 # OBM SSL certificates
 ca_path: /var/lib/obm-ca/cacert.pem

@@ -1,11 +1,11 @@
 ---
-- name: Start LDAP
-  service: name=slapd state=started enabled=yes
+- name: Copy slapd.conf
+  template: src=slapd.conf dest=/etc/openldap/slapd.conf owner=root group=ldap mode=0640
+  register: command_result
   tags: ldap
 
-- name: Copy slapd.conf
-  template: src=slapd.conf dest=/etc/openldap/slapd.conf
-  register: command_result
+- name: Copy ldap
+  template: src=ldap dest=/etc/sysconfig/ldap
   tags: ldap
 
 - name: Restart LDAP
