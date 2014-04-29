@@ -14,8 +14,7 @@
 - name: Deploy XPIs
   copy: src={{ item }} dest=/usr/share/obm-autoconf/xpi/{{ item }}
   with_items:
-   - obm-connector.xpi
-   - lightning.xpi
+   - obm-autoconf-client-1.0.3.xpi
   tags: obm-autoconf
 
 - name: Create OBM-Autoconf configuration file
