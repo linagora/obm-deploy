@@ -1,0 +1,1 @@
+host    {{ obm_db_name }}             {{ obm_db_user }}             {{ ansible_default_ipv4['address'] }}/32           md5

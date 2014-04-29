@@ -3,3 +3,4 @@
   roles:
     - obm-sync
     - obm-solr
+    - obm-autoconf

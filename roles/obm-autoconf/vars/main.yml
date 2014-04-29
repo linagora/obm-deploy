@@ -1,0 +1,3 @@
+---
+ pgdatadir: /var/lib/pgsql/data
+ obm_autoconf_search_base: ou=users,dc=example.com,dc=local??sub?(objectClass=*)
