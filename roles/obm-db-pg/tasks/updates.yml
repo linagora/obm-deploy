@@ -2,7 +2,7 @@
 - name: Create applied updates list if needed
   command: touch {{ updatesdir }}/applied_updates.txt
   changed_when: False
-  delegate_to: "{{ obm_db_host }}"
+  delegate_to: "{{ obm_db_master_host }}"
   tags: obm-db
 
 - name: Fetch applied updates list
@@ -10,21 +10,21 @@
    src={{ updatesdir }}/applied_updates.txt
    dest=collected_files/{{ obm_db_host }}
   changed_when: False
-  delegate_to: "{{ obm_db_host }}"
+  delegate_to: "{{ obm_db_master_host }}"
   tags: obm-db
 
 - name: Read applied updates list
   command: cat {{ updatesdir }}/applied_updates.txt
   changed_when: False
   register: applied_updates
-  delegate_to: "{{ obm_db_host }}"
+  delegate_to: "{{ obm_db_master_host }}"
   tags: obm-db
 
 - name: List DB update scripts
   command: ls -1 {{ updatesdir }} --hide=*mysql* --hide=*applied*
   changed_when: False
   register: available_updates
-  delegate_to: "{{ obm_db_host }}"
+  delegate_to: "{{ obm_db_master_host }}"
   tags: obm-db
 
 - name: Apply remaining DB updates
@@ -33,7 +33,7 @@
   with_items: available_updates.stdout_lines
   when: "item not in applied_updates.stdout_lines"
   register: command_result
-  delegate_to: "{{ obm_db_host }}"
+  delegate_to: "{{ obm_db_master_host }}"
   tags: obm-db
 
 - name: Update list of applied updates on remote host
@@ -43,5 +43,5 @@
    dest={{ updatesdir }}/applied_updates.txt
   with_items: available_updates.stdout_lines
   when: "item not in applied_updates.stdout_lines"
-  delegate_to: "{{ obm_db_host }}"
+  delegate_to: "{{ obm_db_master_host }}"
   tags: obm-db
