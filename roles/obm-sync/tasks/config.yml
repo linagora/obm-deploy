@@ -9,12 +9,8 @@
 
 - name: Create OBM-Sync configuration file
   template: src=obm-sync.xml dest=/etc/obm-tomcat/applis/obm-sync.xml
-  register: command_result
-  tags: obm-sync
-
-- name: Update Tomcat
-  command: /usr/bin/obm-tomcat-trigger
-  when: command_result.changed
+  notify:
+      - Update Tomcat triggers
   tags: obm-sync
 
 - name: Fix perms on obm_conf.ini

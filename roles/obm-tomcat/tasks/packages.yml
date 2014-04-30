@@ -1,0 +1,6 @@
+---
+- Install obm-tomcat
+  yum: pkg=obm-tomcat
+  
+- Enable tomcat
+  server: name=obm-tomcat enabled started

@@ -19,12 +19,8 @@
 
 - name: Create OBM-Autoconf configuration file
   template: src=config.xml dest=/usr/share/obm-autoconf/
-  register: command_result
-  tags: obm-autoconf
-
-- name: Update Tomcat
-  command: /usr/bin/obm-tomcat-trigger
-  when: command_result.changed
+  notify:
+    - Update Tomcat triggers
   tags: obm-autoconf
 
 - name: Fix perms on obm_conf.ini

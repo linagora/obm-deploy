@@ -1,0 +1,4 @@
+---
+- name: Update Tomcat triggers
+  command: /usr/bin/obm-tomcat-trigger
+
