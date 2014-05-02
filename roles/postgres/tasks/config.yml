@@ -5,26 +5,24 @@
 
 - name: Deploy PostgreSQL configuration header
   copy: src=00-header dest={{ datadir }}/pg_hba.d/00-header
+  notify:
+    - Merge PostgreSQL configuration files
   tags: postgres
 
 - name: Deploy PostgreSQL local configuration
   copy: src=02-local-peer dest={{ datadir }}/pg_hba.d/02-local-peer
+  notify:
+    - Merge PostgreSQL configuration files
   tags: postgres
 
 - name: Deploy PostgreSQL remote configuration
   copy: src=04-remote-ident dest={{ datadir }}/pg_hba.d/04-remote-ident
+  notify:
+    - Merge PostgreSQL configuration files
   tags: postgres
 
 - name: Deploy PostgreSQL configuration footer
   copy: src=06-footer dest={{ datadir }}/pg_hba.d/06-footer
-  tags: postgres
-
-- name: Merge PostgreSQL configuration files
-  assemble: src={{ datadir }}/pg_hba.d dest={{ datadir }}/pg_hba.conf
-  register: command_result
-  tags: postgres
-
-- name: Reload PostgreSQL
-  service: name=postgresql state=reloaded
-  when: command_result.changed
+  notify:
+    - Merge PostgreSQL configuration files
   tags: postgres

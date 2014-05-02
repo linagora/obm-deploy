@@ -3,12 +3,7 @@
   template: src=03-remote-obm-ui dest={{ pgdatadir }}/pg_hba.d/03-remote-obm-ui
   delegate_to: "{{ obm_db_master_host }}"
   when: not has_sql_load_balancer
+  notify:
+    - Merge PostgreSQL configuration files
   tags: obm-ui
 
-- name: Merge PostgreSQL configuration files
-  assemble: src={{ pgdatadir }}/pg_hba.d dest={{ pgdatadir }}/pg_hba.conf
-  delegate_to: "{{ obm_db_master_host }}"
-  when: not has_sql_load_balancer
-  notify:
-    - Reload Postgres
-  tags: obm-ui

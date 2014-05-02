@@ -1,14 +1,9 @@
 ---
-- name: Deploy local OBM PostgreSQL Permissions
+- name: Deploy local OBM PostgreSQL permissions
   template: src=01-local-obm dest={{ pgdatadir }}/pg_hba.d/01-local-obm
   delegate_to: "{{ obm_db_master_host }}"
-  tags: obm-db
-
-- name: Merge PostgreSQL configuration files
-  assemble: src={{ pgdatadir }}/pg_hba.d dest={{ pgdatadir }}/pg_hba.conf
-  delegate_to: "{{ obm_db_master_host }}"
-  notify: Reload Postgres
-  meta: flush_handlers
+  notify:
+    - Merge PostgreSQL configuration files
   tags: obm-db
 
 - name: Copy Postgres SQL scripts
@@ -45,6 +40,7 @@
   sudo_user: postgres
   delegate_to: "{{ obm_db_master_host }}"
   notify:
+    - Reload Postgres
     - Init Postgres database
   tags: obm-db
 

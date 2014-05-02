@@ -2,3 +2,4 @@
 - include: repositories.yml
 - include: packages.yml
 - include: config.yml
+- include: flush.yml
