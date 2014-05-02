@@ -1,5 +1,5 @@
 ---
-- name: Deploy local OBM PostgreSQL Permissions
+- name: Deploy obm-sync PostgreSQL permissions
   template: src=03-remote-obm-sync dest={{ pgdatadir }}/pg_hba.d/03-remote-obm-sync
   delegate_to: "{{ obm_db_host }}"
   tags: obm-sync
