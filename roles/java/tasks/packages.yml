@@ -1,4 +1,8 @@
 ---
+# This absolutely needs to be installed BEFORE alternatives
+- name: Install JDK devel
+  yum: pkg=java-1.6.0-openjdk-devel
+
 - name: Download Sun JDK
   get_url: url=http://packages.obm.org/rpm/other/jdk-6u45-linux-x64-rpm.bin
            dest=/tmp/jdk-6u45-linux-x64-rpm.bin
