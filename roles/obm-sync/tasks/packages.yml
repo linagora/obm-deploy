@@ -2,10 +2,3 @@
 - name: Install OBM-Sync server
   yum: pkg=obm-sync state=present
   tags: obm-sync
-
-- name: Correct OBM-Tomcat init-script
-  lineinfile: >
-   line="jps=$JAVA_HOME/bin/jps"
-   dest=/etc/init.d/obm-tomcat
-   state=absent
-  tags: obm-sync

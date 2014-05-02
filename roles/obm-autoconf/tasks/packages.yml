@@ -2,17 +2,3 @@
 - name: Install OBM-Autoconf server
   yum: pkg=obm-autoconf state=present
   tags: obm-autoconf
-
-- name: Correct OBM-Tomcat init-script
-  lineinfile: >
-   line="jps=$JAVA_HOME/bin/jps"
-   dest=/etc/init.d/obm-tomcat
-   state=absent
-  tags: obm-autoconf
-
-- name: Correct the tomcat_running function in OBM-Tomcat init-script
-  lineinfile: >
-   dest=/etc/init.d/obm-tomcat
-   regexp='.*jps.*'
-   line="    ret=`jps |grep -q ${supposed_pid}`"
-  tags: obm-autoconf
