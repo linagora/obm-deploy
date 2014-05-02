@@ -1,16 +1,22 @@
 ---
 # OBM global configuration
 obm_major_version: 2.5
+# Public URL of the OBM web interface
 obm_external_url: obm.example.com
+# Type of the database (should be either PGSQL or MYSQL)
 obm_db_type: PGSQL
 # The server hosting the database, or if you have an SQL load balancer, the SQL
 # load balancer
 obm_db_host: toto.example.com
 # If you have a master/slave configuration, this is the host for the master
 obm_db_master_host: "{{ obm_db_host }}"
+# Login of the database
 obm_db_user: obm
+# Password for the database
 obm_db_password: obm
+# Name of the database
 obm_db_name: obm
+# Language of the database
 obm_language: fr
 obm_ldap_host: obm.example.com
 
