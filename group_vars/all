@@ -10,6 +10,8 @@ obm_db_type: PGSQL
 obm_db_host: toto.example.com
 # If you have a master/slave configuration, this is the host for the master
 obm_db_master_host: "{{ obm_db_host }}"
+# Whether you have an SQL load balancer
+has_sql_load_balancer: "{{ obm_db_host != obm_db_master_host }}"
 # Login of the database
 obm_db_user: obm
 # Password for the database
