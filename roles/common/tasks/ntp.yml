@@ -5,35 +5,29 @@
 
 - name: Start NTP server
   service: name=ntpd state=started enabled=yes
-  register: command_result
-  tags: ntp
-
-- name: Update system date
-  command: ntpq -p
-  when: command_result.changed
+  notify:
+   - Update system date
   tags: ntp
 
 - name: NTP Server configuration cleanup
-  lineinfile: dest=/etc/ntp.conf regexp="server {{ item }}" state=absent
+  lineinfile: dest=/etc/ntp.conf regexp="server {{ item }}\." state=absent
   with_items:
+   - 0
    - 1
    - 2
    - 3
   when: ntp_server is defined
+  notify:
+   - Restart NTP service
+   - Update system date
   tags: ntp
 
 - name: NTP Server configuration update
-  lineinfile: dest=/etc/ntp.conf regexp="server 0" line="server {{ ntp_server }} iburst"
-  register: command_result
+  lineinfile: >
+   dest=/etc/ntp.conf
+   line="server {{ ntp_server }} iburst"
+  notify:
+   - Restart NTP service
+   - Update system date
   when: ntp_server is defined
-  tags: ntp
-
-- name: Restart NTP service
-  service: name=ntpd state=restarted
-  when: command_result.changed
-  tags: ntp
-
-- name: Update system date
-  command: ntpq -p
-  when: command_result.changed
   tags: ntp
