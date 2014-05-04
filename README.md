@@ -42,7 +42,7 @@ Dreamed features
 ----------------
 
  * Corosync / Pacemaker
- * PostgreSQL Streming Replication / PGPool
+ * PostgreSQL Streaming Replication / PGPool
  * OpenLDAP Sync Replication
  * Better OBM database updates management
  * Auto-generated documentation
