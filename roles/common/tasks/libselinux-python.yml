@@ -1,0 +1,17 @@
+---
+- name: Deploy libselinux-python RPM (proxy mode)
+  copy: >
+      src=resources/libselinux-python-2.0.94-5.3.el6_4.1.x86_64.rpm
+      dest=/root/libselinux-python-2.0.94-5.3.el6_4.1.x86_64.rpm
+  when: packages_mode == "proxy"
+  tags: repositories
+
+- name: Install libselinux-python (proxy mode)
+  yum: name=/root/libselinux-python-2.0.94-5.3.el6_4.1.x86_64.rpm
+  when: packages_mode == "proxy"
+  tags: repositories
+
+- name: Install libselinux-python (internet mode)
+  yum: name=libselinux-python
+  when: packages_mode == "internet"
+  tags: repositories

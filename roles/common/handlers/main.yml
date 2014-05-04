@@ -1,0 +1,3 @@
+---
+- name: Clean yum repositories
+  command: /usr/bin/yum clean-all

@@ -28,4 +28,15 @@ cert_path: /etc/obm/certs/obm_cert.pem
 key_path: /etc/obm/certs/obm_cert.pem
 
 # Global NTP server (if needed)
-#ntp_server
+ntp_server: 192.168.122.1
+
+# Packages mode (default: internet)
+# Allows you to deploy your architecture without internet access
+#
+#  internet : get packages from internet repositories
+#  proxy: add all repositories hostnames in /etc/hosts and make
+#         them point to this machine.
+#  rsync: rsync resources/rpm-repos directory and install from it
+#
+packages_mode: internet
+packages_proxy: 192.168.122.1

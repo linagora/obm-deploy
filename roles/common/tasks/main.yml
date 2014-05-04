@@ -1,7 +1,10 @@
 ---
-- include: repositories.yml
-- include: packages.yml
+- include: libselinux-python.yml
 - include: selinux.yml
+- include: repositories.yml
+- include: flush.yml
+- include: ntp.yml
+- include: packages.yml
 - include: hosts.yml
 - include: sysctl.yml
 - include: iptables.yml

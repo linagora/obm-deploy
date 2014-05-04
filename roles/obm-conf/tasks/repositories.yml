@@ -1,4 +1,35 @@
 ---
-- name: Enable OBM Repository
+- name: Deploy OBM repository RPM (proxy mode)
+  copy: >
+      src=resources/obm-release.noarch.rpm
+      dest=/root/obm-release.noarch.rpm
+  when: packages_mode == "proxy"
+  tags: obm-conf
+
+- name: Enable OBM repository (proxy mode)
+  yum: name=/root/obm-release.noarch.rpm
+  when: packages_mode == "proxy"
+  tags: obm-conf
+
+- name: Activate OBM repository baseurl (proxy mode)
+  command: sed -i s/^#baseurl/baseurl/ /etc/yum.repos.d/CentOS-Base.repo
+  when: packages_mode == "proxy"
+  tags: obm-conf
+
+- name: Disable OBM repository mirrorlist (proxy mode)
+  command: sed -i s/^mirrorlist/#mirrorlist/ /etc/yum.repos.d/CentOS-Base.repo
+  when: packages_mode == "proxy"
+  tags: obm-conf
+
+- name: Spoof OBM repository hostname in /etc/hosts (proxy mode)
+  lineinfile: >
+              dest=/etc/hosts
+              regexp='.*packages\.obm\.org$'
+              line="{{ packages_proxy_ip }}    packages.obm.org"
+  when: packages_mode == "proxy"
+  tags: obm-conf
+
+- name: Enable OBM Repository (internet mode)
   yum: name=http://packages.obm.org/rpm/25/release/obm-release.noarch.rpm
+  when: packages_mode == "internet"
   tags: obm-conf

@@ -1,5 +1,9 @@
 ---
-- name: Start NTP Server
+- name: Install NTP server
+  yum: pkg=ntp
+  tags: ntp
+
+- name: Start NTP server
   service: name=ntpd state=started enabled=yes
   register: command_result
   tags: ntp

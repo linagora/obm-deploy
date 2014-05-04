@@ -13,4 +13,6 @@
    - atop
    - strace
    - screen
+   - rsync
+   - bind-utils
   tags: packages

@@ -1,4 +1,89 @@
 ---
-- name: Enable EPEL Repository
+- name: Deploy EPEL repository RPM (proxy mode)
+  copy: >
+      src=resources/epel-release-6-8.noarch.rpm
+      dest=/root/epel-release-6-8.noarch.rpm
+  when: packages_mode == "proxy"
+  tags: repositories
+
+- name: Enable EPEL repository (proxy mode)
+  yum: name=/root/epel-release-6-8.noarch.rpm
+  when: packages_mode == "proxy"
+  tags: repositories
+
+- name: Enable baseurl in repositories (proxy mode)
+  command: sed -i s/^#baseurl/baseurl/ {{ item }}
+  when: packages_mode == "proxy"
+  with_items:
+   - /etc/yum.repos.d/CentOS-Base.repo
+   - /etc/yum.repos.d/epel.repo
+  tags: repositories
+
+- name: Disable mirrorlist in repositories (proxy mode)
+  command: sed -i s/^mirrorlist/#mirrorlist/ {{ item }}
+  when: packages_mode == "proxy"
+  with_items:
+   - /etc/yum.repos.d/CentOS-Base.repo
+   - /etc/yum.repos.d/epel.repo
+  tags: repositories
+
+- name: Spoof CentOS Base hostname in /etc/hosts (proxy mode)
+  lineinfile: >
+              dest=/etc/hosts
+              regexp='.*mirror\.centos\.org$'
+              line="{{ packages_proxy }}    mirror.centos.org"
+  when: packages_mode == "proxy"
+  notify:
+   - Clean yum repositories
+  tags: repositories
+
+- name: Spoof EPEL hostname in /etc/hosts (proxy mode)
+  lineinfile: >
+              dest=/etc/hosts
+              regexp='.*download\.fedoraproject\.org$'
+              line="{{ packages_proxy }}    download.fedoraproject.org"
+  when: packages_mode == "proxy"
+  notify:
+   - Clean yum repositories
+  tags: repositories
+
+- name: Disable baseurl in repositories (internet mode)
+  command: sed -i s/^baseurl/#baseurl/ {{ item }}
+  when: packages_mode == "proxy"
+  with_items:
+   - /etc/yum.repos.d/CentOS-Base.repo
+   - /etc/yum.repos.d/epel.repo
+  tags: repositories
+
+- name: Enable mirrorlist in repositories (internet mode)
+  command: sed -i s/^#mirrorlist/mirrorlist/ {{ item }}
+  when: packages_mode == "proxy"
+  with_items:
+   - /etc/yum.repos.d/CentOS-Base.repo
+   - /etc/yum.repos.d/epel.repo
+  tags: repositories
+
+- name: Remove any CentOS Base hostname spoofing (internet mode)
+  lineinfile: >
+              dest=/etc/hosts
+              regexp='.*mirror\.centos\.org$'
+              state=absent
+  when: packages_mode == "internet"
+  notify:
+   - Clean yum repositories
+  tags: repositories
+
+- name: Remove any EPEL hostname spoofing (internet mode)
+  lineinfile: >
+              dest=/etc/hosts
+              regexp='.*download\.fedoraproject\.org$'
+              state=absent
+  when: packages_mode == "internet"
+  notify:
+   - Clean yum repositories
+  tags: repositories
+
+- name: Enable EPEL repository (internet mode)
   yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+  when: packages_mode == "internet"
   tags: repositories

@@ -1,4 +1,0 @@
----
-- name: Install NTP server
-  yum: pkg=ntp
-  tags: ntp
