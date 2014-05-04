@@ -1,6 +1,6 @@
 ---
 - name: Clean yum repositories
-  command: /usr/bin/yum clean-all
+  command: /usr/bin/yum clean all
 
 - name: Start NTP server
   service: name=ntpd state=started enabled=yes

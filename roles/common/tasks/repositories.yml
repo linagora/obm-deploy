@@ -31,7 +31,7 @@
   lineinfile: >
               dest=/etc/hosts
               regexp='.*mirror\.centos\.org$'
-              line="{{ packages_proxy }}    mirror.centos.org"
+              line="{{ packages_proxy_ip }}    mirror.centos.org"
   when: packages_mode == "proxy"
   notify:
    - Clean yum repositories
@@ -41,7 +41,7 @@
   lineinfile: >
               dest=/etc/hosts
               regexp='.*download\.fedoraproject\.org$'
-              line="{{ packages_proxy }}    download.fedoraproject.org"
+              line="{{ packages_proxy_ip }}    download.fedoraproject.org"
   when: packages_mode == "proxy"
   notify:
    - Clean yum repositories
@@ -49,7 +49,7 @@
 
 - name: Disable baseurl in repositories (internet mode)
   command: sed -i s/^baseurl/#baseurl/ {{ item }}
-  when: packages_mode == "proxy"
+  when: packages_mode == "internet"
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
    - /etc/yum.repos.d/epel.repo
@@ -57,7 +57,7 @@
 
 - name: Enable mirrorlist in repositories (internet mode)
   command: sed -i s/^#mirrorlist/mirrorlist/ {{ item }}
-  when: packages_mode == "proxy"
+  when: packages_mode == "internet"
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
    - /etc/yum.repos.d/epel.repo

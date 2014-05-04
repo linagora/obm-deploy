@@ -7,8 +7,8 @@
    - wget
    - curl
    - policycoreutils-python
-   - tmux
    - man
+   - tmux
    - htop
    - atop
    - strace
