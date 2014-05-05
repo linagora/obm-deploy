@@ -19,6 +19,11 @@
   when: packages_mode == "proxy"
   tags: postgres
 
+- name: Enable Postgresql 9.1 Repository (internet mode)
+  yum: name=http://yum.postgresql.org/9.1/redhat/rhel-6-x86_64/pgdg-centos91-9.1-4.noarch.rpm
+  when: packages_mode == "internet"
+  tags: postgres
+
 - name: Remove any Postgres hostname spoofing (internet mode)
   lineinfile: >
               dest=/etc/hosts
@@ -27,9 +32,4 @@
   when: packages_mode == "internet"
   notify:
    - Clean yum repositories
-  tags: postgres
-
-- name: Enable Postgresql 9.1 Repository (internet mode)
-  yum: name=http://yum.postgresql.org/9.1/redhat/rhel-6-x86_64/pgdg-centos91-9.1-4.noarch.rpm
-  when: packages_mode == "internet"
   tags: postgres
