@@ -5,4 +5,3 @@
   PGUSER: "{{ obm_db_user }}"
   PGPASSWORD: "{{ obm_db_password }}"
   PGDATABASE: "{{ obm_db_name }}"
- pgdatadir: /var/lib/pgsql/data

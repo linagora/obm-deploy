@@ -1,0 +1,2 @@
+---
+ datadir: "/var/lib/pgsql/data"

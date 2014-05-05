@@ -1,6 +1,6 @@
 ---
 - name: Deploy obm-ui PostgreSQL permissions
-  template: src=03-remote-obm-ui dest={{ pgdatadir }}/pg_hba.d/03-remote-obm-ui
+  template: src=03-remote-obm-ui dest={{ datadir }}/pg_hba.d/03-remote-obm-ui
   delegate_to: "{{ obm_db_master_host }}"
   when: not has_sql_load_balancer
   notify:

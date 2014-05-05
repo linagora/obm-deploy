@@ -1,6 +1,6 @@
 ---
 - name: Deploy local OBM PostgreSQL permissions
-  template: src=01-local-obm dest={{ pgdatadir }}/pg_hba.d/01-local-obm
+  template: src=01-local-obm dest={{ datadir }}/pg_hba.d/01-local-obm
   delegate_to: "{{ obm_db_master_host }}"
   notify:
     - Merge PostgreSQL configuration files
