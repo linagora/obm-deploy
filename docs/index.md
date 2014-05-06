@@ -171,8 +171,8 @@ Roles reference
 
 Exhaustive roles documentation will be auto-generated as soon as possible.
 
-Using Proxy mode
-----------------
+Proxy mode
+----------
 
 Proxy mode allow you to deploy your OBM infrastructure without internet access on remote hosts.
 
