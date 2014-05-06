@@ -15,4 +15,5 @@
    - screen
    - rsync
    - bind-utils
+   - createrepo
   tags: packages
