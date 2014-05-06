@@ -1,0 +1,7 @@
+---
+- name: Enable YUM keepcache option
+  lineinfile: >
+              dest=/etc/yum.conf
+              regexp="^keepcache=0"
+              line="keepcache=1"
+  tags: yum

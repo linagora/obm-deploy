@@ -1,6 +1,7 @@
 ---
 - include: libselinux-python.yml
 - include: selinux.yml
+- include: yum.yml
 - include: repositories.yml
 - include: ntp.yml
 - include: flush.yml
