@@ -19,6 +19,11 @@
   when: packages_mode == "proxy"
   tags: obm-conf
 
+- name: Enable OBM Repository (internet mode)
+  yum: name=http://packages.obm.org/rpm/25/release/obm-release.noarch.rpm
+  when: packages_mode == "internet"
+  tags: obm-conf
+
 - name: Remove any OBM hostname spoofing (internet mode)
   lineinfile: >
               dest=/etc/hosts
@@ -27,9 +32,4 @@
   when: packages_mode == "internet"
   notify:
    - Clean yum repositories
-  tags: obm-conf
-
-- name: Enable OBM Repository (internet mode)
-  yum: name=http://packages.obm.org/rpm/25/release/obm-release.noarch.rpm
-  when: packages_mode == "internet"
   tags: obm-conf
