@@ -16,7 +16,7 @@ before=$(ls -l /etc/alternatives/ |grep jdk${version} |wc -l)
 after=$(ls -l /etc/alternatives/ |grep jdk${version} |wc -l)
 
 
-if [[ "$after" -gt 6 ]]; then
+if [[ "$after" -ge 6 ]]; then
     if [[ "$before" -eq "$after" ]]; then
         echo "OK"
         exit 0
