@@ -188,7 +188,8 @@ To make it works, you must follow this steps :
 * Configure needed virtualhosts in your webserver
 * Manually install libselinux-python on your remote hosts
 
-Be carefull, to build resources directory will need to deploy an obm-full host using internet. It is only required the first time but youy need to keep this in mind.
+Be carefull, to build resources directory an obm-full host needs to be deployed using internet.
+It is only required the first time but you need to keep this in mind.
 
 A sample nginx configuration file can be found [here].
 
