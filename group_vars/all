@@ -38,5 +38,5 @@ key_path: /etc/obm/certs/obm_cert.pem
 #         them point to `packages_proxy_ip`.
 #  rsync: rsync resources/rpm-repos directory and install from it
 #
-packages_mode: proxy
-packages_proxy_ip: 192.168.122.1
+packages_mode: internet
+#packages_proxy_ip: 192.168.122.1
