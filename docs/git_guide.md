@@ -117,7 +117,7 @@ To go further
 
 [GIT reference]
 
-[installation instructions]: https://github.com/linagora/obm-deploy/blob/master/INSTALL.md "installation instructions"
-[contributing instructions]: https://github.com/linagora/obm-deploy/blob/master/CONTRIBUTING.md "contributing instructions"
+[installation instructions]: ../INSTALL.md "installation instructions"
+[contributing instructions]: ../CONTRIBUTING.md "contributing instructions"
 [GIT reference]: http://git-scm.com/docs "GIT reference"
 

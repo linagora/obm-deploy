@@ -57,7 +57,7 @@ Support
 
 If you need support, please use [OBM mailing-list].
 
-[installation procedure]: https://github.com/linagora/obm-deploy/blob/master/INSTALL.md "installation procedure"
-[our guide]: https://github.com/linagora/obm-deploy/blob/master/docs/git_guide.md "our guide"
+[installation procedure]: INSTALL.md "installation procedure"
+[our guide]: docs/git_guide.md "our guide"
 [OBM mailing-list]: http://list.obm.org/mailman/listinfo/obm "OBM mailing-list"
 

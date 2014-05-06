@@ -1,7 +1,9 @@
 Installation
 ============
 
-This documentation is known to work with all Linux or BSD Flavors (including OSX).
+This documentation wasx inspired by [Oliver Welge's article](https://weluse.de/blog/installing-ansible-on-os-x.html "Oliver Welge's article")
+
+It is known to work with all Linux or BSD Flavors (including OSX).
 
 First, you need to ensure that python2 with virtualenv and pip support is installed on your system. Please refer to your OS documentation.
 

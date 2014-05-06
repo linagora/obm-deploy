@@ -171,6 +171,26 @@ Roles reference
 
 Exhaustive roles documentation will be auto-generated as soon as possible.
 
+Using Proxy mode
+----------------
+
+Proxy mode allow you to deploy your OBM infrastructure without internet access on remote hosts.
+
+It can also helps you to work on obm-deploy without internet access (eg. in the train).
+
+It's main role will be to redirect remote repositories to your own computer by hacking their /etc/hosts file.
+
+First, you need to ensure that your remote host(s) can have access to your computer.
+
+Then, you need to build a resources directory wich will store needed packages using an already installed host.
+
+[This script] will do that for you.
+
+Then, you need to ensure that you have a fully functional web server and configure it to serve files in resources directory.
+
+A sample nginx configuration file can be found [here].
+
+
 [YAML Syntax]: http://docs.ansible.com/YAMLSyntax.html "YAML Syntax"
 [Jinja2]: http://docs.ansible.com/playbooks_variables.html "Jinja2"
 [Ansible documentation]: http://docs.ansible.com/index.html "Ansible documentation"
@@ -186,4 +206,5 @@ Exhaustive roles documentation will be auto-generated as soon as possible.
 [Variable]: http://docs.ansible.com/playbooks_variables.html "variable"
 [Check Mode]: http://docs.ansible.com/playbooks_checkmode.html "Check Mode"
 [Ansible best practices]: http://docs.ansible.com/playbooks_best_practices.html "Ansible best practices"
-
+[This script]: ../build-resources-dir.sh "This script"
+[here]: examples/nginx_proxy_mode.conf "sample nginx configuration file"
