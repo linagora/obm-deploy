@@ -8,7 +8,6 @@
   command: >
       creates=/etc/obm/certs/{{ obm_external_url }}_signed.pem
       /usr/share/obm-ca/createcert.sh "{{ obm_external_url }}"
-  when: command_result.changed
   tags: obm-cert
 
 - name: Set the OBM certificate symlink
