@@ -15,7 +15,7 @@
   lineinfile: >
               dest=/etc/hosts
               regexp='.*yum\.postgresql\.org$'
-              line="{{ packages_proxy_ip }}    packages.obm.org"
+              line="{{ packages_proxy_ip }}    yum.postgresql.org"
   when: packages_mode == "proxy"
   tags: postgres
 
