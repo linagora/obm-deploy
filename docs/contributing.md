@@ -30,7 +30,7 @@ We don't use specific syntax rules, but, for clarity, try to follow this recomme
 
 * A task must have a name
 * A task must have at least a tag
-* Tags represents the role or, if role is common, a functionnality
+* Tags represent the role or, if role is common, a functionnality
 * Command module is better than shell module
 * Using a module is better than using a command
 * Beware of flushing handlers when they are needed by other tasks
@@ -38,7 +38,7 @@ We don't use specific syntax rules, but, for clarity, try to follow this recomme
 ### Variables
 
 * Variables are written in lowercase and use underscores to separate words
-* If you variable is a configuration key, place it in group_vars/all
+* If your variable is a configuration key, place it in group_vars/all
 * If your variable is specific to a group and will never been update by users, place it in group_vars/your_group
 * If your variable is specific to a role and will never been update by users, place it role/you_role/vars
 

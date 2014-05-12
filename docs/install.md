@@ -5,7 +5,11 @@ This documentation wasx inspired by [Oliver Welge's article]
 
 It is known to work with all Linux or BSD Flavors (including OSX).
 
-First, you need to ensure that python2 with virtualenv and pip support is installed on your system. Please refer to your OS documentation.
+First, you need to ensure that python2 with virtualenv and pip support is installed on your system.
+
+Python-dev|Python-devel will also be needed on Debian/Ubuntu based distros.
+
+Please refer to your OS documentation.
 
 ### Fork the repo using github
 I don't need to explain that.
