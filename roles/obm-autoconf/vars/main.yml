@@ -1,2 +1,5 @@
 ---
  obm_autoconf_search_base: ou=users,dc=example.com,dc=local??sub?(objectClass=*)
+ url_lightning_xpi: http://www.obm.org/mozilla-addons/lightning/stable
+ url_obm_connector_xpi: http://www.obm.org/mozilla-addons/obm-connector/stable
+ xpi_dir: /usr/share/obm-autoconf/xpi

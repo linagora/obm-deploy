@@ -8,13 +8,50 @@
   tags: obm-autoconf
 
 - name: Create OBM Autoconf XPI directory
-  file: path=/usr/share/obm-autoconf/xpi state=directory
+  file: path={{ xpi_dir }} state=directory
   tags: obm-autoconf
 
-- name: Deploy XPIs
-  copy: src={{ item }} dest=/usr/share/obm-autoconf/xpi/{{ item }}
+- name: Deploy obm-autoconf-client xpi
+  copy: src={{ item }} dest="{{ xpi_dir }}/{{ item }}"
   with_items:
    - obm-autoconf-client-1.0.3.xpi
+  tags: obm-autoconf
+
+- name: Deploy Lightning XPIs for TB10
+  get_url: > 
+           url="{{ url_lightning_xpi }}/tb{{ item.tb_version }}/{{ lightning_tb10 }}obm-tb-{{ item.os }}.xpi"
+           dest="{{ xpi_dir }}/{{ lightning_tb10 }}obm-tb-{{ item.os }}.xpi" 
+           force=no
+  with_items:
+   - { tb_version: '10', os: linux_x86}
+   - { tb_version: '10', os: win_x86}
+   - { tb_version: '10', os: mac}
+  tags: obm-autoconf
+
+- name: Deploy Lightning XPIs for TB17
+  get_url: >
+           url="{{ url_lightning_xpi }}/tb{{ item.tb_version }}/{{ lightning_tb17 }}obm-tb-{{ item.os }}.xpi"
+           dest="{{ xpi_dir }}/{{ lightning_tb17 }}obm-tb-{{ item.os }}.xpi"
+           force=no
+  with_items:
+   - { tb_version: '17', os: linux_x86}
+   - { tb_version: '17', os: win_x86}
+   - { tb_version: '17', os: mac}
+  tags: obm-autoconf
+
+
+- name: Deploy OBM-Connector XPIs for TB10 and TB17
+  get_url: >
+           url="{{ url_obm_connector_xpi }}/tb17/{{ obm_connector_tb17 }}.xpi"
+           dest="{{ xpi_dir }}/{{ obm_connector_tb17 }}.xpi"
+           force=no
+  tags: obm-autoconf
+
+- name: Deploy OBM-Connector XPIs for TB24
+  get_url: >
+           url="{{ url_obm_connector_xpi }}/tb24/{{ obm_connector_tb24 }}.xpi"
+           dest="{{ xpi_dir }}/{{ obm_connector_tb24 }}.xpi"
+           force=no
   tags: obm-autoconf
 
 - name: Create OBM-Autoconf configuration file
