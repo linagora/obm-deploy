@@ -46,144 +46,15 @@ Execution of a task can be [conditionned] by success of another task, [delegated
 
 ### [Handler]: Task called by its name by another task
 
-We discourage handlers usage because, to be factorised, they are only executed at the end of playbook. If you use site.xml to deploy you infrastructure, they will be all runned at the end of installation wich can cause problems.
+Handlers are tasks wich are called by other tasks, on if they implies a change (eg. restart a service after updating configuration).
+
+It simplifies tasks order mangement but beware, by default, they are only executed at the end of playbook.
+
+If you want them to bu launched earlier, you need to explicitly flush them.
 
 ### [Variable]: Will I really define what is a variable ?
 
 Variables can be used in [Jinja2] templates but also in all ansible YAML description files.
-
-Directories layout
-------------------
-
-The layout we use is described in [Ansible best practices].
-
-Roles detailed documentation will be auto-generated as soon as possible.
-
-<div class="highlight highlight-bash"><pre>
-obmfull-example           <span class="c"># </span><a href="http://docs.ansible.com/intro_inventory.html" title="Inventory">Inventory</a><span class="c"> file for our obm-full obm.example.com.</span>
-...                       <span class="c"># You can add your own</span><a href="http://docs.ansible.com/intro_inventory.html" title="Inventory">Inventory</a><span class="c"> file here to fit your needs.</span>
-
-config.yml                <span class="c"># Main obm-deploy configuration file. Please always take a look at it before launching your deployments.</span>
-
-obm.yml                   <span class="c"># OBM main </span><a href="http://docs.ansible.com/playbooks.html" title="Playbook">Playbook</a></span>
-                          <span class="c"># We mostly use it to associate roles to groups. You probably don't need to update it.</span>  
-
-group_vars/               <span class="c"># Here we assign variables to particular groups</span>
-   all                    <span class="c"># Variables shared by all groups</span>
-   webservers             <span class="c"># Variables specifics to the dbservers group</span>
-   dbservers              <span class="c"># Variables specifics to the dbservers group</span>
-   ...
-
-host_vars/                <span class="c"># Here we assign variables to particular hosts</span>
-   localhost              <span class="c"># localhost specific variables (eg. connection=local)</span>
-   toto.example.com
-   ...
-
-collected_files           <span class="c"># Here we store files fetched on hosts (convention)</span>
-   toto.example.com       <span class="c"># Files are stored in a directory named like host</span>
-      usr/                <span class="c"># Remote path is automatically replicated</span>
-         share/
-         ...
-
-roles/                    <span class="c"># This hierarchy represents a </span><a href="http://docs.ansible.com/playbooks_roles.html" title="Role">Role</a>
-   common/                <span class="c"># Common </span><a href="http://docs.ansible.com/playbooks_roles.html" title="Role">Role</a><span class="c"> used on all hosts</span>
-
-        tasks/            <span class="c"># Here we declare tasks dedicated to this role</span>
-            main.yml      <span class="c"># Main tasks file can include smaller files</span>
-            ...
-
-        handlers/         <span class="c"># Here we declare handlers dedicated to this role</span>
-            main.yml      <span class="c"># Main handlers file can include smaller files</span>
-            ...
-
-        templates/        <span class="c"># Here we store files used by template module</span>
-            ntp.conf      <span class="c"># Templates can eventually ends with .j2 suffix</span>
-            ...
-
-        files/            <span class="c"># Here we store files used by copy module</span>
-            bar.txt 
-
-        vars/             <span class="c"># Here we store variables dedicated to this role</span>
-            main.yml
-
-        meta/             <span class="c"># Here we store role metadad (eg. dependencies)</span>
-            main.yml
-
-    cyrus/                <span class="c"># Same kind of structure as "common" was above, done</span>
-    ...                   <span class="c"># for obm-ui role.</span>
-
-</pre></div>
-
-Basic usage
------------
-
-To use any of this commands, you need to have ssh root acces to hosts you set up in inventory files.
-
-```.bash
-# Deploy obm-full on our development environment
-$ ansible-playbook -i obmfull-example obm.yml
-
-# Deploy production environment using your own inventory file 'production'
-$ ansible-playbook -i production obm.yml
-```
-
-Scope limitation
-----------------
-
-It is possible to limit scope of a particular deployment.
-
-```.bash
-# Deploy all ntp tagged tasks on production servers
-$ ansible-playbook -i production obm.yml --tags ntp
-
-# Deploy development environment only toto.example.com host
-$ ansible-playbook -i dev obm.yml --limit obm.example.com
-```
-
-You can found other examples in [Ansible best practices].
-
-Dry run
--------
-
-It is possible to use [Check Mode] to run faked deployments without any change on remote servers.
-
-```.bash
-$ ansible-playbook -i obmfull-example obm.yml --check
-```
-
-It also possible to show diffenrences when files are modified.
-
-```.bash
-# In check mode
-$ ansible-playbook -i obmfull-example obm.yml --check --diff
-
-# Used by itself
-$ ansible-playbook -i obmfull-example obm.yml --diff
-```
-
-Proxy mode
-----------
-
-Proxy mode allows you to deploy your OBM infrastructure without internet access on remote hosts.
-
-It can also helps you to work on obm-deploy without internet access (eg. in the train).
-
-Its main role will be to redirect remote repositories to your own computer by hacking their /etc/hosts file.
-
-To make it works, you must follow this steps :
-
-* Ensure that your remote host(s) have access to your computer
-* Build a resources directory with [this script] (included in sources)
-* Have a remotely accessible fully functional time server
-* Have a fully functional web server and grant it access to resources directory
-* Configure needed virtualhosts in your webserver
-* Manually install libselinux-python on remote hosts
-
-Be carefull, building resources directory requires a complete obm-full host to sync from.
-
-You can refer to [our documentation] to install our test.example.com test host.
-
-A sample nginx configuration file can be found [here].
 
 [YAML Syntax]: http://docs.ansible.com/YAMLSyntax.html "YAML Syntax"
 [Jinja2]: http://docs.ansible.com/playbooks_variables.html "Jinja2"
@@ -191,15 +62,10 @@ A sample nginx configuration file can be found [here].
 [Inventory]: http://docs.ansible.com/intro_inventory.html "Inventory"
 [Playbook]: http://docs.ansible.com/playbooks.html "Playbook"
 [Role]: http://docs.ansible.com/playbooks_roles.html "Role"
-[module]: http://docs.ansible.com/modules.html "module"
+[Module]: http://docs.ansible.com/modules.html "module"
 [included modules]: http://docs.ansible.com/modules_by_category.html "included modules"
 [conditionned]: http://docs.ansible.com/playbooks_conditionals.html "conditionned"
 [delegated]: http://docs.ansible.com/playbooks_delegation.html "delegated"
 [iterated]: http://docs.ansible.com/playbooks_loops.html "iterated"
 [Handler]: http://docs.ansible.com/glossary.html#handlers "handler"
 [Variable]: http://docs.ansible.com/playbooks_variables.html "variable"
-[Check Mode]: http://docs.ansible.com/playbooks_checkmode.html "Check Mode"
-[Ansible best practices]: http://docs.ansible.com/playbooks_best_practices.html "Ansible best practices"
-[this script]: ../build-resources-dir.sh "this script"
-[here]: examples/nginx_proxy_mode.conf "sample nginx configuration file"
-[our documentation]: ../INSTALL.md "INSTALL.md"

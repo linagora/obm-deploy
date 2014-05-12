@@ -1,7 +1,7 @@
 Installation
 ============
 
-This documentation wasx inspired by [Oliver Welge's article](https://weluse.de/blog/installing-ansible-on-os-x.html "Oliver Welge's article")
+This documentation wasx inspired by [Oliver Welge's article]
 
 It is known to work with all Linux or BSD Flavors (including OSX).
 
@@ -101,3 +101,5 @@ $ source ansible/hacking/env-setup
 ```.bash
 $ workon obm-deploy-env
 ```
+
+[Oliver Welge's article]: https://weluse.de/blog/installing-ansible-on-os-x.html "Oliver Welge's article"

@@ -45,7 +45,7 @@ We don't use specific syntax rules, but, for clarity, try to follow this recomme
 Bug Report
 ----------
 
-To make your lives better, respect following rules before creating a new issue :
+To make our lives better, respect following rules before creating a new issue :
 
 * Ensure you followed our [installation procedure]
 * Be sure that all dependencies for your role are satisfied (common ?)
@@ -57,7 +57,6 @@ Support
 
 If you need support, please use [OBM mailing-list].
 
-[installation procedure]: INSTALL.md "installation procedure"
+[installation procedure]: docs/install.md "installation procedure"
 [our guide]: docs/git_guide.md "our guide"
 [OBM mailing-list]: http://list.obm.org/mailman/listinfo/obm "OBM mailing-list"
-
