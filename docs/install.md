@@ -1,11 +1,11 @@
 Installation
 ============
 
-This documentation wasx inspired by [Oliver Welge's article]
+This documentation was inspired by [Oliver Welge's article]
 
 It is known to work with all Linux or BSD Flavors (including OSX).
 
-First, you need to ensure that python2 with virtualenv and pip support is installed on your system.
+First, you need to ensure that python2 with virtualenv and pip support are installed on your system.
 
 Python-dev|Python-devel will also be needed on Debian/Ubuntu based distros.
 
