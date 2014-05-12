@@ -60,10 +60,13 @@ The layout we use is described in [Ansible best practices].
 Roles detailed documentation will be auto-generated as soon as possible.
 
 <div class="highlight highlight-bash"><pre>
-production                <span class="c"># </span><a href="http://docs.ansible.com/intro_inventory.html" title="Inventory">Inventory</a><span class="c"> file for production servers</span>
-stage                     <span class="c"># </span><a href="http://docs.ansible.com/intro_inventory.html" title="Inventory">Inventory</a><span class="c"> file for stage environment</span>
-dev                       <span class="c"># </span><a href="http://docs.ansible.com/intro_inventory.html" title="Inventory">Inventory</a><span class="c"> file for dev env (toto.example.com)</span>
-obm-full                  <span class="c"># </span><a href="http://docs.ansible.com/intro_inventory.html" title="Inventory">Inventory</a><span class="c"> file for obm-full on localhost</span>
+obmfull-example           <span class="c"># </span><a href="http://docs.ansible.com/intro_inventory.html" title="Inventory">Inventory</a><span class="c"> file for our obm-full obm.example.com.</span>
+...                       <span class="c"># You can add your own</span><a href="http://docs.ansible.com/intro_inventory.html" title="Inventory">Inventory</a><span class="c"> file here to fit your needs.</span>
+
+config.yml                <span class="c"># Main obm-deploy configuration file. Please always take a look at it before launching your deployments.</span>
+
+obm.yml                   <span class="c"># OBM main </span><a href="http://docs.ansible.com/playbooks.html" title="Playbook">Playbook</a></span>
+                          <span class="c"># We mostly use it to associate roles to groups. You probably don't need to update it.</span>  
 
 group_vars/               <span class="c"># Here we assign variables to particular groups</span>
    all                    <span class="c"># Variables shared by all groups</span>
@@ -75,11 +78,6 @@ host_vars/                <span class="c"># Here we assign variables to particul
    localhost              <span class="c"># localhost specific variables (eg. connection=local)</span>
    toto.example.com
    ...
-
-site.yml                  <span class="c"># Master </span><a href="http://docs.ansible.com/playbooks.html" title="Playbook">Playbook</a>
-webservers.yml            <span class="c"># </span><a href="http://docs.ansible.com/playbooks.html" title="Playbook">Playbook</a><span class="c"> to manage webservers</span>
-dbservers.yml             <span class="c"># </span><a href="http://docs.ansible.com/playbooks.html" title="Playbook">Playbook</a><span class="c"> to manage dbservers</span>
-...
 
 collected_files           <span class="c"># Here we store files fetched on hosts (convention)</span>
    toto.example.com       <span class="c"># Files are stored in a directory named like host</span>
@@ -119,16 +117,14 @@ roles/                    <span class="c"># This hierarchy represents a </span><
 Basic usage
 -----------
 
+To use any of this commands, you need to have ssh root acces to hosts you set up in inventory files.
+
 ```.bash
-# Deploy all your infrastructure on development environment
-$ ansible-playbook -i dev site.xml
+# Deploy obm-full on our development environment
+$ ansible-playbook -i obmfull-example obm.yml
 
-# Deploy common configuration on all production hosts
-$ ansible-playbook -i production common.yml
-
-# Deploy production obm-ui hosts
-# Warning, you need to deploy common configuration on them first
-$ ansible-playbook -i production uiservers.yml
+# Deploy production environment using your own inventory file 'production'
+$ ansible-playbook -i production obm.yml
 ```
 
 Scope limitation
@@ -137,15 +133,14 @@ Scope limitation
 It is possible to limit scope of a particular deployment.
 
 ```.bash
-# Deploy only production javaservers hosts group
-$ ansible-playbook -i production site.xml --groups javaservers
+# Deploy all ntp tagged tasks on production servers
+$ ansible-playbook -i production obm.yml --tags ntp
 
-# Deploy only systcl related common configuration on dev hosts
-$ ansible-playbook -i dev common.xml --tags sysctl
-
-# Deploy only toto.example.com host
-$ ansible-playbook -i dev site.xml --limit toto.example.com
+# Deploy development environment only toto.example.com host
+$ ansible-playbook -i dev obm.yml --limit obm.example.com
 ```
+
+You can found other examples in [Ansible best practices].
 
 Dry run
 -------
@@ -153,23 +148,18 @@ Dry run
 It is possible to use [Check Mode] to run faked deployments without any change on remote servers.
 
 ```.bash
-$ ansible-playbook -i dev site.xml --check
+$ ansible-playbook -i obmfull-example obm.yml --check
 ```
 
 It also possible to show diffenrences when files are modified.
 
 ```.bash
 # In check mode
-$ ansible-playbook -i dev site.xml --check --diff
+$ ansible-playbook -i obmfull-example obm.yml --check --diff
 
 # Used by itself
-$ ansible-playbook -i dev site.xml --diff
+$ ansible-playbook -i obmfull-example obm.yml --diff
 ```
-
-Roles reference
----------------
-
-Exhaustive roles documentation will be auto-generated as soon as possible.
 
 Proxy mode
 ----------
@@ -212,4 +202,4 @@ A sample nginx configuration file can be found [here].
 [Ansible best practices]: http://docs.ansible.com/playbooks_best_practices.html "Ansible best practices"
 [this script]: ../build-resources-dir.sh "this script"
 [here]: examples/nginx_proxy_mode.conf "sample nginx configuration file"
-[our documentation]: #
+[our documentation]: ../INSTALL.md "INSTALL.md"

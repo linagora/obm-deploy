@@ -77,13 +77,12 @@ Make sure that you have access to it using SSH and user root.
 
 If you want to use our test infrastructure, add this to you /etc/hosts :
 ```.bash
-ip_of_your_vm toto.example.com
 ip_of_your_vm obm.example.com
 ```
 
 ### Launch deployement of your VM
 ```.bash
-ansible-playbook -i dev site.xml
+ansible-playbook -i obmfull-example obm.yml
 ```
 
 ### Exit developpement environnement
@@ -102,4 +101,3 @@ $ source ansible/hacking/env-setup
 ```.bash
 $ workon obm-deploy-env
 ```
-
