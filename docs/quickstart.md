@@ -4,7 +4,7 @@ Quick Start
 Basic usage
 -----------
 
-To use any of this commands, you need to have ssh root acces to hosts you set up in inventory files.
+To use any of this commands, you need to have ssh root access to hosts you set up in inventory files.
 
 ```.bash
 # Deploy obm-full on our development environment
