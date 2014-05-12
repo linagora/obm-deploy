@@ -25,7 +25,7 @@ It is possible to use [Check Mode] to run faked deployments without any change o
 $ ansible-playbook -i obmfull-example obm.yml --check
 ```
 
-It also possible to show diffenrences when files are modified.
+It also possible to show differences when files are modified.
 
 ```.bash
 # In check mode
