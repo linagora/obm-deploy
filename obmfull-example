@@ -1,0 +1,41 @@
+#
+# OBM-Full example inventory file
+# 
+
+[obmfullservers]
+obm.example.com
+
+[dbservers]
+[webservers]
+[javaservers]
+
+# THE LAST PART IS REQUIRED
+# DO NOT EDIT AFTER THIS LINE
+
+[ldapservers:children]
+obmfullservers
+
+[pgservers:children]
+obmfullservers
+dbservers
+
+[uiservers:children]
+obmfullservers
+webservers
+
+[webmailservers:children]
+obmfullservers
+webservers
+
+[syncservers:children]
+obmfullservers
+javaservers
+
+[solrservers:children]
+obmfullservers
+javaservers
+
+[autoconfservers:children]
+obmfullservers
+javaservers
+

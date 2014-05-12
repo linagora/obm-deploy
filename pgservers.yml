@@ -1,4 +1,0 @@
----
-- hosts: pgservers
-  roles:
-    - postgres

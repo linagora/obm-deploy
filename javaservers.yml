@@ -1,6 +1,0 @@
----
-- hosts: javaservers
-  roles:
-    - obm-sync
-    - obm-solr
-    - obm-autoconf

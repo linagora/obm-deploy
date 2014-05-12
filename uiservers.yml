@@ -1,4 +1,0 @@
----
-- hosts: uiservers
-  roles:
-    - obm-ui

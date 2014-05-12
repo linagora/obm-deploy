@@ -28,15 +28,14 @@ Current Status
 --------------
 
  * Only CentOS/RHEL 6 is supported
- * Foolowing roles can be installed using ansible :
-    - Tomcat based Java webapps : OBM-Sync, OBM-Solr
+ * Following roles can be installed using ansible :
+    - Tomcat based Java webapps : OBM-Sync, OBM-Solr, OBM-Autoconf
     - Jetty based Java webapps : OBM-Locator
     - PHP based webapps : OBM-UI
     - Perl based webapp : OBM-Satellite
     - OpenLDAP directory
     - PostgreSQL database
     - OBM CA and certificates management
-    - ... More will come
 
 Dreamed features
 ----------------
@@ -48,22 +47,13 @@ Dreamed features
  * Auto-generated documentation
  * ... More will come :-)
 
-Installation
-------------
-
-Please refer to [Install.md] to show installation instructions for this project.
-
 Documentation
 -------------
 
-Please refer to [docs/index.md] to show full documentation for this project.
-
-Get involved
-------------
-
-Please refer to [Contributing.md] to show how to contribute to this project.
-
-[Install.md]: INSTALL.md "Install.md"
-[docs/index.md]: docs/index.md "docs/index.md"
-[Contributing.md]: CONTRIBUTING.md "Contributing.md"
+ * [About ansible](docs/ansible.md "ansible.md")
+ * [Installation](docs/install.md "install.md")
+ * [Quick start](docs/quickstart.md "quickstart.md")
+ * [Roles reference](docs/roles.md "roles.md")
+ * [Advanced usage](docs/advanced.md "advanced.md")
+ * [Development](docs/development.md "development.md")
 

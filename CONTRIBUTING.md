@@ -33,7 +33,7 @@ We don't use specific syntax rules, but, for clarity, try to follow this recomme
 * Tags represents the role or, if role is common, a functionnality
 * Command module is better than shell module
 * Using a module is better than using a command
-* Using changed state tracking is better than using handlers
+* Beware of flushing handlers when they are needed by other tasks
 
 ### Variables
 
@@ -50,7 +50,7 @@ To make your lives better, respect following rules before creating a new issue :
 * Ensure you followed our [installation procedure]
 * Be sure that all dependencies for your role are satisfied (common ?)
 * Be sure your problem can be reproduced and indicate how we can do it
-* Provide us all usefull infos abour your environment (inventory file, configuration variables, ...)
+* Provide us all usefull infos about your environment (inventory file, configuration variables, ...)
 
 Support
 -------

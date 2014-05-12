@@ -1,7 +1,0 @@
----
-- include: local.yml
-- include: common.yml
-- include: dbservers.yml
-- include: ldapservers.yml
-- include: webservers.yml
-- include: javaservers.yml

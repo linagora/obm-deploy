@@ -1,4 +1,0 @@
----
-- hosts: myservers
-  roles:
-    - mysql

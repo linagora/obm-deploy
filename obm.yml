@@ -1,0 +1,56 @@
+---
+# Please don't edit this file
+
+- hosts: localhost
+  connection: local
+  roles:
+    #-
+
+- hosts: all
+  vars_files:
+    - config.yml
+  roles:
+    - common
+
+- hosts: pgservers
+  vars_files:
+    - config.yml
+  roles:
+    - postgres
+
+- hosts: myservers
+  vars_files:
+    - config.yml
+  roles:
+    #- mysql
+
+- hosts: ldapservers
+  vars_files:
+    - config.yml
+  roles:
+    - ldap
+
+- hosts: uiservers
+  vars_files:
+    - config.yml
+  roles:
+    - obm-ui
+
+- hosts: syncservers
+  vars_files:
+    - config.yml
+  roles:
+    - obm-sync
+
+- hosts: solrservers
+  vars_files:
+    - config.yml
+  roles:
+    - obm-solr
+
+- hosts: autoconfservers
+  vars_files:
+    - config.yml
+  roles:
+    - obm-autoconf
+

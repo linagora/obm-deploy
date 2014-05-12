@@ -184,12 +184,14 @@ To make it works, you must follow this steps :
 
 * Ensure that your remote host(s) have access to your computer
 * Build a resources directory with [this script] (included in sources)
+* Have a remotely accessible fully functional time server
 * Have a fully functional web server and grant it access to resources directory
 * Configure needed virtualhosts in your webserver
-* Manually install libselinux-python on your remote hosts
+* Manually install libselinux-python on remote hosts
 
-Be carefull, to build resources directory an obm-full host needs to be deployed using internet.
-It is only required the first time but you need to keep this in mind.
+Be carefull, building resources directory requires a complete obm-full host to sync from.
+
+You can refer to [our documentation] to install our test.example.com test host.
 
 A sample nginx configuration file can be found [here].
 
@@ -210,3 +212,4 @@ A sample nginx configuration file can be found [here].
 [Ansible best practices]: http://docs.ansible.com/playbooks_best_practices.html "Ansible best practices"
 [this script]: ../build-resources-dir.sh "this script"
 [here]: examples/nginx_proxy_mode.conf "sample nginx configuration file"
+[our documentation]: #

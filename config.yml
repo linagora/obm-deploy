@@ -1,0 +1,65 @@
+---
+#
+# Global configuration file
+#
+
+### OBM configuration ####
+
+# OBM version
+obm_major_version: 2.5
+
+# Public URL of the OBM web interface
+obm_external_url: obm.example.com
+
+# Database configuration (type should be either PGSQL or MYSQL)
+obm_db_type: PGSQL
+
+# The server hosting the database or the SQL load balancer
+obm_db_host: obm.example.com
+
+# The server hosting the database or the master of replication
+obm_db_master_host: "{{ obm_db_host }}"
+
+# Database configuration
+obm_db_user: obm
+obm_db_password: obm
+obm_db_name: obm
+
+# Language of the database (fr/en)
+obm_language: fr
+
+# The server hosting the directory
+obm_ldap_host: obm.example.com
+
+#### OBM SSL certificates ####
+
+ca_path: /var/lib/obm-ca/cacert.pem
+cert_path: /etc/obm/certs/obm_cert.pem
+key_path: /etc/obm/certs/obm_cert.pem
+
+#### Global NTP server (if needed) ####
+
+#ntp_server: 192.168.122.1
+
+#### Packages mode (default: internet) ####
+
+## Allows you to deploy your architecture without internet access
+##
+##  internet : get packages from internet repositories
+##  proxy: add all repositories hostnames in /etc/hosts and make
+##         them point to `packages_proxy_ip`.
+##  rsync: rsync resources/rpm-repos directory and install from it
+##
+packages_mode: internet
+#packages_proxy_ip: 192.168.122.1
+
+#### OBM-Autoconf extensions ####
+
+# Lightning Version
+lightning_tb10: "lightning-1.2.3.24"
+lightning_tb17: "lightning-1.9.24"
+
+# OBM-connector Version
+obm_connector_tb17: "obm-connector-3.2.0.15"
+obm_connector_tb24: "obm-connector-4.0.3"
+
