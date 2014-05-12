@@ -1,7 +1,7 @@
 Get involved
 ------------
 
-If you are interested in hepling us to imporve this tool, please follow [this instructions].
+If you are interested in hepling us to improve this tool, please follow [this instructions].
 
 Directories layout
 ------------------
@@ -21,7 +21,7 @@ obm.yml                   <span class="c"># OBM main </span><a href="http://docs
 
 group_vars/               <span class="c"># Here we assign variables to particular groups</span>
    all                    <span class="c"># Variables shared by all groups</span>
-   webservers             <span class="c"># Variables specifics to the dbservers group</span>
+   webservers             <span class="c"># Variables specifics to the webservers group</span>
    dbservers              <span class="c"># Variables specifics to the dbservers group</span>
    ...
 
@@ -57,7 +57,7 @@ roles/                    <span class="c"># This hierarchy represents a </span><
         vars/             <span class="c"># Here we store variables dedicated to this role</span>
             main.yml
 
-        meta/             <span class="c"># Here we store role metadad (eg. dependencies)</span>
+        meta/             <span class="c"># Here we store role metadatas (eg. dependencies)</span>
             main.yml
 
     cyrus/                <span class="c"># Same kind of structure as "common" was above, done</span>
