@@ -1,16 +1,16 @@
 #! /bin/bash
 # Launch me from your activated virtualenv
 echo "### Install test.example.com ###"
-ansible-playbook -i dev site.yml
+#ansible-playbook -i obmfull-example obm.yml
 echo "### Create resources directory ###"
 [ -d resources ] || mkdir resources
 pushd resources
 echo "### Copy yum cache to /root/6 ###"
-ssh toto.example.com "cp -r /var/cache/yum/x86_64/6 /root/"
+ssh obm.example.com "cp -r /var/cache/yum/x86_64/6 /root/"
 echo "### Create RPM repositories ###"
-ssh toto.example.com "find /root/6 -type d -name packages -exec createrepo -q {} \;"
+ssh obm.example.com "find /root/6 -type d -name packages -exec createrepo -q {} \;"
 echo "### Sync repos from remote host ###"
-rsync -r --delete toto.example.com:/root/6/* rpm-repos
+rsync -r --delete obm.example.com:/root/6/* rpm-repos
 echo "### Copy libselinux-python ###"
 if [ ! -f libselinux-python-*.rpm ]; then
     cp ./rpm-repos/base/packages/libselinux-python-2.0.94-5.3.el6_4.1.x86_64.rpm ./
