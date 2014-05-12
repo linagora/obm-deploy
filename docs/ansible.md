@@ -50,7 +50,7 @@ Handlers are tasks wich are called by other tasks, on if they implies a change (
 
 It simplifies tasks order mangement but beware, by default, they are only executed at the end of playbook.
 
-If you want them to bu launched earlier, you need to explicitly flush them.
+If you want them to be launched earlier, you need to explicitly flush them.
 
 ### [Variable]: Will I really define what is a variable ?
 
