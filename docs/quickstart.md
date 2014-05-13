@@ -12,6 +12,7 @@ $ ansible-playbook -i obmfull-example obm.yml
 
 # Deploy production environment using your own inventory file 'production'
 $ ansible-playbook -i production obm.yml
+```
 
 Sudo
 ----
