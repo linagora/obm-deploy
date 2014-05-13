@@ -1,48 +1,48 @@
 ---
-- name: Deploy EPEL repository RPM (proxy mode)
+- name: Deploy EPEL repository RPM (mirror mode)
   copy: >
       src=resources/epel-release-6-8.noarch.rpm
       dest=/root/epel-release-6-8.noarch.rpm
-  when: packages_mode == "proxy"
+  when: packages_mode == "mirror"
   tags: repositories
 
-- name: Enable EPEL repository (proxy mode)
+- name: Enable EPEL repository (mirror mode)
   yum: name=/root/epel-release-6-8.noarch.rpm
-  when: packages_mode == "proxy"
+  when: packages_mode == "mirror"
   tags: repositories
 
-- name: Enable baseurl in repositories (proxy mode)
+- name: Enable baseurl in repositories (mirror mode)
   command: sed -i s/^#baseurl/baseurl/ {{ item }}
-  when: packages_mode == "proxy"
+  when: packages_mode == "mirror"
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
    - /etc/yum.repos.d/epel.repo
   tags: repositories
 
-- name: Disable mirrorlist in repositories (proxy mode)
+- name: Disable mirrorlist in repositories (mirror mode)
   command: sed -i s/^mirrorlist/#mirrorlist/ {{ item }}
-  when: packages_mode == "proxy"
+  when: packages_mode == "mirror"
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
    - /etc/yum.repos.d/epel.repo
   tags: repositories
 
-- name: Spoof CentOS Base hostname in /etc/hosts (proxy mode)
+- name: Spoof CentOS Base hostname in /etc/hosts (mirror mode)
   lineinfile: >
               dest=/etc/hosts
               regexp='.*mirror\.centos\.org$'
-              line="{{ packages_proxy_ip }}    mirror.centos.org"
-  when: packages_mode == "proxy"
+              line="{{ packages_mirror_ip }}    mirror.centos.org"
+  when: packages_mode == "mirror"
   notify:
    - Clean yum repositories
   tags: repositories
 
-- name: Spoof EPEL hostname in /etc/hosts (proxy mode)
+- name: Spoof EPEL hostname in /etc/hosts (mirror mode)
   lineinfile: >
               dest=/etc/hosts
               regexp='.*download\.fedoraproject\.org$'
-              line="{{ packages_proxy_ip }}    download.fedoraproject.org"
-  when: packages_mode == "proxy"
+              line="{{ packages_mirror_ip }}    download.fedoraproject.org"
+  when: packages_mode == "mirror"
   notify:
    - Clean yum repositories
   tags: repositories

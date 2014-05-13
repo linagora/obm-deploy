@@ -3,11 +3,11 @@
 - name: Install JDK devel
   yum: pkg=java-1.6.0-openjdk-devel
 
-- name: Deploy Sun JDK RPM (proxy mode)
+- name: Deploy Sun JDK RPM (mirror mode)
   copy: >
         src=resources/jdk-6u45-linux-x64-rpm.bin
         dest=/tmp/jdk-6u45-linux-x64-rpm.bin
-  when: packages_mode == "proxy"
+  when: packages_mode == "mirror"
   tags: java
 
 - name: Download Sun JDK (internet mode)

@@ -46,12 +46,12 @@ key_path: /etc/obm/certs/obm_cert.pem
 ## Allows you to deploy your architecture without internet access
 ##
 ##  internet : get packages from internet repositories
-##  proxy: add all repositories hostnames in /etc/hosts and make
-##         them point to `packages_proxy_ip`.
-##  rsync: rsync resources/rpm-repos directory and install from it
+##  mirror   : add all repositories hostnames in /etc/hosts and make
+##             them point to `packages_mirror_ip`.
+##  rsync    : rsync resources/rpm-repos directory and install from it [not implemented yet]
 ##
 packages_mode: internet
-#packages_proxy_ip: 192.168.122.1
+#packages_mirror_ip: 192.168.122.1
 
 #### OBM-Autoconf extensions ####
 

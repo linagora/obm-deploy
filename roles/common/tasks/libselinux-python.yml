@@ -1,15 +1,15 @@
 ---
 # Currenly, libselinux must be installed for offline deployment
-#- name: Deploy libselinux-python RPM (proxy mode)
+#- name: Deploy libselinux-python RPM (mirror mode)
 #  copy: >
 #      src=resources/libselinux-python-2.0.94-5.3.el6_4.1.x86_64.rpm
 #      dest=/tmp/libselinux-python-2.0.94-5.3.el6_4.1.x86_64.rpm
-#  when: packages_mode == "proxy"
+#  when: packages_mode == "mirror"
 #  tags: repositories
 #
-#- name: Install libselinux-python (proxy mode)
+#- name: Install libselinux-python (mirror mode)
 #  yum: name=/tmp/libselinux-python-2.0.94-5.3.el6_4.1.x86_64.rpm
-#  when: packages_mode == "proxy"
+#  when: packages_mode == "mirror"
 #  tags: repositories
 #
 - name: Install libselinux-python (internet mode)

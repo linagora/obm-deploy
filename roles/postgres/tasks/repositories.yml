@@ -1,22 +1,22 @@
 ---
-- name: Deploy Postgres repository RPM (proxy mode)
+- name: Deploy Postgres repository RPM (mirror mode)
   copy: >
       src=resources/pgdg-centos91-9.1-4.noarch.rpm
       dest=/root/pgdg-centos91-9.1-4.noarch.rpm
-  when: packages_mode == "proxy"
+  when: packages_mode == "mirror"
   tags: postgres
 
-- name: Enable Postgres repository (proxy mode)
+- name: Enable Postgres repository (mirror mode)
   yum: name=/root/pgdg-centos91-9.1-4.noarch.rpm
-  when: packages_mode == "proxy"
+  when: packages_mode == "mirror"
   tags: postgres
 
-- name: Spoof Postgres repository hostname in /etc/hosts (proxy mode)
+- name: Spoof Postgres repository hostname in /etc/hosts (mirror mode)
   lineinfile: >
               dest=/etc/hosts
               regexp='.*yum\.postgresql\.org$'
-              line="{{ packages_proxy_ip }}    yum.postgresql.org"
-  when: packages_mode == "proxy"
+              line="{{ packages_mirror_ip }}    yum.postgresql.org"
+  when: packages_mode == "mirror"
   tags: postgres
 
 - name: Enable Postgresql 9.1 Repository (internet mode)
