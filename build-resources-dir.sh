@@ -29,7 +29,7 @@ if [ ! -f obm-release.noarch.rpm ]; then
 fi
 echo "### Download PG91 repo RPM ###"
 if [ ! -f pgdg-centos91-9.1-4.noarch.rpm ]; then
-wget -q http://yum.postgresql.org/9.1/redhat/rhel-6-x86_64/pgdg-centos91-9.1-4.noarch.rpm
+    wget -q http://yum.postgresql.org/9.1/redhat/rhel-6-x86_64/pgdg-centos91-9.1-4.noarch.rpm
 fi
 popd
 echo "### DONE ! ###"
