@@ -57,7 +57,7 @@ roles/                    <span class="c"># This hierarchy represents a </span><
         vars/             <span class="c"># Here we store variables dedicated to this role</span>
             main.yml
 
-        meta/             <span class="c"># Here we store role metadatas (eg. dependencies)</span>
+        meta/             <span class="c"># Here we store role metadata (eg. dependencies)</span>
             main.yml
 
     cyrus/                <span class="c"># Same kind of structure as "common" was above, done</span>
