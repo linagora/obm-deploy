@@ -1,4 +1,4 @@
 ---
 # file: group_vars/ldapservers
-ldap_rootpw: "{SSHA}cHNJGXmyMectqSthTAKfzjBnhQHmTmHy"
+ldap_rootpw: "{SSHA}EnwKtXsyE5t73wAARsWCbyQbBQ8Ijpry"
 
