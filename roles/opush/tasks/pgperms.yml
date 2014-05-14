@@ -1,0 +1,7 @@
+---
+- name: Deploy opush PostgreSQL permissions
+  template: src=04-remote-opush dest={{ datadir }}/pg_hba.d/04-remote-opush
+  delegate_to: "{{ obm_db_master_host }}"
+  notify:
+    - Merge PostgreSQL configuration files
+  tags: opush

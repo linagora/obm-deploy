@@ -54,3 +54,8 @@
   roles:
     - obm-autoconf
 
+- hosts: opushservers
+  vars_files:
+    - config.yml
+  roles:
+    - opush

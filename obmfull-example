@@ -39,3 +39,6 @@ javaservers
 obmfullservers
 javaservers
 
+[opushservers:children]
+obmfullservers
+javaservers
