@@ -1,0 +1,3 @@
+- name: Restart obm-sync
+  service: name=obm-sync state=restarted
+  tags: obm-sync

@@ -1,1 +1,3 @@
-../../postgres/handlers/main.yml
+---
+ - include: postgres.yml
+ - include: obm-sync.yml
