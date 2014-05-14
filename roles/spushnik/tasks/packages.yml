@@ -1,0 +1,4 @@
+---
+- name: Install Spushnik Probe 
+  yum: pkg=spushnik state=present
+  tags: spushnik

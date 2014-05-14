@@ -1,0 +1,10 @@
+---
+# Fix jetty6 init script (refers http://ci-obm.linagora.com/jira/browse/OBMFULL-5592)
+- name: Fix jetty6 init script
+  lineinfile: >
+   line="	exit $?"
+   dest=/etc/init.d/jetty6
+   insertafter=".*status -p.*"
+  notify: 
+      - Restart Jetty
+  tags: spushnik
