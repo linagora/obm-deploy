@@ -46,3 +46,6 @@ javaservers
 [spushnikservers:children]
 obmfullservers
 javaservers
+
+[saslservers:children]
+obmfullservers
