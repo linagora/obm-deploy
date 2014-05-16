@@ -1,0 +1,7 @@
+---
+- name: Install cyrus-sasl
+  yum: pkg={{ item }}
+  with_items:
+   - cyrus-sasl
+   - pam_ldap
+  tags: sasl

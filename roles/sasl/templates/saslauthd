@@ -1,0 +1,3 @@
+SOCKETDIR=/var/run/saslauthd
+MECH=pam
+FLAGS="-r -c -n 0"

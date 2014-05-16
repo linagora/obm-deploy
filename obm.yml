@@ -65,3 +65,9 @@
     - config.yml
   roles:
     - spushnik
+
+- hosts: saslservers
+  vars_files:
+    - config.yml
+  roles:
+    - sasl

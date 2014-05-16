@@ -1,0 +1,4 @@
+---
+- name: Restart saslauthd
+  service: name=saslauthd state=restarted
+  tags: sasl
