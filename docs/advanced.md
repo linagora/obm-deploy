@@ -10,7 +10,7 @@ It is possible to limit scope of a particular deployment.
 # Deploy all ntp tagged tasks on production servers
 $ ansible-playbook -i production obm.yml --tags ntp
 
-# Deploy development environment only toto.example.com host
+# Deploy development environment only obm.example.com host
 $ ansible-playbook -i dev obm.yml --limit obm.example.com
 ```
 
@@ -57,7 +57,7 @@ To make it works, you must follow this steps :
 
 Be carefull, building resources directory requires a complete obm-full host to sync from.
 
-You can refer to [our documentation] to install our test.example.com test host.
+You can refer to [our documentation] to install our obm.example.com test host.
 
 A sample nginx configuration file can be found [here].
 

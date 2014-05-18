@@ -27,11 +27,11 @@ group_vars/               <span class="c"># Here we assign variables to particul
 
 host_vars/                <span class="c"># Here we assign variables to particular hosts</span>
    localhost              <span class="c"># localhost specific variables (eg. connection=local)</span>
-   toto.example.com
+   obm.example.com
    ...
 
 collected_files           <span class="c"># Here we store files fetched on hosts (convention)</span>
-   toto.example.com       <span class="c"># Files are stored in a directory named like host</span>
+   obm.example.com       <span class="c"># Files are stored in a directory named like host</span>
       usr/                <span class="c"># Remote path is automatically replicated</span>
          share/
          ...
