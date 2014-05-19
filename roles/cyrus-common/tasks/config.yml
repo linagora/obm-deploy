@@ -1,0 +1,12 @@
+---
+- name: Deploy imapd.conf
+  template: src=imapd.conf dest=/etc/imapd.conf
+  notify:
+   - Restart Cyrus-Imapd Service
+  tags: cyrus-common
+
+- name: Deploy cyrus.conf
+  template: src=cyrus.conf dest=/etc/cyrus.conf
+  notify:
+   - Restart Cyrus-Imapd Service
+  tags: cyrus-common

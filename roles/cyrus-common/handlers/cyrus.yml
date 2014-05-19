@@ -1,0 +1,4 @@
+---
+- name: Restart Cyrus-Imapd Service
+  service: name=cyrus-imapd state=restarted
+  tags: cyrus-common
