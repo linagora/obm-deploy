@@ -49,3 +49,6 @@ javaservers
 
 [saslservers:children]
 obmfullservers
+
+[cyrusservers:children]
+obmfullservers
