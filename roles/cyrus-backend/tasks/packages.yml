@@ -1,4 +1,0 @@
----
-- name: Install Cyrus-IMAPd Packages
-  yum: pkg=obm-cyrus state=present
-  tags: packages

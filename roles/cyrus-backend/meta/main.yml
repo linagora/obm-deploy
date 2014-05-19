@@ -2,4 +2,3 @@
 dependencies:
  - { role: cyrus-common }
  - { role: obm-satellite }
-

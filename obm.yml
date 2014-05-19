@@ -71,3 +71,9 @@
     - config.yml
   roles:
     - sasl
+
+- hosts: cyrusservers
+  vars_files:
+    - config.yml
+  roles:
+    - cyrus-backend
