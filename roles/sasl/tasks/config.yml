@@ -5,14 +5,11 @@
    - Restart saslauthd
   tags: sasl
 
-- name: Deploy pam_ldap_imap.conf
-  template: src=pam_ldap_imap.conf dest=/etc
-  notify: 
-   - Restart saslauthd
-  tags: sasl
-
-- name: Deploy /etc/pam.d/imap 
-  template: src=pamd_imap dest=/etc/pam.d/imap
+- name: Deploy SASL configuration
+  template: src={{ item }} dest=/etc
+  with_items:
+   - pam_ldap_obm.conf
+   - saslauthd.conf
   notify: 
    - Restart saslauthd
   tags: sasl

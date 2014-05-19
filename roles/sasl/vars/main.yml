@@ -1,0 +1,4 @@
+---
+sasl_ldap_port: "{{ sasl_ldap_port | default('unspecified') }}"
+sasl_ldap_host: "{{ sasl_ldap_host | default('unspecified') }}"
+sasl_ldap_ssl: "{{ sasl_ldap_ssl | default('no') }}"
