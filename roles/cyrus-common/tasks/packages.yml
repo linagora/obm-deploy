@@ -1,7 +1,6 @@
 ---
-- name: Install Cyrus-IMAPd Packages
+- name: Install Cyrus-IMAP Package
   yum: pkg={{ item }} state=present
   with_items:
-   - obm-cyrus
-  tags: packages
-
+   - cyrus-imapd
+  tags: cyrus-common
