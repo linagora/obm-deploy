@@ -1,79 +1,14 @@
 ---
 # Please don't edit this file
-
-- hosts: localhost
-  connection: local
-  roles:
-    #-
-
-- hosts: all
-  vars_files:
-    - config.yml
-  roles:
-    - common
-
-- hosts: pgservers
-  vars_files:
-    - config.yml
-  roles:
-    - postgres
-
-- hosts: myservers
-  vars_files:
-    - config.yml
-  roles:
-    #- mysql
-
-- hosts: ldapservers
-  vars_files:
-    - config.yml
-  roles:
-    - ldap
-
-- hosts: uiservers
-  vars_files:
-    - config.yml
-  roles:
-    - obm-ui
-
-- hosts: syncservers
-  vars_files:
-    - config.yml
-  roles:
-    - obm-sync
-
-- hosts: solrservers
-  vars_files:
-    - config.yml
-  roles:
-    - obm-solr
-
-- hosts: autoconfservers
-  vars_files:
-    - config.yml
-  roles:
-    - obm-autoconf
-
-- hosts: opushservers
-  vars_files:
-    - config.yml
-  roles:
-    - opush
-
-- hosts: spushnikservers
-  vars_files:
-    - config.yml
-  roles:
-    - spushnik
-
-- hosts: saslservers
-  vars_files:
-    - config.yml
-  roles:
-    - sasl
-
-- hosts: cyrusservers
-  vars_files:
-    - config.yml
-  roles:
-    - cyrus-backend
+- include: yml/localhost.yml
+- include: yml/all.yml
+- include: yml/pgservers.yml
+- include: yml/myservers.yml
+- include: yml/ldapservers.yml
+- include: yml/uiservers.yml
+- include: yml/syncservers.yml
+- include: yml/solrservers.yml
+- include: yml/autoconfservers.yml
+- include: yml/opushservers
+- include: yml/spushnikservers
+- include: yml/cyrusbackendservers

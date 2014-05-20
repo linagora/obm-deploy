@@ -1,9 +1,0 @@
----
-# PAM LDAP variables
-ldap_search_base: dc=local
-ldap_server_uri: ldap://obm.example.com
-ldap_ssl: no
-ldap_port: 389
-ldap_bind_dn: "uid=ldapadmin,ou=sysusers,dc=local"
-ldap_bind_pw: "mdp3PaAL"
-ldap_tls_cacertfile: "/var/lib/obm-ca/cacert.pem"

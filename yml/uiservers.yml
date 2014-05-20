@@ -1,0 +1,6 @@
+---
+- hosts: uiservers
+  vars_files:
+    - config.yml
+  roles:
+    - obm-ui

@@ -1,0 +1,6 @@
+---
+- hosts: autoconfservers
+  vars_files:
+    - config.yml
+  roles:
+    - obm-autoconf

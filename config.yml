@@ -63,3 +63,12 @@ lightning_tb17: "lightning-1.9.24"
 obm_connector_tb17: "obm-connector-3.2.0.15"
 obm_connector_tb24: "obm-connector-4.0.3"
 
+# SASL variables
+sasl_ldap_search_base: dc=local
+sasl_ldap_filter: "(|(&(mailBox=%U@%d)(objectClass=obmUser)(mailAccess=PERMIT))(&(uid=%U)(cn=Administrator Cyrus)(objectClass=posixAccount)))"
+sasl_ldap_bind_dn: "uid=ldapadmin,ou=sysusers,dc=local"
+sasl_ldap_bind_pw: "mdp3PaAL"
+sasl_backend: "ldap"
+
+# User Password
+cyrus_password: cyrus

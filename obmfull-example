@@ -8,6 +8,7 @@ obm.example.com
 [dbservers]
 [webservers]
 [javaservers]
+[cyrusservers]
 
 # THE LAST PART IS REQUIRED
 # DO NOT EDIT AFTER THIS LINE
@@ -50,5 +51,7 @@ javaservers
 [saslservers:children]
 obmfullservers
 
-[cyrusservers:children]
+[cyrusbackendservers:children]
 obmfullservers
+cyrusservers
+

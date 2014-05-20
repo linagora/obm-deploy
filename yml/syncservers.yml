@@ -1,0 +1,6 @@
+---
+- hosts: syncservers
+  vars_files:
+    - config.yml
+  roles:
+    - obm-sync
