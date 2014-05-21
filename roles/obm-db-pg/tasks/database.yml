@@ -7,7 +7,7 @@
   tags: obm-db
 
 - name: Copy Postgres SQL scripts
-  template: src=setup.sql dest={{ scriptsdir }}/{{ item }}
+  template: src={{ item }} dest={{ scriptsdir }}/{{ item }}
   with_items:
    - setup.sql
    - lang.sql
