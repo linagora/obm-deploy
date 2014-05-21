@@ -1,12 +1,34 @@
 ---
-- name: Deploy imapd.conf
-  template: src=imapd.conf dest=/etc/imapd.conf
-  notify:
-   - Restart Cyrus-Imapd Service
+- name: Create cyrus.conf directory
+  file: name=/etc/cyrus_conf.d state=directory
   tags: cyrus-common
 
-- name: Deploy cyrus.conf
-  template: src=cyrus.conf dest=/etc/cyrus.conf
+- name: Deploy cyrus.conf configuration
+  copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }}
+  with_items:
+   - 00-header_cyrus.conf
+   - 10-services_cyrus.conf
+   - 20-events_cyrus.conf
+   - 30-footer_cyrus.conf
   notify:
-   - Restart Cyrus-Imapd Service
+    - Merge cyrus.conf configuration files
   tags: cyrus-common
+
+- name: Check if imapd.conf exists
+  stat: path=/etc/imapd.conf
+  register: imapd_file
+
+- name: Create imapd.conf directory
+  file: name=/etc/imapd_conf.d state=directory
+  tags: cyrus-common
+
+- name: Deploy imapd.conf configuration
+  copy: src={{ item }} dest=/etc/imapd_conf.d/{{ item }}
+  with_items:
+   - 10-main_imapd.conf
+   - 20-partitions_imapd.conf
+   - 50-debug_imapd.conf
+  notify:
+    - Merge imapd.conf configuration files
+  tags: cyrus-common
+
