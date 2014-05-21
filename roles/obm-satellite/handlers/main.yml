@@ -1,0 +1,4 @@
+---
+- name: Restart OBM-Satellite service
+  service: name=obm-satellite state=restarted
+  tags: obm-satellite

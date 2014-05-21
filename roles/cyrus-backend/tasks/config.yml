@@ -1,58 +1,33 @@
 ---
-- name: Activate start-up services
-  lineinfile: >
-           line='        {{ item.name }}        cmd="{{ item.cmd }}"'
-           dest=/etc/cyrus.conf
-           insertafter='idled"$'
+- name: Deploy cyrus.conf configuration
+  copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
   with_items:
-   - { name: 'delprune', cmd: '/usr/sbin/cyr_expire -E 3' }
-   - { name: 'tlsprune', cmd: '/usr/sbin/tls_prune' }
-  tags: cyrus-backend
-
-- name: Activate sieve and lmtp services
-  lineinfile: >
-           line='        {{ item.name }}           cmd="{{ item.cmd }}" listen=":{{ item.name }}" prefork=10 maxchild={{ item.maxchild }}'
-           dest=/etc/cyrus.conf
-           insertafter='^SERVICES*'
-  with_items:
-   - { name: 'lmtp', cmd: 'lmtpd -a', maxchild: 20 }
-   - { name: 'sieve', cmd: 'timsieved', maxchild: 100 }
+   - 01-header_cyrus.conf
+   - 11-services_cyrus.conf
+   - 21-events_cyrus.conf
   notify:
-   - Restart Cyrus-Imapd Service
-  tags: cyrus-backend
+    - Merge cyrus.conf configuration files
+  tags: cyrus-common
 
-- name: Activate imap and pop services
-  lineinfile: >
-           line='        {{ item.name }}           cmd="{{ item.cmd }} -U 30" listen="{{ item.name }}" prefork=10 maxchild={{ item.maxchild }} proto=tcp4 maxforkrate=4'
-           dest=/etc/cyrus.conf
-           insertafter='^SERVICES'
+- name: Check if imapd.conf exists
+  stat: path=/etc/imapd.conf
+  register: imapd_file
+
+- name: Deploy imapd.conf configuration
+  copy: src={{ item }} dest=/etc/imapd_conf.d/{{ item }} mode=0644
   with_items:
-   - { name: 'pop3', cmd: 'pop3d', maxchild: 50 }
-   - { name: 'imap', cmd: 'imapd', maxchild: 200 }
+   - 30-tls_imapd.conf
   notify:
-   - Restart Cyrus-Imapd Service
-  tags: cyrus-backend
-
-- name: Activate notify service
-  lineinfile: >
-           line='	notify		cmd="notifyd" listen="/var/run/cyrus/socket/notify" proto="udp" prefork=1'
-           dest=/etc/cyrus.conf
-           insertafter='.*lmtpd -a.*'
-  tags: cyrus-backend
-
-- name: Activate event services
-  lineinfile: >
-           line='        {{ item.name }}        cmd="{{ item.cmd }}" at=0401'
-           dest=/etc/cyrus.conf
-           insertafter='.*-c.*'
-  with_items:
-   - { name: 'delprune', cmd: '/usr/sbin/cyr_expire -E 3' }
-   - { name: 'tlsprune', cmd: '/usr/sbin/tls_prune' }
-  tags: cyrus-backend
+    - Merge imapd.conf configuration files
+  tags: cyrus-common
 
 - name: Set cyrus password
   shell: echo {{ cyrus_password }}|passwd --stdin cyrus
   tags: cyrus-backend
+
+#- name: Restart Cyrus-Imapd Service
+#  service: name=cyrus-imapd state=restarted
+#  tags: cyrus-backend
 
 - name: Enable cyrus-partition obm-satellite module
   shell: /usr/sbin/osenmod cyrusPartition
