@@ -9,6 +9,6 @@
 - include: yml/syncservers.yml
 - include: yml/solrservers.yml
 - include: yml/autoconfservers.yml
-- include: yml/opushservers
-- include: yml/spushnikservers
-- include: yml/cyrusbackendservers
+- include: yml/opushservers.yml
+- include: yml/spushnikservers.yml
+- include: yml/cyrusbackendservers.yml
