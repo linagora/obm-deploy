@@ -1,9 +1,0 @@
----
-- name: Copy install and configuration script
-  template: src=files/obm-admin.expect dest=/tmp/obm-admin.expect
-
-- name: Configure Postfix server
-  shell: expect -f /tmp/obm-admin.expect > /var/log/expect-obm-admin.log 2>&1
-
-- name: Start Postfix service
-  service: name=postix state=started enabled=yes

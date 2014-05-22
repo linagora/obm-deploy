@@ -1,5 +1,0 @@
----
-- name: Install Postfix Server
-  yum: pkg=obm-postfix state=present
-  tags: packages
-
