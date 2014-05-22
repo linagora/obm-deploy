@@ -80,3 +80,7 @@ smtp_in_relayhost: ""
 smtp_in_submission: "yes"
 smtp_in_smtps: "no"
 smtp_in_ssl: "no"
+
+#### OBM-UI ####
+remove_banner: "yes"
+
