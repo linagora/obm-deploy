@@ -1,0 +1,42 @@
+---
+- name: Create master.cf directory
+  file: name=/etc/master_cf.d state=directory
+  tags: postfix-common
+
+- name: Deploy master.cf configuration
+  copy: src={{ item }} dest=/etc/master_cf.d/{{ item }}
+  with_items:
+   - 00-header_master.cf
+   - 30-services_master.cf
+  notify:
+    - Merge master.cf configuration files
+  tags: postfix-common
+
+- name: Check if main.cf exists
+  stat: path=/etc/main.cf
+  register: postfix_file
+
+- name: Create main.cf directory
+  file: name=/etc/main_cf.d state=directory
+  tags: postfix-common
+
+- name: Deploy main.cf templates configuration
+  template: src={{ item }} dest=/etc/main_cf.d/{{ item }}
+  with_items:
+   - 00-header_main.cf
+   - 30-mynetworks_main.cf
+  tags: postfix-common
+
+- name: Deploy main.cf files configuration
+  copy: src={{ item }} dest=/etc/main_cf.d/{{ item }}
+  with_items:
+   - 20-localmaps_main.cf
+   - 40-virtualmaps_main.cf
+   - 50-delimiter_main.cf
+  notify:
+    - Merge main.cf configuration files
+  tags: postfix-common
+
+- name: Start postfix service
+  service: name=postfix state=started enabled=yes
+  tags: postfix-common

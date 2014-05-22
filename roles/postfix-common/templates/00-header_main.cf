@@ -1,0 +1,24 @@
+# See /usr/share/postfix/main.cf.dist for a commented, more complete version
+#mailbox_command = procmail -a "$EXTENSION"
+#mailbox_size_limit = 0
+
+smtpd_banner = $myhostname ESMTP $mail_name (CentOS)
+biff = no
+
+# appending .domain is the MUA's job.
+append_dot_mydomain = no
+
+# Uncomment the next line to generate "delayed mail" warnings
+#delay_warning_time = 4h
+
+#
+# Nom de l'hôte
+myhostname = {{ smtp_in_hostname }}
+# Domaine utilisé dans les mails générés localement ;
+# Indique aussi le domaine ajoutés aux adresses des destinataires n'ayant pas de
+# domaine.
+# Un mail envoyé à 'toto@$mydestination', et qui correspond à l'alias 'toto'
+# dans 'alias_maps' sera en fait redirigé à 'toto@$myorigin' et délivré localement
+# si '$myorigin' est listé dans '$mydestination'.
+myorigin = $myhostname
+

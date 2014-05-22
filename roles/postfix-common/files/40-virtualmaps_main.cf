@@ -1,0 +1,14 @@
+# Test multi-domaines
+# Le moyen de transport par defaut pour les BAL des domaines virtuels
+#virtual_transport = lmtp:unix:/var/run/cyrus/socket/lmtp
+#virtual_transport = lmtp:10.0.0.101:24
+virtual_transport = error:mailbox does not exist
+# Les domaines virtuels
+virtual_mailbox_domains = hash:/etc/postfix/virtual_domains
+# Les BAL existantes
+virtual_mailbox_maps = hash:/etc/postfix/virtual_mailbox
+# Les alias des domaines virtuels
+virtual_alias_maps = hash:/etc/postfix/virtual_alias
+# Comment délivrer le courier dans la bonne BAL
+transport_maps = hash:/etc/postfix/transport
+

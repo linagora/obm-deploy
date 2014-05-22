@@ -1,0 +1,6 @@
+---
+- name: Install Postfix Package
+  yum: pkg={{ item }} state=present
+  with_items:
+   - postfix
+  tags: postfix-common

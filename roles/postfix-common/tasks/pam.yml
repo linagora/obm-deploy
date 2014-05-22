@@ -1,0 +1,9 @@
+---
+- name: Deploy pam configuration
+  copy: src=pam dest=/etc/pam.d/{{ item }}
+  with_items:
+   - smtp
+  when: sasl_backend == "pam"
+  notify:
+   - Restart saslauthd
+  tags: postfix-common

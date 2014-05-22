@@ -9,6 +9,7 @@ obm.example.com
 [webservers]
 [javaservers]
 [cyrusservers]
+[postfixservers]
 
 # THE LAST PART IS REQUIRED
 # DO NOT EDIT AFTER THIS LINE
@@ -52,6 +53,10 @@ javaservers
 obmfullservers
 
 [cyrusbackendservers:children]
+obmfullservers
+cyrusservers
+
+[postfixsmtpinservers:children]
 obmfullservers
 cyrusservers
 

@@ -1,0 +1,15 @@
+#
+# Liste des bases d'alias consultées par l'agent de livraison 'local'
+alias_maps = hash:/etc/aliases
+# Listes des base d'alias mise à jour par 'newaliases'
+alias_database = hash:/etc/aliases
+# On ne considère que les utilisateurs définits par un alias (et pas les
+# utilisateurs système comme c'est la cas par défaut)
+local_recipient_maps = $alias_maps
+
+#
+# Acces aux BAL des utilisateurs
+# A VOIR : Les BAL de $mydestination ?...
+#mailbox_transport_maps = hash:/etc/postfix/mailbox_transport
+#mailbox_transport = lmtp:unix:/var/run/cyrus/socket/lmtp
+
