@@ -1,0 +1,6 @@
+smtpd_use_tls = yes 
+smtpd_tls_cert_file = {{ cert_path }}
+smtpd_tls_key_file = {{ key_path }}
+smtpd_tls_security_level = may 
+smtpd_tls_auth_only = no
+

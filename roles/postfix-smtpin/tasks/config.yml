@@ -1,0 +1,54 @@
+---
+- name: Deploy master.cf configuration
+  copy: src={{ item }} dest=/etc/master_cf.d/{{ item }} mode=0644
+  with_items:
+   - 10-submission_master.cf
+  when: smtp_in_submission == "yes"
+  notify:
+    - Merge master.cf configuration files
+  tags: postfix-smtpin
+
+- name: Deploy master.cf configuration
+  copy: src={{ item }} dest=/etc/master_cf.d/{{ item }} mode=0644
+  with_items:
+   - 20-smtps_master.cf
+  when: smtp_in_smtps == "yes"
+  notify:
+    - Merge master.cf configuration files
+  tags: postfix-smtpin
+
+- name: Check if main.cf exists
+  stat: path=/etc/main.cf
+  register: maincf_file
+
+- name: Deploy main.cf templates configuration
+  template: src={{ item }} dest=/etc/main_cf.d/{{ item }} mode=0644
+  with_items:
+   - 10-relayhost_main.cf
+  notify:
+    - Merge main.cf configuration files
+  tags: postfix-smtpin
+
+- name: Deploy main.cf templates configuration
+  template: src={{ item }} dest=/etc/main_cf.d/{{ item }} mode=0644
+  with_items:
+   - 60-smtps_main.cf
+  when: smtp_in_ssl == "yes"
+  notify:
+    - Merge main.cf configuration files
+  tags: postfix-smtpin
+
+- name: Enable postfixSmtpInMaps and postfixAccess obm-satellite modules
+  shell: /usr/sbin/osenmod {{ item }}
+  with_items:
+   - postfixSmtpInMaps
+   - postfixAccess
+  notify:
+   - Restart OBM-Satellite service
+  tags: postfix-smtpin
+
+- name: Add user postfix in saslauth group
+  user: name=postfix groups=saslauth append=yes
+  notify:
+   - Restart postfix service
+  tags: postfix-smtpin
