@@ -12,7 +12,7 @@
   tags: repositories
 
 - name: Enable baseurl in repositories (mirror mode)
-  command: sed -i s/^#baseurl/baseurl/ {{ item }}
+  command: sed -i 's/^#baseurl/baseurl/' {{ item }}
   when: packages_mode == "mirror"
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
@@ -20,7 +20,7 @@
   tags: repositories
 
 - name: Disable mirrorlist in repositories (mirror mode)
-  command: sed -i s/^mirrorlist/#mirrorlist/ {{ item }}
+  command: sed -i 's/^mirrorlist/#mirrorlist/g' {{ item }}
   when: packages_mode == "mirror"
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
@@ -61,7 +61,7 @@
   tags: repositories
 
 - name: Disable baseurl in repositories (internet mode)
-  command: sed -i s/^baseurl/#baseurl/ {{ item }}
+  command: sed -i 's/^baseurl/#baseurl/g' {{ item }}
   when: packages_mode == "internet"
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
@@ -69,7 +69,7 @@
   tags: repositories
 
 - name: Enable mirrorlist in repositories (internet mode)
-  command: sed -i s/^#mirrorlist/mirrorlist/ {{ item }}
+  command: sed -i 's/^#mirrorlist/mirrorlist/g' {{ item }}
   when: packages_mode == "internet"
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
