@@ -58,5 +58,5 @@ cyrusservers
 
 [postfixsmtpinservers:children]
 obmfullservers
-cyrusservers
+postfixservers
 
