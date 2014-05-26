@@ -1,21 +1,19 @@
 ---
-- name: Fix perms on cyrus.conf
-  file: path=/etc/cyrus.conf mode=0644
-  tags: cyrus-common
-
-- name: Fix perms on imapd.conf
-  file: path=/etc/imapd.conf mode=0644
-  tags: cyrus-common
-
 - name: Merge cyrus.conf configuration files
   assemble: src=/etc/cyrus_conf.d dest=/etc/cyrus.conf
-  notify:
-    - Fix perms on cyrus.conf
   tags: cyrus-common
 
 - name: Merge imapd.conf configuration files
   assemble: src=/etc/imapd_conf.d dest=/etc/imapd.conf
-#  when: imapd_file.stat.exists == False
-  notify:
-    - Fix perms on imapd.conf
+  tags: cyrus-common
+
+- name: Fix perms on Cyrus configuration files
+  file: path={{ item }} mode=0644
+  with_items:
+   - /etc/cyrus.conf
+   - /etc/imapd.conf
+  tags: cyrus-common
+
+- name: Restart Cyrus-Imapd service
+  service: name=cyrus-imapd state=restarted
   tags: cyrus-common

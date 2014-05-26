@@ -10,13 +10,7 @@
    - 10-services_cyrus.conf
    - 20-events_cyrus.conf
    - 30-footer_cyrus.conf
-  notify:
-    - Merge cyrus.conf configuration files
   tags: cyrus-common
-
-- name: Check if imapd.conf exists
-  stat: path=/etc/imapd.conf
-  register: imapd_file
 
 - name: Create imapd.conf directory
   file: name=/etc/imapd_conf.d state=directory
@@ -28,7 +22,5 @@
    - 10-main_imapd.conf
    - 20-partitions_imapd.conf
    - 50-debug_imapd.conf
-  notify:
-    - Merge imapd.conf configuration files
   tags: cyrus-common
 
