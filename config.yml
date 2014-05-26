@@ -84,3 +84,10 @@ smtp_in_ssl: "no"
 #### OBM-UI ####
 remove_banner: "yes"
 
+#### Proxy Configuration ####
+# Will be deployed on all remote hosts
+#proxy_host:
+#proxy_port:
+#proxy_username:
+#proxy_password:
+

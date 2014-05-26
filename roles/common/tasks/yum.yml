@@ -1,7 +1,51 @@
 ---
 - name: Enable YUM keepcache option
   lineinfile: >
-              dest=/etc/yum.conf
-              regexp="^keepcache=0"
-              line="keepcache=1"
+    dest=/etc/yum.conf
+    regexp="^keepcache=0$"
+    line="keepcache=1"
+    backrefs=yes
   tags: yum
+
+- name: Enable YUM proxy option
+  lineinfile: >
+    dest=/etc/yum.conf
+    regexp="^proxy=.*$"
+    line="proxy=http://{{ proxy_host }}:{{ proxy_port }}/"
+  when: proxy_host is defined
+  when: proxy_port is defined
+  tags: yum
+
+- name: Disable YUM proxy option
+  lineinfile: >
+    dest=/etc/yum.conf
+    regexp="^proxy=.*$"
+    state=absent
+  when: proxy_host is not defined
+  when: proxy_port is not defined
+  tags: yum
+
+- name: Enable YUM proxy ACL
+  lineinfile: >
+   dest=/etc/yum.conf
+   regexp="^{{item.var}}=.*$"
+   line="{{ item.var }}={{ item.value }}"
+  with_items:
+   - { var: proxy_username, value: proxy_username }
+   - { var: proxy_password, value: proxy_password }
+  when: proxy_username is defined
+  when: proxy_password is defined
+  tags: yum
+
+- name: Disable YUM proxy ACL
+  lineinfile: >
+   dest=/etc/yum.conf
+   regexp="^{{item.var}}=.*$"
+   state=absent
+  with_items:
+   - { var: proxy_username, value: proxy_username }
+   - { var: proxy_password, value: proxy_password }
+  when: proxy_username is not defined
+  when: proxy_password is not defined
+  tags: yum
+

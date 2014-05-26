@@ -47,9 +47,17 @@
    - Clean yum repositories
   tags: repositories
 
-- name: Enable EPEL repository (internet mode)
+- name: Enable EPEL repository (internet mode) [with proxy]
+  yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+  environment: proxy_env
+  when: packages_mode == "internet"
+  when: proxy_host is defined
+  tags: repositories
+
+- name: Enable EPEL repository (internet mode) [without proxy]
   yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
   when: packages_mode == "internet"
+  when: proxy_host is not defined
   tags: repositories
 
 - name: Disable baseurl in repositories (internet mode)

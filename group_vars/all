@@ -1,3 +1,19 @@
 ---
 # Please don't edit this file
+
 has_sql_load_balancer: "{{ obm_db_host != obm_db_master_host }}"
+
+prx_protocol: "{{ proxy_protocol | default('http') }}"
+prx_username: "{{ proxy_username | default('') }}"
+prx_password: "{{ proxy_password | default('') }}"
+prx_host: "{{ proxy_host | default('') }}"
+prx_port: "{{ proxy_port | default('') }}"
+prx_acl: "{% if prx_username == '' %}{% else %}{{ prx_username }}:{{ prx_password }}@{% endif %}"
+prx_url: "{% if prx_host == '' %}{% else %}{{ prx_protocol }}://{{ prx_acl }}{{ prx_host }}:{{ prx_port }}/{% endif %}"
+prx_uri: "{% if prx_host == '' %}{% else %}{{ prx_protocol }}://{{ prx_host }}:{{ prx_port }}/{% endif %}"
+
+proxy_env:
+ http_proxy: "{{ prx_url }}"
+ https_proxy: "{{ prx_url }}"
+ ftp_proxy: "{{ prx_url }}"
+

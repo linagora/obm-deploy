@@ -10,10 +10,21 @@
   when: packages_mode == "mirror"
   tags: java
 
-- name: Download Sun JDK (internet mode)
+- name: Download Sun JDK (internet mode) [with proxy]
+  get_url: >
+           url=http://packages.obm.org/rpm/other/jdk-6u45-linux-x64-rpm.bin
+           dest=/tmp/jdk-6u45-linux-x64-rpm.bin
+           sha256sum=f432ce7dbc4ff7c104d67a967e28078ec50e084d1934e579ba6c7d6038d76cf9
+  environment: proxy_env
+  when: packages_mode == "internet"
+  when: proxy_host is defined
+  tags: java
+
+- name: Download Sun JDK (internet mode) [without proxy]
   get_url: >
            url=http://packages.obm.org/rpm/other/jdk-6u45-linux-x64-rpm.bin
            dest=/tmp/jdk-6u45-linux-x64-rpm.bin
            sha256sum=f432ce7dbc4ff7c104d67a967e28078ec50e084d1934e579ba6c7d6038d76cf9
   when: packages_mode == "internet"
+  when: proxy_host is not defined
   tags: java
