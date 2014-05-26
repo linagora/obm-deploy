@@ -21,7 +21,9 @@
 
 - name: Enable OBM Repository (internet mode)
   yum: name=http://packages.obm.org/rpm/25/release/obm-release.noarch.rpm
+  environment: proxy_env
   when: packages_mode == "internet"
+  when: proxy_host is defined
   tags: obm-conf
 
 - name: Remove any OBM hostname spoofing (internet mode)
