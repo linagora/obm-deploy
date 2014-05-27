@@ -9,7 +9,30 @@
     - Merge cyrus.conf configuration files
     - Fix perms on Cyrus configuration files
     - Restart Cyrus-Imapd service
-  tags: cyrus-common
+  tags: cyrus-backend
+
+- name: Deploy cyrus.conf ssl services configuration
+  copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
+  with_items:
+   - 12-services_cyrus.conf
+   - 13-services_cyrus.conf
+  notify:
+    - Merge cyrus.conf configuration files
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  when: cyrus_ssl == "yes"
+  tags: cyrus-backend
+
+- name: Deploy imapd.conf configuration
+  copy: src={{ item }} dest=/etc/imapd_conf.d/{{ item }} mode=0644
+  with_items:
+   - 50-debug_imapd.conf
+  notify:
+    - Merge imapd.conf configuration files
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  tags: cyrus-backend
+
 
 - name: Deploy imapd.conf configuration
   copy: src={{ item }} dest=/etc/imapd_conf.d/{{ item }} mode=0644
@@ -19,7 +42,8 @@
     - Merge imapd.conf configuration files
     - Fix perms on Cyrus configuration files
     - Restart Cyrus-Imapd service
-  tags: cyrus-common
+  when: cyrus_ssl == "yes"
+  tags: cyrus-backend
 
 - name: Set cyrus password
   shell: echo {{ cyrus_password }}|passwd --stdin cyrus

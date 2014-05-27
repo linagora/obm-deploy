@@ -72,6 +72,7 @@ sasl_backend: "ldap"
 
 # User Password
 cyrus_password: cyrus
+cyrus_ssl: "yes"
 
 # Postfix variables
 smtp_in_hostname: "obm.example.com"

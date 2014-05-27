@@ -21,6 +21,5 @@
   with_items:
    - 10-main_imapd.conf
    - 20-partitions_imapd.conf
-   - 50-debug_imapd.conf
   tags: cyrus-common
 
