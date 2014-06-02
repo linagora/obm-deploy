@@ -23,6 +23,17 @@
   when: cyrus_ssl == "yes"
   tags: cyrus-backend
 
+- name: Deploy imapd.conf configuration (murder)
+  template: src={{ item }} dest=/etc/imapd_conf.d/{{ item }} mode=0644
+  with_items:
+   - 40-murder_imapd.conf
+  notify:
+    - Merge imapd.conf configuration files
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  when: use_murder == "yes"
+  tags: cyrus-backend
+
 - name: Deploy imapd.conf configuration
   copy: src={{ item }} dest=/etc/imapd_conf.d/{{ item }} mode=0644
   with_items:
@@ -45,8 +56,17 @@
   when: cyrus_ssl == "yes"
   tags: cyrus-backend
 
+- name: Create murder system user
+  user: name=murder
+  when: use_murder == "yes"
+  tags: cyrus-backend
+
+
 - name: Set cyrus password
-  shell: echo {{ cyrus_password }}|passwd --stdin cyrus
+  shell: echo {{ item.password }}|passwd --stdin {{ item.password }}
+  with_items:
+   - { user: cyrus, password: "{{ cyrus_password }}" }
+   - { user: murder, password: "{{ murder_password }}" }
   tags: cyrus-backend
 
 - name: Enable cyrus-partition obm-satellite module

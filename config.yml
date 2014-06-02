@@ -68,7 +68,7 @@ sasl_ldap_search_base: dc=local
 sasl_ldap_filter: "(|(&(mailBox=%U@%d)(objectClass=obmUser)(mailAccess=PERMIT))(&(uid=%U)(cn=Administrator Cyrus)(objectClass=posixAccount)))"
 sasl_ldap_bind_dn: "uid=ldapadmin,ou=sysusers,dc=local"
 sasl_ldap_bind_pw: "mdp3PaAL"
-sasl_backend: "ldap"
+sasl_backend: "pam"
 
 # User Password
 cyrus_password: cyrus
@@ -92,3 +92,16 @@ remove_banner: "yes"
 #proxy_username:
 #proxy_password:
 
+
+#### Murder Configuration ####
+mupdate_server: murder
+mupdate_port: 3905
+mupdate_username: murder
+mupdate_authname: murder
+mupdate_password: murder
+
+proxyservers: murder
+proxy_authname: murder
+proxy_password: murder
+murder_password: murder
+use_murder: "yes"
