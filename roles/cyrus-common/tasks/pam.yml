@@ -9,6 +9,3 @@
   notify:
    - Restart saslauthd
   tags: cyrus-backend
-
-- name: Debug
-  debug: msg="What the fuck {{ sasl_ldap_ssl }}"

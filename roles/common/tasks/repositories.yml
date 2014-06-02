@@ -13,8 +13,7 @@
 
 - name: Enable baseurl in repositories (mirror mode)
   command: sed -i 's/^#baseurl/baseurl/' {{ item }}
-  when: packages_mode == "mirror"
-  when: ansible_distribution == "CentOS"
+  when: packages_mode == "mirror" and ansible_distribution == "CentOS"
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
    - /etc/yum.repos.d/epel.repo
@@ -22,8 +21,7 @@
 
 - name: Disable mirrorlist in repositories (mirror mode)
   command: sed -i 's/^mirrorlist/#mirrorlist/g' {{ item }}
-  when: packages_mode == "mirror"
-  when: ansible_distribution == "CentOS"
+  when: packages_mode == "mirror" and ansible_distribution == "CentOS"
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
    - /etc/yum.repos.d/epel.repo
@@ -52,20 +50,17 @@
 - name: Enable EPEL repository (internet mode) [with proxy]
   yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
   environment: proxy_env
-  when: packages_mode == "internet"
-  when: proxy_host is defined
+  when: packages_mode == "internet" and proxy_host is defined
   tags: repositories
 
 - name: Enable EPEL repository (internet mode) [without proxy]
   yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-  when: packages_mode == "internet"
-  when: proxy_host is not defined
+  when: packages_mode == "internet" and proxy_host is not defined
   tags: repositories
 
 - name: Disable baseurl in repositories (internet mode)
   command: sed -i 's/^baseurl/#baseurl/g' {{ item }}
-  when: packages_mode == "internet"
-  when: ansible_distribution == "CentOS"
+  when: packages_mode == "internet" and ansible_distribution == "CentOS"
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
    - /etc/yum.repos.d/epel.repo
@@ -73,8 +68,7 @@
 
 - name: Enable mirrorlist in repositories (internet mode)
   command: sed -i 's/^#mirrorlist/mirrorlist/g' {{ item }}
-  when: packages_mode == "internet"
-  when: ansible_distribution == "CentOS"
+  when: packages_mode == "internet" and ansible_distribution == "CentOS"
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
    - /etc/yum.repos.d/epel.repo
@@ -85,8 +79,7 @@
               dest=/etc/hosts
               regexp='.*mirror\.centos\.org$'
               state=absent
-  when: packages_mode == "internet"
-  when: ansible_distribution == "CentOS"
+  when: packages_mode == "internet" and ansible_distribution == "CentOS"
   notify:
    - Clean yum repositories
   tags: repositories

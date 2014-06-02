@@ -31,21 +31,18 @@
    regexp="^{{item.var}}=.*$"
    line="{{ item.var }}={{ item.value }}"
   with_items:
-   - { var: proxy_username, value: proxy_username }
-   - { var: proxy_password, value: proxy_password }
-  when: proxy_username is defined
-  when: proxy_password is defined
+   - { var: proxy_username, value: "{{ proxy_username }}" }
+   - { var: proxy_password, value: "{{ proxy_password }}" }
+  when: proxy_username is defined and proxy_password is defined
   tags: yum
 
 - name: Disable YUM proxy ACL
   lineinfile: >
    dest=/etc/yum.conf
-   regexp="^{{item.var}}=.*$"
+   regexp="^{{ item }}=.*$"
    state=absent
   with_items:
-   - { var: proxy_username, value: proxy_username }
-   - { var: proxy_password, value: proxy_password }
-  when: proxy_username is not defined
-  when: proxy_password is not defined
+   - proxy_username
+   - proxy_password
+  when: proxy_username is not defined and proxy_password is not defined
   tags: yum
-
