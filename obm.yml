@@ -12,4 +12,5 @@
 - include: yml/opushservers.yml
 - include: yml/spushnikservers.yml
 - include: yml/cyrusbackendservers.yml
+- include: yml/cyrusfrontendservers.yml
 - include: yml/postfixsmtpinservers.yml

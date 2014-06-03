@@ -1,0 +1,71 @@
+---
+- name: Deploy cyrus.conf configuration
+  copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
+  with_items:
+   - 01-header_cyrus.conf
+   - 11-services_cyrus.conf
+   - 12-services_cyrus.conf
+   - 21-events_cyrus.conf
+  notify:
+    - Merge cyrus.conf configuration files
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  tags: cyrus-frontend
+
+- name: Deploy cyrus.conf ssl services configuration
+  copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
+  with_items:
+   - 13-services_cyrus.conf
+   - 14-services_cyrus.conf
+  notify:
+    - Merge cyrus.conf configuration files
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  when: cyrus_ssl == "yes"
+  tags: cyrus-frontend
+
+- name: Deploy imapd.conf configuration (debug)
+  copy: src={{ item }} dest=/etc/imapd_conf.d/{{ item }} mode=0644
+  with_items:
+   - 50-debug_imapd.conf
+  notify:
+    - Merge imapd.conf configuration files
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  tags: cyrus-frontend
+
+- name: Deploy imapd.conf configuration (murder)
+  template: src={{ item }} dest=/etc/imapd_conf.d/{{ item }} mode=0644
+  with_items:
+   - 40-murder_imapd.conf
+  notify:
+    - Merge imapd.conf configuration files
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  when: use_murder == "yes"
+  tags: cyrus-frontend
+
+
+- name: Deploy imapd.conf configuration
+  copy: src={{ item }} dest=/etc/imapd_conf.d/{{ item }} mode=0644
+  with_items:
+   - 30-tls_imapd.conf
+  notify:
+    - Merge imapd.conf configuration files
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  when: cyrus_ssl == "yes"
+  tags: cyrus-frontend
+
+- name: Create murder system user
+  user: name=murder
+  when: use_murder == "yes"
+  tags: cyrus-frontend
+
+- name: Set cyrus password
+  shell: echo {{ item.password }}|passwd --stdin {{ item.password }}
+  with_items:
+   - { user: cyrus, password: "{{ cyrus_password }}" }
+   - { user: murder, password: "{{ murder_password }}" }
+  tags: cyrus-frontend
+
