@@ -21,6 +21,16 @@
     - Restart Cyrus-Imapd service
   tags: cyrus-murder
 
+- name: Add the murder account as an cyrus admin
+  lineinfile: >
+   dest=/etc/imapd.conf
+   regexp='^admins:.*'
+   line="admins: cyrus {{ mupdate_username }}"
+  notify:
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  tags: cyrus-murder
+
 - name: Create murder system user
   user: name=murder
   when: use_murder == "yes"
