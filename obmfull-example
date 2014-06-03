@@ -11,6 +11,8 @@ obm.example.com
 [cyrusservers]
 [cyrusfrontendservers]
 front.example.com
+[cyrusmurderservers]
+murder.example.com
 [postfixservers]
 
 # THE LAST PART IS REQUIRED
@@ -59,6 +61,9 @@ obmfullservers
 cyrusservers
 
 [cyrusfrontendservers:children]
+cyrusservers
+
+[cyrusmurderservers:children]
 cyrusservers
 
 [postfixsmtpinservers:children]

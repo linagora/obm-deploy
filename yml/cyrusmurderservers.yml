@@ -1,0 +1,7 @@
+---
+- hosts: cyrusmurderservers
+  vars_files:
+    - config.yml
+  roles:
+    - common
+    - cyrus-murder
