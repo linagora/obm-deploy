@@ -3,5 +3,6 @@
   yum: pkg={{ item }}
   with_items:
    - cyrus-sasl
+   - cyrus-sasl-plain
    - pam_ldap
   tags: sasl
