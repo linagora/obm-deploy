@@ -102,6 +102,6 @@ mupdate_password: murder
 
 proxyservers: murder
 proxy_authname: murder
-proxy_password: murder
+proxy_password_murder: murder
 murder_password: murder
 use_murder: "yes"
