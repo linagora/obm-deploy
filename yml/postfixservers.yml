@@ -3,4 +3,4 @@
   vars_files:
     - config.yml
   roles:
-    - postfix-smtpin
+    - postfix
