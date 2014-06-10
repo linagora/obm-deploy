@@ -14,4 +14,4 @@
 - include: yml/cyrusbackendservers.yml
 - include: yml/cyrusfrontendservers.yml
 - include: yml/cyrusmurderservers.yml
-- include: yml/postfixsmtpinservers.yml
+- include: yml/postfixservers.yml
