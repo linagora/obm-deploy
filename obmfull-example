@@ -51,10 +51,6 @@ javaservers
 obmfullservers
 javaservers
 
-[saslservers:children]
-obmfullservers
-saslservers
-
 [cyrusbackendservers:children]
 obmfullservers
 cyrusservers
