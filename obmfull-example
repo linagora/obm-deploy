@@ -5,21 +5,19 @@
 [obmfullservers]
 obm.example.com
 
+[directoryservers]
 [dbservers]
 [webservers]
 [javaservers]
 [cyrusservers]
-[cyrusfrontendservers]
-front.example.com
-[cyrusmurderservers]
-murder.example.com
-[postfixservers]
+[smtpservers]
 
 # THE LAST PART IS REQUIRED
 # DO NOT EDIT AFTER THIS LINE
 
 [ldapservers:children]
 obmfullservers
+directoryservers
 
 [pgservers:children]
 obmfullservers
@@ -55,18 +53,13 @@ javaservers
 
 [saslservers:children]
 obmfullservers
+saslservers
 
 [cyrusbackendservers:children]
 obmfullservers
 cyrusservers
 
-[cyrusfrontendservers:children]
-cyrusservers
-
-[cyrusmurderservers:children]
-cyrusservers
-
-[postfixsmtpinservers:children]
+[postfixservers:children]
 obmfullservers
-postfixservers
+smtpservers
 
