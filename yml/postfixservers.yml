@@ -1,5 +1,5 @@
 ---
-- hosts: postfixsmtpinservers
+- hosts: postfixservers
   vars_files:
     - config.yml
   roles:
