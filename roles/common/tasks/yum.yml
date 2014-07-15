@@ -11,9 +11,8 @@
   lineinfile: >
     dest=/etc/yum.conf
     regexp="^proxy=.*$"
-    line="proxy=http://{{ proxy_host }}:{{ proxy_port }}/"
+    line="proxy=http://{{ prx_host }}:{{ prx_port }}/"
   when: proxy_host is defined
-  when: proxy_port is defined
   tags: yum
 
 - name: Disable YUM proxy option
@@ -22,7 +21,6 @@
     regexp="^proxy=.*$"
     state=absent
   when: proxy_host is not defined
-  when: proxy_port is not defined
   tags: yum
 
 - name: Enable YUM proxy ACL
@@ -31,9 +29,9 @@
    regexp="^{{item.var}}=.*$"
    line="{{ item.var }}={{ item.value }}"
   with_items:
-   - { var: proxy_username, value: "{{ proxy_username }}" }
-   - { var: proxy_password, value: "{{ proxy_password }}" }
-  when: proxy_username is defined and proxy_password is defined
+   - { var: proxy_username, value: "{{ prx_username }}" }
+   - { var: proxy_password, value: "{{ prx_password }}" }
+  when: proxy_username is defined
   tags: yum
 
 - name: Disable YUM proxy ACL
@@ -42,7 +40,7 @@
    regexp="^{{ item }}=.*$"
    state=absent
   with_items:
-   - proxy_username
-   - proxy_password
-  when: proxy_username is not defined and proxy_password is not defined
+   - prx_username
+   - prx_password
+  when: proxy_username is not defined
   tags: yum

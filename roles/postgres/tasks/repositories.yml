@@ -22,31 +22,23 @@
 - name: Enable Postgresql 9.1 Repository for CentOS (internet mode) [with proxy]
   yum: name=http://yum.postgresql.org/9.1/redhat/rhel-6-x86_64/pgdg-centos91-9.1-4.noarch.rpm
   environment: proxy_env
-  when: packages_mode == "internet"
-  when: proxy_host is defined
-  when: ansible_distribution == "CentOS"
+  when: packages_mode == "internet" and proxy_host is defined and  ansible_distribution == "CentOS"
   tags: postgres
 
 - name: Enable Postgresql 9.1 Repository for CentOS (internet mode) [without proxy]
   yum: name=http://yum.postgresql.org/9.1/redhat/rhel-6-x86_64/pgdg-centos91-9.1-4.noarch.rpm
-  when: packages_mode == "internet"
-  when: proxy_host is not defined
-  when: ansible_distribution == "CentOS"
+  when: packages_mode == "internet" and proxy_host is not defined and ansible_distribution == "CentOS"
   tags: postgres
 
 - name: Enable Postgresql 9.1 Repository for RedHat (internet mode) [with proxy]
   yum: name=http://yum.postgresql.org/9.1/redhat/rhel-6-x86_64/pgdg-redhat91-9.1-5.noarch.rpm
   environment: proxy_env
-  when: packages_mode == "internet"
-  when: proxy_host is defined
-  when: ansible_distribution == "RedHat"
+  when: packages_mode == "internet" and proxy_host is defined and ansible_distribution == "RedHat"
   tags: postgres
 
 - name: Enable Postgresql 9.1 Repository for RedHat (internet mode) [without proxy]
   yum: name=http://yum.postgresql.org/9.1/redhat/rhel-6-x86_64/pgdg-redhat91-9.1-5.noarch.rpm
-  when: packages_mode == "internet"
-  when: proxy_host is not defined
-  when: ansible_distribution == "RedHat"
+  when: packages_mode == "internet" and proxy_host is not defined and ansible_distribution == "RedHat"
   tags: postgres
 
 - name: Remove any Postgres hostname spoofing (internet mode)
