@@ -11,8 +11,8 @@ obm_major_version: 2.5
 # Public URL of the OBM web interface
 obm_external_url: obm.example.com
 
-# Database configuration (type should be either PGSQL or MYSQL)
-obm_db_type: PGSQL
+# Database configuration (either PGSQL or MYSQL) (default: PGSQL)
+#obm_db_type: PGSQL
 
 # The server hosting the database or the SQL load balancer
 obm_db_host: obm.example.com
@@ -45,12 +45,12 @@ key_path: /etc/obm/certs/obm_cert.pem
 
 ## Allows you to deploy your architecture without internet access
 ##
-##  internet : get packages from internet repositories
+##  internet : get packages from internet repositories (the default)
 ##  mirror   : add all repositories hostnames in /etc/hosts and make
 ##             them point to `packages_mirror_ip`.
 ##  rsync    : rsync resources/rpm-repos directory and install from it [not implemented yet]
 ##
-packages_mode: internet
+#packages_mode: internet
 #packages_mirror_ip: 192.168.122.1
 
 #### OBM-Autoconf extensions ####

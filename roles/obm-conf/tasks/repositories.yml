@@ -3,12 +3,12 @@
   copy: >
       src=resources/obm-release.noarch.rpm
       dest=/root/obm-release.noarch.rpm
-  when: packages_mode == "mirror"
+  when: mode == "mirror"
   tags: obm-conf
 
 - name: Enable OBM repository (mirror mode)
   yum: name=/root/obm-release.noarch.rpm
-  when: packages_mode == "mirror"
+  when: mode == "mirror"
   tags: obm-conf
 
 - name: Spoof OBM repository hostname in /etc/hosts (mirror mode)
@@ -16,19 +16,19 @@
               dest=/etc/hosts
               regexp='.*packages\.obm\.org$'
               line="{{ packages_mirror_ip }}    packages.obm.org"
-  when: packages_mode == "mirror"
+  when: mode == "mirror"
   tags: obm-conf
 
 - name: Enable OBM Repository (internet mode) [with proxy]
   yum: name=http://packages.obm.org/rpm/25/release/obm-release.noarch.rpm
   environment: proxy_env
-  when: packages_mode == "internet" and proxy_host is defined
+  when: mode == "internet" and proxy_host is defined
   tags: obm-conf
 
 - name: Enable OBM Repository (internet mode) [without proxy]
   yum: name=http://packages.obm.org/rpm/25/release/obm-release.noarch.rpm
   environment: proxy_env
-  when: packages_mode == "internet" and proxy_host is not defined
+  when: mode == "internet" and proxy_host is not defined
   tags: obm-conf
 
 - name: Remove any OBM hostname spoofing (internet mode)
@@ -36,7 +36,7 @@
               dest=/etc/hosts
               regexp='.*packages\.obm\.org$'
               state=absent
-  when: packages_mode == "internet"
+  when: mode == "internet"
   notify:
    - Clean yum repositories
   tags: obm-conf

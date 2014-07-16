@@ -4,15 +4,15 @@
 #  copy: >
 #      src=resources/libselinux-python-2.0.94-5.3.el6_4.1.x86_64.rpm
 #      dest=/tmp/libselinux-python-2.0.94-5.3.el6_4.1.x86_64.rpm
-#  when: packages_mode == "mirror"
+#  when: mode == "mirror"
 #  tags: repositories
 #
 #- name: Install libselinux-python (mirror mode)
 #  yum: name=/tmp/libselinux-python-2.0.94-5.3.el6_4.1.x86_64.rpm
-#  when: packages_mode == "mirror"
+#  when: mode == "mirror"
 #  tags: repositories
 #
 - name: Install libselinux-python (internet mode)
   yum: name=libselinux-python
-  when: packages_mode == "internet"
+  when: mode == "internet"
   tags: repositories

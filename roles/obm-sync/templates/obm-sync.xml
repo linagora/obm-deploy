@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context docBase="/usr/share/obm-sync/" path="/obm-sync">
   <Resource auth="Container"
-            className="{{ obm_db_drivers[obm_db_type] }}"
+            className="{{ obm_db_drivers[db_type] }}"
             factory="fr.aliacom.jndi.DataSourceFactory"
             login="{{ obm_db_user }}"
             max="{{ ansible_processor_cores }}0"
@@ -9,7 +9,7 @@
             password="{{ obm_db_password }}"
             pingQuery="SELECT 1"
             type="javax.sql.DataSource"
-            url="{{ jdbc_urls[obm_db_type] | escape }}"/>
+            url="{{ jdbc_urls[db_type] | escape }}"/>
   <ResourceLink global="UTransaction"
                 name="UserTransaction"
                 type="javax.transaction.UserTransaction"/>
