@@ -1,5 +1,5 @@
 ---
- db_type: {{ obm_db_type | default('PGSQL') }}
+ db_type: "{{ obm_db_type | default('PGSQL') }}"
  obm_db_drivers:
   MYSQL: com.mysql.jdbc.Driver
   PGSQL: org.postgresql.Driver
