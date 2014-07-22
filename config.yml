@@ -28,21 +28,38 @@ obm_db_name: obm
 # Language of the database (fr/en)
 obm_language: fr
 
-# The server hosting the directory
-obm_ldap_host: obm.example.com
+# Make default ldap different from the first member of
+# the ldapservers group (strange but supported)
+#obm_ldap_host: obm.example.com
+#obm_ldap_port: 389
+#obm_ldap_ssl: no
+#obm_ldap_suffix: "dc=local"
 
-#### OBM SSL certificates ####
+# Customize user in charge of authenticating users
+#obm_ldap_bind_dn: "uid=ldapadmin,ou=sysusers,{{ obm_ldap_suffix }}"
+#obm_ldap_bind_pw: "mdp3PaAL"
 
-ca_path: /var/lib/obm-ca/cacert.pem
-cert_path: /etc/obm/certs/obm_cert.pem
-key_path: /etc/obm/certs/obm_cert.pem
+# SASL Backend (allowed values : ldap, pam)
+#obm_sasl_backend: "ldap"
+
+# SASL search filter
+#obm_sasl_ldap_filter: "(|(&(mailBox=%U@%d)(objectClass=obmUser)(mailAccess=PERMIT))(&(uid=%U)(cn=Administrator Cyrus)(objectClass=posixAccount)))"
+
+#### SSL certificates ####
+## If you need a different certificate for an host or a particular
+## service, you can override ca_file, cert_file and key_file
+## variables in group_vars or host_vars folders.
+##
+## Default values are specified below
+#main_ca_file:   /var/lib/obm-ca/cacert.pem
+#main_cert_file: /etc/obm/certs/obm_cert.pem
+#main_key_file:  /etc/obm/certs/obm_cert.pem
 
 #### Global NTP server (if needed) ####
-
+## You probably need it if you use mirror mode
 #ntp_server: 192.168.122.1
 
 #### Packages mode (default: internet) ####
-
 ## Allows you to deploy your architecture without internet access
 ##
 ##  internet : get packages from internet repositories (the default)
@@ -62,13 +79,6 @@ lightning_tb17: "lightning-1.9.24"
 # OBM-connector Version
 obm_connector_tb17: "obm-connector-3.2.0.15"
 obm_connector_tb24: "obm-connector-4.0.3"
-
-# SASL variables
-sasl_ldap_search_base: dc=local
-sasl_ldap_filter: "(|(&(mailBox=%U@%d)(objectClass=obmUser)(mailAccess=PERMIT))(&(uid=%U)(cn=Administrator Cyrus)(objectClass=posixAccount)))"
-sasl_ldap_bind_dn: "uid=ldapadmin,ou=sysusers,dc=local"
-sasl_ldap_bind_pw: "mdp3PaAL"
-sasl_backend: "pam"
 
 # User Password
 cyrus_password: cyrus

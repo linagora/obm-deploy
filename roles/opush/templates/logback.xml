@@ -1,5 +1,5 @@
 <included>
-    <logger name="AUTHENTICATION" level="DEBUG" />
-    <logger name="REQUEST.FULL" level="DEBUG" />
-    <logger name="CONFIGURATION" level="DEBUG" />
+    <logger name="AUTHENTICATION" level="INFO" />
+    <logger name="REQUEST.TRIMMED" level="INFO" />
+    <logger name="CONFIGURATION" level="INFO" />
 </included>

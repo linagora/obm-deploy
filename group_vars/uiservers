@@ -1,4 +1,6 @@
 ---
-# OBM-UI variables
-obm_sync_host: localhost
-opush_host: localhost
+## Use this file to override ui server settings, if needed
+
+#entry_point: "{{ obm_external_url | mandatory }}"
+#sync_host: "{{ groups['syncservers'][0] | default('localhost') }}"
+#opush_host: "{{ groups['opushservers'][0] | default('localhost') }}"

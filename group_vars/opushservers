@@ -1,0 +1,4 @@
+---
+## Use this file to override opsuh server settings, if needed
+
+#ldap_host: "{{ groups['ldapservers'][0] | mandatory }}"

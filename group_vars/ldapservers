@@ -1,4 +1,5 @@
 ---
-# file: group_vars/ldapservers
+## Use this file to override ldap server settings, if needed
+
 ldap_rootpw: "{SSHA}EnwKtXsyE5t73wAARsWCbyQbBQ8Ijpry"
 

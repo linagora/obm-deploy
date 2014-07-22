@@ -13,7 +13,7 @@ SLAPD_LDAPI=no
 
 # Run slapd with -h "... ldaps:/// ..."
 #   yes/no, default: no
-SLAPD_LDAPS=yes
+SLAPD_LDAPS={{ ldap_ssl }}
 
 # Run slapd with -h "... $SLAPD_URLS ..."
 # This option could be used instead of previous three ones, but:

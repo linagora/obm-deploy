@@ -1,0 +1,13 @@
+---
+## Use this file to override autoconf server settings, if needed
+
+#ldap_host: "{{ groups['ldapservers'][0] | mandatory }}"
+#smtp_host: "{{ groups['postfixservers'][0] | mandatory }}"
+#imap_host: "{{ groups['cyrusfrontendservers'][0] | mandatory }}"
+
+#autoconf_search_base: ou=users,dc=${obmDomain},{{ ldap_suffix }}
+#autoconf_search_fields: cn,mailBox,uid
+#autoconf_search_filter: (|(objectClass=obmUser)(objectClass=obmGroup)(objectClass=obmMailShare))
+#lightning_xpi_baseurl: http://www.obm.org/mozilla-addons/lightning/stable
+#obm_xpi_baseurl: http://www.obm.org/mozilla-addons/obm-connector/stable
+#xpi_dir: /usr/share/obm-autoconf/xpi

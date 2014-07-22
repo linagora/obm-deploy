@@ -1,3 +1,3 @@
 SOCKETDIR=/var/run/saslauthd
-MECH={{ sasl_backend | default('ldap') }}
+MECH={{ sasl_backend }}
 FLAGS="-r -c -n 0"
