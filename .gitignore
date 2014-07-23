@@ -4,3 +4,4 @@ obm-deploy-dev
 ansible.cfg
 docs.ansible.com
 resources
+*.swp
