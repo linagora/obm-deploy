@@ -1,0 +1,10 @@
+content   obm-autoconf-client                 chrome/content/
+skin      obm-autoconf-client   classic/1.0   chrome/skin/
+locale    obm-autoconf-client   fr-FR         chrome/locale/fr-FR/
+
+overlay chrome://messenger/content/accountcreation/emailWizard.xul chrome://obm-autoconf-client/content/accountcreation/emailWizard_overlay.xul
+style chrome://messenger/content/accountcreation/emailWizard.xul chrome://obm-autoconf-client/skin/emailWizard_overlay.css
+overlay	chrome://messenger/content/messenger.xul	chrome://obm-autoconf-client/content/options/thunderbirdOverlay.xul
+
+resource modules modules/
+resource obm-autoconf-client .

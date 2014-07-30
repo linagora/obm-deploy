@@ -1,5 +1,17 @@
 ---
- obm_autoconf_search_base: ou=users,dc=example.com,dc=local??sub?(objectClass=*)
- url_lightning_xpi: http://www.obm.org/mozilla-addons/lightning/stable
- url_obm_connector_xpi: http://www.obm.org/mozilla-addons/obm-connector/stable
- xpi_dir: /usr/share/obm-autoconf/xpi
+# This file stores default values for role variables
+# Please don't edit it
+# Values can be updated in config.yml, groups_vars/autoconfservers
+# or in host_vars/fqdn_of_your_host or each of them
+
+ldap_host: "{{ groups['ldapservers'][0] | mandatory }}"
+smtp_host: "{{ groups['postfixservers'][0] | mandatory }}"
+imap_host: "{{ groups['cyrusfrontendservers'][0] | mandatory }}"
+
+autoconf_search_base: ou=users,dc=${obmDomain},{{ ldap_suffix }}
+autoconf_search_fields: cn,mailBox,uid
+autoconf_search_filter: (|(objectClass=obmUser)(objectClass=obmGroup)(objectClass=obmMailShare))
+lightning_xpi_baseurl: http://www.obm.org/mozilla-addons/lightning/stable
+obm_xpi_baseurl: http://www.obm.org/mozilla-addons/obm-connector/stable
+xpi_dir: /usr/share/obm-autoconf/xpi
+autoconf_client_dir: /usr/share/obm-autoconf-client

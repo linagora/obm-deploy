@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?> 
+<?xml-stylesheet href="chrome://messenger/skin/folderMenus.css" type="text/css"?>
+<?xml-stylesheet href="chrome://messenger/skin/folderPane.css" type="text/css"?>
+<!DOCTYPE prefwindow SYSTEM "chrome://obm-autoconf-client/locale/prefwindow.dtd">
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	xmlns:xpngmt="http://home.netscape.com/NC-rdf#"
+	xmlns:xpngtt="http://home.netscape.com/NC-rdf#"
+	xmlns:xpngmc="http://home.netscape.com/NC-rdf#"
+	xmlns:xpngtc="http://home.netscape.com/NC-rdf#"
+	id="obm-autoconf-client_options"
+	title="&prefwindow.options.title;"
+    ondialogcancel="return doCancel();"
+	buttons="accept, cancel"
+	persist="screenX screenY width height"
+	style="width:520px; height:320px;"
+	flex="0">
+		<script type="application/x-javascript" src="chrome://messenger/content/widgetglue.js"/> 
+	<script type="application/x-javascript" src="chrome://obm-autoconf-client/content/options/options.js"/>
+	<script type="application/x-javascript" src="chrome://obm-extension/content/js/extension.js"/>
+<script>
+function doCancel(){
+  return true;
+}
+</script>
+
+	
+  <stringbundleset id="obm-autoconf-client_stringbundleset">
+    <stringbundle id="obm-autoconf-client_strings" src="chrome://obm-autoconf-client/locale/obm-autoconf-client.properties"/>
+  </stringbundleset>
+	
+			<hbox flex="0" pack="center" align="center">
+				<groupbox flex="0">
+					<spacer style="height:2.0em;"/>
+					<button id ="resetAutoconf" label="&prefwindow.resetAutonconf.label;" align="center" oncommand="obmautoconfclient.resetAutoconf();"/>
+					<spacer style="height:2.0em;"/>
+					<button id ="resetAPE" label="&prefwindow.reinitAPE.label;" align="center" oncommand="obmautoconfclient.resetAPE();"/>
+					<spacer style="height:2.0em;"/>
+				</groupbox>
+			</hbox>
+
+	
+</dialog>

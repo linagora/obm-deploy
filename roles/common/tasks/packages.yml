@@ -16,4 +16,7 @@
    - rsync
    - bind-utils
    - createrepo
+   - openssl
+   - zip
+   - unzip
   tags: packages

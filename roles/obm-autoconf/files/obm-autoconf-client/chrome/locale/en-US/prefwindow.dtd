@@ -1,0 +1,7 @@
+<!ENTITY prefwindow.title "AutoConfiguration preferences">
+<!ENTITY prefwindow.resetAutonconf.label "Reset autoconfiguration">
+<!ENTITY prefwindow.menu.label "Autoconfiguration options">
+<!ENTITY prefwindow.ongletReinit.label "Reset">
+<!ENTITY prefwindow.options.title "Autoconfiguration options">
+<!ENTITY prefwindow.reinitAPE.label "Reset account settings">
+

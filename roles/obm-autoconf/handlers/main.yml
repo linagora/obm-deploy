@@ -1,0 +1,16 @@
+---
+- name: Add a CA certificate to OBM-Autoconf client
+  lineinfile: >
+      line="certs.push({file: {{ ca_file | basename}}})"
+      dest={{ autoconf_client_dir }}/modules/certs/certs.jsm
+      state=present
+  delegate_to: "{{ autoconf_host }}"
+  when: groups['autoconfservers'].length > 0
+  tags: obm-autoconf
+
+- name: Build OBM-Autoconf client
+  command: >
+      zip -r {{ xpi_dir }}/obm-autoconf-client.xpi {{ autoconf_client_dir }}/*
+  delegate_to: "{{ autoconf_host }}"
+  when: groups['autoconfservers'].length > 0
+  tags: obm-autoconf

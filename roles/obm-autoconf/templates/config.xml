@@ -3,47 +3,65 @@
   <directories> 
       <directory id="ldap-obm" 
                  label="Annuaire OBM" 
-                 uri="ldap://{{ obm_ldap_host }}:389/{{ obm_autoconf_search_base }}" 
+                 {% if ldap_ssl == "no" %}
+                 uri="ldap://{{ ldap_host }}:{{ ldap_port }}/{{ autoconf_search_base }}"
+                 {% else %}
+                 uri="ldaps://{{ ldap_host }}:{{ ldap_port }}/{{ autoconf_search_base }}"
+                 {% endif %}
                  autocomplete="true"/> 
   </directories> 
   <preferences>
     <preference type="boolean" name="app.update.enabled" value="false" set="lock" />
-    <preference type="string" name="extensions.obm.server" value="http://{{ obm_sync_host }}:8080/obm-sync/services" set="user" />
+    <preference type="string" name="extensions.obm.server" value="https://{{ obm_external_url }}/obm-sync/services" set="user" />
     <preference type="string" name="extensions.obm.obmUrl" value="https://{{ obm_external_url }}" set="user" />
     <preference type="boolean" name="extensions.obm.rememberpassword" value="true" set="user" />
     <preference type="string" name="extensions.obm.autoconf.login" value="${mailBox}" set="user" />
     <preference type="string" name="extensions.obm.autoconf.email" value="${mailBox}" set="user" />
+    <!-- <preference type="string" name="extensions.linshare.url" value="https://linshare_host/linshare" set="user" /> -->
+    <!-- <preference type="string" name="extensions.linshare.email" value="${mailBox}" set="user" /> -->
   </preferences>
   <extensions>
-    <extension id="{e2fda1a4-762b-4020-b5ad-a41df1933103}" src="http://{{ obm_sync_host }}:8080/obm-autoconf/xpi/lightning-1.2.3.24obm-tb-linux_x86.xpi" version="1.2.3.24obm">
-    	<targetApplication id="{3550f703-e582-4d05-9a08-453d09bdfdc6}" minVersion="10" maxVersion="10.*" />
-    	<targetPlatform name="Linux" />
+
+      <extension id="obm-autoconf-client@obm.org" src="https://{{ obm_external_url }}/obm-autoconf/xpi/obm-autoconf-client.xpi" version="{{ autoconf_version.stdout }}">
+        <targetApplication id="{3550f703-e582-4d05-9a08-453d09bdfdc6}" minVersion="24" maxVersion="31.*" />
     </extension>
-    <extension id="{e2fda1a4-762b-4020-b5ad-a41df1933103}" src="http://{{ obm_sync_host }}:8080/obm-autoconf/xpi/lightning-1.9.24obm-tb-linux_x86.xpi" version="1.9.24obm">
-    	<targetApplication id="{3550f703-e582-4d05-9a08-453d09bdfdc6}" minVersion="17" maxVersion="17.*" />
-    	<targetPlatform name="Linux" />
+
+    <extension id="{e2fda1a4-762b-4020-b5ad-a41df1933103}" src="https://{{ obm_external_url }}/obm-autoconf/xpi/lightning-tb31-linux.xpi" version="{{ lightning31_version.stdout }}">
+        <targetApplication id="{3550f703-e582-4d05-9a08-453d09bdfdc6}" minVersion="31.0" maxVersion="31.*" />
+        <targetPlatform name="Linux" />
     </extension>
-    <extension id="{e2fda1a4-762b-4020-b5ad-a41df1933103}" src="http://{{ obm_sync_host }}:8080/obm-autoconf/xpi/lightning-1.2.3.24obm-tb-mac.xpi" version="1.2.3.24obm">
-    	<targetApplication id="{3550f703-e582-4d05-9a08-453d09bdfdc6}" minVersion="10" maxVersion="10.*" />
-    	<targetPlatform name="Darwin" />
+    <extension id="{e2fda1a4-762b-4020-b5ad-a41df1933103}" src="https://{{ obm_external_url }}/obm-autoconf/xpi/lightning-tb31-mac.xpi" version="{{ lightning31_version.stdout }}">
+        <targetApplication id="{3550f703-e582-4d05-9a08-453d09bdfdc6}" minVersion="31.0" maxVersion="31.*" />
+        <targetPlatform name="Darwin" />
     </extension>
-    <extension id="{e2fda1a4-762b-4020-b5ad-a41df1933103}" src="http://{{ obm_sync_host }}:8080/obm-autoconf/xpi/lightning-1.9.24obm-tb-mac.xpi" version="1.9.24obm">
-    	<targetApplication id="{3550f703-e582-4d05-9a08-453d09bdfdc6}" minVersion="17" maxVersion="17.*" />
-    	<targetPlatform name="Darwin" />
+    <extension id="{e2fda1a4-762b-4020-b5ad-a41df1933103}" src="https://{{ obm_external_url }}/obm-autoconf/xpi/lightning-tb31-windows.xpi" version="{{ lightning31_version.stdout }}">
+        <targetApplication id="{3550f703-e582-4d05-9a08-453d09bdfdc6}" minVersion="31.0" maxVersion="31.*" />
+        <targetPlatform name="WINNT" />
     </extension>
-    <extension id="{e2fda1a4-762b-4020-b5ad-a41df1933103}" src="http://{{ obm_sync_host }}:8080/obm-autoconf/xpi/lightning-1.2.3.24obm-tb-win_x86.xpi" version="1.2.3.24obm">
-    	<targetApplication id="{3550f703-e582-4d05-9a08-453d09bdfdc6}" minVersion="10" maxVersion="10.*" />
-    	<targetPlatform name="WINNT" />
+
+    <extension id="{e2fda1a4-762b-4020-b5ad-a41df1933103}" src="https://{{ obm_external_url }}/obm-autoconf/xpi/lightning-tb24-linux.xpi" version="{{ lightning24_version.stdout }}">
+        <targetApplication id="{3550f703-e582-4d05-9a08-453d09bdfdc6}" minVersion="24" maxVersion="24.*" />
+        <targetPlatform name="Linux" />
     </extension>
-    <extension id="{e2fda1a4-762b-4020-b5ad-a41df1933103}" src="http://{{ obm_sync_host }}:8080/obm-autoconf/xpi/lightning-1.9.24obm-tb-win_x86.xpi" version="1.9.24obm">
-    	<targetApplication id="{3550f703-e582-4d05-9a08-453d09bdfdc6}" minVersion="17" maxVersion="17.*" />
-    	<targetPlatform name="WINNT" />
+    <extension id="{e2fda1a4-762b-4020-b5ad-a41df1933103}" src="https://{{ obm_external_url }}/obm-autoconf/xpi/lightning-tb24-mac.xpi" version="{{ lightning24_version.stdout }}">
+        <targetApplication id="{3550f703-e582-4d05-9a08-453d09bdfdc6}" minVersion="24" maxVersion="24.*" />
+        <targetPlatform name="Darwin" />
     </extension>
-    <extension id="obm-connector@aliasource.fr" src="http://{{ obm_sync_host }}:8080/obm-autoconf/xpi/obm-connector-3.2.0.13s.xpi" version="3.2.0.13s">
-    	<targetApplication id="{3550f703-e582-4d05-9a08-453d09bdfdc6}" minVersion="10" maxVersion="24.*" />
+    <extension id="{e2fda1a4-762b-4020-b5ad-a41df1933103}" src="https://{{ obm_external_url }}/obm-autoconf/xpi/lightning-tb24-windows.xpi" version="{{ lightning24_version.stdout }}">
+        <targetApplication id="{3550f703-e582-4d05-9a08-453d09bdfdc6}" minVersion="24" maxVersion="24.*" />
+        <targetPlatform name="WINNT" />
     </extension>
-    <extension id="obm-connector@aliasource.fr" src="http://{{ obm_sync_host }}:8080/obm-autoconf/xpi/obm-connector-4.0.1s.xpi" version="4.0.1s">
-    	<targetApplication id="{3550f703-e582-4d05-9a08-453d09bdfdc6}" minVersion="24" maxVersion="24.*" />
+
+<!--
+    <extension id="linshare@linagora" src="https://{{ obm_external_url }}/obm-autoconf/xpi/linshare-tb-1.7.xpi" version="1.7">
+        <targetApplication id="{3550f703-e582-4d05-9a08-453d09bdfdc6}" minVersion="24" maxVersion="24.*" />
     </extension>
+-->
+
+    <extension id="obm-connector@aliasource.fr" src="https://{{ obm_external_url }}/obm-autoconf/xpi/obm-connector-latest.xpi" version="{{ connector_version.stdout }}">
+        <targetApplication id="{3550f703-e582-4d05-9a08-453d09bdfdc6}" minVersion="24" maxVersion="24.*" />
+    </extension>
+
   </extensions>
+
 </configuration>

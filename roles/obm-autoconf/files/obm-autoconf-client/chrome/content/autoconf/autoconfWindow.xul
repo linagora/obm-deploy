@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://obm-autoconf-client/skin/autoconfWindow.css" type="text/css"?>
+
+<!DOCTYPE window SYSTEM "chrome://obm-autoconf-client/locale/autoconfWindow.dtd">
+ 
+<!-- This mysterious file is called after the initial acocunt setup (ie where you set your login/pass) -->
+<window id="autoconfWindow" 
+	title="&autoconfTitle;" 
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	onload="doAutoConf(callback);">
+	<script type="application/x-javascript" src="chrome://obm-autoconf-client/content/autoconf/autoconfWindow.js"/>
+  	<vbox>
+		<hbox align="center">
+			<image id="obm-autoconf-client-icon"/>
+			<description value="&autoconfText;"/>
+		</hbox>
+  		<!-- TODO : add a progress bar ? -->
+  		<!-- TODO : cancel button ? -->
+  	</vbox>
+</window>

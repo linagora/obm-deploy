@@ -2,13 +2,13 @@
 # Please don't edit this file
 - include: yml/localhost.yml
 - include: yml/all.yml
+- include: yml/autoconfservers.yml
 - include: yml/pgservers.yml
 - include: yml/myservers.yml
 - include: yml/ldapservers.yml
 - include: yml/uiservers.yml
 - include: yml/syncservers.yml
 - include: yml/solrservers.yml
-- include: yml/autoconfservers.yml
 - include: yml/opushservers.yml
 - include: yml/spushnikservers.yml
 - include: yml/cyrusbackendservers.yml

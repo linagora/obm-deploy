@@ -1,0 +1,12 @@
+label.autoconfigLabel {
+  width: 110px;
+  text-align: right;
+}
+
+#initialSettings textbox{
+	width: 250px;
+}
+
+#obm-autoconf-client-fullspacer{
+	min-width: 650px;
+}
