@@ -1,0 +1,13 @@
+---
+- name: Grant execute rights on obm-ca scripts
+  file: path=/usr/share/obm-ca/{{ item }} mode=0750
+  with_items:
+   - buildca.sh
+   - createcert.sh
+  tags: obm-ca
+
+- name: Generate OBM-CA certificate file
+  command: >
+      creates=/var/lib/obm-ca/cacert.pem
+      /usr/share/obm-ca/buildca.sh
+  tags: obm-ca

@@ -1,6 +1,5 @@
 ---
 dependencies:
- - { role: postgres-common }
  - { role: obm-cert }
  - { role: obm-db-pg, when: obm_db_type is not defined or obm_db_type == 'PGSQL' }
 # - { role: obm-db-my, when: obm_db_type == 'MYSQL' }

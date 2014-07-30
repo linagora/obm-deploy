@@ -1,0 +1,7 @@
+---
+# This file stores default values for role variables
+# Please don't edit it
+# Values can be updated in config.yml
+
+cert_path: "/etc/obm/certs/"
+ca_host: "{{ groups['caservers'][0] | mandatory }}"

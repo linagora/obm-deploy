@@ -1,4 +1,5 @@
 ---
 dependencies:
+ - { role: obm-cert }
  - { role: postfix-common }
  - { role: obm-satellite }

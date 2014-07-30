@@ -6,6 +6,7 @@
 obm.example.com
 
 [directoryservers]
+[caservers]
 [dbservers]
 [webservers]
 [javaservers]
@@ -18,6 +19,10 @@ obm.example.com
 [ldapservers:children]
 obmfullservers
 directoryservers
+
+[caservers:children]
+obmfullservers
+certservers
 
 [pgservers:children]
 obmfullservers

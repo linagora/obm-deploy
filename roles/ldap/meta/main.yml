@@ -1,4 +1,3 @@
 ---
 dependencies:
  - { role: obm-cert }
- - { role: cyrus-common }

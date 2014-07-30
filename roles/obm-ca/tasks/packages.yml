@@ -1,0 +1,4 @@
+---
+- name: Install OBM-CA
+  yum: pkg=obm-ca state=present
+  tags: obm-ca
