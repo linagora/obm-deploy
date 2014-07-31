@@ -6,7 +6,8 @@
 
 ldap_host: "{{ groups['ldapservers'][0] | mandatory }}"
 smtp_host: "{{ groups['postfixservers'][0] | mandatory }}"
-imap_host: "{{ groups['cyrusfrontendservers'][0] | mandatory }}"
+imap_host_list: "{{ groups['cyrusfrontendservers'] | union(groups['cyrusbackendservers'] }}"
+imap_host: "{{ imap_host_list[0] | mandatory }}"
 
 autoconf_search_base: ou=users,dc=${obmDomain},{{ ldap_suffix }}
 autoconf_search_fields: cn,mailBox,uid

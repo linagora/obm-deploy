@@ -1,0 +1,10 @@
+---
+# This file stores default values for role variables
+# Please don't edit it
+# Values can be updated in config.yml, groups_vars/autoconfservers
+# or in host_vars/fqdn_of_your_host or each of them
+
+autoconf_host: "{{ groups['autoconfservers'][0] | mandatory }}"
+
+xpi_dir: /usr/share/obm-autoconf/xpi
+autoconf_client_dir: /usr/share/obm-autoconf-client

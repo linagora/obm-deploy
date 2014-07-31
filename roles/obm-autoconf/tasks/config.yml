@@ -13,17 +13,23 @@
 
 - name: Sync obm-autoconf-client directory
   synchronize: >
-        src=obm-autoconf-client
-        dest=/usr/share/
-        archive=yes
-        delete=yes
+      src=roles/obm-autoconf/files/obm-autoconf-client
+      dest=/usr/share/
+      archive=yes
+      delete=yes
+  tags: obm-autoconf
+
+- name: Configure OBM Autoconf client
+  template: >
+      src=roles/obm-autoconf/files/obm-autoconf-client/modules/specificRules.jsm
+      dest=/usr/share/obm-autoconf-client/modules/specificRules.jsm
   tags: obm-autoconf
 
 - name: Deploy Lightning XPIs for TB
   get_url: > 
-           url="{{ lightning_xpi_baseurl }}/tb{{ item.tb_version }}/latest-{{ item.os }}.xpi"
-           dest="{{ xpi_dir }}/lightning-tb{{ item.tb_version }}-{{ item.os }}.xpi" 
-           force=no
+      url="{{ lightning_xpi_baseurl }}/tb{{ item.tb_version }}/latest-{{ item.os }}.xpi"
+      dest="{{ xpi_dir }}/lightning-tb{{ item.tb_version }}-{{ item.os }}.xpi" 
+      force=no
   with_items:
    - { tb_version: '24', os: linux}
    - { tb_version: '24', os: windows}
@@ -36,31 +42,31 @@
 - name: Deploy OBM-Connector XPIs for TB
   get_url: >
       url="{{ obm_xpi_baseurl }}/tb24/obm-connector-latest.xpi"
-           dest="{{ xpi_dir }}/obm-connector-latest.xpi"
-           force=no
+      dest="{{ xpi_dir }}/obm-connector-latest.xpi"
+      force=no
   tags: obm-autoconf
 
 - name: Get Lightning XPI version for TB24
-  command: >
-      unzip -p {{ xpi_dir }}/lightning-tb24-linux.xpi | grep '<version>' | sed 's/.*<.*>\(.*\)<.*>.*/\1/'
+  shell: >
+      unzip -p {{ xpi_dir }}/lightning-tb24-linux.xpi install.rdf | egrep '<(em:version|version)>' | sed 's/.*<.*>\(.*\)<\/.*>.*/\1/'
   register: lightning24_version
   tags: obm-autoconf
 
 - name: Get Lightning XPI version for TB31
-  command: >
-      unzip -p {{ xpi_dir }}/lightning-tb31-linux.xpi | grep '<version>' | sed 's/.*<.*>\(.*\)<.*>.*/\1/'
+  shell: >
+      unzip -p {{ xpi_dir }}/lightning-tb31-linux.xpi install.rdf | egrep '<(em:version|version)>' | sed 's/.*<.*>\(.*\)<\/.*>.*/\1/'
   register: lightning31_version
   tags: obm-autoconf
 
 - name: Get OBM Connector version for TB24
-  command: >
-      unzip -p {{ xpi_dir }}/obm-connector-latest.xpi | grep '<version>' | sed 's/.*<.*>\(.*\)<.*>.*/\1/'
+  shell: >
+      unzip -p {{ xpi_dir }}/obm-connector-latest.xpi install.rdf | egrep '<(em:version|version)>' | sed 's/.*<.*>\(.*\)<\/.*>.*/\1/'
   register: connector_version
   tags: obm-autoconf
 
 - name: Get OBM Autoconf client version for TBxx
-  command: >
-      unzip -p {{ xpi_dir }}/obm-autoconf-client.xpi | grep '<version>' | sed 's/.*<.*>\(.*\)<.*>.*/\1/'
+  shell: >
+      unzip -p {{ xpi_dir }}/obm-autoconf-client.xpi install.rdf | egrep '<(em:version|version)>' | sed 's/.*<.*>\(.*\)<\/.*>.*/\1/'
   register: autoconf_version
   tags: obm-autoconf
 

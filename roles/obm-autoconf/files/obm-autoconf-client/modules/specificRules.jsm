@@ -4,7 +4,7 @@ var EXPORTED_SYMBOLS = ["specificRules"];
 
 var config = {
     obm: {
-        autoconfServer: "{{ entry_point }}",
+        autoconfServer: "{{ obm_external_url }}",
         shouldAutoconfRunWithoutAccountCreation: true,
         mail: {
             incoming: {
@@ -162,8 +162,8 @@ var specificRules = {
 	// this one is called one time after the initial account creation
 	//
 	getInitialAutoconfURL: function(cia, accountManager, prefsManager, ldaptool, callback) {
-		logger.log("getInitialAutoconfURL: return URL :"+"http://" + config.obm.autoconfServer + ":8080/obm-autoconf/autoconfiguration/" + cia.email)
-		return callback(null, "http://" + config.obm.autoconfServer + ":8080/obm-autoconf/autoconfiguration/" + cia.email, cia);
+		logger.log("getInitialAutoconfURL: return URL :"+"https://" + config.obm.autoconfServer + "/obm-autoconf/autoconfiguration/" + cia.email)
+		return callback(null, "https://" + config.obm.autoconfServer + "/obm-autoconf/autoconfiguration/" + cia.email, cia);
 	},
 
 	getPeriodicAutoconfURL: function(cia, accountManager, prefsManager, ldaptool, callback) {

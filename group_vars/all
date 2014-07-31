@@ -11,12 +11,8 @@ ldap_ssl: "{{ obm_ldap_ssl | default('no') }}"
 ldap_port: "{{ obm_ldap_port | default('389') }}"
 ldap_suffix: "{{ obm_ldap_suffix | default('dc=local') }}"
 
-ldap_bind_dn: "{{ obm_ldap_bind_dn | default('') }}"
+ldap_bind_dn: "{{ obm_ldap_bind_dn | default('uid=ldapadmin,ou=sysusers,{{ ldap_suffix }}') }}"
 ldap_bind_pw: "{{ obm_ldap_bind_pw | default('mdp3PaAL') }}"
-
-{% if ldap_bind_dn == '' %}
-ldap_bind_dn: "uid=ldapadmin,ou=sysusers,{{ ldap_suffix }}"
-{% endif %}
 
 ca_file:   "{{ main_ca_file   | default('/var/lib/obm-ca/cacert.pem') }}"
 cert_file: "{{ main_cert_file | default('/etc/obm/certs/obm_cert.pem') }}"
