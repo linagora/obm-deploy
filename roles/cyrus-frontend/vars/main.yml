@@ -1,0 +1,7 @@
+---
+# This file stores default values for role variables
+# Please don't edit it
+# Values can be updated in config.yml, groups_vars/cyrusfrontendservers
+# or in host_vars/fqdn_of_your_host or each of them
+
+entry_point: "{{ obm_external_url | mandatory }}"
