@@ -1,3 +1,4 @@
 ---
 dependencies:
  - { role: obm-conf }
+ - { role: obm-autoconf-client }

@@ -1,2 +1,3 @@
 ---
 - include: config.yml
+- include: flush.yml
