@@ -1,6 +1,9 @@
 ---
 ## Use this file to override autoconf server settings, if needed
 
+# Fake variable to make file works even if dont override anything
+group: autoconfservers
+
 #ldap_host: "{{ groups['ldapservers'][0] | mandatory }}"
 #smtp_host: "{{ groups['postfixservers'][0] | mandatory }}"
 #imap_host: "{{ groups['cyrusfrontendservers'][0] | mandatory }}"
