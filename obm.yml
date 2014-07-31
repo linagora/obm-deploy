@@ -2,6 +2,7 @@
 # Please don't edit this file
 - include: yml/localhost.yml
 - include: yml/all.yml
+- include: yml/caservers.yml
 - include: yml/autoconfservers.yml
 - include: yml/pgservers.yml
 - include: yml/myservers.yml
