@@ -1,11 +1,15 @@
 ---
 - name: Ensure IPTables packages are  installed
   yum: pkg=system-config-firewall-base state=present
-  tags: iptables
+  tags:
+      - common
+      - iptables
 
 - name: Stop IPTables services
   service: name={{ item }} state=stopped enabled=no
   with_items:
    - iptables
    - ip6tables
-  tags: iptables
+  tags:
+      - common
+      - iptables

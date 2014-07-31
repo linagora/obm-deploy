@@ -1,3 +1,4 @@
 ---
 - name: Flush handlers
   meta: flush_handlers
+  tags: postgres

@@ -4,12 +4,16 @@
       src=resources/epel-release-6-8.noarch.rpm
       dest=/root/epel-release-6-8.noarch.rpm
   when: mode == "mirror"
-  tags: repositories
+  tags:
+      - common
+      - repositories
 
 - name: Enable EPEL repository (mirror mode)
   yum: name=/root/epel-release-6-8.noarch.rpm
   when: mode == "mirror"
-  tags: repositories
+  tags:
+      - common
+      - repositories
 
 - name: Enable baseurl in repositories (mirror mode)
   command: sed -i 's/^#baseurl/baseurl/' {{ item }}
@@ -17,7 +21,9 @@
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
    - /etc/yum.repos.d/epel.repo
-  tags: repositories
+  tags:
+      - common
+      - repositories
 
 - name: Disable mirrorlist in repositories (mirror mode)
   command: sed -i 's/^mirrorlist/#mirrorlist/g' {{ item }}
@@ -25,7 +31,9 @@
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
    - /etc/yum.repos.d/epel.repo
-  tags: repositories
+  tags:
+      - common
+      - repositories
 
 - name: Spoof CentOS Base hostname in /etc/hosts (mirror mode)
   lineinfile: >
@@ -35,7 +43,9 @@
   when: mode == "mirror"
   notify:
    - Clean yum repositories
-  tags: repositories
+  tags:
+      - common
+      - repositories
 
 - name: Spoof EPEL hostname in /etc/hosts (mirror mode)
   lineinfile: >
@@ -45,18 +55,24 @@
   when: mode == "mirror"
   notify:
    - Clean yum repositories
-  tags: repositories
+  tags:
+      - common
+      - repositories
 
 - name: Enable EPEL repository (internet mode) [with proxy]
   yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
   environment: proxy_env
   when: mode == "internet" and proxy_host is defined
-  tags: repositories
+  tags:
+      - common
+      - repositories
 
 - name: Enable EPEL repository (internet mode) [without proxy]
   yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
   when: mode == "internet" and proxy_host is not defined
-  tags: repositories
+  tags:
+      - common
+      - repositories
 
 - name: Disable baseurl in repositories (internet mode)
   command: sed -i 's/^baseurl/#baseurl/g' {{ item }}
@@ -64,7 +80,9 @@
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
    - /etc/yum.repos.d/epel.repo
-  tags: repositories
+  tags:
+      - common
+      - repositories
 
 - name: Enable mirrorlist in repositories (internet mode)
   command: sed -i 's/^#mirrorlist/mirrorlist/g' {{ item }}
@@ -72,7 +90,9 @@
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
    - /etc/yum.repos.d/epel.repo
-  tags: repositories
+  tags:
+      - common
+      - repositories
 
 - name: Remove any CentOS Base hostname spoofing (internet mode)
   lineinfile: >
@@ -82,7 +102,9 @@
   when: mode == "internet" and ansible_distribution == "CentOS"
   notify:
    - Clean yum repositories
-  tags: repositories
+  tags:
+      - common
+      - repositories
 
 - name: Remove any EPEL hostname spoofing (internet mode)
   lineinfile: >
@@ -92,4 +114,6 @@
   when: mode == "internet"
   notify:
    - Clean yum repositories
-  tags: repositories
+  tags:
+      - common
+      - repositories

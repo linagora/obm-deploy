@@ -2,13 +2,19 @@
 - name: Disable SELinux startup
   selinux: state=disabled
   when: ansible_selinux['status'] == 'enabled' and ansible_selinux['config_mode'] != 'disabled'
-  tags: selinux
+  tags:
+      - common
+      - selinux
 
 - name: Disable SELinux now
   command: setenforce 0
   when: ansible_selinux['status'] == 'enabled' and ansible_selinux['mode'] != 'permissive'
-  tags: selinux
+  tags:
+      - common
+      - selinux
 
 - name: Uninstall SELinux
   yum: pkg=selinux-policy state=absent
-  tags: selinux
+  tags:
+      - common
+      - selinux

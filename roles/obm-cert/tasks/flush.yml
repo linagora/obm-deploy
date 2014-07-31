@@ -1,4 +1,4 @@
 ---
 - name: Flush handlers
   meta: flush_handlers
-  tags: postfix-common
+  tags: obm-cert

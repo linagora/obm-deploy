@@ -6,8 +6,12 @@
    - iptables
    - arptables
   changed_when: False
-  tags: ipv6
+  tags:
+      - common
+      - ipv6
 
 - name: Disable IPv6
   sysctl: name="net.ipv6.conf.all.disable_ipv6" value=1
-  tags: ipv6
+  tags:
+      - common
+      - ipv6

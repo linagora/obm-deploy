@@ -1,13 +1,17 @@
 ---
 - name: Install NTP server
   yum: pkg=ntp
-  tags: ntp
+  tags:
+      - common
+      - ntp
 
 - name: Start NTP server
   service: name=ntpd state=started enabled=yes
   notify:
    - Update system date
-  tags: ntp
+  tags:
+      - common
+      - ntp
 
 - name: NTP Server configuration cleanup
   lineinfile: dest=/etc/ntp.conf regexp="server {{ item }}\." state=absent
@@ -20,7 +24,9 @@
   notify:
    - Restart NTP service
    - Update system date
-  tags: ntp
+  tags:
+      - common
+      - ntp
 
 - name: NTP Server configuration update
   lineinfile: >
@@ -30,4 +36,6 @@
    - Restart NTP service
    - Update system date
   when: ntp_server is defined
-  tags: ntp
+  tags:
+      - common
+      - ntp

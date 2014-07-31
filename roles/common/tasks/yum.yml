@@ -5,7 +5,9 @@
     regexp="^keepcache=0$"
     line="keepcache=1"
     backrefs=yes
-  tags: yum
+  tags:
+      - common
+      - yum
 
 - name: Enable YUM proxy option
   lineinfile: >
@@ -13,7 +15,9 @@
     regexp="^proxy=.*$"
     line="proxy=http://{{ prx_host }}:{{ prx_port }}/"
   when: proxy_host is defined
-  tags: yum
+  tags:
+      - common
+      - yum
 
 - name: Disable YUM proxy option
   lineinfile: >
@@ -21,7 +25,9 @@
     regexp="^proxy=.*$"
     state=absent
   when: proxy_host is not defined
-  tags: yum
+  tags:
+      - common
+      - yum
 
 - name: Enable YUM proxy ACL
   lineinfile: >
@@ -32,7 +38,9 @@
    - { var: proxy_username, value: "{{ prx_username }}" }
    - { var: proxy_password, value: "{{ prx_password }}" }
   when: proxy_username is defined
-  tags: yum
+  tags:
+      - common
+      - yum
 
 - name: Disable YUM proxy ACL
   lineinfile: >
@@ -43,4 +51,6 @@
    - prx_username
    - prx_password
   when: proxy_username is not defined
-  tags: yum
+  tags:
+      - common
+      - yum

@@ -15,4 +15,6 @@
 - name: Install libselinux-python (internet mode)
   yum: name=libselinux-python
   when: mode == "internet"
-  tags: repositories
+  tags:
+      - common
+      - libselinux
