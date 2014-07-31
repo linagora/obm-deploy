@@ -12,7 +12,7 @@ obm_major_version: 2.5
 obm_external_url: obm.example.com
 
 # Database configuration (either PGSQL or MYSQL) (default: PGSQL)
-#obm_db_type: PGSQL
+obm_db_type: PGSQL
 
 # The server hosting the database or the SQL load balancer
 obm_db_host: obm.example.com
