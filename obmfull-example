@@ -6,11 +6,12 @@
 obm.example.com
 
 [directoryservers]
-[caservers]
+[certservers]
 [dbservers]
 [webservers]
 [javaservers]
-[cyrusservers]
+[cyrusbackservers]
+[cyrusfrontservers]
 [smtpservers]
 
 # THE LAST PART IS REQUIRED
@@ -56,9 +57,12 @@ javaservers
 obmfullservers
 javaservers
 
+[cyrusfrontendservers:children]
+cyrusfrontservers
+
 [cyrusbackendservers:children]
 obmfullservers
-cyrusservers
+cyrusbackservers
 
 [postfixservers:children]
 obmfullservers
