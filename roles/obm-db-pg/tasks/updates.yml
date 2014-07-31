@@ -8,7 +8,7 @@
 - name: Fetch applied updates list
   fetch: >
    src={{ updatesdir }}/applied_updates.txt
-   dest=collected_files/{{ obm_db_host }}
+   dest=collected_files
   changed_when: False
   delegate_to: "{{ obm_db_master_host }}"
   tags: obm-db
