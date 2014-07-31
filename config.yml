@@ -72,14 +72,6 @@ obm_language: fr
 
 #### OBM-Autoconf extensions ####
 
-# Lightning Version
-lightning_tb10: "lightning-1.2.3.24"
-lightning_tb17: "lightning-1.9.24"
-
-# OBM-connector Version
-obm_connector_tb17: "obm-connector-3.2.0.15"
-obm_connector_tb24: "obm-connector-4.0.3"
-
 # User Password
 cyrus_password: cyrus
 cyrus_ssl: "yes"
