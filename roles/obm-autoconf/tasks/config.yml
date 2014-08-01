@@ -25,11 +25,10 @@
       dest=/usr/share/obm-autoconf-client/modules/specificRules.jsm
   tags: obm-autoconf
 
-- name: Deploy Lightning XPIs for TB
-  get_url: > 
-      url="{{ lightning_xpi_baseurl }}/tb{{ item.tb_version }}/latest-{{ item.os }}.xpi"
+- name: Deploy Lightning XPIs for TB (mirror mode)
+  copy: > 
+      src="resources/xpi/lightning/tb{{ item.tb_version }}/latest-{{ item.os }}.xpi"
       dest="{{ xpi_dir }}/lightning-tb{{ item.tb_version }}-{{ item.os }}.xpi" 
-      force=no
   with_items:
    - { tb_version: '24', os: linux}
    - { tb_version: '24', os: windows}
@@ -37,13 +36,62 @@
    - { tb_version: '31', os: linux}
    - { tb_version: '31', os: windows}
    - { tb_version: '31', os: mac}
+  when: mode == "mirror"
   tags: obm-autoconf
 
-- name: Deploy OBM-Connector XPIs for TB
+- name: Download and deploy Lightning XPIs for TB (internet mode) [with proxy]
+  get_url: >
+      url="{{ lightning_xpi_baseurl }}/tb{{ item.tb_version }}/latest-{{ item.os }}.xpi"
+      dest="{{ xpi_dir }}/lightning-tb{{ item.tb_version }}-{{ item.os }}.xpi"
+      force=yes
+  with_items:
+   - { tb_version: '24', os: linux}
+   - { tb_version: '24', os: windows}
+   - { tb_version: '24', os: mac}
+   - { tb_version: '31', os: linux}
+   - { tb_version: '31', os: windows}
+   - { tb_version: '31', os: mac}
+  environment: proxy_env
+  when: mode == "internet" and proxy_host is defined
+  tags: obm-autoconf
+
+- name: Download and deploy Lightning XPIs for TB (internet mode) [without proxy]
+  get_url: >
+      url="{{ lightning_xpi_baseurl }}/tb{{ item.tb_version }}/latest-{{ item.os }}.xpi"
+      dest="{{ xpi_dir }}/lightning-tb{{ item.tb_version }}-{{ item.os }}.xpi"
+      force=yes
+  with_items:
+   - { tb_version: '24', os: linux}
+   - { tb_version: '24', os: windows}
+   - { tb_version: '24', os: mac}
+   - { tb_version: '31', os: linux}
+   - { tb_version: '31', os: windows}
+   - { tb_version: '31', os: mac}
+  when: mode == "internet" and proxy_host is not defined
+  tags: obm-autoconf
+
+- name: Deploy OBM-Connector XPIs for TB (mirror mode)
+  copy: >
+      src="resources/xpi/connector/tb24/obm-connector-latest.xpi"
+      dest="{{ xpi_dir }}/obm-connector-latest.xpi"
+  when: mode == "mirror"
+  tags: obm-autoconf
+
+- name: Download and deploy OBM-Connector XPIs for TB (internet mode) [with proxy]
+  get_url: >
+      url="{{ obm_xpi_baseurl }}/tb24/obm-connector-latest.xpi"
+      dest="{{ xpi_dir }}/obm-connector-latest.xpi"
+      force=yes
+  environment: proxy_env
+  when: mode == "internet" and proxy_host is defined
+  tags: obm-autoconf
+
+- name: Download and deploy OBM-Connector XPIs for TB (internet mode) [without proxy]
   get_url: >
       url="{{ obm_xpi_baseurl }}/tb24/obm-connector-latest.xpi"
       dest="{{ xpi_dir }}/obm-connector-latest.xpi"
       force=no
+  when: mode == "internet" and proxy_host is not defined
   tags: obm-autoconf
 
 - name: Get Lightning XPI version for TB24
