@@ -25,7 +25,7 @@ if [ ! -f jdk-6u45-linux-x64-rpm.bin ]; then
 fi
 echo "### Download obm-release RPM ###"
 if [ ! -f obm-release-2.5-1.noarch.rpm ]; then
-    wget -q http://packages.obm.org/rpm/25/release/obm-release-2.5-1.noarch.rpm
+    wget -q http://packages.obm.org/rpm/release/obm-release-2.5-1.noarch.rpm
 fi
 echo "### Download PG91 repo RPM ###"
 if [ ! -f pgdg-centos91-9.1-4.noarch.rpm ]; then

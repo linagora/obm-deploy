@@ -3,6 +3,11 @@
 # Please don't edit this file
 # Use config.xml instead
 
+version: "{{ obm_version | default('2.5.7') }}"
+
+major_version: "{{ version[0:3] }}"
+short_version: "{{ version[0] }}{{ version[2] }}"
+
 mode: "{{ packages_mode | default('internet') }}"
 
 has_sql_load_balancer: "{{ obm_db_host != obm_db_master_host }}"

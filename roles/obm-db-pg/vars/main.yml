@@ -1,5 +1,5 @@
 ---
- scriptsdir: "/usr/share/obm/scripts/{{ obm_major_version }}"
+ scriptsdir: "/usr/share/obm/scripts/{{ major_version }}"
  updatesdir: "{{ scriptsdir }}/updates"
  pg_env:
   PGUSER: "{{ obm_db_user }}"

@@ -1,13 +1,13 @@
 ---
 - name: Deploy OBM repository RPM (mirror mode)
   copy: >
-      src=resources/obm-release-{{ obm_major_version }}-1.noarch.rpm
-      dest=/root/obm-release-{{ obm_major_version }}-1.noarch.rpm
+      src=resources/obm-release-{{ major_version }}-1.noarch.rpm
+      dest=/root/obm-release-{{ major_version }}-1.noarch.rpm
   when: mode == "mirror"
   tags: obm-conf
 
 - name: Enable OBM repository (mirror mode)
-  yum: name=/root/obm-release-{{ obm_major_version }}-1.noarch.rpm
+  yum: name=/root/obm-release-{{ major_version }}-1.noarch.rpm
   when: mode == "mirror"
   tags: obm-conf
 
@@ -20,13 +20,13 @@
   tags: obm-conf
 
 - name: Enable OBM Repository (internet mode) [with proxy]
-  yum: name=http://rpm.obm.org/25/release/obm-release-{{ obm_major_version }}-1.noarch.rpm
+  yum: name=http://rpm.obm.org/release/obm-release-{{ major_version }}-1.noarch.rpm
   environment: proxy_env
   when: mode == "internet" and proxy_host is defined
   tags: obm-conf
 
 - name: Enable OBM Repository (internet mode) [without proxy]
-  yum: name=http://rpm.obm.org/25/release/obm-release-{{ obm_major_version }}-1.noarch.rpm
+  yum: name=http://rpm.obm.org/release/obm-release-{{ major_version }}-1.noarch.rpm
   environment: proxy_env
   when: mode == "internet" and proxy_host is not defined
   tags: obm-conf
