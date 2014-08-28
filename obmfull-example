@@ -10,6 +10,7 @@ obm.example.com
 [dbservers]
 [webservers]
 [javaservers]
+[cyrusmupdateservers]
 [cyrusbackservers]
 [cyrusfrontservers]
 [smtpservers]
@@ -56,6 +57,9 @@ javaservers
 [spushnikservers:children]
 obmfullservers
 javaservers
+
+[cyrusmurderservers:children]
+cyrusmupdateservers
 
 [cyrusfrontendservers:children]
 cyrusfrontservers

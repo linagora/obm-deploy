@@ -45,15 +45,30 @@ obm_language: fr
 # SASL search filter
 #obm_sasl_ldap_filter: "(|(&(mailBox=%U@%d)(objectClass=obmUser)(mailAccess=PERMIT))(&(uid=%U)(cn=Administrator Cyrus)(objectClass=posixAccount)))"
 
+#### IMAP / SMTP configuration ####
+## Globally enable legacy SSL on Messaging services
+## by default, only TLS on standard ports will be enable (more secure)
+#obm_enable_legacy_ssl: "no"
+## Enable POP services (discouraged because it makes backups very difficult)
+#obm_enable_pop: "no"
+
+#### IMAP Cluster Configuration ####
+## Clustering is automatically enabled if you set a cyrusmupdateserver
+## in your inventory.
+## You need to set a user for cluster synchronisation. murder will by
+## used by default.
+#obm_mupdate_user: murder
+#obm_mupdate_pass: murder
+
 #### SSL certificates ####
 ## If you need a different certificate for an host or a particular
 ## service, you can override ca_file, cert_file and key_file
 ## variables in group_vars or host_vars folders.
 ##
 ## Default values are specified below
-#main_ca_file:   /var/lib/obm-ca/cacert.pem
-#main_cert_file: /etc/obm/certs/obm_cert.pem
-#main_key_file:  /etc/obm/certs/obm_cert.pem
+#obm_ca_file:   /var/lib/obm-ca/cacert.pem
+#obm_cert_file: /etc/obm/certs/obm_cert.pem
+#obm_key_file:  /etc/obm/certs/obm_cert.pem
 
 #### Global NTP server (if needed) ####
 ## You probably need it if you use mirror mode
@@ -71,10 +86,6 @@ obm_language: fr
 #packages_mirror_ip: 192.168.122.1
 
 #### OBM-Autoconf extensions ####
-
-# User Password
-cyrus_password: cyrus
-cyrus_ssl: "yes"
 
 # Postfix variables
 smtp_in_hostname: "obm.example.com"
@@ -94,16 +105,3 @@ remove_banner: "yes"
 #proxy_username:
 #proxy_password:
 
-
-#### Murder Configuration ####
-mupdate_server: murder
-mupdate_port: 3905
-mupdate_username: murder
-mupdate_authname: murder
-mupdate_password: murder
-
-proxyservers: murder
-proxy_authname: murder
-proxy_password_murder: murder
-murder_password: murder
-use_murder: "yes"

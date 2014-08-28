@@ -11,6 +11,7 @@
   with_items:
    - setup.sql
    - lang.sql
+   - murder_user.sql
   delegate_to: "{{ obm_db_master_host }}"
   tags: obm-db
 

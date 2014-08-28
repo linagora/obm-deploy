@@ -3,23 +3,44 @@
   file: name=/etc/cyrus_conf.d state=directory
   tags: cyrus-common
 
-- name: Deploy cyrus.conf configuration
+- name: Deploy cyrus.conf common configuration
   copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }}
   with_items:
-   - 00-header_cyrus.conf
-   - 10-services_cyrus.conf
-   - 20-events_cyrus.conf
-   - 30-footer_cyrus.conf
+   - 00-HEADER_cyrus.conf
+   - 10-SERVICES_cyrus.conf
+   - 20-EVENTS_cyrus.conf
+   - 30-FOOTER_cyrus.conf
   tags: cyrus-common
 
 - name: Create imapd.conf directory
   file: name=/etc/imapd_conf.d state=directory
   tags: cyrus-common
 
-- name: Deploy imapd.conf configuration
+- name: Deploy imapd.conf BASE common configuration
   copy: src={{ item }} dest=/etc/imapd_conf.d/{{ item }}
   with_items:
-   - 10-main_imapd.conf
-   - 20-partitions_imapd.conf
+   - 10-MAIN_imapd.conf
+   - 20-PARTITIONS_imapd.conf
+   - 50-DEBUG_imapd.conf
   tags: cyrus-common
 
+- name: Deploy imapd.conf TLS common configuration
+  template: src={{ item }} dest=/etc/imapd_conf.d/{{ item }} mode=0644
+  with_items:
+   - 30-TLS_imapd.conf
+  notify:
+    - Merge imapd.conf configuration files
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  tags: cyrus-common
+
+- name: Deploy imapd.conf MURDER common configuration
+  template: src={{ item }} dest=/etc/imapd_conf.d/{{ item }} mode=0644
+  with_items:
+   - 40-MURDER_imapd.conf
+  notify:
+    - Merge imapd.conf configuration files
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  when: mupdate_server != ""
+  tags: cyrus-common

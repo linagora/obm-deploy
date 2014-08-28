@@ -1,79 +1,61 @@
 ---
-- name: Deploy cyrus.conf configuration
+- name: Deploy cyrus.conf basic backend configuration
   copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
   with_items:
-   - 01-header_cyrus.conf
-   - 11-services_cyrus.conf
-   - 21-events_cyrus.conf
+   - 01-IDLE_cyrus.conf
+   - 11-IMAP_cyrus.conf
+   - 13-SIEVE_cyrus.conf
+   - 14-LMTPUNIX_cyrus.conf
+   - 15-LMTPREMOTE_cyrus.conf
+   - 21-EVENTS_cyrus.conf
   notify:
     - Merge cyrus.conf configuration files
     - Fix perms on Cyrus configuration files
     - Restart Cyrus-Imapd service
   tags: cyrus-backend
 
-- name: Deploy cyrus.conf ssl services configuration
+- name: Deploy cyrus.conf MUPDATE backend configuration
   copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
   with_items:
-   - 12-services_cyrus.conf
-   - 13-services_cyrus.conf
+   - 02-MUPDATE_cyrus.conf
   notify:
     - Merge cyrus.conf configuration files
     - Fix perms on Cyrus configuration files
     - Restart Cyrus-Imapd service
-  when: cyrus_ssl == "yes"
+  when: mupdate_server != ""
   tags: cyrus-backend
 
-- name: Deploy imapd.conf configuration (murder)
-  template: src={{ item }} dest=/etc/imapd_conf.d/{{ item }} mode=0644
+- name: Deploy cyrus.conf POP backend configuration
+  copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
   with_items:
-   - 40-murder_imapd.conf
+      - 12-POP_cyrus.conf
   notify:
-    - Merge imapd.conf configuration files
+    - Merge cyrus.conf configuration files
     - Fix perms on Cyrus configuration files
     - Restart Cyrus-Imapd service
-  when: use_murder == "yes"
+  when: enable_pop != "no"
   tags: cyrus-backend
 
-- name: Deploy imapd.conf configuration
-  copy: src={{ item }} dest=/etc/imapd_conf.d/{{ item }} mode=0644
+- name: Deploy cyrus.conf IMAPS backend configuration
+  copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
   with_items:
-   - 50-debug_imapd.conf
+      - 16-IMAPS_cyrus.conf
   notify:
-    - Merge imapd.conf configuration files
+    - Merge cyrus.conf configuration files
     - Fix perms on Cyrus configuration files
     - Restart Cyrus-Imapd service
+  when: enable_legacy_ssl != "no"
   tags: cyrus-backend
 
-
-- name: Deploy imapd.conf configuration
-  copy: src={{ item }} dest=/etc/imapd_conf.d/{{ item }} mode=0644
+- name: Deploy cyrus.conf POPS backend configuration
+  copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
   with_items:
-   - 30-tls_imapd.conf
+      - 17-POPS_cyrus.conf
   notify:
-    - Merge imapd.conf configuration files
+    - Merge cyrus.conf configuration files
     - Fix perms on Cyrus configuration files
     - Restart Cyrus-Imapd service
-  when: cyrus_ssl == "yes"
-  tags: cyrus-backend
-
-- name: Create murder system user
-  user: name=murder
-  when: use_murder == "yes"
-  tags: cyrus-backend
-
-
-- name: Set cyrus password
-  shell: echo {{ item.password }}|passwd --stdin {{ item.password }}
-  with_items:
-   - { user: cyrus, password: "{{ cyrus_password }}" }
-  when: sasl_backend == "yes"
-  tags: cyrus-backend
-
-- name: Set murder password
-  shell: echo {{ item.password }}|passwd --stdin {{ item.password }}
-  with_items:
-   - { user: murder, password: "{{ murder_password }}" }
-  when: use_murder == "yes"
+  when: enable_pop != "no" and enable_legacy_ssl != "no"
   tags: cyrus-backend
 
 - name: Enable cyrus-partition obm-satellite module

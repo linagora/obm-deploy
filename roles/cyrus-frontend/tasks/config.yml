@@ -1,71 +1,58 @@
 ---
-- name: Deploy cyrus.conf configuration
+- name: Deploy cyrus.conf basic frontend configuration
   copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
   with_items:
-   - 01-header_cyrus.conf
-   - 11-services_cyrus.conf
-   - 12-services_cyrus.conf
-   - 21-events_cyrus.conf
+   - 01-IDLE_cyrus.conf
+   - 12-IMAP_cyrus.conf
+   - 14-SIEVE_cyrus.conf
+   - 15-LMTP_cyrus.conf
+   - 21-EVENTS_cyrus.conf
   notify:
     - Merge cyrus.conf configuration files
     - Fix perms on Cyrus configuration files
     - Restart Cyrus-Imapd service
   tags: cyrus-frontend
 
-- name: Deploy cyrus.conf ssl services configuration
+- name: Deploy cyrus.conf MUPDATE frontend configuration
   copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
   with_items:
-   - 13-services_cyrus.conf
-   - 14-services_cyrus.conf
+   - 11-MUPDATE_cyrus.conf
   notify:
     - Merge cyrus.conf configuration files
     - Fix perms on Cyrus configuration files
     - Restart Cyrus-Imapd service
-  when: cyrus_ssl == "yes"
+  when: mupdate_server == ""
   tags: cyrus-frontend
 
-- name: Deploy imapd.conf configuration (debug)
-  copy: src={{ item }} dest=/etc/imapd_conf.d/{{ item }} mode=0644
+- name: Deploy cyrus.conf POP frontend configuration
+  copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
   with_items:
-   - 50-debug_imapd.conf
+   - 13-POP_cyrus.conf
   notify:
-    - Merge imapd.conf configuration files
+    - Merge cyrus.conf configuration files
     - Fix perms on Cyrus configuration files
     - Restart Cyrus-Imapd service
+  when: enable_pop != "no"
   tags: cyrus-frontend
 
-- name: Deploy imapd.conf configuration (murder)
-  template: src={{ item }} dest=/etc/imapd_conf.d/{{ item }} mode=0644
+- name: Deploy cyrus.conf IMAPS frontend configuration
+  copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
   with_items:
-   - 40-murder_imapd.conf
+   - 16-IMAPS_cyrus.conf
   notify:
-    - Merge imapd.conf configuration files
+    - Merge cyrus.conf configuration files
     - Fix perms on Cyrus configuration files
     - Restart Cyrus-Imapd service
-  when: use_murder == "yes"
+  when: enable_legacy_ssl != "no"
   tags: cyrus-frontend
 
-
-- name: Deploy imapd.conf configuration
-  copy: src={{ item }} dest=/etc/imapd_conf.d/{{ item }} mode=0644
+- name: Deploy cyrus.conf POPS frontend configuration
+  copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
   with_items:
-   - 30-tls_imapd.conf
+      - 17-POPS_cyrus.conf
   notify:
-    - Merge imapd.conf configuration files
+    - Merge cyrus.conf configuration files
     - Fix perms on Cyrus configuration files
     - Restart Cyrus-Imapd service
-  when: cyrus_ssl == "yes"
+  when: enable_pop != "no" and enable_legacy_ssl != "no"
   tags: cyrus-frontend
-
-- name: Create murder system user
-  user: name=murder
-  when: use_murder == "yes"
-  tags: cyrus-frontend
-
-- name: Set cyrus password
-  shell: echo {{ item.password }}|passwd --stdin {{ item.password }}
-  with_items:
-   - { user: cyrus, password: "{{ cyrus_password }}" }
-   - { user: murder, password: "{{ murder_password }}" }
-  tags: cyrus-frontend
-
