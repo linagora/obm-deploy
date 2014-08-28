@@ -1,4 +1,13 @@
 ---
+######################## CREATE NEEDED DIRECTORIES #####################################
+- name: Create CA and certificate directories if needed
+  file: path={{ item }} state=directory recurse=true mode=0755
+  with_items:
+      - "{{ ca_path }}"
+      - "{{ cert_path }}"
+  tags: obm-cert
+########################################################################################
+#
 ############################ CHECK STATIC FILES ########################################
 - name: Check for local certificate
   stat: path=certificates/{{ entry_point }}/{{ cert_file | basename }}
@@ -61,8 +70,7 @@
   copy: >
       src=collected_files/{{ ca_host }}/{{ ca_path }}/cacert.pem
       dest={{ ca_path }}/cacert.pem
-      state=file
-  when: ca_file == '/var/lib/obm-ca/cacert.pem' or cafile.stat.isfile == False
+  when: ca_file == '/var/lib/obm-ca/cacert.pem' or cafile.stat.isfile == False 
   notify:
       - Add a CA certificate to OBM-Autoconf client
       - Build OBM-Autoconf client
