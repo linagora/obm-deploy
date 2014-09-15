@@ -1,14 +1,14 @@
 ---
 - name: Disable SELinux startup
   selinux: state=disabled
-  when: ansible_selinux['status'] == 'enabled' and ansible_selinux['config_mode'] != 'disabled'
+  when: ansible_selinux != false and ansible_selinux['status'] == 'enabled' and ansible_selinux['config_mode'] != 'disabled'
   tags:
       - common
       - selinux
 
 - name: Disable SELinux now
   command: setenforce 0
-  when: ansible_selinux['status'] == 'enabled' and ansible_selinux['mode'] != 'permissive'
+  when: ansible_selinux != false and ansible_selinux['status'] == 'enabled' and ansible_selinux['mode'] != 'permissive'
   tags:
       - common
       - selinux
