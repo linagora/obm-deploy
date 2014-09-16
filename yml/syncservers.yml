@@ -1,4 +1,10 @@
 ---
+- hosts: all
+  tasks:
+    - name: Collect all IPV4 addresses
+      setup: filter=ansible_default_ipv4
+      tags: obm-sync
+
 - hosts: syncservers
   vars_files:
     - config.yml
