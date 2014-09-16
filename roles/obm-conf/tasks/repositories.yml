@@ -19,13 +19,13 @@
   when: mode == "mirror"
   tags: obm-conf
 
-- name: Enable OBM Repository (internet mode) [with proxy]
+- name: Enable OBM repository (internet mode) [with proxy]
   yum: name=http://rpm.obm.org/release/obm-release-{{ major_version }}-1.noarch.rpm
   environment: proxy_env
   when: mode == "internet" and proxy_host is defined
   tags: obm-conf
 
-- name: Enable OBM Repository (internet mode) [without proxy]
+- name: Enable OBM repository (internet mode) [without proxy]
   yum: name=http://rpm.obm.org/release/obm-release-{{ major_version }}-1.noarch.rpm
   environment: proxy_env
   when: mode == "internet" and proxy_host is not defined

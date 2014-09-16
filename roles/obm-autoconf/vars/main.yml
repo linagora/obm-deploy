@@ -4,10 +4,10 @@
 # Values can be updated in config.yml, groups_vars/autoconfservers
 # or in host_vars/fqdn_of_your_host or each of them
 
-ldap_host: "{{ groups['ldapservers'][0] | mandatory }}"
-smtp_host: "{{ groups['postfixservers'][0] | mandatory }}"
+ldap_host: "{% if inventory_hostname in groups['obmfullservers'] %}{{ inventory_hostname }}{% else %}{{ groups['ldapservers'][0] }}{% endif %}"
+smtp_host: "{% if inventory_hostname in groups['obmfullservers'] %}{{ inventory_hostname }}{% else %}{{ groups['postfixservers'][0] }}{% endif %}"
 imap_host_list: "{{ groups['cyrusfrontendservers'] | union(groups['cyrusbackendservers'] }}"
-imap_host: "{{ imap_host_list[0] | mandatory }}"
+imap_host: "{% if inventory_hostname in groups['obmfullservers'] %}{{ inventory_hostname }}{% else %}{{ imap_host_list[0] }}{% endif %}"
 
 autoconf_search_base: ou=users,dc=${obmDomain},{{ ldap_suffix }}
 autoconf_search_fields: cn,mailBox,uid

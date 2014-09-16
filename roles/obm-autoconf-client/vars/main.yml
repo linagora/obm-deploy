@@ -4,7 +4,7 @@
 # Values can be updated in config.yml, groups_vars/autoconfservers
 # or in host_vars/fqdn_of_your_host or each of them
 
-autoconf_host: "{{ groups['autoconfservers'][0] | mandatory }}"
+autoconf_host: "{% if inventory_hostname in groups['obmfullservers'] %}{{ inventory_hostname }}{% else %}{{ groups['autoconfservers'][0] }}{% endif %}"
 
 xpi_dir: /usr/share/obm-autoconf/xpi
 autoconf_client_dir: /usr/share/obm-autoconf-client

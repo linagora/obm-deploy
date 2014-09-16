@@ -3,6 +3,6 @@
   file: path=/etc/obm/conf state=directory
   tags: obm-conf
 
-- name: Deploy OBM Global configuration
+- name: Deploy OBM global configuration
   template: src=00-global.ini dest=/etc/obm/conf/00-global.ini
   tags: obm-conf
