@@ -1,4 +1,5 @@
 ---
+- include: version.yml
 - include: libselinux-python.yml
 - include: selinux.yml
 - include: yum.yml
