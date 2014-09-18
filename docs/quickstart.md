@@ -6,6 +6,8 @@ Basic usage
 
 To use any of this commands, you need to have ssh root access to hosts you set up in inventory files.
 
+They also all need to be valid hosts (place them in your /etc/hosts file or in DNS).
+
 ```.bash
 # Deploy obm-full on our development environment
 $ ansible-playbook -i obmfull-example obm.yml
