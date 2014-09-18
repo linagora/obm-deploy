@@ -9,13 +9,13 @@
 
 - name: Merge master.cf configuration files
   assemble: src=/etc/master_cf.d dest=/etc/postfix/master.cf
-  notify:
-    - Fix perms on master.cf
   tags: postfix-common
 
 - name: Merge main.cf configuration files
   assemble: src=/etc/main_cf.d dest=/etc/postfix/main.cf
 #  when: postfix_file.stat.exists == False
-  notify:
-    - Fix perms on main.cf
+  tags: postfix-common
+
+- name: Restart postfix service
+  service: name=postfix state=restarted
   tags: postfix-common

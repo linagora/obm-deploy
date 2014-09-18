@@ -6,6 +6,7 @@
   when: smtp_in_submission == "yes"
   notify:
     - Merge master.cf configuration files
+    - Fix perms on master.cf
   tags: postfix-smtpin
 
 - name: Deploy master.cf configuration
@@ -15,6 +16,7 @@
   when: smtp_in_smtps == "yes"
   notify:
     - Merge master.cf configuration files
+    - Fix perms on master.cf
   tags: postfix-smtpin
 
 - name: Check if main.cf exists
@@ -27,6 +29,7 @@
    - 10-relayhost_main.cf
   notify:
     - Merge main.cf configuration files
+    - Fix perms on main.cf
   tags: postfix-smtpin
 
 - name: Deploy main.cf templates configuration
@@ -36,6 +39,7 @@
   when: smtp_in_ssl == "yes"
   notify:
     - Merge main.cf configuration files
+    - Fix perms on main.cf
   tags: postfix-smtpin
 
 - name: Enable postfixSmtpInMaps and postfixAccess obm-satellite modules

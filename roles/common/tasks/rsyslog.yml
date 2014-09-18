@@ -1,0 +1,12 @@
+---
+- name: Install RSyslog server
+  yum: pkg=rsyslog
+  tags:
+      - common
+      - rsyslog
+
+- name: Start RSyslog server
+  service: name=rsyslog state=started enabled=yes
+  tags:
+      - common
+      - rsyslog

@@ -19,6 +19,7 @@
    - openssl
    - zip
    - unzip
+   - postfix
   tags:
       - common
       - packages

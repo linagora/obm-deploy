@@ -10,6 +10,7 @@
    - 30-services_master.cf
   notify:
     - Merge master.cf configuration files
+    - Fix perms on master.cf
   tags: postfix-common
 
 - name: Check if main.cf exists
@@ -35,8 +36,5 @@
    - 50-delimiter_main.cf
   notify:
     - Merge main.cf configuration files
-  tags: postfix-common
-
-- name: Start postfix service
-  service: name=postfix state=started enabled=yes
+    - Fix perms on main.cf
   tags: postfix-common

@@ -3,6 +3,7 @@
 - include: selinux.yml
 - include: yum.yml
 - include: repositories.yml
+- include: rsyslog.yml
 - include: ntp.yml
 - include: flush.yml
 - include: packages.yml
