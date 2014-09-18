@@ -28,7 +28,7 @@
 - name: Deploy cyrus.conf POP backend configuration
   copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
   with_items:
-      - 12-POP_cyrus.conf
+   - 12-POP_cyrus.conf
   notify:
     - Merge cyrus.conf configuration files
     - Fix perms on Cyrus configuration files
@@ -39,7 +39,7 @@
 - name: Deploy cyrus.conf IMAPS backend configuration
   copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
   with_items:
-      - 16-IMAPS_cyrus.conf
+   - 16-IMAPS_cyrus.conf
   notify:
     - Merge cyrus.conf configuration files
     - Fix perms on Cyrus configuration files
@@ -50,7 +50,7 @@
 - name: Deploy cyrus.conf POPS backend configuration
   copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
   with_items:
-      - 17-POPS_cyrus.conf
+   - 17-POPS_cyrus.conf
   notify:
     - Merge cyrus.conf configuration files
     - Fix perms on Cyrus configuration files
