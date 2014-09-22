@@ -47,3 +47,6 @@ proxy_env:
  https_proxy: "{{ prx_url }}"
  ftp_proxy: "{{ prx_url }}"
 
+
+healthcheck_login: "{{ obm_healthcheck_login | default('admin') }}"
+healthcheck_pass: "{{ obm_healthcheck_pass | default('linagora') }}"

@@ -8,3 +8,12 @@
   notify: 
       - Restart Jetty
   tags: spushnik
+
+- name:  Deploy healthcheck.ini configuration
+  template: src={{ item }} dest=/etc/obm/healthcheck_ini.d/{{ item }} mode=0644
+  with_items:
+   - 03-SPUSHNIK_healthcheck.ini
+  delegate_to: {{ ui_host }}
+  notify:
+   - Merge healthcheck.ini configuration file
+  tags: spushnik

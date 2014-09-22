@@ -106,3 +106,7 @@ remove_banner: "yes"
 #proxy_username:
 #proxy_password:
 
+#### Healthcheck Configuration ####
+## Healtcheck HTTP Authentication
+#healtcheck_login: "admin"
+#healtcheck_pass: "linagora"

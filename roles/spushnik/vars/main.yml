@@ -1,0 +1,8 @@
+---
+# This file stores default values for role variables
+# Please don't edit it
+# Values can be updated in config.yml, group_vars/spushnikservers
+# or in host_vars/fqdn_of_your_host or each of them
+
+spushnik_port: 8083
+ui_host: "{{ groups['uiservers'][0] | mandatory }}"

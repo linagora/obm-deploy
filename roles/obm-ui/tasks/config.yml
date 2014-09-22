@@ -26,3 +26,21 @@
               state=absent
   when: remove_banner == "yes"
   tags: obm-ui
+
+- name: Create healthcheck.ini directory
+  file: name=/etc/obm/healthcheck_ini.d state=directory
+  tags: obm-ui
+
+- name: Generate healthcheck encoded password
+  command: echo {{ healthcheck_pass }} | sha1sum | cut -d ' ' -f1
+  register: healthcheck_sha1
+  tags: obm-ui
+
+- name:  Deploy healthcheck.ini configuration
+  template: src={{ item }} dest=/etc/obm/healthcheck_ini.d/{{ item }} mode=0644
+  with_items:
+   - 01-HTTP-AUTH_healthcheck.ini
+   - 02-TEST-AUTH_healthcheck.ini
+  notify: 
+   - Merge healthcheck.ini configuration file
+  tags: obm-ui
