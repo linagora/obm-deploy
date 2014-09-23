@@ -4,5 +4,5 @@
 # Values can be updated in config.yml, group_vars/spushnikservers
 # or in host_vars/fqdn_of_your_host or each of them
 
-spushnik_port: {% if {{ short_version | version_compare('30','>=') }} %}8083{% else %}8082{% endif %}
+spushnik_port: "{% if {{ short_version | version_compare('30','>=') }} %}8083{% else %}8082{% endif %}"
 ui_host: "{{ groups['uiservers'][0] | mandatory }}"
