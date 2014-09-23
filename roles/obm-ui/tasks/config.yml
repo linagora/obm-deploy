@@ -21,9 +21,9 @@
 
 - name: Remove the OBM banner
   lineinfile: >
-              dest=/usr/share/obm/obminclude/of/of_display.inc
-              regexp='supportOBMBanner"];$'
-              state=absent
+    dest=/usr/share/obm/obminclude/of/of_display.inc
+    regexp='supportOBMBanner"];$'
+    state=absent
   when: remove_banner == "yes"
   tags: obm-ui
 
@@ -32,7 +32,8 @@
   tags: obm-ui
 
 - name: Generate healthcheck encoded password
-  command: echo {{ healthcheck_pass }} | sha1sum | cut -d ' ' -f1
+  shell: >
+    echo {{ healthcheck_pass | quote }} | sha1sum | cut -d ' ' -f1
   register: healthcheck_sha1
   tags: obm-ui
 

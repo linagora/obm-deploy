@@ -5,7 +5,7 @@
 
 version: "{{ obm_version | default('2.5.7') }}"
 
-major_version: "{% if version == 5 %}{{ version[0:3] }}{% else %}2.5{% endif %}"
+major_version: "{% if version|length == 5 %}{{ version[0:3] }}{% else %}2.5{% endif %}"
 short_version: "{{ major_version | replace('.', '') }}"
 
 mode: "{{ packages_mode | default('internet') }}"

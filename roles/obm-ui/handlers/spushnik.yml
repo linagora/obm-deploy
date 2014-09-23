@@ -2,7 +2,3 @@
 - name: Merge healthcheck.ini configuration file
   assemble: src=/etc/obm/healthcheck_ini.d dest=/etc/obm/healthcheck.ini
   tags: spushnik
-
-- name: Restart Jetty 
-  service: name=jetty6 state=restarted
-  tags: spushnik
