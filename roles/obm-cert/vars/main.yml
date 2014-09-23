@@ -3,6 +3,4 @@
 # Please don't edit it
 # Values can be updated in config.yml
 
-ca_path: "/var/lib/obm-ca"
-cert_path: "/etc/obm/certs"
 ca_host: "{% if inventory_hostname in groups['obmfullservers'] %}{{ inventory_hostname }}{% else %}{{ groups['caservers'][0] }}{% endif %}"

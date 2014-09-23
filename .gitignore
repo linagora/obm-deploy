@@ -1,4 +1,5 @@
 collected_files
+certificates
 ansible
 obm-deploy-dev
 ansible.cfg

@@ -24,7 +24,10 @@ enable_pop: "{{ obm_enable_pop | default('no') }}"
 
 mupdate_server: "{{ groups['cyrusmurderservers'][0] | default('') }}"
 mupdate_user: "{{ obm_mupdate_user | default('murder') }}"
-mupdate_pass: "{{ obm_mupdate_pass | replace(\"'\", '') | replace('\"', '') | default('murder') }}"
+mupdate_pass: "{{ obm_mupdate_pass | default('murder') | replace(\"'\", '') | replace('\"', '') }}"
+
+default_ca_file: '/var/lib/obm-ca/cacert.pem'
+default_cert_file: '/etc/obm/certs/obm_cert.pem'
 
 ca_file:   "{{ obm_ca_file   | default('/var/lib/obm-ca/cacert.pem') }}"
 cert_file: "{{ obm_cert_file | default('/etc/obm/certs/obm_cert.pem') }}"

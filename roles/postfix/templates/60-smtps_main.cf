@@ -1,6 +1,8 @@
 smtpd_use_tls = yes 
-smtpd_tls_cert_file = {{ cert_file }}
-smtpd_tls_key_file = {{ key_file }}
+smtpd_tls_cert_file = {% if cert_file == default_cert_file or check_certfile.stat.isfile == False %}{{ default_cert_file | dirname }}/{{ entry_point }}_signed.pem{% else %}{{ cert_file }}{% endif %}
+
+smtpd_tls_key_file = {% if key_file == default_cert_file or check_keyfile.stat.isfile == False %}{{ default_cert_file | dirname }}/{{ entry_point }}_signed.pem{% else %}{{ key_file }}{% endif %}
+
 smtpd_tls_security_level = may 
 smtpd_tls_auth_only = no
 

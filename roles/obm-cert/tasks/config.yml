@@ -3,170 +3,144 @@
 - name: Create CA and certificate directories if needed
   file: path={{ item }} state=directory recurse=true mode=0755
   with_items:
-      - "{{ ca_path }}"
-      - "{{ cert_path }}"
+      - "{{ ca_file | dirname }}"
+      - "{{ cert_file | dirname }}"
+      - "{{ default_ca_file | dirname }}"
+      - "{{ default_cert_file | dirname }}"
   tags: obm-cert
 ########################################################################################
-#
-############################ CHECK STATIC FILES ########################################
-- name: Check for local certificate
-  stat: path=certificates/{{ entry_point }}/{{ cert_file | basename }}
-  delegate_to: localhost
-  register: certfile
-  when: cert_file != '/etc/obm/certs/obm_cert.pem'
-  tags: obm-cert
-
-- name: Check for local key
-  stat: path=certificates/{{ entry_point }}/{{ key_file | basename }}
-  delegate_to: localhost
-  register: keyfile
-  when: key_file != '/etc/obm/certs/obm_cert.pem'
-  tags: obm-cert
-
-- name: Check for local certificate
-  stat: path=certificates/{{ entry_point }}/{{ ca_file | basename }}
-  delegate_to: localhost
-  register: cafile
-  when: ca_file != '/var/lib/obm-ca/cacert.pem'
-  tags: obm-cert
-#########################################################################################
 
 ############################### CHECK CONFIGURATION INTEGRITY ###########################
 - name: Check if certificate is cutomized if CA is customized
   debug: >
       msg=You can't customize your CA if you don't customize your certificate
-  when: ca_file != '/var/lib/obm-ca/cacert.pem' and cert_file == '/etc/obm/certs/obm_cert.pem'
+  when: ca_file != default_ca_file and cert_file == default_cert_file
   failed_when: True
   tags: obm-cert
 
 - name: Check if CA is cutomized if certificate is customized
   debug: >
       msg=You can't customize your certificate if you don't customize your CA
-  when: cert_file != '/etc/obm/certs/obm_cert.pem' and ca_file == '/var/lib/obm-ca/cacert.pem'
+  when: cert_file != default_cert_file and ca_file == default_ca_file
   failed_when: True
   tags: obm-cert
 
 - name: Check if certificate is cutomized if key is customized
   debug: >
       msg=You can't customize your key if you don't customize your certificate
-  when: key_file != '/etc/obm/certs/obm_cert.pem' and cert_file == '/etc/obm/certs/obm_cert.pem'
+  when: key_file != default_cert_file and cert_file == default_cert_file
   failed_when: True
   tags: obm-cert
+#########################################################################################
+
+################################## CHECK LOCAL FILES ##################################
+- name: Check for local CA certificate
+  stat: path=certificates/{{ entry_point }}/{{ ca_file | basename }}
+  delegate_to: localhost
+  register: check_cafile
+  tags: obm-cert
+
+- name: Check for local certificate
+  stat: path=certificates/{{ entry_point }}/{{ cert_file | basename }}
+  delegate_to: localhost
+  register: check_certfile
+  tags: obm-cert
+
+- name: Check for local key
+  stat: path=certificates/{{ entry_point }}/{{ key_file | basename }}
+  delegate_to: localhost
+  register: check_keyfile
+  tags: obm-cert
 
 #########################################################################################
 
-################################### NO CUSTOM CA FILE ###################################
+################################## MANAGE CA CERTIFICATE ################################
 - name: Fetch OBM CA File
   fetch: >
-      src="{{ ca_path }}/cacert.pem"
-      dest=collected_files
+      src={{ default_ca_file }}
+      dest=certificates/{{ ca_host }}/
       validate_md5=yes
-  #changed_when: False
+      flat=yes
   delegate_to: "{{ ca_host }}"
-  when: ca_file == '/var/lib/obm-ca/cacert.pem' or cafile.stat.isfile == False
+  when: ca_file == default_ca_file or check_cafile.stat.isfile == False
   tags: obm-cert
 
-- name: Push OBM CA file to remote host
+- name: Push generic CA file to remote host
   copy: >
-      src=collected_files/{{ ca_host }}/{{ ca_path }}/cacert.pem
-      dest={{ ca_path }}/cacert.pem
-  when: ca_file == '/var/lib/obm-ca/cacert.pem' or cafile.stat.isfile == False 
-  notify:
-      - Add a CA certificate to OBM-Autoconf client
-      - Build OBM-Autoconf client
-  tags: obm-cert
-
-- name: Force OBM Autoconf notification for obm-ca host
-  debug: "msg=Forcing obm-autoconf notification"
-  notify:
-      - Add a CA certificate to OBM-Autoconf client
-      - Build OBM-Autoconf client
-  when: ca_file == '/var/lib/obm-ca/cacert.pem' and ca_host == ansible_fqdn and ca_first_role is defined
-  changed_when: True
-  tags: obm-cert
-#########################################################################################
-
-################################### CUSTOM CA FILE ######################################
-- name: Push static CA file to remote host
-  copy: >
-      src=certificates/{{ entry_point }}/{{ ca_file | basename }}
-      dest={{ cert_path }}/{{ cert_file | basename }}
+      src=certificates/{{ ca_host }}/{{ default_ca_file | basename }}
+      dest={{ default_ca_file }}
       state=file
-  when: ca_file != '/var/lib/obm-ca/cacert.pem' and cafile.stat.isfile == True
+  when: ca_file == default_ca_file or check_cafile.stat.isfile == False
+  tags: obm-cert
+
+- name: Push custom CA file to remote host
+  copy: >
+      src=certificates/{{ ca_host }}/{{ ca_file | basename }}
+      dest={{ ca_file }}
+      state=file
+  when: ca_file != default_ca_file and check_cafile.stat.isfile == True
+  tags: obm-cert
+
+- name: Push generic CA file to OBM-autoconf
+  copy: >
+      src=certificates/{{ ca_host }}/{{ default_ca_file | basename }}
+      dest={{ autoconf_client_dir }}/modules/certs/{{ default_ca_file | basename }}
   notify:
-      - Add a CA certificate to OBM-Autoconf client
+      - Add a generic CA cert to OBM-Autoconf configuration
       - Build OBM-Autoconf client
+  when: ca_file == default_ca_file or check_cafile.stat.isfile == False
+  tags: obm-cert
+
+- name: Push custom CA file to OBM-autoconf
+  copy: >
+      src=certificates/{{ ca_host }}/{{ ca_file | basename }}
+      dest={{ autoconf_client_dir }}/modules/certs/{{ ca_file | basename }}
+  notify:
+      - Add a generic CA cert to OBM-Autoconf configuration
+      - Build OBM-Autoconf client
+  when: ca_file != default_ca_file and check_cafile.stat.isfile == True
   tags: obm-cert
 #########################################################################################
 
-################################## NO CUSTOM CERT FILE ##################################
-- name: Create OBM certificate
+################################ MANAGE CERTIFICATE FILE ################################
+- name: Create OBM generic certificate
   command: >
-      creates="{{ cert_path }}/{{ entry_point }}_signed.pem"
+      creates={{ default_cert_file | dirname }}/{{ entry_point }}_signed.pem
       /usr/share/obm-ca/createcert.sh "{{ entry_point }}"
   delegate_to: "{{ ca_host }}"
-  when: cert_file == '/etc/obm/certs/obm_cert.pem' or certfile.stat.isfile == False
+  when: cert_file == default_cert_file or check_certfile.stat.isfile == False
   tags: obm-cert
 
-- name: Fetch generated certificate
+- name: Fetch OBM generic certificate
   fetch: >
-      src="{{ cert_path }}/{{ entry_point }}_signed.pem"
-      dest=collected_files/
+      src={{ default_cert_file | dirname }}/{{ entry_point }}_signed.pem
+      dest=certificates/{{ entry_point }}/
       validate_md5=yes
-  #changed_when: False
+      flat=yes
   delegate_to: "{{ ca_host }}"
-  when: cert_file == '/etc/obm/certs/obm_cert.pem' or certfile.stat.isfile == False
+  when: cert_file == default_cert_file or check_certfile.stat.isfile == False
   tags: obm-cert
 
-- name: Push generated certificate file on remote host
+- name: Push OBM generic certificate to remote host
   copy: >
-      src=collected_files/{{ ca_host }}/{{ cert_path }}/{{ entry_point }}_signed.pem
-      dest={{ cert_path }}/{{ entry_point }}.pem
-  when: cert_file == '/etc/obm/certs/obm_cert.pem' or certfile.stat.isfile == False
-  tags: obm-cert
-##########################################################################################
-
-################################# CUSTOM CERT FILE #######################################
-- name: Copy static certificate to merged file
-  command: >
-      creates=certificates/{{ entry_point }}/{{ cert_file | basename }}_merged
-      cat certificates/{{ entry_point }}/{{ cert_file | basename }} > certificates/{{ entry_point }}/{{ cert_file | basename }}_merged \
-      && cat certificates/{{ entry_point }}/{{ key_file | basename }} >> certificates/{{ entry_point }}/{{ cert_file | basename }}_merged
-      state=file
-  when: key_file != '/etc/obm/certs/obm_cert.pem' and keyfile.stat.isfile == True
+      src=certificates/{{ entry_point }}/{{ entry_point }}_signed.pem
+      dest={{ default_cert_file | dirname }}/{{ entry_point }}_signed.pem
+  when: cert_file == default_cert_file or check_certfile.stat.isfile == False
   tags: obm-cert
 
-- name: Push merged file to remote host
-  copy: >
-      src=certificates/{{ entry_point }}/{{ cert_file | basename }}_merged
-      dest={{ cert_path }}/{{ cert_file | basename }}
-      state=file
-  when: key_file != '/etc/obm/certs/obm_cert.pem' and keyfile.stat.isfile == True
-  tags: obm-cert
-
-- name: Push static certificate file on remote host
+- name: Push custom certificate to remote host
   copy: >
       src=certificates/{{ entry_point }}/{{ cert_file | basename }}
-      dest={{ cert_path }}/{{ cert_file | basename }}
+      dest={{ cert_file }}
       state=file
-  when: cert_file != '/etc/obm/certs/obm_cert.pem' and certfile.stat.isfile == True and (key_file == '/etc/obm/certs/obm_cert.pem' or keyfile.stat.isfile == False)
+  when: cert_file != default_cert_file and check_certfile.stat.isfile == True
+  tags: obm-cert
+
+- name: Push custom key file to remote host
+  copy: >
+      src=certificates/{{ entry_point }}/{{ key_file | basename }}
+      dest={{ key_file }}
+      state=file
+  when: key_file != default_cert_file and check_keyfile.stat.isfile == True
   tags: obm-cert 
 ##########################################################################################
-
-############################### SYMLINK CREATION #########################################
-- name: Set OBM symlink to generated certificate
-  file: >
-      src="{{ cert_path }}/{{ entry_point }}.pem"
-      dest="{{ cert_path }}/obm_cert.pem"
-      state=link
-  when: cert_file == '/etc/obm/certs/obm_cert.pem' or certfile.stat.isfile == False
-  tags: obm-cert
-
-- name: Set OBM symlink to static certificate
-  file: >
-      src="{{ cert_path }}/{{ cert_file | basename }}"
-      dest="{{ cert_path }}/obm_cert.pem"
-      state=link
-  when: cert_file != '/etc/obm/certs/obm_cert.pem' and certfile.stat.isfile == True
-  tags: obm-cert
-###########################################################################################

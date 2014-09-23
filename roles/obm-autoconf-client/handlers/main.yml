@@ -1,7 +1,17 @@
 ---
-- name: Add a CA certificate to OBM-Autoconf client
+- name: Add a generic CA cert to OBM-Autoconf configuration
   lineinfile: >
-      line="certs.push({file: {{ ca_file | basename}}})"
+      line="certs.push({file: cacert.pem})"
+      regexp="^certs\.push.*cacert.pem"
+      dest={{ autoconf_client_dir }}/modules/certs/certs.jsm
+      state=present
+  delegate_to: "{{ autoconf_host }}"
+  when: groups['autoconfservers'][0] is defined
+  tags: obm-autoconf
+
+- name: Add a custom CA cert to OBM-Autoconf configuration
+  lineinfile: >
+      line="certs.push({file: {{ ca_file | basename }}})"
       dest={{ autoconf_client_dir }}/modules/certs/certs.jsm
       state=present
   delegate_to: "{{ autoconf_host }}"
