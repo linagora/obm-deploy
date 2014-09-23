@@ -1,6 +1,0 @@
----
-- hosts: myservers
-  vars_files:
-    - config.yml
-  roles:
-    #- mysql

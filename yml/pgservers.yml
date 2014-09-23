@@ -1,6 +1,0 @@
----
-- hosts: pgservers
-  vars_files:
-    - config.yml
-  roles:
-    - postgres

@@ -26,7 +26,7 @@ directoryservers
 obmfullservers
 certservers
 
-[pgservers:children]
+[databaseservers:children]
 obmfullservers
 dbservers
 
