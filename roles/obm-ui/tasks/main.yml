@@ -3,3 +3,4 @@
 - include: virtualhost.yml
 - include: config.yml
 - include: pgperms.yml
+- include: flush.yml
