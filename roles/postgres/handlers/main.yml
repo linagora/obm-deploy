@@ -4,9 +4,14 @@
   delegate_to: "{{ obm_db_master_host }}"
   notify: 
     - Reload Postgres
-  tags: obm-db
+  tags: postgres
 
 - name: Reload Postgres
   service: name=postgresql state=reloaded
   delegate_to: "{{ obm_db_master_host }}"
-  tags: obm-db
+  tags: postgres
+
+- name: Restart Postgres
+  service: name=postgresql state=restarted
+  delegate_to: "{{ obm_db_master_host }}"
+  tags: postgres
