@@ -9,13 +9,13 @@
 #obm_version: 2.5.7
 
 # Public URL of the OBM web interface
-obm_external_url: obm.example.com
+obm_external_url: "{{ inventory_hostname }}"
 
 # Database configuration (either PGSQL or MYSQL) (default: PGSQL)
 obm_db_type: PGSQL
 
 # The server hosting the database or the SQL load balancer
-obm_db_host: obm.example.com
+obm_db_host: "{{ inventory_hostname }}"
 
 # The server hosting the database or the master of replication
 obm_db_master_host: "{{ obm_db_host }}"
@@ -57,6 +57,7 @@ obm_language: fr
 ## in your inventory.
 ## You need to set a user for cluster synchronisation. murder will by
 ## used by default.
+## Be carefull : caracters ', " and ; will be automatically removed.
 #obm_mupdate_user: murder
 #obm_mupdate_pass: murder
 
