@@ -102,7 +102,7 @@
   tags: obm-cert
 #########################################################################################
 
-################################ MANAGE CERTIFICATE FILE ################################
+############################ MANAGE GENERIC CERTIFICATE FILE ############################
 - name: Create OBM generic certificate
   command: >
       creates={{ default_cert_file | dirname }}/{{ entry_point }}_signed.pem
@@ -128,6 +128,16 @@
   when: cert_file == default_cert_file or check_certfile.stat.isfile == False
   tags: obm-cert
 
+- name: Set OBM symlink to generic certificate
+  file: >
+      src="{{ default_cert_file | dirname }}/{{ entry_point }}_signed.pem"
+      dest="{{ default_cert_file }}"
+      state=link
+  when: cert_file == default_cert_file or check_certfile.stat.isfile == False
+  tags: obm-cert
+##########################################################################################
+
+############################# MANAGE CUSTOM CERTIFICATE FILE #############################
 - name: Push custom certificate to remote host
   copy: >
       src=certificates/{{ entry_point }}/{{ cert_file | basename }}
@@ -142,5 +152,13 @@
       dest={{ key_file }}
       state=file
   when: key_file != default_cert_file and check_keyfile.stat.isfile == True
-  tags: obm-cert 
+  tags: obm-cert
+
+- name: Set OBM symlink to custom certificate
+  file: >
+      src="{{ cert_file }}"
+      dest="{{ default_cert_file }}"
+      state=link
+  when: cert_file != default_cert_file and check_certfile.stat.isfile == True
+  tags: obm-cert
 ##########################################################################################
