@@ -1,4 +1,19 @@
 ---
+- name: Approximate date using local host
+  command: date -u +%m%d%H%M
+  register: command_result
+  delegate_to: localhost
+  tags:
+      - common
+      - ntp
+
+- name: Set approximate system date
+  command: date -u "{{ command_result.stdout_lines[0] }}"
+  register: command_result
+  tags:
+      - common
+      - ntp
+
 - name: Install NTP server
   yum: pkg=ntp
   tags:
