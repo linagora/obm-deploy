@@ -1,7 +1,7 @@
 ---
 - name: Deploy local OBM PostgreSQL permissions
   template: src=01-local-obm dest={{ datadir }}/pg_hba.d/01-local-obm
-  delegate_to: "{{ obm_db_master_host }}"
+  delegate_to: "{{ db_master_host }}"
   notify:
     - Merge PostgreSQL configuration files
   tags: obm-db
@@ -12,7 +12,7 @@
    - setup.sql
    - lang.sql
    - murder_user.sql
-  delegate_to: "{{ obm_db_master_host }}"
+  delegate_to: "{{ db_master_host }}"
   tags: obm-db
 
 - name: Disable requiretty
@@ -24,23 +24,24 @@
 
 - name: Create OBM postgres user
   postgresql_user:
-   name={{ obm_db_user }}
-   password={{ obm_db_password }}
+   name={{ db_user }}
+   password={{ db_pass }}
    role_attr_flags=CREATEDB,NOSUPERUSER,NOCREATEROLE
   sudo: yes
   sudo_user: postgres
-  delegate_to: "{{ obm_db_master_host }}"
+  delegate_to: "{{ db_master_host }}"
   tags: obm-db
 
 - name: Create OBM database
   postgresql_db:
-   name={{ obm_db_name }}
-   owner={{ obm_db_user }}
+   name={{ db_name }}
+   owner={{ db_user }}
    encoding='UTF-8'
   sudo: yes
   sudo_user: postgres
-  delegate_to: "{{ obm_db_master_host }}"
+  delegate_to: "{{ db_master_host }}"
   notify:
+    - Merge PostgreSQL configuration files
     - Reload Postgres
     - Init Postgres database
   tags: obm-db

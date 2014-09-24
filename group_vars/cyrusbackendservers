@@ -7,4 +7,4 @@
 # Fake variable to make file works even if dont override anything
 group: cyrusbackendservers
 
-#entry_point: "{{ obm_external_url | mandatory }}"
+#entry_point: "{{ external_url | mandatory }}"

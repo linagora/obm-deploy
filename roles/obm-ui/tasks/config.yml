@@ -44,4 +44,5 @@
    - 02-TEST-AUTH_healthcheck.ini
   notify: 
    - Merge healthcheck.ini configuration file
+   - Fix perms on healthcheck.ini
   tags: obm-ui

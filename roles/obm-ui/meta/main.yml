@@ -1,5 +1,5 @@
 ---
 dependencies:
  - { role: obm-cert }
- - { role: obm-db-pg, when: obm_db_type is not defined or obm_db_type == 'PGSQL' }
-# - { role: obm-db-my, when: obm_db_type == 'MYSQL' }
+ - { role: obm-db-pg, when: db_type is not defined or db_type == 'PGSQL' }
+# - { role: obm-db-my, when: db_type == 'MYSQL' }

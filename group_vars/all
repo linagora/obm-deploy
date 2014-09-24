@@ -8,15 +8,29 @@ version: "{{ obm_version | default('2.5.7') }}"
 major_version: "{% if version|length == 5 %}{{ version[0:3] }}{% else %}2.5{% endif %}"
 short_version: "{{ major_version | replace('.', '') }}"
 
+external_tmp: "{{ obm_external_url | default('undefined') }}"
+external_url: "{% if external_tmp == 'undefined' %}{{ inventory_hostname }}{% else %}{{ external_tmp }}{% endif %}"
+
+db_type: "{{ obm_db_type | default('PGSQL') }}"
+db_host: "{{ obm_db_host | default(inventory_hostname) }}"
+db_master_host: "{{ obm_db_master_host | default(db_host) }}"
+
+db_user: "{{ obm_db_user | default('obm') }}"
+db_pass: "{{ obm_db_pass | default('obm') }}"
+db_name: "{{ obm_db_name | default('obm') }}"
+
+language: "{{ obm_language | default('fr') }}"
+
 mode: "{{ packages_mode | default('internet') }}"
 
-has_sql_load_balancer: "{{ obm_db_host != obm_db_master_host }}"
+has_sql_load_balancer: "{{ db_host != db_master_host }}"
 
 ldap_ssl: "{{ obm_ldap_ssl | default('no') }}"
 ldap_port: "{{ obm_ldap_port | default('389') }}"
 ldap_suffix: "{{ obm_ldap_suffix | default('dc=local') }}"
 
-ldap_bind_dn: "{{ obm_ldap_bind_dn | default('uid=ldapadmin,ou=sysusers,{{ ldap_suffix }}') }}"
+ldap_bind_dn_tmp: "{{ obm_ldap_bind_dn | default('undefined') }}"
+ldap_bind_dn: "{% if ldap_bind_dn_tmp == 'undefined' %}uid=ldapadmin,ou=sysusers,{{ ldap_suffix }}{% else %}{{ ldap_bind_dn_tmp }}{% endif %}"
 ldap_bind_pw: "{{ obm_ldap_bind_pw | default('mdp3PaAL') }}"
 
 enable_legacy_ssl: "{{ obm_enable_legacy_ssl | default('no') }}"

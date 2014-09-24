@@ -3,30 +3,33 @@
 # Global configuration file
 #
 
+# Don't remove this line
+config_version: 0.1
+
 ### OBM configuration ####
 
 # OBM version
 #obm_version: 2.5.7
 
 # Public URL of the OBM web interface
-obm_external_url: "{{ inventory_hostname }}"
+#obm_external_url: "{{ inventory_hostname }}"
 
 # Database configuration (either PGSQL or MYSQL) (default: PGSQL)
-obm_db_type: PGSQL
+#obm_db_type: PGSQL
 
 # The server hosting the database or the SQL load balancer
-obm_db_host: "{{ inventory_hostname }}"
+#obm_db_host: "{{ inventory_hostname }}"
 
 # The server hosting the database or the master of replication
-obm_db_master_host: "{{ obm_db_host }}"
+#obm_db_master_host: "{{ obm_db_host }}"
 
 # Database configuration
-obm_db_user: obm
-obm_db_password: obm
-obm_db_name: obm
+#obm_db_user: obm
+#obm_db_pass: obm
+#obm_db_name: obm
 
 # Language of the database (fr/en)
-obm_language: fr
+#obm_language: fr
 
 # Make default ldap different from the first member of
 # the ldapservers group (strange but supported)

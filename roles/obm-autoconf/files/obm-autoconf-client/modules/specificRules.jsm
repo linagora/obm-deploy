@@ -4,7 +4,7 @@ var EXPORTED_SYMBOLS = ["specificRules"];
 
 var config = {
     obm: {
-        autoconfServer: "{{ obm_external_url }}",
+        autoconfServer: "{{ external_url }}",
         shouldAutoconfRunWithoutAccountCreation: true,
         mail: {
             incoming: {

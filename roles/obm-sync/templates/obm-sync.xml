@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context docBase="/usr/share/obm-sync/" path="/obm-sync">
   <Resource auth="Container"
-            className="{{ obm_db_drivers[db_type] }}"
+            className="{{ db_drivers[db_type] }}"
             factory="fr.aliacom.jndi.DataSourceFactory"
-            login="{{ obm_db_user }}"
+            login="{{ db_user }}"
             max="{{ ansible_processor_cores }}0"
             name="jdbc/ObmDS"
-            password="{{ obm_db_password }}"
+            password="{{ db_pass }}"
             pingQuery="SELECT 1"
             type="javax.sql.DataSource"
             url="{{ jdbc_urls[db_type] | escape }}"/>

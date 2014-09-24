@@ -1,12 +1,12 @@
 ---
 - name: Merge PostgreSQL configuration files
   assemble: src={{ datadir }}/pg_hba.d dest={{ datadir }}/pg_hba.conf
-  delegate_to: "{{ obm_db_master_host }}"
+  delegate_to: "{{ db_master_host }}"
   notify: 
     - Reload Postgres
   tags: postgres-common
 
 - name: Reload Postgres
   service: name=postgresql state=reloaded
-  delegate_to: "{{ obm_db_master_host }}"
+  delegate_to: "{{ db_master_host }}"
   tags: postgres-common

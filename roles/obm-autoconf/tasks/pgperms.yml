@@ -1,7 +1,7 @@
 ---
 - name: Deploy obm-autoconf PostgreSQL permissions
   template: src=03-remote-obm-autoconf dest={{ datadir }}/pg_hba.d/03-remote-obm-autoconf
-  delegate_to: "{{ obm_db_master_host }}"
+  delegate_to: "{{ db_master_host }}"
   # If there is a load balancer, the master should let only the load balancer
   # and the slaves connect
   when: not has_sql_load_balancer

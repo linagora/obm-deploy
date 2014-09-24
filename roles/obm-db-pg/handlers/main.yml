@@ -7,9 +7,9 @@
    - create_obmdb_{{ major_version }}.pgsql.sql
    - obmdb_default_values_{{ major_version }}.sql
    - murder_user.sql
-   - data-{{ obm_language }}/obmdb_ref_{{ major_version }}.sql
-   - data-{{ obm_language }}/obmdb_nafcode_{{ major_version }}.sql
+   - data-{{ language }}/obmdb_ref_{{ major_version }}.sql
+   - data-{{ language }}/obmdb_nafcode_{{ major_version }}.sql
    - obmdb_prefs_values_{{ major_version }}.sql
    - lang.sql
-  delegate_to: "{{ obm_db_master_host }}"
+  delegate_to: "{{ db_master_host }}"
   tags: obm-db

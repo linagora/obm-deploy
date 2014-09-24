@@ -2,6 +2,6 @@
  scriptsdir: "/usr/share/obm/scripts/{{ major_version }}"
  updatesdir: "{{ scriptsdir }}/updates"
  pg_env:
-  PGUSER: "{{ obm_db_user }}"
-  PGPASSWORD: "{{ obm_db_password }}"
-  PGDATABASE: "{{ obm_db_name }}"
+  PGUSER: "{{ db_user }}"
+  PGPASSWORD: "{{ db_pass }}"
+  PGDATABASE: "{{ db_name }}"

@@ -1,2 +1,2 @@
 CREATE LANGUAGE plpgsql;
-ALTER DATABASE {{ obm_db_name }} SET TIMEZONE='GMT';
+ALTER DATABASE {{ db_name }} SET TIMEZONE='GMT';
