@@ -1,4 +1,4 @@
 ---
 - include: apache.yml
 - include: postgres.yml
-- include: spushnik.yml
+- include: healthcheck.yml
