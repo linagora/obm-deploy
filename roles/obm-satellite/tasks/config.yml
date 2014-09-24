@@ -1,4 +1,5 @@
 ---
-- name: Start OBM-Satellite service
-  service: name=obm-satellite state=started enabled=yes
+- name: Deploy OBM-Satellite configuration
+  template: src=obmSatellite.ini dest=/etc/obm-satellite/obmSatellite.ini
+  notify: Restart OBM-Satellite service
   tags: obm-satellite
