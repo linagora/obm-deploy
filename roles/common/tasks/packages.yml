@@ -21,6 +21,7 @@
    - unzip
    - postfix
    - mailx
+   - sharutils
   tags:
       - common
       - packages
