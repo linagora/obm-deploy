@@ -1,12 +1,39 @@
 ---
 - name: Clean yum repositories
   command: /usr/bin/yum clean all
+  tags:
+      - common
+      - repositories
 
 - name: Start NTP server
   service: name=ntpd state=started enabled=yes
+  tags:
+      - common
+      - ntp
 
 - name: Restart NTP service
   service: name=ntpd state=restarted
+  tags:
+      - common
+      - ntp
+
+- name: Approximate date using local host
+  command: date -u +%m%d%H%M
+  register: command_result
+  delegate_to: localhost
+  tags:
+      - common
+      - ntp
+
+- name: Set approximate system date
+  command: date -u "{{ command_result.stdout_lines[0] }}"
+  register: command_result
+  tags:
+      - common
+      - ntp
 
 - name: Update system date
   command: ntpq -p
+  tags:
+      - common
+      - ntp
