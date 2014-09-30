@@ -5,3 +5,4 @@
 group: opushservers
 
 #ldap_host: "{{ groups['ldapservers'][0] | mandatory }}"
+#cassandra_host: "{% if major_version | version_compare('3.0', '>=') %}{{ groups['cassandraservers'][0] | mandatory }}{% endif %}"

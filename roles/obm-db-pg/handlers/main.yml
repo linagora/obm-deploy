@@ -1,5 +1,5 @@
 ---
-- name: Init Postgres database
+- name: Init OBM2 Postgres database
   command: psql -f {{ scriptsdir }}/{{item}}
   environment: pg_env
   with_items:
@@ -11,5 +11,25 @@
    - data-{{ language }}/obmdb_nafcode_{{ major_version }}.sql
    - obmdb_prefs_values_{{ major_version }}.sql
    - lang.sql
+  when: major_version | version_compare('3.0', '<')
+  delegate_to: "{{ db_master_host }}"
+  tags: obm-db
+
+- name: Init OBM3 Postgres database
+  command: psql -f {{ scriptsdir }}/{{item}}
+  environment: pg_env
+  with_items:
+   - setup.sql
+   - ../creation/create_obmdb.pgsql.sql
+   - ../creation/obmdb_default_values.sql
+   - murder_user.sql
+   - ../creation/data-{{ language }}/obmdb_ref.sql
+   - ../creation/data-{{ language }}/obmdb_nafcode.sql
+   - ../creation/obmdb_prefs_values.sql
+   - lang.sql
+   - ../2.5/updates/update-2.5.7~1.pgsql.sql
+   - ../2.5/updates/update-2.5.7~2.pgsql.sql
+   - ../2.5/updates/update-2.5.8~1.pgsql.sql
+  when: major_version | version_compare('3.0', '>=')
   delegate_to: "{{ db_master_host }}"
   tags: obm-db

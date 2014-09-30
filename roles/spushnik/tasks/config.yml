@@ -5,6 +5,7 @@
    line="	exit $?"
    dest=/etc/init.d/jetty6
    insertafter=".*status -p.*"
+  when: major_version | version_compare('3.0', '<')
   notify: 
       - Restart Jetty
   tags: spushnik
@@ -16,4 +17,5 @@
   delegate_to: "{{ ui_host }}"
   notify:
    - Merge healthcheck.ini configuration file
+   - Fix perms on healthcheck.ini
   tags: spushnik

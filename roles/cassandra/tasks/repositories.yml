@@ -1,0 +1,26 @@
+---
+- name: Deploy Datastax repository config file
+  copy: >
+        src=datastax.repo
+        dest=/etc/yum.repos.d/datastax.repo
+  tags: cassandra
+
+- name: Spoof Datastax hostname in /etc/hosts (mirror mode)
+  lineinfile: >
+              dest=/etc/hosts
+              regexp='.*rpm\.datastax\.com$'
+              line="{{ packages_mirror_ip }}    rpm.datastax.com"
+  when: mode == "mirror"
+  notify:
+   - Clean yum repositories
+  tags: cassandra
+
+- name: Remove any CentOS Base hostname spoofing (internet mode)
+  lineinfile: >
+              dest=/etc/hosts
+              regexp='.*rpm\.datastax\.com$'
+              state=absent
+  when: mode == "internet"
+  notify:
+   - Clean yum repositories
+  tags: cassandra

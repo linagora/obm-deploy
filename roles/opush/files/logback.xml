@@ -2,4 +2,6 @@
     <logger name="AUTHENTICATION" level="INFO" />
     <logger name="REQUEST.TRIMMED" level="INFO" />
     <logger name="CONFIGURATION" level="INFO" />
+    <logger name="CONTAINER" level="INFO" />
+    <logger name="BREAKDOWN" level="INFO" />
 </included>

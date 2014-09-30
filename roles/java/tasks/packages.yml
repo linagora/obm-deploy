@@ -2,12 +2,19 @@
 # This absolutely needs to be installed BEFORE alternatives
 - name: Install JDK devel
   yum: pkg=java-1.6.0-openjdk-devel
+  when: major_version | version_compare('3.0', '<')
+  tags: java
+
+- name: Install OpenJDK 7
+  yum: pkg=java-1.7.0-openjdk
+  when: major_version | version_compare('3.0', '>=')
+  tags: java
 
 - name: Deploy Sun JDK RPM (mirror mode)
   copy: >
         src=resources/jdk-6u45-linux-x64-rpm.bin
         dest=/tmp/jdk-6u45-linux-x64-rpm.bin
-  when: mode == "mirror"
+  when: mode == "mirror" and major_version | version_compare('3.0', '<')
   tags: java
 
 - name: Download Sun JDK (internet mode) [with proxy]
@@ -16,7 +23,7 @@
            dest=/tmp/jdk-6u45-linux-x64-rpm.bin
            sha256sum=f432ce7dbc4ff7c104d67a967e28078ec50e084d1934e579ba6c7d6038d76cf9
   environment: proxy_env
-  when: mode == "internet" and proxy_host is defined
+  when: mode == "internet" and proxy_host is defined and major_version | version_compare('3.0', '<')
   tags: java
 
 - name: Download Sun JDK (internet mode) [without proxy]
@@ -24,5 +31,5 @@
            url=http://packages.obm.org/rpm/other/jdk-6u45-linux-x64-rpm.bin
            dest=/tmp/jdk-6u45-linux-x64-rpm.bin
            sha256sum=f432ce7dbc4ff7c104d67a967e28078ec50e084d1934e579ba6c7d6038d76cf9
-  when: mode == "internet" and proxy_host is not defined
+  when: mode == "internet" and proxy_host is not defined and major_version | version_compare('3.0', '<')
   tags: java

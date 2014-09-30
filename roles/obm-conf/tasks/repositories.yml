@@ -11,6 +11,13 @@
   when: mode == "mirror"
   tags: obm-conf
 
+- name: Deploy Opush3 repository config file
+  copy: >
+        src=opush.repo
+        dest=/etc/yum.repos.d/opush.repo
+  when: major_version | version_compare('3.0', '>=')
+  tags: obm-conf
+
 - name: Spoof OBM repository hostname in /etc/hosts (mirror mode)
   lineinfile: >
               dest=/etc/hosts

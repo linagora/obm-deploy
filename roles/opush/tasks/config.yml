@@ -5,23 +5,30 @@
    line="	exit $?"
    dest=/etc/init.d/jetty6
    insertafter=".*status -p.*"
+  when: major_version | version_compare('3.0', '<')
   notify: 
-      - Restart OPush
+      - Restart OPush2
   tags: opush
 
-- name: Deploy ldap_conf.ini 
-  template: src=ldap_conf.ini dest=/etc/opush/ldap_conf.ini
+- name: Deploy Opush LDAP configuration
+  template: src=ldap_conf.ini dest=/etc/opush/ldap_conf.ini mode=0644
   tags: opush
 
-- name: Deploy ldap_conf.ini 
-  template: src=logback.xml dest=/etc/opush/logback.xml
+- name: Deploy Opush Logback configuration
+  copy: src=logback.xml dest=/etc/opush/logback.xml mode=0644
   notify: 
-      - Restart OPush
+      - Restart OPush2
+      - Restart OPush3
   tags: opush
 
-- name: Fix perms on obm_conf.ini
-  file: path=/etc/opush/{{ item }} mode=0644
-  with_items:
-   - ldap_conf.ini
-   - logback.xml
+- name: Deploy Opush Cassandra configuration
+  template: src=cassandra.ini dest=/etc/opush/cassandra.ini mode=0644
+  when: major_version | version_compare('3.0', '>=')
+  notify:
+      - Restart OPush3
   tags: opush
+
+- name: Start Opush3
+  service: name=opush enabled=yes state=started
+  when: major_version | version_compare('3.0', '>=')
+  tags: opush  

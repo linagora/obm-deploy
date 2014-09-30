@@ -1,7 +1,7 @@
 ---
 - name: Check OBM version
   debug: "msg='Configured OBM version : {{ version }} - major : {{ major_version }} - short : {{ short_version }}'"
-  failed_when: short_version != '25'
+  failed_when: short_version != '25' and short_version != '30'
   tags:
       - common
       - version

@@ -3,9 +3,9 @@
 # Please don't edit this file
 # Use config.xml instead
 
-version: "{{ obm_version | default('2.5.7') }}"
+version: "{{ obm_version | default('3.0.0') }}"
 
-major_version: "{% if version|length == 5 %}{{ version[0:3] }}{% else %}2.5{% endif %}"
+major_version: "{% if version|length == 5 %}{{ version[0:3] }}{% else %}3.0{% endif %}"
 short_version: "{{ major_version | replace('.', '') }}"
 
 external_tmp: "{{ obm_external_url | default('undefined') }}"
@@ -18,6 +18,12 @@ db_master_host: "{{ obm_db_master_host | default(db_host) }}"
 db_user: "{{ obm_db_user | default('obm') }}"
 db_pass: "{{ obm_db_pass | default('obm') }}"
 db_name: "{{ obm_db_name | default('obm') }}"
+
+cassandra_seeds_tmp: "{% if inventory_hostname in groups['obmfullservers'] %}{{ ansible_default_ipv4['address'] }}{% else %}{{ hostvars[groups['cassandraservers'][1]]['ansible_default_ipv4']['address'] }}{% endif %}"
+cassandra_seeds: "{{ obm_cassandra_seeds | default(cassandra_seeds_tmp) }}"
+cassandra_keyspace: "{{ obm_cassandra_keyspace | default('opush') }}"
+cassandra_user: "{{ obm_cassandra_user | default('opush') }}"
+cassandra_password: "{{ obm_cassandra_password | default('opush') }}"
 
 language: "{{ obm_language | default('fr') }}"
 

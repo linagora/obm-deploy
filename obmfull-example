@@ -1,12 +1,13 @@
 #
 # OBM-Full example inventory file
-# 
+#
 
 [obmfullservers]
-obm.example.com
+ansiblehost1.example.com
 
 [directoryservers]
 [certservers]
+[nosqlservers]
 [dbservers]
 [webservers]
 [javaservers]
@@ -18,17 +19,21 @@ obm.example.com
 # THE LAST PART IS REQUIRED
 # DO NOT EDIT AFTER THIS LINE
 
-[ldapservers:children]
-obmfullservers
-directoryservers
-
 [caservers:children]
 obmfullservers
 certservers
 
+[autoconfservers:children]
+obmfullservers
+javaservers
+
 [databaseservers:children]
 obmfullservers
 dbservers
+
+[ldapservers:children]
+obmfullservers
+directoryservers
 
 [uiservers:children]
 obmfullservers
@@ -46,9 +51,9 @@ javaservers
 obmfullservers
 javaservers
 
-[autoconfservers:children]
+[cassandraservers:children]
 obmfullservers
-javaservers
+nosqlservers
 
 [opushservers:children]
 obmfullservers

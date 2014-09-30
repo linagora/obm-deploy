@@ -1,0 +1,12 @@
+---
+- name: Restart Cassandra server
+  service: name=cassandra state=restarted
+  tags: cassandra
+
+- name: Sleep a little
+  command: sleep 20
+  tags: cassandra
+
+- name: Run Cassandra initialization script
+  command: cqlsh -u cassandra -p cassandra -f /etc/cassandra/init.cql {{ ansible_default_ipv4['address'] }}
+  tags: cassandra

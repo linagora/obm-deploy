@@ -1,4 +1,10 @@
 ---
-- name: Restart OPush
+- name: Restart OPush2
   service: name=jetty6 state=restarted
+  when: major_version | version_compare('3.0', '<')
+  tags: opush
+
+- name: Restart OPush3
+  service: name=opush state=restarted
+  when: major_version | version_compare('3.0', '>=')
   tags: opush

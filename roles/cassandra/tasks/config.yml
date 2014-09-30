@@ -1,0 +1,39 @@
+---
+- name: Change Cassandra authenticator
+  lineinfile: >
+              dest=/etc/cassandra/conf/cassandra.yaml
+              regexp='^authenticator:.*'
+              line='authenticator: PasswordAuthenticator'
+  notify:
+      - Restart Cassandra server
+  tags: cassandra
+
+- name: Change Cassandra seed
+  lineinfile: >
+              dest=/etc/cassandra/conf/cassandra.yaml
+              regexp='seeds:.*'
+              line='          - seeds: {{ cassandra_seeds }}'
+  notify:
+      - Restart Cassandra server
+  tags: cassandra
+
+- name: Change Cassandra rpc_address
+  lineinfile: >
+              dest=/etc/cassandra/conf/cassandra.yaml
+              regexp='^rpc_address:.*'
+              line='rpc_address: {{ ansible_default_ipv4["address"] }}'
+  notify:
+      - Restart Cassandra server
+  tags: cassandra
+
+- name: Deploy Cassandra initialization script
+  template: src=init.cql dest=/etc/cassandra/init.cql
+  when: inventory_hostname == groups['cassandraservers'][0]
+  notify:
+      - Sleep a little
+      - Run Cassandra initialization script
+  tags: cassandra
+
+- name: Start Cassandra service
+  service: name=cassandra enabled=true state=started
+  tags: cassandra

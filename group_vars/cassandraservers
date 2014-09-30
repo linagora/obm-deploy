@@ -1,0 +1,6 @@
+## Use this file to override opsuh server settings, if needed
+
+# Fake variable to make file works even if dont override anything
+group: cassandraservers
+
+#cassandra_seeds: "{% if inventory_hostname in groups['obmfullservers'] %}{{ ansible_default_ipv4['address'] }}{% else %}{{ hostvars[groups['cassandraservers'][1]]['ansible_default_ipv4']['address'] }}{% endif %}"

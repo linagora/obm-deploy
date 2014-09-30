@@ -33,7 +33,7 @@
 
 - name: Generate healthcheck encoded password
   shell: >
-    echo {{ healthcheck_pass | quote }} | sha1sum | cut -d ' ' -f1
+    echo -n {{ healthcheck_pass | quote }} | sha1sum | cut -d ' ' -f1
   register: healthcheck_sha1
   tags: obm-ui
 

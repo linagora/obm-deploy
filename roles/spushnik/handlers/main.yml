@@ -3,6 +3,10 @@
   assemble: src=/etc/obm/healthcheck_ini.d dest=/etc/obm/healthcheck.ini
   tags: spushnik
 
+- name: Fix perms on healthcheck.ini
+  file: path=/etc/obm/healthcheck.ini mode=0644
+  tags: spushnik
+
 - name: Restart Jetty 
   service: name=jetty6 state=restarted
   tags: spushnik

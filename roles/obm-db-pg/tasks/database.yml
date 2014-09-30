@@ -43,7 +43,8 @@
   notify:
     - Merge PostgreSQL configuration files
     - Reload Postgres
-    - Init Postgres database
+    - Init OBM2 Postgres database
+    - Init OBM3 Postgres database
   tags: obm-db
 
 - name: Enable requiretty

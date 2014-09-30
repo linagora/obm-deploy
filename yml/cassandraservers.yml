@@ -1,0 +1,6 @@
+---
+- hosts: cassandraservers
+  vars_files:
+    - config.yml
+  roles:
+    - { role: cassandra, when: major_version != '2.5' }
