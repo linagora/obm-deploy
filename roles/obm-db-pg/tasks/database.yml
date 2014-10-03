@@ -15,13 +15,6 @@
   delegate_to: "{{ db_master_host }}"
   tags: obm-db
 
-- name: Disable requiretty
-  lineinfile: >
-   dest=/etc/sudoers
-   regexp="^Defaults.*requiretty"
-   line="#Defaults    requiretty"
-  tags: obm-db
-
 - name: Create OBM postgres user
   postgresql_user:
    name={{ db_user }}
@@ -45,11 +38,4 @@
     - Reload Postgres
     - Init OBM2 Postgres database
     - Init OBM3 Postgres database
-  tags: obm-db
-
-- name: Enable requiretty
-  lineinfile: >
-   dest=/etc/sudoers
-   regexp=^#Defaults.*requiretty
-   line="Defaults    requiretty"
   tags: obm-db

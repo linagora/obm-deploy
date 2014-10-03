@@ -1,6 +1,7 @@
 ---
 - include: version.yml
 - include: libselinux-python.yml
+- include: sudo.yml
 - include: selinux.yml
 - include: yum.yml
 - include: repositories.yml

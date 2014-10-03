@@ -1,0 +1,7 @@
+---
+- name: Disable requiretty
+  lineinfile: >
+   dest=/etc/sudoers
+   regexp="^Defaults.*requiretty"
+   line="#Defaults    requiretty"
+  tags: obm-db

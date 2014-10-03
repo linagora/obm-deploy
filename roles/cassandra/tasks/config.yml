@@ -8,7 +8,7 @@
       - Restart Cassandra server
   tags: cassandra
 
-- name: Change Cassandra seed
+- name: Set Cassandra seed
   lineinfile: >
               dest=/etc/cassandra/conf/cassandra.yaml
               regexp='seeds:.*'
@@ -17,11 +17,20 @@
       - Restart Cassandra server
   tags: cassandra
 
-- name: Change Cassandra rpc_address
+- name: Set Cassandra rpc_address
   lineinfile: >
               dest=/etc/cassandra/conf/cassandra.yaml
               regexp='^rpc_address:.*'
               line='rpc_address: {{ ansible_default_ipv4["address"] }}'
+  notify:
+      - Restart Cassandra server
+  tags: cassandra
+
+- name: Set Cassandra listen_address
+  lineinfile: >
+              dest=/etc/cassandra/conf/cassandra.yaml
+              regexp='^listen_address:.*'
+              line='listen_address: 0.0.0.0'
   notify:
       - Restart Cassandra server
   tags: cassandra
