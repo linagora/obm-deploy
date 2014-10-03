@@ -30,7 +30,7 @@
   lineinfile: >
               dest=/etc/cassandra/conf/cassandra.yaml
               regexp='^listen_address:.*'
-              line='listen_address: 0.0.0.0'
+              line='listen_address: {{ ansible_default_ipv4["address"] }}'
   notify:
       - Restart Cassandra server
   tags: cassandra
