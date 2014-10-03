@@ -39,7 +39,6 @@
   template: src=init.cql dest=/etc/cassandra/init.cql
   when: inventory_hostname == groups['cassandraservers'][0]
   notify:
-      - Sleep a little
       - Run Cassandra initialization script
   tags: cassandra
 
