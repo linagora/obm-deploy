@@ -5,4 +5,6 @@
    - obm-ui
    - mod_ssl
    - obm-services
+   - php-pecl-apc
+   - php-pecl-imagick
   tags: obm-ui
