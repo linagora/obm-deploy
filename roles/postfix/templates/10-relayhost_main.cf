@@ -1,4 +1,4 @@
 #
 # Le relais vers l'extérieur.
-relayhost = {{ smtp_in_relayhost }}
+relayhost = {{ smtp_relayhost }}
 

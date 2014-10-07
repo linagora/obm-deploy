@@ -1,4 +1,4 @@
 # Les domaines a considérer comme locaux
 mydestination = localhost, $myhostname
-mynetworks = {{ smtp_in_mynetworks }}
+mynetworks = {{ smtp_mynetworks }}
 

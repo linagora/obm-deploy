@@ -13,7 +13,7 @@ append_dot_mydomain = no
 
 #
 # Nom de l'hôte
-myhostname = {{ smtp_in_hostname }}
+myhostname = {{ smtp_host }}
 # Domaine utilisé dans les mails générés localement ;
 # Indique aussi le domaine ajoutés aux adresses des destinataires n'ayant pas de
 # domaine.
