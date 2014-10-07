@@ -4,7 +4,7 @@
   tags: obm-ui
 
 - name: Deploy obm_conf.inc
-  copy: src=obm_conf.inc dest=/etc/obm/obm_conf.inc
+  copy: src=obm_conf.inc dest=/etc/obm/obm_conf.inc backup=yes
   tags: obm-ui
 
 - name: Deploy OBM Automaton configuration
