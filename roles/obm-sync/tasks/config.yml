@@ -4,7 +4,7 @@
   tags: obm-sync
 
 - name: Merge OBM configuration files
-  assemble: src=/etc/obm/conf dest=/etc/obm/obm_conf.ini
+  assemble: src=/etc/obm/conf dest=/etc/obm/obm_conf.ini backup=yes
   tags: obm-sync
 
 - name: Create OBM-Sync configuration file

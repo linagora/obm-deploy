@@ -12,7 +12,7 @@
   tags: obm-ui
 
 - name: Merge OBM configuration files
-  assemble: src=/etc/obm/conf dest=/etc/obm/obm_conf.ini
+  assemble: src=/etc/obm/conf dest=/etc/obm/obm_conf.ini backup=yes
   tags: obm-ui
 
 - name: Fix perms on obm_conf.ini

@@ -1,6 +1,6 @@
 ---
 - name: Merge PostgreSQL configuration files
-  assemble: src={{ datadir }}/pg_hba.d dest={{ datadir }}/pg_hba.conf
+  assemble: src={{ datadir }}/pg_hba.d dest={{ datadir }}/pg_hba.conf backup=yes
   delegate_to: "{{ db_master_host }}"
   notify: 
     - Reload Postgres

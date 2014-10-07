@@ -8,11 +8,11 @@
   tags: postfix-common
 
 - name: Merge master.cf configuration files
-  assemble: src=/etc/master_cf.d dest=/etc/postfix/master.cf
+  assemble: src=/etc/master_cf.d dest=/etc/postfix/master.cf backup=yes
   tags: postfix-common
 
 - name: Merge main.cf configuration files
-  assemble: src=/etc/main_cf.d dest=/etc/postfix/main.cf
+  assemble: src=/etc/main_cf.d dest=/etc/postfix/main.cf backup=yes 
 #  when: postfix_file.stat.exists == False
   tags: postfix-common
 

@@ -1,10 +1,10 @@
 ---
 - name: Merge cyrus.conf configuration files
-  assemble: src=/etc/cyrus_conf.d dest=/etc/cyrus.conf
+  assemble: src=/etc/cyrus_conf.d dest=/etc/cyrus.conf backup=yes
   tags: cyrus-common
 
 - name: Merge imapd.conf configuration files
-  assemble: src=/etc/imapd_conf.d dest=/etc/imapd.conf
+  assemble: src=/etc/imapd_conf.d dest=/etc/imapd.conf backup=yes
   tags: cyrus-common
 
 - name: Fix perms on Cyrus configuration files

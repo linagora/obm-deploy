@@ -4,7 +4,7 @@
   tags: obm-autoconf
 
 - name: Merge OBM configuration files
-  assemble: src=/etc/obm/conf dest=/etc/obm/obm_conf.ini
+  assemble: src=/etc/obm/conf dest=/etc/obm/obm_conf.ini backup=yes
   tags: obm-autoconf
 
 - name: Create OBM Autoconf XPI directory
