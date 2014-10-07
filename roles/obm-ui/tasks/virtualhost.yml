@@ -1,5 +1,5 @@
 ---
 - name: Deploy OBM VirtualHost
-  template: src=obm.conf dest=/etc/httpd/conf.d/obm.conf
+  template: src=obm.conf dest=/etc/httpd/conf.d/obm.conf backup=yes
   notify: Restart Apache
   tags: obm-ui

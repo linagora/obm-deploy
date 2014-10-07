@@ -1,5 +1,5 @@
 ---
 - name: Deploy OBM-Satellite configuration
-  template: src=obmSatellite.ini dest=/etc/obm-satellite/obmSatellite.ini
+  template: src=obmSatellite.ini dest=/etc/obm-satellite/obmSatellite.ini backup=yes 
   notify: Restart OBM-Satellite service
   tags: obm-satellite

@@ -1,11 +1,11 @@
 ---
 - name: Copy slapd.conf
-  template: src=slapd.conf dest=/etc/openldap/slapd.conf owner=root group=ldap mode=0640
+  template: src=slapd.conf dest=/etc/openldap/slapd.conf owner=root group=ldap mode=0640 backup=yes
   register: command_result
   tags: ldap
 
 - name: Copy ldap
-  template: src=ldap dest=/etc/sysconfig/ldap
+  template: src=ldap dest=/etc/sysconfig/ldap backup=yes
   tags: ldap
 
 - name: Restart LDAP

@@ -8,7 +8,7 @@
   tags: obm-sync
 
 - name: Create OBM-Sync configuration file
-  template: src=obm-sync.xml dest=/etc/obm-tomcat/applis/obm-sync.xml
+  template: src=obm-sync.xml dest=/etc/obm-tomcat/applis/obm-sync.xml backup=yes
   notify:
       - Update Tomcat triggers
   tags: obm-sync

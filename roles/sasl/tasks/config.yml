@@ -1,12 +1,12 @@
 ---
 - name: Deploy saslauthd configuration
-  template: src=saslauthd dest=/etc/sysconfig/saslauthd
+  template: src=saslauthd dest=/etc/sysconfig/saslauthd backup=yes
   notify: 
    - Restart saslauthd
   tags: sasl
 
 - name: Deploy SASL configuration
-  template: src={{ item }} dest=/etc
+  template: src={{ item }} dest=/etc backup=yes
   with_items:
    - pam_ldap_obm.conf
    - saslauthd.conf

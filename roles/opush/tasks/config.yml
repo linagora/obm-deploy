@@ -11,18 +11,18 @@
   tags: opush
 
 - name: Deploy Opush LDAP configuration
-  template: src=ldap_conf.ini dest=/etc/opush/ldap_conf.ini mode=0644
+  template: src=ldap_conf.ini dest=/etc/opush/ldap_conf.ini mode=0644 backup=yes
   tags: opush
 
 - name: Deploy Opush Logback configuration
-  copy: src=logback.xml dest=/etc/opush/logback.xml mode=0644
+  copy: src=logback.xml dest=/etc/opush/logback.xml mode=0644 backup=yes
   notify: 
       - Restart OPush2
       - Restart OPush3
   tags: opush
 
 - name: Deploy Opush Cassandra configuration
-  template: src=cassandra.ini dest=/etc/opush/cassandra.ini mode=0644
+  template: src=cassandra.ini dest=/etc/opush/cassandra.ini mode=0644 backup=yes
   when: major_version | version_compare('3.0', '>=')
   notify:
       - Restart OPush3
