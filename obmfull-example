@@ -3,7 +3,7 @@
 #
 
 [obmfullservers]
-ansiblehost1.example.com
+obm.example.com
 
 [directoryservers]
 [certservers]
