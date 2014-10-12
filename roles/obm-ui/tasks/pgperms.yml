@@ -1,8 +1,14 @@
 ---
+- name: Create PostgreSQL configuration directory
+  file: name={{ datadir }}/pg_hba.d state=directory
+  when: db_master_host in groups['all']
+  delegate_to: "{{ db_master_host }}"
+  tags: obm-ui
+
 - name: Deploy obm-ui PostgreSQL permissions
   template: src=03-remote-obm-ui dest={{ datadir }}/pg_hba.d/03-remote-obm-ui
+  when: db_master_host in groups['all']
   delegate_to: "{{ db_master_host }}"
-  when: not has_sql_load_balancer
   notify:
     - Merge PostgreSQL configuration files
   tags: obm-ui

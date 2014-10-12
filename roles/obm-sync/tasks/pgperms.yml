@@ -1,6 +1,13 @@
 ---
+- name: Create PostgreSQL configuration directory
+  file: name={{ datadir }}/pg_hba.d state=directory
+  when: db_master_host in groups['all']
+  delegate_to: "{{ db_master_host }}"
+  tags: obm-sync
+
 - name: Deploy obm-sync PostgreSQL permissions
   template: src=03-remote-obm-sync dest={{ datadir }}/pg_hba.d/03-remote-obm-sync
+  when: db_master_host in groups['all']
   delegate_to: "{{ db_master_host }}"
   notify:
     - Merge PostgreSQL configuration files

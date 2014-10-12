@@ -28,6 +28,7 @@
   template: src={{ item }} dest=/etc/imapd_conf.d/{{ item }} mode=0644
   with_items:
    - 30-TLS_imapd.conf
+  when: mupdate_server != inventory_hostname
   notify:
     - Merge imapd.conf configuration files
     - Fix perms on Cyrus configuration files
@@ -38,6 +39,7 @@
   template: src={{ item }} dest=/etc/imapd_conf.d/{{ item }} mode=0644
   with_items:
    - 40-MURDER_imapd.conf
+  when: mupdate_server != inventory_hostname
   notify:
     - Merge imapd.conf configuration files
     - Fix perms on Cyrus configuration files

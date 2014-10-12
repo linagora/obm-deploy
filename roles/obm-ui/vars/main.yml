@@ -4,7 +4,7 @@
 # Values can be updated in config.yml, groups_vars/uiservers
 # or in host_vars/fqdn_of_your_host or each of them
 
-entry_point: "{{ external_url | mandatory }}"
+entry_point: "{{ inventory_hostname }}"
 ldap_host: "{{ groups['ldapservers'][0] | mandatory }}"
 obm_sync_host: "{{ groups['syncservers'][0] | mandatory }}"
 opush_host: "{{ groups['opushservers'][0] | mandatory }}"

@@ -5,5 +5,5 @@
   vars:
     db_type: "{{ obm_db_type | default('PGSQL') }}"
   roles:
-      - { role: postgres, when: "db_type == 'PGSQL'" }
-      #- { role: mysql, when: "db_type == 'MYSQL'" }
+      - { role: obm-db-pg, when: "db_type == 'PGSQL'" }
+      #- { role: obm-db-my, when: "db_type == 'MYSQL'" }

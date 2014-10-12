@@ -5,4 +5,4 @@
 # or in host_vars/fqdn_of_your_host or each of them
 
 ca_first_role: True
-entry_point: "{{ external_url | mandatory }}"
+entry_point: "{{ inventory_hostname }}"

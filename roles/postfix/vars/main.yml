@@ -4,7 +4,6 @@
 # Values can be updated in config.yml, groups_vars/postfixservers
 # or in host_vars/fqdn_of_your_host or each of them
 
-smtp_host: "{{ groups['postfixservers'][0] | mandatory }}"
+entry_point: "{{ inventory_hostname }}"
 smtp_mynetworks: "127.0.0.0/8"
 smtp_relayhost: ""
-
