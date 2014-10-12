@@ -1,4 +1,5 @@
 ---
 dependencies:
  - { role: obm-conf }
+ - { role: postgres-common }
  - { role: obm-tomcat }

@@ -21,7 +21,7 @@
   lineinfile: >
               dest=/etc/cassandra/conf/cassandra.yaml
               regexp='^rpc_address:.*'
-              line='rpc_address: {{ ansible_default_ipv4["address"] }}'
+              line='rpc_address: {{ hostvars[inventory_hostname] | get_ip(lan_net) }}'
   notify:
       - Restart Cassandra server
   tags: cassandra
@@ -30,7 +30,7 @@
   lineinfile: >
               dest=/etc/cassandra/conf/cassandra.yaml
               regexp='^listen_address:.*'
-              line='listen_address: {{ ansible_default_ipv4["address"] }}'
+              line='listen_address: {{ hostvars[inventory_hostname] | get_ip(lan_net) }}'
   notify:
       - Restart Cassandra server
   tags: cassandra

@@ -6,7 +6,17 @@
 # Don't remove this line
 config_version: 0.1
 
-### OBM configuration ####
+#### Networks definition ####
+## Here, you can explicitly declare your lan network IP
+## to be sure IP addresses for your services are not taken
+## from your management
+##
+## LAN network : Network used by services
+#lan_net: 192.168.122.0
+## Admin network : Network used for VM or clusters management
+#admin_net: 192.168.100.0
+
+#### OBM configuration ####
 
 ## OBM version
 #obm_version: 3.0.0
@@ -18,7 +28,7 @@ config_version: 0.1
 #obm_db_type: PGSQL
 
 ## The server hosting the database or the SQL load balancer
-#obm_db_host: "{{ inventory_hostname }}"
+#obm_db_host: "{{ groups['databaseservers'][0] }}"
 
 ## The server hosting the database or the master of replication
 #obm_db_master_host: "{{ obm_db_host }}"
@@ -33,7 +43,7 @@ config_version: 0.1
 
 #### Cassandra cluster configuration
 ## Use it only with OBM 3.x
-#obm_cassandra_seeds: {{ ansible_default_ipv4['address'] }}
+#obm_cassandra_seeds: {{ hostvars[inventory_hostname] | get_ip(lan_net) }}
 #obm_cassandra_keyspace: opush
 #obm_cassandra_user: opush
 #obm_cassandra_password: opush

@@ -4,7 +4,7 @@
   tags: cassandra
 
 - name: Run Cassandra initialization script
-  command: cqlsh -u cassandra -p cassandra -f /etc/cassandra/init.cql {{ ansible_default_ipv4['address'] }}
+  command: cqlsh -u cassandra -p cassandra -f /etc/cassandra/init.cql {{ hostvars[inventory_hostname] | get_ip(lan_net) }}
   register: command_result
   retries: 60
   delay: 2

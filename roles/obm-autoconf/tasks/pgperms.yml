@@ -1,10 +1,15 @@
 ---
+
+- name: Create PostgreSQL configuration directory
+  file: name={{ datadir }}/pg_hba.d state=directory
+  when: db_master_host in groups['all']
+  delegate_to: "{{ db_master_host }}"
+  tags: obm-autoconf
+
 - name: Deploy obm-autoconf PostgreSQL permissions
   template: src=03-remote-obm-autoconf dest={{ datadir }}/pg_hba.d/03-remote-obm-autoconf
+  when: db_master_host in groups['all']
   delegate_to: "{{ db_master_host }}"
-  # If there is a load balancer, the master should let only the load balancer
-  # and the slaves connect
-  when: not has_sql_load_balancer
   notify:
     - Merge PostgreSQL configuration files
   tags: obm-autoconf

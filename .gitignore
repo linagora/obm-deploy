@@ -7,3 +7,4 @@ docs.ansible.com
 resources
 *.swp
 testinv
+*.pyc
