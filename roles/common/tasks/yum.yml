@@ -54,3 +54,14 @@
   tags:
       - common
       - yum
+
+- name: Correct centos releasever
+  lineinfile: >
+    regexp="^(\d+)\..*"
+    line="\1"
+    dest=/etc/yum/vars/releasever
+    backrefs=yes
+  when: ansible_os_family == "RedHat"
+  tags:
+   - common
+   - yum
