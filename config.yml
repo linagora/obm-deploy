@@ -4,7 +4,7 @@
 #
 
 # Don't remove this line
-config_version: 0.1
+version: 0.1
 
 #### Networks definition ####
 ## Here, you can explicitly declare your lan network IP
