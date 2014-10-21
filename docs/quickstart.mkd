@@ -1,0 +1,93 @@
+<a name="top-page"></a>
+
+This documentation makes the assumption that your shell is located in the directory where you cloned obm-deploy repository.
+
+Also, whatever installation method you use, your virtualhost must be activated.
+
+#### Table of contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Prerequisites](#prerequisites)
+  - [Root access](#root-access)
+  - [Host names resolving](#host-names-resolving)
+  - [SSH connection without a key pair](#ssh-connection-without-a-key-pair)
+  - [Sudo usage](#sudo-usage)
+- [OBM-Deploy usage](#obm-deploy-usage)
+  - [Installing an obm-full (all services on the same host)](#installing-an-obm-full-all-services-on-the-same-host)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<a name="prerequisites"></a>
+
+<br />
+Prerequisites  [&#x25B2;](#top-page "back to top")
+=============
+
+<a name="root-access"></a>
+
+Root access
+-----------
+
+OBM-Deploy uses SSH to connect to remote hosts using root account.
+
+This is a prerequisite but we will try to allow non-root accounts in the future.
+
+So, ensure that you can connect to your remote hosts as root before trying to run OBM-Deploy.
+
+<a name="host-names-resolving"></a>
+
+Host names resolving
+--------------------
+
+Another constraint is that OBM-Deploy needs to be able to resolve host names.
+
+So, you need to add all your remote hosts with their IP addresses in your /etc/hosts file or add them in your DNS server.
+
+<a name="ssh-connection-without-a-key-pair"></a>
+
+SSH connection without a key pair
+---------------------------------
+
+OBM-Deploy needs, if you want to do a fully unattended deployment, that your SSH public key has been added to /root/.ssh/authorized_keys.
+
+It is also possible to authenticate using a password but you need to do two things :
+
+ - Add this option in ansible.cfg :
+
+    ask_pass = True
+
+
+ - Add this configuration in /home/*your_username*/.ssh/config file :
+
+    Host your_remote_host
+      PubkeyAuthentication no
+
+<a name="sudo-usage"></a>
+
+Sudo usage
+----------
+
+Sudo usage has been disabled in obm-deploy for the moment.
+
+We will probably reintroduce it in the future.
+
+<a name="obm-deploy-usage"></a>
+
+<br />
+OBM-Deploy usage  [&#x25B2;](#top-page "back to top")
+================
+
+<a name="installing-an-obm-full-all-services-on-the-same-host"></a>
+
+Installing an obm-full (all services on the same host)
+------------------------------------------------------
+
+If you have an already running remote host or a VM on your desktop, you can directly use the obmfull-example inventory provided by OBM-Deploy.
+
+The only thing you need to do is to replace obm.example.com with your hostname in the obmfull-example file.
+
+Then, you can make your first automated deployment :
+
+    $ ansible-playbook -i obmfull-example obm.yml

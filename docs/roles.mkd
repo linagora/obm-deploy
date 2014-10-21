@@ -1,5 +1,4 @@
-Roles reference
----------------
+<a name="top-page"></a>
 
 Exhaustive roles documentation will be auto-generated as soon as possible.
 

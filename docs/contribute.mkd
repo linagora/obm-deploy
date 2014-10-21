@@ -1,0 +1,90 @@
+<a name="top-page"></a>
+
+You can contribute to this project in many ways.
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Declaring an issue](#declaring-an-issue)
+  - [Before declaring an issue :](#before-declaring-an-issue)
+  - [What to include in your issue :](#what-to-include-in-your-issue)
+- [Providing a patch a a new feature](#providing-a-patch-or-a-new-feature)
+  - [Before proposing a pull request](#before-proposing-a-pull-request)
+- [Development rules](#development-rules)
+  - [Grammar](#grammar)
+  - [Syntax](#syntax)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<a name="declaring-an-issue"></a>
+
+<br />
+Declaring an issue  [&#x25B2;](#top-page "back to top")
+==================
+
+Your can declare issues using our [official bugtracker](http://ci-obm.linagora.com/jira/browse/DEPLOY "OBM-Deploy offcial Jira bugtracker").
+
+<a name="before-declaring-an-issue"></a>
+
+Before declaring an issue
+-------------------------
+
+ * Ensure you (we) can easily reproduce your issue using simple steps
+ * Check your installation using our [installation procedure]( install.mkd "OBM-Deploy installation procedure")
+ * Check you have root acces to your remote hosts using ssh
+ * Check if your issue isn't already declared using our search engine
+
+<a name="what-to-include-in-your-issue"></a>
+
+What to include in your issue
+-----------------------------
+
+ * Inventory file used
+ * Config.yml and customized content in group_vars or host_vars
+ * /etc/hosts content
+
+<a name="providing-a-patch-or-a-new-feature"></a>
+
+<br />
+Providing a patch or a new feature  [&#x25B2;](#top-page "back to top")
+==================================
+
+You can provide pull-requests using github.
+We will try to merge pull-requests everytime it is possible.
+
+<a name="before-proposing-a-pull-request"></a>
+
+Before proposing a pull request
+-------------------------------
+
+ * Check if your pull request is related to an existing issue
+ * If not, create it. We will not read github's issues.
+ * There is currently no automated testing tools so try to check that your doesn't broke something
+
+<a name="development-rules"></a>
+
+<br />
+Development rules  [&#x25B2;](#top-page "back to top")
+=================
+
+<a name="grammar"></a>
+
+Grammar
+-------
+
+* A task must have a name
+* A task must have at least a tag
+* Tags represent the role or, if role is common, a functionnality
+* Command module is better than shell module
+* Using a module is better than using a command
+* Beware of flushing handlers when they are needed by other tasks
+
+<a name="syntax"></a>
+
+Syntax
+------
+
+* Variables are written in lowercase and use underscores to separate words
+* If your variable is a configuration key, place it in group_vars/all
+* If your variable is specific to a group and will never been update by users, place it in group_vars/your_group
+* If your variable is specific to a role and will never been update by users, place it role/you_role/vars

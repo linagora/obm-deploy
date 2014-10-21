@@ -1,0 +1,57 @@
+<a name="top-page"></a>
+
+Here are our main goals for next releases.
+
+#### Table of contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Short-term objectives](#short-term-objectives)
+- [Medium-term objectives](#medium-term-objectives)
+- [Long-term objectives](#long-term-objectives)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<a name="short-term-objectives"></a>
+
+<br />
+Short-term objectives  [&#x25B2;](#top-page "back to top")
+=====================
+
+Objectives for next release.
+
+ * Imporve mirror-mode
+   * Make it compatible with OBM 3.x
+   * Provide an Apache example virtualhost configuration
+ * Provide a documentation about how to work with Vagrant
+
+<a name="medium-term-objectives"></a>
+
+<br />
+Medium-term objectives  [&#x25B2;](#top-page "back to top")
+======================
+
+Objectives for next weeks.
+
+ * Improve mirror mode
+   * Make use of ansible instead of shell script
+ * Generate roles documentation
+ * Drastically reduce deployment time on obmfull installation
+   * Make use of ansible dynamic groups instead of roles dependencies
+ * Support CentOS/RHEL 7
+ * Implement LemonLDAP role
+
+<a name="long-term-objectives"></a>
+
+<br />
+Long-term objectives  [&#x25B2;](#top-page "back to top")
+====================
+
+Objectives for next months.
+
+ * Support Debian GNU/Linux
+ * Support various clustered installations
+   * Support Corosync deployment and configuration
+   * Support OpenLDAP and PostgresSQL clusters
+

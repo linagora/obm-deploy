@@ -1,0 +1,103 @@
+<a name="top-page"></a>
+
+Mirror mode allows you to deploy your OBM infrastructure without internet access on remote hosts.
+
+It can also helps you to work on obm-deploy without internet access (eg. in the train).
+
+Be carefull ! Currently, mirror mode only supports OBM 2.x.
+
+#### Table of contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [How it works](#how-it-works)
+- [Install source system](#install-source-system)
+- [Ensure your remote hosts have access to your computer](#ensure-your-remote-hosts-have-access-to-your-computer)
+- [Build ressources directory](#build-ressources-directory)
+- [Install a fully fonctionnal web server](#install-a-fully-fonctionnal-web-server)
+- [Configure needed virtualhosts](#configure-needed-virtualhosts)
+- [Manually install libselinux-python on remote hosts](#manually-install-libselinux-python-on-remote-hosts)
+- [Sync time using your own computer (optional)](#sync-time-using-your-own-computer-optional)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<a name="how-it-works"></a>
+
+<br />
+How it works  [&#x25B2;](#top-page "back to top")
+============
+
+Mirror mode main goal is to make a copy of all packages and files involved in the installation process on you own computer.
+
+Then, it redirects remote hosts repositories to your computer by hacking their /etc/hosts file and by updating download URLs when needed.
+
+<a name="install-source-system"></a>
+
+<br />
+Install source system  [&#x25B2;](#top-page "back to top")
+=====================
+
+First, you need to install an obmfull system on a remote host with Internet access.
+
+It will be used to copy all needed packages to your local computer.
+
+It's required to use default obmfdull-example without any customization.
+
+For more information about this step, please refer to our [quickstart guide](quickstart.mkd "OBM Deploy quickstart guide").
+
+    $ ansible-playbook -i obmfull-example obm.yml
+
+<a name="ensure-your-remote-hosts-have-access-to-your-computer"></a>
+
+<br />
+Ensure your remote hosts have access to your computer  [&#x25B2;](#top-page "back to top")
+=====================================================
+
+We can't help you at this point.
+
+<a name="build-ressources-directory"></a>
+
+<br />
+Build ressources directory  [&#x25B2;](#top-page "back to top")
+==========================
+
+To build your ressources directory, you need to use [provided shell script](../build-resources-dir.sh "OBM Deploy ressources dir building script").
+
+<a name="install-a-fully-fonctionnal-web-server"></a>
+
+<br />
+Install a fully fonctionnal web server  [&#x25B2;](#top-page "back to top")
+======================================
+
+We can't help you at this point.
+
+<a name="configure-needed-virtualhosts"></a>
+
+<br />
+Configure needed virtualhosts  [&#x25B2;](#top-page "back to top")
+=============================
+
+A sample nginx configuration file can be found [here].
+
+An Apache configuration will be provided as soon as possible.
+
+<a name="manually-install-libselinux-python-on-remote-hosts"></a>
+
+<br />
+Manually install libselinux-python on remote hosts  [&#x25B2;](#top-page "back to top")
+==================================================
+
+The most important limitation of mirror is that it can't deploy libselinux-python by itself on remote hosts.
+
+You need to install it manually using your favorite package manager or integrate it into your VM templates.
+
+<a name="sync-time-using-your-own-computer-optional"></a>
+
+<br />
+Sync time using your own computer (optional)  [&#x25B2;](#top-page "back to top")
+============================================
+
+If you have a functionnal NTP server on your computer and want to keep remote hosts in sync with it, you can specify your own IP address in config.yml using **ntp_server** variable.
+
+Otherwise, remote hosts will be synced only once, when you install them.
