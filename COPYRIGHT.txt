@@ -1,4 +1,4 @@
-OBM-Deploy : Asible based OBM deployment system
+OBM-Deploy : Ansible based OBM deployment system
 Copyright (C) 2014 Linagora SA, Thomas Sarboni, Cedric Liard
 
 This program is free software; you can redistribute it and/or modify
