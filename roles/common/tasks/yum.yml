@@ -35,8 +35,8 @@
    regexp="^{{item.var}}=.*$"
    line="{{ item.var }}={{ item.value }}"
   with_items:
-   - { var: proxy_username, value: "{{ prx_username }}" }
-   - { var: proxy_password, value: "{{ prx_password }}" }
+      - { var: proxy_username, value: "{{ prx_username }}" }
+      - { var: proxy_password, value: "{{ prx_password }}" }
   when: proxy_username is defined
   tags:
       - common
@@ -48,14 +48,26 @@
    regexp="^{{ item }}=.*$"
    state=absent
   with_items:
-   - prx_username
-   - prx_password
+      - prx_username
+      - prx_password
   when: proxy_username is not defined
   tags:
       - common
       - yum
 
-- name: Correct centos releasever
+- name: Check if Yum releasever file exists
+  stat: path=/etc/yum/vars/releasever
+  register: releasefile
+  when: ansible_os_family == "RedHat"
+
+- name: Create Yum releasever file if missing
+  lineinfile: >
+    line="{{ ansible_distribution_major_version }}"
+    dest=/etc/yum/vars/releasever
+    create=true
+  when: ansible_os_family == "RedHat" and releasefile.stat.isfile is not defined
+
+- name: Correct Yum releasever
   lineinfile: >
     regexp="^(\d+)\..*"
     line="\1"
@@ -63,5 +75,5 @@
     backrefs=yes
   when: ansible_os_family == "RedHat"
   tags:
-   - common
-   - yum
+      - common
+      - yum
