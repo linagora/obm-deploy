@@ -22,6 +22,7 @@ Ansible based Open Business Management ([**OBM**](http://obm.org "The new genera
   - [Configuration](#configuration)
   - [Roles index](#roles-index)
   - [Mirror Mode](#mirror-mode)
+  - [Vagrant](#vagrant)
 - [Development](#development)
   - [Roadmap](#roadmap)
   - [Get involved](#get-involved)
@@ -125,6 +126,13 @@ Mirror Mode
 -----------
 
 [Mirror-mode](docs/mirror-mode.mkd) : Deploy remote nodes without Internet access.
+
+<a name="vagrant"></a>
+
+Vagrant
+-------
+
+[Vagrant](docs/vagrant.mkd) : Automatically create remote VMs using any hypervisor.
 
 <a name="development"></a>
 

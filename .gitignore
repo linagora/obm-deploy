@@ -8,3 +8,5 @@ resources
 *.swp
 testinv
 *.pyc
+.vagrant
+*.pub

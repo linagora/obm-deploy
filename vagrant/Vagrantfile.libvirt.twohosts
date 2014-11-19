@@ -1,0 +1,59 @@
+Vagrant.configure("2") do |config|
+
+  ## First VM definition
+  config.vm.define "obm1.example.com" do |centos661|
+    centos661.vm.box = "centos66"
+    centos661.vm.hostname = "obm1.example.com"
+    centos661.vm.network :private_network,
+                         :libvirt__network_name => "default",
+                         :ip => "10.75.250.131",
+                         :libvirt__netmask => "255.255.255.128",
+                         :libvirt__forward_mode => "route"
+    ## Shell provisionning
+    centos661.vm.provision "shell" do |shell|
+      shell.path = "vagrant/bootstrap.sh"
+      shell.args = "10.75.250.129 eth1"
+    end
+  end
+
+  ## Second VM definition
+  config.vm.define "obm0.example.com" do |centos662|
+    centos662.vm.box = "centos66"
+    centos662.vm.hostname = "obm0.example.com"
+    centos662.vm.network :private_network,
+                         :libvirt__network_name => "default",
+                         :ip => "10.75.250.130",
+                         :libvirt__netmask => "255.255.255.128",
+                         :libvirt__forward_mode => "route"
+    ## Shell provisionning
+    centos662.vm.provision "shell" do |shell|
+      shell.path = "vagrant/bootstrap.sh"
+      shell.args = "10.75.250.129 eth1"
+    end
+    ## Ansible/obm-deploy provisionning
+    centos662.vm.provision :ansible do |ansible|
+      ansible.inventory_path = "twohosts-example"
+      ansible.playbook = "obm.yml"
+      ansible.extra_vars = { ansible_ssh_user: 'root' }
+      # Disable default limit (required with Vagrant 1.5+)
+      ansible.limit = 'all'
+    end
+  end
+
+  ## Libvirt provider global configuration
+  config.vm.provider :libvirt do |libvirt|
+    libvirt.driver = "kvm"
+    libvirt.memory = 2048
+    libvirt.graphics_type = "spice"
+    libvirt.host = "yourhypervisor.yourdomain"
+    libvirt.connect_via_ssh = true
+    libvirt.username = "your_username"
+    libvirt.id_ssh_key_file = "id_dsa"
+    libvirt.management_network_name = "vagrant-libvirt"
+    libvirt.management_network_address = "10.75.250.0/25"
+  end
+
+  ## synced folder configuration
+  config.vm.synced_folder "vagrant/pubkeys", "/pubkeys", type: "rsync"
+
+end

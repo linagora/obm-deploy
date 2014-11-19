@@ -1,0 +1,510 @@
+<a name="top-page"></a>
+
+Vagrant eases a VM instanciation followed by OBM installation.
+The idea behind that is to create a VM then install OBM on it using obm-deploy.
+Vagrant will do all that automatically for you.
+
+#### Table of contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Vagrant documentation](#documentation)
+  - [Official documentation](#official-documentation)
+- [Installation](#installation)
+  - [Installation on Debian based distros](#install-vagrant-on-debian)
+  - [Installation on CentOS based distros](#install-vagrant-on-centos)
+- [Boxes](#boxes)
+- [First deployment (Virtualbox)](#first-deployment)
+  - [Pre-requisites](#pre-requisites)
+  - [Vagrantfile](#vagrantfile)
+  - [Running Vagrant](#running-vagrant)
+- [Vagrant-libvirt](#vagrant-libvirt)
+  - [Documentation](#libvirt-documentation)
+  - [Prerequisites installation on Debian based distros](#install-libvirt-on-debian)
+  - [Prerequisites installation on CentOS based distros](#install-libvirt-on-centos)
+  - [Installation](#install-vagrant-libvirt)
+  - [Networking](#libvirt-networking)
+  - [Vagrantfile (simple example)](#vagrantfile-simple)
+  - [Vagrantfile (advanced example)](#vagrantfile-advanced)
+  - [Libvirt hypervisor configuration](#libvirt-hypervisor-configuration)
+  - [Provisioning](#libvirt-provisioning)
+  - [Deployment](#libvirt-deployment)
+- [Other plugins](#other-plugins)
+  - [vagrant-mutate](#mutate)
+  - [sahara](#sahara)
+  - [vagrant-lxc](#lxc)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<a name="documentation"></a>
+
+<br />
+Vagrant documentation  [&#x25B2;](#top-page "back to top")
+=====================
+
+<a name="official-documentation"></a>
+
+Official documentation
+----------------------
+
+[Vagrant official documentation]( https://docs.vagrantup.com/v2/ "Vagrant documentation on docs.vagrantup.com") is a good place to start.
+
+<a name="installation"></a>
+
+<br />
+Installation  [&#x25B2;](#top-page "back to top")
+============
+
+This installation is played on the machine from which the user deploys the VM.
+
+<a name="install-vagrant-on-debian"></a>
+
+Installation on Debian based distros
+------------------------------------
+
+Debian package is available from vargant website :
+
+    $ wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.5_x86_64.deb
+    $ sudo dpkg -i vagrant_1.6.5_x86_64.deb
+
+<a name="install-vagrant-on-centos"></a>
+
+Installation on CentOS based distros
+------------------------------------
+
+CentOS package is available from vagrant website :
+
+    $ wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.5_x86_64.rpm
+    $ sudo rpm -ivh vagrant_1.6.5_x86_64.rpm
+
+<a name="boxes"></a>
+
+<br />
+Boxes  [&#x25B2;](#top-page "back to top")
+=====
+
+We provide some boxes to use with obm-deploy.
+You can download them from download.obm.org.
+For example :
+
+    $ wget http://download.obm.org/vagrant-centos-66-virtualbox.box
+
+Once you have downloaded your image, you need to add it to your local vagrant repository :
+
+    $ vagrant box add vagrant-centos-66-virtualbox.box --name centos66
+
+<a name="first-deployment"></a>
+
+<br />
+First deployment (Virtualbox)  [&#x25B2;](#top-page "back to top")
+=============================
+
+<a name="pre-requisites"></a>
+
+Pre-requisites
+--------------
+
+### Declare your hosts in /etc/hosts
+
+Target VMs need to be declared in /etc/hosts.
+Example :
+
+    192.168.56.201 obm.example.com
+
+### Put your SSH key in the dedicated directory
+
+Your must place your SSH key in vagrant/pubkeys directory to make bootstrap.sh deploy it on your futur VM.
+Otherwise obm-deploy will not be able to connect to your VM as root.
+*All the public keys you put on this folder need to end with .pub extension to be deployed on your VM*
+
+### Activate your obm-deploy virtualenv
+
+Your obm-deploy virtualenv must be activated to be able to provision your VM after its creation.
+The method to follow depends on the method you use to install obm-deploy.
+Here is command to launch to activate your virtualenv using virtualenvwrapper :
+
+    $ workon obm-deploy-env
+
+<a name="vagrantfile"></a>
+
+Vagrantfile
+-----------
+
+Here is a simple example Vagrantfile wich allows you to deploy a single VM
+using the obmfull-example inventory and the box you downloaded at the previous step.
+
+Ip address is configured to match Virtualbox default configuration.
+You can change it but it must always match virtualbox networking configuration.
+By default, `Host-Only` networking will be used but it can be customized (please refer to Vagrant documentation).
+
+As you can see, your VM will be provisionned firstly by a shell script then by Ansible/obm-deploy.
+The shell script will configure SSH and place your SSH key in root account's authorized_keys file.
+
+    Vagrant.configure("2") do |config|
+    
+      ## VM definition
+      config.vm.define "obm.example.com" do |centos66|
+        centos66.vm.box = "centos66"
+        centos66.vm.hostname = "obm.example.com"
+        centos66.vm.network :private_network,
+                            :ip => "192.168.56.201"
+    
+        ## Shell script provisionning
+        centos66.vm.provision "shell" do |shell|
+          shell.path = "vagrant/bootstrap.sh"
+        end
+    
+        ## Ansible/obm-deploy provisionning
+        centos66.vm.provision :ansible do |ansible|
+          ansible.inventory_path = "obmfull-example"
+          ansible.playbook = "obm.yml"
+          ansible.extra_vars = { ansible_ssh_user: 'root' }
+          # Disable default limit (required with Vagrant 1.5+)
+          ansible.limit = 'all'
+        end
+    
+      end
+    
+      ## synced folder configuration 
+      config.vm.synced_folder "vagrant/pubkeys", "/pubkeys", type: "rsync"
+    
+    end
+
+<a name="runing-vagrant"></a>
+
+Running Vagrant
+---------------
+
+To deploy your VM, the only thing you need to do is to run the `up` command as below :
+
+    $ vagrant up
+
+<a name="connect-to-your-vm"></a>
+
+Connect to your VM
+------------------
+
+To connect to your VM, run the following command :
+
+    $ vagrant ssh
+
+<a name="vagrant-libvirt"></a>
+
+<br />
+Vagrant-libvirt  [&#x25B2;](#top-page "back to top")
+===============
+
+Using vagrant-libvirt plugin, you can easily deploy kvm VMs to any remote hypervisor running libvirt daemon.
+
+<a name="vagrant-libvirt-documentation"></a>
+
+Documentation
+-------------
+
+Vagrant-libvirt documentation could be found on [pradel's vagrant-libvirt github page](https://github.com/pradels/vagrant-libvirt).
+
+<a name="install-libvirt-on-debian"></a>
+
+Pre-requisites installation on Debian based distros
+---------------------------------------------------
+
+    $ sudo apt-get install build-essential libvirt-dev
+
+<a name="install-libvirt-on-centos"></a>
+
+Pre-requisites installation on CentOS based distros
+---------------------------------------------------
+
+    $ sudo yum groupinstall "Development Tools"
+    $ sudo yum install libvirt-devel libxslt-devel libxml2-devel
+
+<a name="install-vagrant-libvirt"></a>
+
+Installation
+------------
+
+The plugin installation is runned as follow:
+
+    $ vagrant plugin install vagrant-libvirt
+
+<a name="libvirt-boxes"></a>
+
+Boxes
+-----
+
+    $ wget http://download.obm.org/vagrant-centos-66-libvirt.box
+    $ vagrant box add vagrant-centos-66-libvirt.box --name centos66
+
+<a name="libvirt-networking"></a>
+
+Networking
+----------
+
+Networking with vagrant-libvirt is composed of two elements.
+
+### Management network
+
+The first interface of the VM is always bound to a management network.
+This network must have already been created and DHCP must be enabled.
+You probably want to make this network private but it's not mandatory.
+Vagrant-libvirt will use dnsmasq to retrieve VM's IP addresses when you run `vagrant ssh`.
+
+By default, vagrant-libvirt management network name is `vagrant-libvirt`.
+You shall be able to rename it but i don't recommend you to do that because it can produce strange bugs.
+
+Management network can be configured globally for all VMs in your Vagrantfile.
+
+### User network(s)
+
+In addition to this network, you need to specify user network(s), especially if you you want to access your servcies from the outside.
+
+In Vagrant, there is two type of user networks, private and public.
+Private networks are shared only between the hypervisor and the VMs.
+Public networks are used to make VMs joinable from the outside.
+
+On user networks, you can statically set IP adresses or DHCP.
+
+For more infos about networking, please refer to the following links :
+
+ * [Vagrant networking documentation](https://docs.vagrantup.com/v2/networking/index.html)
+ * [pradel's vagrant-libvirt github page](https://github.com/pradels/vagrant-libvirt)
+
+*Network features in vagrant-libvirt makes use of macvtap driver only present in kernel >= 2.6.24*
+
+<a name="libvirt-vagrantfile"></a>
+
+Vagrantfile (simple example)
+----------------------------
+
+Here is an example Vagrantfile you can use with twohosts-exemple inventry file.
+This Vagrantfile can easily replace virtualbox example above if you have kvm and libvirt installed on your local host.
+Note that you'll need to customize network configuration and hypervisor configuration.
+I'll give more details about this point on next chapter.
+
+*Notice the parameters given to the bootstrap.sh script.
+They are used to change the default gateway and set it to the user network*
+
+    Vagrant.configure("2") do |config|
+    
+      ## VM definition
+      config.vm.define "obm.example.com" do |centos66|
+        centos66.vm.box = "centos66"
+        centos66.vm.hostname = "obm.example.com"
+        centos66.vm.network :private_network,
+                            :libvirt__network_name => "default",
+                            :ip => "192.168.122.201",
+                            :libvirt__netmask => "255.255.255.0",
+                            :libvirt__forward_mode => "nat"
+        ## Shell provisionning
+        centos66.vm.provision "shell" do |shell|
+          shell.path = "vagrant/bootstrap.sh"
+          shell.args = "10.75.250.129 eth1"
+        end
+        ## Ansible/obm-deploy provisionning
+        centos66.vm.provision :ansible do |ansible|
+          ansible.inventory_path = "obmfull-example"
+          ansible.playbook = "obm.yml"
+          ansible.extra_vars = { ansible_ssh_user: 'root' }
+          # Disable default limit (required with Vagrant 1.5+)
+          ansible.limit = 'all'
+        end
+      end
+    
+      ## Libvirt provider global configuration
+      config.vm.provider :libvirt do |libvirt|
+        libvirt.driver = "kvm"
+        libvirt.memory = 2048
+        libvirt.graphics_type = "spice"
+        libvirt.connect_via_ssh = false
+        libvirt.management_network_name = "vagrant-libvirt"
+        libvirt.management_network_address = "10.2.0.0/24"
+      end
+    
+      ## synced folder configuration
+      config.vm.synced_folder "vagrant/pubkeys", "/pubkeys", type: "rsync"
+    
+    end
+
+<a name="vagrantfile-advanced"></a>
+
+Vagrantfile (advanced example)
+------------------------------
+
+In this more advanced example, we choose to route hypervisor's private network because it is located on LAN network.
+We split a C class network into two subnets of 126 addresses, respectively for management and user networks.
+
+On an internet hosting, you'll probably prefer to use bridged networking using your fallback IP address for user network.
+
+    Vagrant.configure("2") do |config|
+    
+      ## First VM definition
+      config.vm.define "obm1.example.com" do |centos661|
+        centos661.vm.box = "centos66"
+        centos661.vm.hostname = "obm1.example.com"
+        centos661.vm.network :private_network,
+                             :libvirt__network_name => "default",
+                             :ip => "10.75.250.131",
+                             :libvirt__netmask => "255.255.255.128",
+                             :libvirt__forward_mode => "route"
+        ## Shell provisionning
+        centos661.vm.provision "shell" do |shell|
+          shell.path = "vagrant/bootstrap.sh"
+          shell.args = "10.75.250.129 eth1"
+        end
+      end
+    
+      ## Second VM definition
+      config.vm.define "obm0.example.com" do |centos662|
+        centos662.vm.box = "centos66"
+        centos662.vm.hostname = "obm0.example.com"
+        centos662.vm.network :private_network,
+                             :libvirt__network_name => "default",
+                             :ip => "10.75.250.130",
+                             :libvirt__netmask => "255.255.255.128",
+                             :libvirt__forward_mode => "route"
+        ## Shell provisionning
+        centos662.vm.provision "shell" do |shell|
+          shell.path = "vagrant/bootstrap.sh"
+          shell.args = "10.75.250.129 eth1"
+        end
+        ## Ansible/obm-deploy provisionning
+        centos662.vm.provision :ansible do |ansible|
+          ansible.inventory_path = "twohosts-example"
+          ansible.playbook = "obm.yml"
+          ansible.extra_vars = { ansible_ssh_user: 'root' }
+          # Disable default limit (required with Vagrant 1.5+)
+          ansible.limit = 'all'
+        end
+      end
+    
+    
+      ## Libvirt provider global configuration
+      config.vm.provider :libvirt do |libvirt|
+        libvirt.driver = "kvm"
+        libvirt.memory = 2048
+        libvirt.graphics_type = "spice"
+        libvirt.host = "yourhypervisor.yourdomain"
+        libvirt.connect_via_ssh = true
+        libvirt.username = "linagora"
+        libvirt.id_ssh_key_file = "id_dsa"
+        libvirt.management_network_name = "vagrant-libvirt"
+        libvirt.management_network_address = "10.75.250.0/25"
+      end
+    
+      ## synced folder configuration 
+      config.vm.synced_folder "vagrant/pubkeys", "/pubkeys", type: "rsync"
+    
+    end
+
+<a name="libvirt-hypervisor-configuration"></a>
+
+Libvirt hypervisor configuration
+--------------------------------
+
+Hypervisor configuration can be made globally like in the above example but you
+can also set it on a per VM basis.
+
+The most important part of this configuration the part wich is about SSH connection :
+
+ * host : hostname of you hypervisor
+ * connect_via_ssh : Set it to flase if your hypervisor is your localhost
+ * username : Username used to connect to your hypervisor via SSH (comment it for localhost)
+ * id_ssh_key_file : Name of your private key (relative to ~/.ssh firectory) (comment it for localhost)
+
+Some other options related to your hypervisor can be usefull :
+
+ * memory : amount of memory to allocate to your VMs
+ * driver : libvirt driver to use (kvm or qemu are supported)
+ * graphics_type : protocole to use to expose guest display (vnc by default)
+
+For the exhaustive list of available parameters, please refer to [pradel's vagrant-libvirt github page](https://github.com/pradels/vagrant-libvirt).
+
+<a name="libvirt-provisioning"></a>
+
+Provisioning
+------------
+
+As you have seen in Vagrantfile, Ansible/obm-deploy provisioning is only activated for the last VM.
+This is done to take advantage of Ansible parallelisme capabilities.
+
+This way, Vagrant will create VMs simultaneously, then Ansible will provision them in parallel.
+
+To disable this, you can append --no-parallel option to vagrant's command line.
+
+<a name="libvirt-deployment"></a>
+
+Deployment
+----------
+
+To launch deployement, start the same command as above but explicitly define the corresponding provider :
+
+    $ vagrant up --provider=libvirt
+
+You can make it the default by setting VAGRANT_DEFAULT_PROVIDER environment variable, for example, in you .bashrc file :
+
+    $ export VAGRANT_DEFAULT_PROVIDER=libvirt
+
+<a name="other-plugins"></a>
+
+<br />
+Other plugins  [&#x25B2;](#top-page "back to top")
+=============
+
+There are several other plugins you can use with Vagrant.
+I'll try to quickly present you some usefull of them.
+
+Install them using following command if you need them :
+
+    $ vagrant plugin install `plugin_name`
+
+<a name="mutate"></a>
+
+Vagrant-mutate
+--------------
+
+Vagrant boxes are provider dependant.
+Vagrant mutate is very usefull to convert them one provider and another.
+
+For example, to convert a Virtualbox box named centos66 into libvirt's one, please use the following command :
+
+    $ vagrant mutate centos66 libvirt
+
+More infos on [sciurus's vagrant-mutate github page](https://github.com/sciurus/vagrant-mutate)
+
+<a name="sahara"></a>
+
+Sahara
+------
+
+Sahara is another usefull plugin wich allows you to work with your VMs in a sandboxed environment.
+
+To enable sandbox environment :
+
+    $ vagrant sandbox on
+
+To permanently apply your changes :
+
+    $ vagrant sandbox commit
+
+Otherwise, to revert them :
+
+    $ vagrant sandbox rollback
+
+Then, to exit sandbox mode :
+
+    $ vagrant sandbox off
+
+Pretty good, no ?
+
+More infos on [jedi4ever's vagrant-mutate github page](https://github.com/jedi4ever/sahara)
+
+<a name="lxc"></a>
+
+Vagrant-lxc
+-----------
+
+With vagrant-lxc, you can deploy VMs to your local lxc service.
+
+More infos on [fgrehm's vagrant-mutate github page](https://github.com/fgrehm/vagrant-lxc)
+
