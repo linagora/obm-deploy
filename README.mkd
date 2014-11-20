@@ -2,7 +2,7 @@
 
 Ansible based Open Business Management ([**OBM**](http://obm.org "The new generation of collaborative software")) full-featured deployment tool.
 
-*OBM Installations made easy !*
+*OBM Installation made easy !*
 
 #### Table of contents
 
@@ -39,9 +39,9 @@ Objectives
 ----------
 
  - Quickly build deployment environments
- - Standardize OBM installations
+ - Standardize OBM installation
  - Separate configuration management from packaging
- - Make deployments costless much more simple and efficient
+ - Make deployments much more simple and efficient
 
 
 <a name="current-status"></a>

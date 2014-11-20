@@ -84,10 +84,12 @@ OBM-Deploy usage  [&#x25B2;](#top-page "back to top")
 Installing an obm-full (all services on the same host)
 ------------------------------------------------------
 
-If you have an already running remote host or a VM on your desktop, you can directly use the obmfull-example inventory provided by OBM-Deploy.
+If you have an already running CentOS remote host or a VM on your desktop, you can directly use the obmfull-example inventory provided by OBM-Deploy.
 
 The only thing you need to do is to replace obm.example.com with your hostname in the obmfull-example file.
 
 Then, you can make your first automated deployment :
 
     $ ansible-playbook -i obmfull-example obm.yml
+
+The latest stable OBM version (currently 3.0) will be installed.

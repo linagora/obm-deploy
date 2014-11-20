@@ -21,7 +21,7 @@ Short-term objectives  [&#x25B2;](#top-page "back to top")
 
 Objectives for next release.
 
- * Imporve mirror-mode
+ * Improve mirror mode
    * Make it compatible with OBM 3.x
    * Provide an Apache example virtualhost configuration
  * Provide a documentation about how to work with Vagrant
@@ -35,7 +35,7 @@ Medium-term objectives  [&#x25B2;](#top-page "back to top")
 Objectives for next weeks.
 
  * Improve mirror mode
-   * Make use of ansible instead of shell script
+   * Make use of Ansible instead of shell scripts
  * Generate roles documentation
  * Drastically reduce deployment time on obmfull installation
    * Make use of ansible dynamic groups instead of roles dependencies

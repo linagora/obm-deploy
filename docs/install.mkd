@@ -2,7 +2,7 @@
 
 This documentation is based on [Oliver Welge's article](http://weluse.de/blog/installing-ansible-on-os-x.html "Oliver Welge's article about Ansible installation").
 
-Manual installations methods are to work with almost all Linux or BSD flavors, including OSX.
+Manual installations methods are known to work with almost all Linux or BSD flavors, including OSX.
 
 We recommend you to choose a manual installation strategy even if this is a little bit difficult.
 
@@ -64,7 +64,7 @@ First of all, you need to install git.
 Install common packages on Debian GNU/Linux Wheezy
 --------------------------------------------------
 
-*This step should also work on other .deb based distros (Ubuntu, Mint ...).*
+*This step should also work on other .deb based distributions (Ubuntu, Mint ...).*
 
     $ sudo aptitude install git python-dev wget
 
@@ -73,7 +73,7 @@ Install common packages on Debian GNU/Linux Wheezy
 Install common packages on CentOS Linux 6
 -----------------------------------------
 
-*This step should also work other .rpm based distros (Fedora, Mandriva ...).*
+*This step should also work on other .rpm based distributions (Fedora, Mandriva ...).*
 
     $ sudo yum install git python-devel wget
 
@@ -96,7 +96,7 @@ Package installation on Debian GNU/Linux Wheezy
 
 ### Enable Wheezy Backports
 
-*This step is not needed on other .deb based distros (Ubuntu, Mint ...).*
+*This step is not needed on other .deb based distributions (Ubuntu, Mint ...).*
 
     $ sudo su -c "echo 'deb http://http.debian.net/debian wheezy-backports main' >> /etc/apt/sources.list"
 
@@ -104,7 +104,7 @@ Package installation on Debian GNU/Linux Wheezy
 
 ### Install packages
 
-*This step should also work on other .deb based distros (Ubuntu, Mint ...).*
+*This step should also work on other .deb based distributions (Ubuntu, Mint ...).*
 
     $ sudo aptitude install ansible
 
@@ -117,7 +117,7 @@ Packages installation on CentOS Linux 6
 
 ### Enable EPEL repository
 
-*This step is not needed on other .rpm based distros (Fedora, Mandriva ...).*
+*This step is not needed on other .rpm based distributions (Fedora, Mandriva ...).*
 
 
     $ sudo yum install wget
@@ -128,7 +128,7 @@ Packages installation on CentOS Linux 6
 
 ### Install packages
 
-*This step should also work on other .rpm based distros (Fedora, Mandriva ...).*
+*This step should also work on other .rpm based distributions (Fedora, Mandriva ...).*
 
     $ sudo yum install ansible
 
@@ -147,7 +147,7 @@ Install prerequisites on Debian GNU/Linux Wheezy
 
 ### Enable Wheezy Backports
 
-*This step is not needed on other .deb based distros (Ubuntu, Mint ...).*
+*This step is not needed on other .deb based distributions (Ubuntu, Mint ...).*
 
     $ sudo su -c "echo 'deb http://http.debian.net/debian wheezy-backports main' >> /etc/apt/sources.list"
 
@@ -155,7 +155,7 @@ Install prerequisites on Debian GNU/Linux Wheezy
 
 ### Install packages
 
-*This step should also work on .deb based distros (Debian, Mint ...).*
+*This step should also work on .deb based distributions (Ubuntu, Mint ...).*
 
     $ sudo aptitude install python-virtualenv python-pip
 
@@ -168,7 +168,7 @@ Install prerequisites on CentOS Linux 6
 
 ### Enable EPEL repository
 
-*This step is not needed on other .rpm based distros (Fedora, Mandriva ...).*
+*This step is not needed on other .rpm based distributions (Fedora, Mandriva ...).*
 
     $ sudo yum install wget
     $ wget http://dl.fedoraproject.org/pub/epel/6/`uname -m`/epel-release-6.8.noarch.rpm
@@ -178,7 +178,7 @@ Install prerequisites on CentOS Linux 6
 
 ### Install packages
 
-*This step should also work on other .rpm based distros (Fedora, Mandriva ...).*
+*This step should also work on other .rpm based distributions (Fedora, Mandriva ...).*
 
     $ sudo yum install python-virtualenv python-pip
 
@@ -258,7 +258,7 @@ Manual installation using virtualenvwrapper (recommended)  [&#x25B2;](#top-page 
 Install virtualenvwrapper on Debian GNU/Linux Wheezy
 ----------------------------------------------------
 
-*This step should also work on other .deb based distros (Ubuntu, Mint ...).*
+*This step should also work on other .deb based distributions (Ubuntu, Mint ...).*
 
 
     $ sudo aptitude install virtualenvwrapper
@@ -268,7 +268,7 @@ Install virtualenvwrapper on Debian GNU/Linux Wheezy
 Install virtualenvwrapper on CentOS Linux 6
 -------------------------------------------
 
-*This step should also work on other .rpm based distros (Fedora, Mandriva ...).*
+*This step should also work on other .rpm based distributions (Fedora, Mandriva ...).*
 
 
     $ yum install python-virtualenvwrapper

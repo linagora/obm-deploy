@@ -55,7 +55,7 @@ Let's take a look at the first part of the file :
 
 As you probably know if you've read [Ansible's dedicated documentation](http://docs.ansible.com/intro_inventory.html "Inventory on docs.ansible.com"), inventory files are a kind of INI files where you can find groups between brackets and hosts.
 
-This example inventory allows you to deploy a single OBM host supporting all services by simply replacing obm.example.com by your own hostname in obmfull group.
+This sample inventory allows you to deploy a single OBM host supporting all services by simply replacing obm.example.com with your own hostname in the obmfull group.
 
 <a name="first-customization-steps"></a>
 
@@ -136,18 +136,18 @@ A `parent` group is identified by the `:children` suffix after its name.
 Ansible limitation in nested groups
 -----------------------------------
 
-The problem is you need to choose between groups of hosts or groups of groups.
+The problem is that you need to choose between groups of hosts or groups of groups.
 
 Indeed, a group can't contain other groups and hosts.
 
-To deploy a fine tuned distributed OBM infrastructure you'll need to rewrite the second part putting host names in all the groups.
+To deploy a fine-tuned distributed OBM infrastructure you'll need to rewrite the second part putting host names in all the groups.
 
 <a name="focus-on-groups"></a>
 
 Focus on groups
 ---------------
 
-Some of the groups in the second part must contain only one host but in other, you can put more of them.
+Some of the groups in the second part must contain only one host but in other, you can put more than one.
 
 To see a detailed list of all roles and their corresponding groups, please refer to [roles reference](./roles.mkd "Roles reference").
 

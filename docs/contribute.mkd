@@ -31,7 +31,7 @@ Before declaring an issue
 
  * Ensure you (we) can easily reproduce your issue using simple steps
  * Check your installation using our [installation procedure]( install.mkd "OBM-Deploy installation procedure")
- * Check you have root acces to your remote hosts using ssh
+ * Check that you have root acces to your remote hosts using ssh
  * Check if your issue isn't already declared using our search engine
 
 <a name="what-to-include-in-your-issue"></a>
@@ -50,7 +50,7 @@ Providing a patch or a new feature  [&#x25B2;](#top-page "back to top")
 ==================================
 
 You can provide pull-requests using github.
-We will try to merge pull-requests everytime it is possible.
+We will try to merge pull-requests whenever possible.
 
 <a name="before-proposing-a-pull-request"></a>
 
@@ -58,8 +58,8 @@ Before proposing a pull request
 -------------------------------
 
  * Check if your pull request is related to an existing issue
- * If not, create it. We will not read github's issues.
- * There is currently no automated testing tools so try to check that your doesn't broke something
+ * If not, create it. We do not read github's issues.
+ * There is currently no automated testing tools so try to check that your doesn't brake anything
 
 <a name="development-rules"></a>
 

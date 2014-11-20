@@ -96,7 +96,7 @@ A [playbook](http://docs.ansible.com/playbooks.html "Playbook on docs.ansible.co
 Handler
 -------
 
-An  [handler](http://docs.ansible.com/glossary.html#handlers "Handler on docs.ansible.com") is a special task within a role not run directly but triggered by other tasks.
+A [handler](http://docs.ansible.com/glossary.html#handlers "Handler on docs.ansible.com") is a special task within a role not run directly but triggered by other tasks.
 
 <a name="variable"></a>
 
