@@ -63,7 +63,7 @@ This installation is played on the machine from which the user deploys the VM.
 Installation on Debian based distros
 ------------------------------------
 
-Debian package is available from vargant website :
+Debian package is available from vagrant website :
 
     $ wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.5_x86_64.deb
     $ sudo dpkg -i vagrant_1.6.5_x86_64.deb
@@ -257,15 +257,15 @@ Management network can be configured globally for all VMs in your Vagrantfile.
 
 ### User network(s)
 
-In addition to this network, you need to specify user network(s), especially if you you want to access your servcies from the outside.
+In addition to this network, you need to specify user network(s), especially if you want to access your services from the outside.
 
-In Vagrant, there is two type of user networks, private and public.
+In Vagrant, there is two types of user networks, private and public.
 Private networks are shared only between the hypervisor and the VMs.
-Public networks are used to make VMs joinable from the outside.
+Public networks are used to make VMs reachable from the outside.
 
 On user networks, you can statically set IP adresses or DHCP.
 
-For more infos about networking, please refer to the following links :
+For more details about networking, please refer to the following links :
 
  * [Vagrant networking documentation](https://docs.vagrantup.com/v2/networking/index.html)
  * [pradel's vagrant-libvirt github page](https://github.com/pradels/vagrant-libvirt)
@@ -277,7 +277,7 @@ For more infos about networking, please refer to the following links :
 Vagrantfile (simple example)
 ----------------------------
 
-Here is an example Vagrantfile you can use with twohosts-exemple inventry file.
+Here is an example Vagrantfile you can use with twohosts-exemple inventory file.
 This Vagrantfile can easily replace virtualbox example above if you have kvm and libvirt installed on your local host.
 Note that you'll need to customize network configuration and hypervisor configuration.
 I'll give more details about this point on next chapter.
@@ -405,7 +405,7 @@ Libvirt hypervisor configuration
 Hypervisor configuration can be made globally like in the above example but you
 can also set it on a per VM basis.
 
-The most important part of this configuration the part wich is about SSH connection :
+The most important part of this configuration the part which is about SSH connection :
 
  * host : hostname of you hypervisor
  * connect_via_ssh : Set it to flase if your hypervisor is your localhost
