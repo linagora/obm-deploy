@@ -24,6 +24,6 @@ Vagrant.configure("2") do |config|
   end
 
   ## synced folder configuration
-  config.vm.synced_folder "vagrant/pubkeys", "/pubkeys", type: "rsync"
+  config.vm.synced_folder "vagrant", "/vagrant", type: "rsync"
 
 end
