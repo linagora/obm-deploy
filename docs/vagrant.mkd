@@ -63,7 +63,7 @@ This installation is played on the machine from which the user deploys the VM.
 Installation on Debian based distros
 ------------------------------------
 
-A Debian package is available from vagrant website :
+A Debian package is available from the Vagrant website :
 
     $ wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.5_x86_64.deb
     $ sudo dpkg -i vagrant_1.6.5_x86_64.deb
@@ -73,7 +73,7 @@ A Debian package is available from vagrant website :
 Installation on CentOS based distros
 ------------------------------------
 
-A CentOS package is available from vagrant website :
+A CentOS package is available from the Vagrant website :
 
     $ wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.5_x86_64.rpm
     $ sudo rpm -ivh vagrant_1.6.5_x86_64.rpm
@@ -195,14 +195,14 @@ To connect to your VM, run the following command :
 Vagrant-libvirt  [&#x25B2;](#top-page "back to top")
 ===============
 
-Using the vagrant-libvirt plugin, you can easily deploy kvm VMs to any remote hypervisor running the libvirt.
+Using the vagrant-libvirt plugin, you can easily deploy kvm VMs to any remote hypervisor running the libvirt daemon.
 
 <a name="vagrant-libvirt-documentation"></a>
 
 Documentation
 -------------
 
-Vagrant-libvirt documentation can be found on [pradel's vagrant-libvirt github page](https://github.com/pradels/vagrant-libvirt).
+The Vagrant-libvirt documentation can be found on [pradel's vagrant-libvirt github page](https://github.com/pradels/vagrant-libvirt).
 
 <a name="install-libvirt-on-debian"></a>
 
@@ -248,7 +248,7 @@ Networking with vagrant-libvirt is composed of two elements.
 The first interface of the VM is always bound to a management network.
 This network must have been created beforehand and DHCP must be enabled.
 You probably want to make this network private but it's not mandatory.
-Vagrant-libvirt will use dnsmasq to retrieve IP addresses of the VM when you run `vagrant ssh`.
+Vagrant-libvirt will use dnsmasq to retrieve the IP addresses of the VM when you run `vagrant ssh`.
 
 By default, the name of the vagrant-libvirt management network is `vagrant-libvirt`.
 You should be able to rename it but we can't recommend it, because it is not supported.
@@ -277,7 +277,7 @@ For more details about networking, please refer to the following links :
 Vagrantfile (simple example)
 ----------------------------
 
-Here is an example Vagrantfile you can use with the twohosts-exemple inventory file.
+Here is an example Vagrantfile you can use with the twohosts-example inventory file.
 This Vagrantfile can easily replace the virtualbox example above if you have kvm and libvirt installed on your local host.
 Note that you'll need to customize network configuration and hypervisor configuration.
 I'll give more details about this point on next chapter.
@@ -426,7 +426,7 @@ Provisioning
 ------------
 
 As you have seen in Vagrantfile, Ansible/obm-deploy provisioning is only activated for the last VM.
-This is done to take advantage of Ansible's parallelisme capabilities.
+This is done to take advantage of Ansible's parallelism capabilities.
 
 This way, Vagrant will create VMs simultaneously, then Ansible will provision them in parallel.
 
