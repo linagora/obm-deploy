@@ -1,4 +1,11 @@
 ---
 ## Use this file to override sasl server settings, if needed
 
-#ldap_host: "{{ groups['ldapservers'][0] | mandatory }}"
+# Fake variable to make file works even if dont override anything
+group: saslservers
+
+#ldap_host: ""
+#
+#sasl_backend: "{{ obm_sasl_backend | default('ldap') }}"
+#sasl_ldap_filter: "{{ obm_sasl_ldap_filter | default('(|(&(mailBox=%U@%d)(objectClass=obmUser)(mailAccess=PERMIT))(&(uid=%U)(cn=Administrator Cyrus)(objectClass=posixAccount)))') }}"
+

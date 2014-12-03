@@ -43,14 +43,24 @@ config_version: 0.2
 
 #### Cassandra cluster configuration
 ## Use it only with OBM 3.x
-#obm_cassandra_seeds: {{ hostvars[inventory_hostname] | get_ip(lan_net) }}
+#obm_cassandra_seeds: "{{ groups['cassandraservers'][0] }}"
 #obm_cassandra_keyspace: opush
 #obm_cassandra_user: opush
 #obm_cassandra_password: opush
 
-## Make default ldap different from the first member of
-## the ldapservers group (strange but supported)
-#obm_ldap_host: obm.example.com
+## The obm-sync host used by obm-ui
+#obm_sync_host: "{{ groups['syncservers'][0] }}"
+
+## The opush host used by obm-ui
+#obm_opush_host: "{{ groups['opushservers'][0] }}"
+
+## The server hosting the directory or the LDAP load balancer
+#obm_ldap_host: "{{ groups['ldapservers'][0] }}"
+
+## The server hosting the directory or the master of replication
+#obm_ldap_master_host: "{{ obm_ldap_host }}"
+
+## LDAP directory configuration
 #obm_ldap_port: 389
 #obm_ldap_ssl: no
 #obm_ldap_suffix: "dc=local"
@@ -106,10 +116,11 @@ config_version: 0.2
 #packages_mode: internet
 #packages_mirror_ip: 192.168.122.1
 
-#### OBM-Autoconf extensions ####
-
-#### OBM-UI ####
-remove_banner: "yes"
+#### OBM-Autoconf ####
+## Allows you to set hostnames published by autoconf
+#obm_autoconf_smtp_host: "{{ obm_external_url }}"
+#obm_autoconf_imap_host: "{{ obm_external_url }}"
+#obm_autoconf_ldap_host: "{{ obm_external_url }}""
 
 #### Proxy Configuration ####
 # Will be deployed on all remote hosts

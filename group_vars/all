@@ -34,8 +34,15 @@ language: "{{ obm_language | default('fr') }}"
 
 mode: "{{ packages_mode | default('internet') }}"
 
-has_sql_load_balancer: "{{ db_host != db_master_host }}"
+sync_host_tmp: "{% if inventory_hostname in groups['obmfullservers'] %}{{ hostvars[inventory_hostname] }}{% else %}{{ hostvars[groups['syncservers'][0]] }}{% endif %}"
+sync_host: "{{ obm_sync_host | default(sync_host_tmp) }}"
 
+opush_host_tmp: "{% if inventory_hostname in groups['obmfullservers'] %}{{ hostvars[inventory_hostname] }}{% else %}{{ hostvars[groups['opushservers'][0]] }}{% endif %}"
+opush_host: "{{ obm_opush_host | default(opush_host_tmp) }}"
+
+ldap_host_tmp: "{% if inventory_hostname in groups['obmfullservers'] %}{{ hostvars[inventory_hostname] }}{% else %}{{ hostvars[groups['cassandraservers'][0]] }}{% endif %}"
+ldap_host: "{{ obm_ldap_host | default(ldap_host_tmp) }}"
+ldap_master_host: "{{ obm_ldap_master_host | default(ldap_host) "
 ldap_ssl: "{{ obm_ldap_ssl | default('no') }}"
 ldap_port: "{{ obm_ldap_port | default('389') }}"
 ldap_suffix: "{{ obm_ldap_suffix | default('dc=local') }}"
@@ -57,6 +64,10 @@ default_cert_file: '/etc/obm/certs/obm_cert.pem'
 ca_file:   "{{ obm_ca_file   | default('/var/lib/obm-ca/cacert.pem') }}"
 cert_file: "{{ obm_cert_file | default('/etc/obm/certs/obm_cert.pem') }}"
 key_file:  "{{ obm_key_file  | default('/etc/obm/certs/obm_cert.pem') }}"
+
+autoconf_smtp_host: "{{ obm_autoconf_smtp_host | default(external_url) }}"
+autoconf_imap_host: "{{ obm_autoconf_imap_host | default(external_url) }}"
+autoconf_ldap_host: "{{ obm_autoconf_ldap_host | default(external_url) }}""
 
 prx_protocol: "{{ proxy_protocol | default('http') }}"
 prx_username: "{{ proxy_username | default('') }}"

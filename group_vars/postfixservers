@@ -4,7 +4,7 @@
 # Fake variable to make file works even if dont override anything
 group: postfixservers
 
-#smtp_host: "{{ groups['postfixservers'][0] | mandatory }}"
+#entry_point: "{{ inventory_hostname }}"
 #smtp_mynetworks: ""
 #smtp_relayhost: ""
 

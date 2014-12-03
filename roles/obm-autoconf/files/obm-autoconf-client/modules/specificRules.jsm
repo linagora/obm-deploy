@@ -4,18 +4,18 @@ var EXPORTED_SYMBOLS = ["specificRules"];
 
 var config = {
     obm: {
-        autoconfServer: "{{ external_url }}",
+        autoconfServer: "{{ entry_point }}",
         shouldAutoconfRunWithoutAccountCreation: true,
         mail: {
             incoming: {
-                hostname: "{{ imap_host }}",
+                hostname: "{{ autoconf_imap_host }}",
                 type: "imap",
                 port: 143,
                 socketType: 3,
                 auth: Components.interfaces.nsMsgAuthMethod.passwordCleartext
             },
             outgoing: {
-                hostname: "{{ smtp_host }}",
+                hostname: "{{ autoconf_smtp_host }}",
                 port: 587,
                 socketType: 3,
                 auth: Components.interfaces.nsMsgAuthMethod.none

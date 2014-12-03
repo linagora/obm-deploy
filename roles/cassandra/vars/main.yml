@@ -1,7 +1,0 @@
----
-# This file stores default values for role variables
-# # Please don't edit it
-# # Values can be updated in config.yml, groups_vars/cassandraservers
-# # or in host_vars/fqdn_of_your_host or each of them
-
-cassandra_seeds: "{% if inventory_hostname in groups['obmfullservers'] %}{{ hostvars[inventory_hostname] |get_ip(lan_net) }}{% else %}{{ hostvars[groups['cassandraservers'][0]] | get_ip(lan_net) }}{% endif %}"

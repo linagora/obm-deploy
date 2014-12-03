@@ -1,7 +1,0 @@
----
-# This file stores default values for role variables
-# Please don't edit it
-# Values can be updated in config.yml or in
-# host_vars/fqdn_of_your_host or each of them
-
-ldap_host: "{{ groups['ldapservers'][0] | mandatory }}"

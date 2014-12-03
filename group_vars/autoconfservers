@@ -4,9 +4,11 @@
 # Fake variable to make file works even if dont override anything
 group: autoconfservers
 
-#ldap_host: "{{ groups['ldapservers'][0] | mandatory }}"
-#smtp_host: "{{ groups['postfixservers'][0] | mandatory }}"
-#imap_host: "{{ groups['cyrusfrontendservers'][0] | mandatory }}"
+#autoconf_ldap_host: ""
+#autoconf_smtp_host: ""
+#autoconf_imap_host: ""
+
+#entry_point: {{ inventory_hostname }}
 
 #autoconf_search_base: ou=users,dc=${obmDomain},{{ ldap_suffix }}
 #autoconf_search_fields: cn,mailBox,uid

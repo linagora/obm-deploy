@@ -4,9 +4,9 @@
       <directory id="ldap-obm" 
                  label="Annuaire OBM" 
                  {% if ldap_ssl == "no" %}
-                 uri="ldap://{{ ldap_host }}:{{ ldap_port }}/{{ autoconf_search_base }}"
+                 uri="ldap://{{ autoconf_ldap_host }}:{{ ldap_port }}/{{ autoconf_search_base }}"
                  {% else %}
-                 uri="ldaps://{{ ldap_host }}:{{ ldap_port }}/{{ autoconf_search_base }}"
+                 uri="ldaps://{{ autoconf_ldap_host }}:{{ ldap_port }}/{{ autoconf_search_base }}"
                  {% endif %}
                  autocomplete="true"/> 
   </directories> 

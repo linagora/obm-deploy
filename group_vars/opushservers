@@ -1,8 +1,7 @@
 ---
-## Use this file to override opsuh server settings, if needed
+## Use this file to override opush server settings, if needed
 
 # Fake variable to make file works even if dont override anything
 group: opushservers
 
-#ldap_host: "{{ groups['ldapservers'][0] | mandatory }}"
-#cassandra_host: "{% if major_version | version_compare('3.0', '>=') %}{{ groups['cassandraservers'][0] | mandatory }}{% endif %}"
+#ldap_host: ""

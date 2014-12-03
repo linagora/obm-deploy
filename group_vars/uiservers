@@ -4,6 +4,7 @@
 # Fake variable to make file works even if dont override anything
 group: uiservers
 
-#entry_point: "{{ external_url | mandatory }}"
-#sync_host: "{{ groups['syncservers'][0] | default('localhost') }}"
-#opush_host: "{{ groups['opushservers'][0] | default('localhost') }}"
+#sync_host: ""
+#entry_point: ""
+
+#opush_host: "{{ groups['opushservers'][0] | mandatory }}"

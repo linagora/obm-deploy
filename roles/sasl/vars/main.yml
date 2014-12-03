@@ -4,8 +4,6 @@
 # Values can be updated in config.yml, groups_vars/saslservers,
 # host_vars/fqdn_of_your_host or each of them
 
-ldap_host: "{{ groups['ldapservers'][0] | mandatory }}"
-
 sasl_backend: "{{ obm_sasl_backend | default('ldap') }}"
 sasl_ldap_filter: "{{ obm_sasl_ldap_filter | default('(|(&(mailBox=%U@%d)(objectClass=obmUser)(mailAccess=PERMIT))(&(uid=%U)(cn=Administrator Cyrus)(objectClass=posixAccount)))') }}"
 
