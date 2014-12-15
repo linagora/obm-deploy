@@ -4,7 +4,7 @@
 # Values can be updated in config.yml, groups_vars/autoconfservers
 # or in host_vars/fqdn_of_your_host or each of them
 
-entry_point: {{ inventory_hostname }}
+entry_point: "{{ inventory_hostname }}"
 
 autoconf_search_base: ou=users,dc=${obmDomain},{{ ldap_suffix }}
 autoconf_search_fields: cn,mailBox,uid
