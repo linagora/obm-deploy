@@ -67,7 +67,7 @@ key_file:  "{{ obm_key_file  | default('/etc/obm/certs/obm_cert.pem') }}"
 
 autoconf_smtp_host: "{{ obm_autoconf_smtp_host | default(external_url) }}"
 autoconf_imap_host: "{{ obm_autoconf_imap_host | default(external_url) }}"
-autoconf_ldap_host: "{{ obm_autoconf_ldap_host | default(external_url) }}""
+autoconf_ldap_host: "{{ obm_autoconf_ldap_host | default(external_url) }}"
 
 prx_protocol: "{{ proxy_protocol | default('http') }}"
 prx_username: "{{ proxy_username | default('') }}"
