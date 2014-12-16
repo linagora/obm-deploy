@@ -24,7 +24,7 @@
     dest=/usr/share/obm/obminclude/of/of_display.inc
     regexp='supportOBMBanner"];$'
     state=absent
-  when: remove_banner == "yes"
+  when: remove_banner is defined and remove_banner == "yes"
   tags: obm-ui
 
 - name: Create healthcheck.ini directory

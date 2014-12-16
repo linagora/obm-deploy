@@ -24,7 +24,7 @@ db_user: "{{ obm_db_user | default('obm') }}"
 db_pass: "{{ obm_db_pass | default('obm') }}"
 db_name: "{{ obm_db_name | default('obm') }}"
 
-cassandra_seeds_tmp: "{% if inventory_hostname in groups['obmfullservers'] %}{{ hostvars[inventory_hostname] | get_ip(lan_net) }}{% else %}{{ hostvars[groups['cassandraservers'][0]] | get_ip(lan_net) }}{% endif %}"
+cassandra_seeds_tmp: "{% if inventory_hostname in groups['obmfullservers'] %}{{ hostvars[inventory_hostname] | get_ip(lan_net) }}{% else %}{{ groups['cassandraservers'][0] | get_ip(lan_net) }}{% endif %}"
 cassandra_seeds: "{{ obm_cassandra_seeds | default(cassandra_seeds_tmp) }}"
 cassandra_keyspace: "{{ obm_cassandra_keyspace | default('opush') }}"
 cassandra_user: "{{ obm_cassandra_user | default('opush') }}"
@@ -34,13 +34,13 @@ language: "{{ obm_language | default('fr') }}"
 
 mode: "{{ packages_mode | default('internet') }}"
 
-sync_host_tmp: "{% if inventory_hostname in groups['obmfullservers'] %}{{ hostvars[inventory_hostname] }}{% else %}{{ hostvars[groups['syncservers'][0]] }}{% endif %}"
+sync_host_tmp: "{% if inventory_hostname in groups['obmfullservers'] %}{{ inventory_hostname }}{% else %}{{ groups['syncservers'][0] }}{% endif %}"
 sync_host: "{{ obm_sync_host | default(sync_host_tmp) }}"
 
-opush_host_tmp: "{% if inventory_hostname in groups['obmfullservers'] %}{{ hostvars[inventory_hostname] }}{% else %}{{ hostvars[groups['opushservers'][0]] }}{% endif %}"
+opush_host_tmp: "{% if inventory_hostname in groups['obmfullservers'] %}{{ inventory_hostname }}{% else %}{{ groups['opushservers'][0] }}{% endif %}"
 opush_host: "{{ obm_opush_host | default(opush_host_tmp) }}"
 
-ldap_host_tmp: "{% if inventory_hostname in groups['obmfullservers'] %}{{ hostvars[inventory_hostname] }}{% else %}{{ hostvars[groups['cassandraservers'][0]] }}{% endif %}"
+ldap_host_tmp: "{% if inventory_hostname in groups['obmfullservers'] %}{{ inventory_hostname }}{% else %}{{ groups['cassandraservers'][0] }}{% endif %}"
 ldap_host: "{{ obm_ldap_host | default(ldap_host_tmp) }}"
 ldap_master_host: "{{ obm_ldap_master_host | default(ldap_host) "
 ldap_ssl: "{{ obm_ldap_ssl | default('no') }}"
