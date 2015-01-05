@@ -1,14 +1,23 @@
 ---
 - include: infos.yml
+- include: include_vars.yml
 - include: libselinux-python.yml
 - include: sudo.yml
 - include: selinux.yml
 - include: yum.yml
-- include: repositories.yml
+  when: ansible_pkg_mgr == "yum"
+- include: apt.yml
+  when: ansible_pkg_mgr == "apt"
+- include: yum_repositories.yml
+  when: ansible_pkg_mgr == "yum"
+- include: apt_repositories.yml
+  when: ansible_pkg_mgr == "apt"
 - include: rsyslog.yml
+  when: ansible_pkg_mgr == "yum"
 - include: ntp.yml
 - include: flush.yml
 - include: packages.yml
 - include: hosts.yml
+  when: ansible_os_family == "RedHat"
 - include: sysctl.yml
 - include: iptables.yml

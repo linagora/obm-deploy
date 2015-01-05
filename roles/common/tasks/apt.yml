@@ -1,0 +1,20 @@
+---
+
+- name: Enable APT proxy option
+  template: >
+    src=proxy
+    dest=/etc/apt/apt.conf.d/proxy
+    owner= root group=root mode=0644
+  when: proxy_host is defined
+  tags:
+      - common
+      - apt
+
+- name: Disable APT proxy option
+  file: >
+    path=/etc/apt/apt.conf.d/proxy
+    state=absent
+  when: proxy_host is not defined
+  tags:
+      - common
+      - apt

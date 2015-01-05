@@ -12,9 +12,16 @@
 #  when: mode == "mirror"
 #  tags: repositories
 #
-- name: Install libselinux-python (internet mode)
-  yum: name=libselinux-python
-  when: mode == "internet"
+- name: YUM libselinux-python (internet mode)
+  yum: name={{ selinux_python_package }}
+  when: mode == "internet" and ansible_pkg_mgr == "yum"
+  tags:
+      - common
+      - libselinux
+
+- name: APT python-selinux (internet mode)
+  apt: name={{ selinux_python_package }}
+  when: mode == "internet" and ansible_pkg_mgr == "apt"
   tags:
       - common
       - libselinux

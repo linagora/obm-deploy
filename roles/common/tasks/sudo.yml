@@ -1,7 +1,17 @@
 ---
+
+- name: DEB sudo
+  apt: name=sudo state=present
+  when: ansible_os_family == "Debian"
+  tags:
+      - common
+      - sudo
+
 - name: Disable requiretty
   lineinfile: >
    dest=/etc/sudoers
    regexp="^Defaults.*requiretty"
    line="#Defaults    requiretty"
-  tags: obm-db
+  tags:
+      - common
+      - sudo

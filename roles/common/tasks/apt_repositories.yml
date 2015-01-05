@@ -1,0 +1,21 @@
+---
+
+- name: APT Enable contrib repository
+  copy: >
+      src=contrib.list
+      dest=/etc/apt/sources.list.d/contrib.list
+      mode=0644
+  when: ansible_distribution == "Debian"
+  tags:
+      - common
+      - repositories
+
+- name: APT Enable non-free repository
+  copy: >
+      src=non-free.list
+      dest=/etc/apt/sources.list.d/non-free.list
+      mode=0644
+  when: ansible_distribution == "Debian"
+  tags:
+      - common
+      - repositories

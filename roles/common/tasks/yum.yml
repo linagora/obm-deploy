@@ -60,7 +60,9 @@
     src=releasever
     dest=/etc/yum/vars/releasever
     owner=root group=root mode=0644
-  when: ansible_os_family == "RedHat"
+  tags:
+      - common
+      - yum
 
 - name: Correct Yum releasever
   lineinfile: >
@@ -68,7 +70,6 @@
     line="\1"
     dest=/etc/yum/vars/releasever
     backrefs=yes
-  when: ansible_os_family == "RedHat"
   tags:
       - common
       - yum

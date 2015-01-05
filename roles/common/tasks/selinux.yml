@@ -13,8 +13,16 @@
       - common
       - selinux
 
-- name: Uninstall SELinux
-  yum: pkg=selinux-policy state=absent
+- name: YUM Uninstall SELinux
+  yum: name=selinux-policy state=absent
+  when: ansible_pkg_mgr == "yum"
+  tags:
+      - common
+      - selinux
+
+- name: APT Uninstall SELinux
+  apt: name=selinux-policy state=absent
+  when: ansible_pkg_mgr == "apt"
   tags:
       - common
       - selinux

@@ -1,6 +1,17 @@
 ---
-- name: Install NTP server
+- name: YUM Install NTP server
   yum: pkg=ntp
+  when: ansible_pkg_mgr == "yum"
+  notify:
+   - Approximate date using local host
+   - Set approximate system date
+  tags:
+      - common
+      - ntp
+
+- name: APT Install NTP server
+  apt: pkg=ntp
+  when: ansible_pkg_mgr == "apt"
   notify:
    - Approximate date using local host
    - Set approximate system date
@@ -9,7 +20,7 @@
       - ntp
 
 - name: Start NTP server
-  service: name=ntpd state=started enabled=yes
+  service: name={{ ntp_service_name }} state=started enabled=yes
   notify:
    - Update system date
   tags:

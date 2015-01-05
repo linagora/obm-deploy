@@ -1,0 +1,26 @@
+---
+selinux_python_package: "python-selinux"
+iptables_package: "iptables-persistent"
+iptables_services:
+    - iptables-persistent
+ntp_service_name: "ntp"
+common_packages_list:
+    - "{{ iptables_package }}"
+    - vim
+    - mlocate
+    - wget
+    - curl
+    - man
+    - tmux
+    - htop
+    - atop
+    - strace
+    - screen
+    - rsync
+    - dnsutils
+    - openssl
+    - zip
+    - unzip
+    - postfix
+    - mailutils
+    - sharutils

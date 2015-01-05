@@ -1,27 +1,16 @@
 ---
-- name: Install some common and useful packages
+- name: YUM Install some common useful packages
   yum: pkg={{ item }}
-  with_items:
-   - vim
-   - mlocate
-   - wget
-   - curl
-   - policycoreutils-python
-   - man
-   - tmux
-   - htop
-   - atop
-   - strace
-   - screen
-   - rsync
-   - bind-utils
-   - createrepo
-   - openssl
-   - zip
-   - unzip
-   - postfix
-   - mailx
-   - sharutils
+  with_items: common_packages_list
+  when: ansible_pkg_mgr == "yum"
+  tags:
+      - common
+      - packages
+
+- name: APT Install some common useful packages
+  apt: pkg={{ item }}
+  with_items: common_packages_list
+  when: ansible_pkg_mgr == "apt"
   tags:
       - common
       - packages
