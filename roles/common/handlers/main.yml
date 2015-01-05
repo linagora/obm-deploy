@@ -5,6 +5,12 @@
       - common
       - repositories
 
+- name: Update DEB cache
+  apt: update_cache=yes
+  tags:
+      - common
+      - repositories
+
 - name: Start NTP server
   service: name=ntpd state=started enabled=yes
   tags:

@@ -1,0 +1,2 @@
+deb http://deb.obm.org/{{ short_version }}/stable obm obm
+deb http://deb.obm.org/{{ short_version }}/contrib wheezy obm

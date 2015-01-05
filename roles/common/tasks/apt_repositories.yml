@@ -1,10 +1,10 @@
 ---
-
 - name: APT Enable contrib repository
   copy: >
       src=contrib.list
       dest=/etc/apt/sources.list.d/contrib.list
       mode=0644
+  notify: Update DEB cache
   when: ansible_distribution == "Debian"
   tags:
       - common
@@ -15,6 +15,7 @@
       src=non-free.list
       dest=/etc/apt/sources.list.d/non-free.list
       mode=0644
+  notify: Update DEB cache
   when: ansible_distribution == "Debian"
   tags:
       - common

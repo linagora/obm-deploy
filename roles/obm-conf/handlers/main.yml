@@ -1,0 +1,6 @@
+---
+- name: Update DEB cache
+  apt: update_cache=yes
+  tags:
+      - common
+      - repositories

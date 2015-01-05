@@ -12,6 +12,7 @@
   when: ansible_pkg_mgr == "yum"
 - include: apt_repositories.yml
   when: ansible_pkg_mgr == "apt"
+- include: flush.yml
 - include: rsyslog.yml
   when: ansible_pkg_mgr == "yum"
 - include: ntp.yml

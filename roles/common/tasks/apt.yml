@@ -1,5 +1,4 @@
 ---
-
 - name: Enable APT proxy option
   template: >
     src=proxy

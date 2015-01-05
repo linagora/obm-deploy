@@ -1,0 +1,14 @@
+---
+- name: Add OBM APT GPG key
+  apt_key: >
+    url=http://deb.obm.org/obmgpg.pub
+    state=present
+  tags: obm-conf
+
+- name: Add OBM APT repositories
+  template: >
+    src=obm.list
+    dest=/etc/apt/sources.list.d/obm.list
+    mode=0644
+  notify: Update DEB cache
+  tags: obm-conf

@@ -1,24 +1,24 @@
 ---
-- name: Deploy OBM repository RPM (mirror mode)
+- name: Deploy OBM RPM repository (mirror mode)
   copy: >
       src=resources/obm-release-{{ major_version }}-1.noarch.rpm
       dest=/root/obm-release-{{ major_version }}-1.noarch.rpm
   when: mode == "mirror"
   tags: obm-conf
 
-- name: Enable OBM repository (mirror mode)
+- name: Enable OBM RPM repository (mirror mode)
   yum: name=/root/obm-release-{{ major_version }}-1.noarch.rpm
   when: mode == "mirror"
   tags: obm-conf
 
-- name: Deploy Opush3 repository config file
+- name: Deploy Opush3 RPM repository config file
   copy: >
         src=opush.repo
         dest=/etc/yum.repos.d/opush.repo
   when: major_version | version_compare('3.0', '>=')
   tags: obm-conf
 
-- name: Spoof OBM repository hostname in /etc/hosts (mirror mode)
+- name: Spoof OBM RPM repository hostname in /etc/hosts (mirror mode)
   lineinfile: >
               dest=/etc/hosts
               regexp='.*packages\.obm\.org$'
@@ -26,19 +26,19 @@
   when: mode == "mirror"
   tags: obm-conf
 
-- name: Enable OBM repository (internet mode) [with proxy]
+- name: Enable OBM RPM repository (internet mode) [with proxy]
   yum: name=http://rpm.obm.org/release/obm-release-{{ major_version }}-1.noarch.rpm
   environment: proxy_env
   when: mode == "internet" and proxy_host is defined
   tags: obm-conf
 
-- name: Enable OBM repository (internet mode) [without proxy]
+- name: Enable OBM RPM repository (internet mode) [without proxy]
   yum: name=http://rpm.obm.org/release/obm-release-{{ major_version }}-1.noarch.rpm
   environment: proxy_env
   when: mode == "internet" and proxy_host is not defined
   tags: obm-conf
 
-- name: Remove any OBM hostname spoofing (internet mode)
+- name: Remove any OBM RPM hostname spoofing (internet mode)
   lineinfile: >
               dest=/etc/hosts
               regexp='.*packages\.obm\.org$'
