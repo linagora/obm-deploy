@@ -1,0 +1,2 @@
+---
+scriptsdir: "/usr/share/obm/scripts/{{ major_version }}"

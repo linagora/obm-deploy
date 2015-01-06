@@ -1,0 +1,10 @@
+---
+- name: YUM Install Python psycopg2
+  yum: pkg=python-psycopg2
+  when: ansible_pkg_mgr == "yum"
+  tags: postgres
+
+- name: APT Install Python psycopg2
+  apt: pkg=python-psycopg2
+  when: ansible_pkg_mgr == "apt"
+  tags: postgres

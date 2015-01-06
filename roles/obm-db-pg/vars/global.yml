@@ -1,0 +1,6 @@
+---
+updatesdir: "{{ scriptsdir }}/updates"
+pg_env:
+  PGUSER: "{{ db_user }}"
+  PGPASSWORD: "{{ db_pass }}"
+  PGDATABASE: "{{ db_name }}"

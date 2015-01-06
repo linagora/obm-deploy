@@ -1,4 +1,4 @@
 ---
 dependencies:
- - { role: java }
+ - { role: java, when: ansible_os_family == 'RedHat' }
  - { role: obm-conf }

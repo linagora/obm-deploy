@@ -1,9 +1,5 @@
 ---
-- name: Install Python psycopg2
-  yum: pkg=python-psycopg2
-  tags: postgres
-
-- name: Install PostgreSQL Server
+- name: YUM Install PostgreSQL Server
   yum: pkg=postgresql91-server
   register: command_result
   tags: postgres
@@ -27,7 +23,7 @@
   when: command_result.changed
   tags: postgres
 
-- name: Symlink for obm-admin
+- name: YUM Symlink for obm-admin
   file: src={{ item.src }} dest={{ item.dest }} state=link
   with_items:
    - { src: '/etc/init.d/postgresql-9.1', dest: '/etc/init.d/postgresql' }

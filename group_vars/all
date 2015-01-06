@@ -42,7 +42,7 @@ opush_host: "{{ obm_opush_host | default(opush_host_tmp) }}"
 
 ldap_host_tmp: "{% if inventory_hostname in groups['obmfullservers'] %}{{ inventory_hostname }}{% else %}{{ groups['cassandraservers'][0] }}{% endif %}"
 ldap_host: "{{ obm_ldap_host | default(ldap_host_tmp) }}"
-ldap_master_host: "{{ obm_ldap_master_host | default(ldap_host) "
+ldap_master_host: "{{ obm_ldap_master_host | default(ldap_host) }}"
 ldap_ssl: "{{ obm_ldap_ssl | default('no') }}"
 ldap_port: "{{ obm_ldap_port | default('389') }}"
 ldap_suffix: "{{ obm_ldap_suffix | default('dc=local') }}"
