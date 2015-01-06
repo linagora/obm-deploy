@@ -1,6 +1,8 @@
 ---
 - include: include_vars.yml
 - include: packages.yml
+- include: modules.yml
+  when: ansible_os_family == "Debian"
 - include: virtualhost.yml
 - include: config.yml
 - include: pgperms.yml

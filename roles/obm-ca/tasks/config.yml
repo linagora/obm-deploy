@@ -11,3 +11,11 @@
       creates=/var/lib/obm-ca/cacert.pem
       /usr/share/obm-ca/buildca.sh
   tags: obm-ca
+
+- name: Patch certificate creation script
+  lineinfile: >
+      line="sed -i "/CN=$1$/d" /var/lib/obm-ca/index.txt"
+      dest=/usr/share/obm-ca/createcert.sh
+      insertafter="#!/bin/bash"
+      state=present
+  tags: obm-ca

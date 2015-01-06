@@ -1,3 +1,4 @@
 ---
 apache_service: "httpd"
-www_prefix: ""
+obmwww: ""
+vdir: "conf.d"

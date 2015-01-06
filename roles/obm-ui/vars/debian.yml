@@ -1,3 +1,4 @@
 ---
 apache_service: "apache2"
-www_prefix: "/www"
+obmwww: "/www"
+vdir: "sites-enabled"
