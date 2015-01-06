@@ -1,11 +1,17 @@
 ---
 - name: Copy slapd.conf
-  template: src=slapd.conf dest=/etc/openldap/slapd.conf owner=root group=ldap mode=0640 backup=yes
+  template: src=slapd.conf dest={{ ldap_conf_dir }}/slapd.conf owner=root group=ldap mode=0640 backup=yes
   register: command_result
   tags: ldap
 
-- name: Copy ldap
+- name: Copy ldap sysconfig configuration
   template: src=ldap dest=/etc/sysconfig/ldap backup=yes
+  when: ansible_os_family == "RedHat"
+  tags: ldap
+
+- name: Copy ldap default configuration
+  template: src=slapd dest=/etc/default/slapd backup=yes
+  when: ansible_os_family == "Debian"
   tags: ldap
 
 - name: Restart LDAP

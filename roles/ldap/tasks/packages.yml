@@ -1,6 +1,10 @@
 ---
-- name: Install OBM LDAP Server
-  yum: pkg={{ item }}
-  with_items:
-   - obm-ldap
+- name: YUM Install OBM LDAP Server
+  yum: pkg=obm-ldap state=present
+  when: ansible_pkg_mgr == "yum"
+  tags: ldap
+
+- name: APT Install OBM LDAP Server
+  apt: pkg=obm-ldap state=present
+  when: ansible_pkg_mgr == "apt"
   tags: ldap
