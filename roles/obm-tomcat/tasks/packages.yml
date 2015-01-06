@@ -1,6 +1,14 @@
 ---
-- name: Install obm-tomcat
+- name: YUM Install obm-tomcat
   yum: pkg=obm-tomcat
+  when: ansible_pkg_mgr == "yum"
+  tags: obm-tomcat
   
+- name: APT Install obm-tomcat
+  apt: pkg=obm-tomcat
+  when: ansible_pkg_mgr == "apt"
+  tags: obm-tomcat
+
 - name: Enable tomcat
   service: name=obm-tomcat enabled=yes state=started
+  tags: obm-tomcat

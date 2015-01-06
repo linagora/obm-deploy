@@ -1,4 +1,10 @@
 ---
-- name: Install OBM-Autoconf server
+- name: YUM Install OBM-Autoconf server
   yum: pkg=obm-autoconf state=present
+  when: ansible_pkg_mgr == "yum"
+  tags: obm-autoconf
+
+- name: APT Install OBM-Autoconf server
+  apt: pkg=obm-autoconf state=present
+  when: ansible_pkg_mgr == "apt"
   tags: obm-autoconf

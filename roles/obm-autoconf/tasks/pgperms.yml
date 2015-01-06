@@ -1,5 +1,4 @@
 ---
-
 - name: Create PostgreSQL configuration directory
   file: name={{ datadir }}/pg_hba.d state=directory
   when: db_master_host in groups['all']
