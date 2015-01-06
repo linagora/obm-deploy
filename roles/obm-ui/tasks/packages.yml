@@ -1,5 +1,5 @@
 ---
-- name: Install Apache Server
+- name: YUM Install Apache server
   yum: pkg={{ item }}
   with_items:
    - obm-ui
@@ -7,4 +7,15 @@
    - obm-services
    - php-pecl-apc
    - php-pecl-imagick
+  when: ansible_pkg_mgr == "yum"
+  tags: obm-ui
+
+- name: APT Install Apache server
+  yum: pkg={{ item }}
+  with_items:
+   - obm-ui
+   - obm-services
+   - php-apc
+   - php5-imagick
+  when: ansible_pkg_mgr == "apt"
   tags: obm-ui

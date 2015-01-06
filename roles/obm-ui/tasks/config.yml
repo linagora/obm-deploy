@@ -1,6 +1,6 @@
 ---
 - name: Start Apache service
-  service: name=httpd state=started enabled=yes
+  service: name={{ apache_service }} state=started enabled=yes
   tags: obm-ui
 
 - name: Deploy obm_conf.inc
@@ -21,7 +21,7 @@
 
 - name: Remove the OBM banner
   lineinfile: >
-    dest=/usr/share/obm/obminclude/of/of_display.inc
+    dest=/usr/share/obm{{ obmwww }}/obminclude/of/of_display.inc
     regexp='supportOBMBanner"];$'
     state=absent
   when: remove_banner is defined and remove_banner == "yes"
