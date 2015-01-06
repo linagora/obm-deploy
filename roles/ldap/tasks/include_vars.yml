@@ -19,7 +19,3 @@
       - "../vars/{{ ansible_distribution|lower }}_{{ ansible_distribution_major_version|lower }}.yml"
   ignore_errors: true
   tags: ldap
-
-- name: Load global vars
-  include_vars: "../vars/global.yml"
-  tags: ldap
