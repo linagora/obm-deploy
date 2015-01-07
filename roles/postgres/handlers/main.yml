@@ -4,14 +4,14 @@
   delegate_to: "{{ db_master_host }}"
   notify: 
     - Reload Postgres
-  tags: postgres
+  tags: obm-sync
 
 - name: Reload Postgres
   service: name=postgresql state=reloaded
   delegate_to: "{{ db_master_host }}"
-  tags: postgres
+  tags: obm-sync
 
 - name: Restart Postgres
   service: name=postgresql state=restarted
   delegate_to: "{{ db_master_host }}"
-  tags: postgres
+  tags: obm-sync

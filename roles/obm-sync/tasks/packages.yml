@@ -1,4 +1,10 @@
 ---
-- name: Install OBM-Sync server
+- name: YUM Install OBM-Sync server
   yum: pkg=obm-sync state=present
+  when: ansible_pkg_mgr == "yum"
+  tags: obm-sync
+
+- name: APT Install OBM-Sync server
+  apt: pkg=obm-sync state=present
+  when: ansible_pkg_mgr == "apt"
   tags: obm-sync

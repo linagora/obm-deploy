@@ -10,3 +10,8 @@
   service: name=postgresql state=reloaded
   delegate_to: "{{ db_master_host }}"
   tags: postgres-common
+
+- name: Restart Postgres
+  service: name=postgresql state=restarted
+  delegate_to: "{{ db_master_host }}"
+  tags: postgres-common
