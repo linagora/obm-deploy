@@ -7,7 +7,7 @@
   tags: obm-solr
 
 - name: APT Install OBM Solr Server
-  yum: pkg=obm-solr state=present
+  apt: pkg=obm-solr state=present
   notify:
     - Update Tomcat triggers
   when: ansible_pkg_mgr == "apt"
