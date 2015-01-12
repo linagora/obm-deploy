@@ -27,7 +27,7 @@
 
 - name: Check if distribution is supported
   debug: "msg=Your distribution is not supported !!"
-  when: ansible_distribution != "CentOS" and ansible_distribution != "Debian"
+  when: ansible_distribution not in ["CentOS", "RedHat", "Debian"]
   failed_when: True
   tags:
       - common
