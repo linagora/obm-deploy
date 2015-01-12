@@ -1,7 +1,41 @@
 ---
-- name: Install JNA and Apache Cassandra packages
-  yum: pkg={{ item }}
+- name: YUM Remove Apache Cassandra packages
+  yum: pkg=dsc20 state=absent
+  register: remove_result
+  when: ansible_pkg_mgr == "yum"
+  tags: cassandra
+
+- name: APT Remove Apache Cassandra packages
+  apt: pkg=dsc20 state=absent
+  register: remove_result
+  when: ansible_pkg_mgr == "apt"
+  tags: cassandra
+
+- name: YUM Install Apache Cassandra packages
+  yum: pkg={{ item }} state=latest
   with_items:
    #- jna
-   - dsc20
+   - dsc21
+   - cassandra21-tools
+  register: install_result
+  when: ansible_pkg_mgr == "yum"
+  tags: cassandra
+
+- name: APT Install Apache Cassandra packages
+  apt: pkg={{ item }} state=latest
+  with_items:
+   #- jna
+   - dsc21
+   - cassandra-tools
+  register: install_result
+  when: ansible_pkg_mgr == "apt"
+  tags: cassandra
+
+- name: Notify Cassandra purge handlers
+  debug: "Notifying cassandra purge handlers"
+  notify: >
+      - Stop Cassandra server
+      - Delete Cassandra initial data
+      - Start Cassandra server
+  when: not remove_result.changed and install_result.changed
   tags: cassandra

@@ -1,5 +1,10 @@
 ---
-- include: repositories.yml
+- include: include_vars.yml
+- include: yum_repositories.yml
+  when: ansible_pkg_mgr == "yum"
+- include: apt_repositories.yml
+  when: ansible_pkg_mgr == "apt"
+- include: flush.yml
 - include: packages.yml
 - include: config.yml
 - include: flush.yml

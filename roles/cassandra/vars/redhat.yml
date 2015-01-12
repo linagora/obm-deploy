@@ -1,0 +1,2 @@
+---
+cassandra_conf_dir: "/etc/cassandra/conf"

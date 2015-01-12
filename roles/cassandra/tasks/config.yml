@@ -1,7 +1,7 @@
 ---
 - name: Change Cassandra authenticator
   lineinfile: >
-              dest=/etc/cassandra/conf/cassandra.yaml
+              dest={{ cassandra_conf_dir }}/cassandra.yaml
               regexp='^authenticator:.*'
               line='authenticator: PasswordAuthenticator'
   notify:
@@ -10,7 +10,7 @@
 
 - name: Set Cassandra seed
   lineinfile: >
-              dest=/etc/cassandra/conf/cassandra.yaml
+              dest={{ cassandra_conf_dir }}/cassandra.yaml
               regexp='seeds:.*'
               line='          - seeds: {{ cassandra_seeds }}'
   notify:
@@ -19,7 +19,7 @@
 
 - name: Set Cassandra rpc_address
   lineinfile: >
-              dest=/etc/cassandra/conf/cassandra.yaml
+              dest={{ cassandra_conf_dir }}/cassandra.yaml
               regexp='^rpc_address:.*'
               line='rpc_address: {{ hostvars[inventory_hostname] | get_ip(lan_net) }}'
   notify:
@@ -28,7 +28,7 @@
 
 - name: Set Cassandra listen_address
   lineinfile: >
-              dest=/etc/cassandra/conf/cassandra.yaml
+              dest={{ cassandra_conf_dir }}/cassandra.yaml
               regexp='^listen_address:.*'
               line='listen_address: {{ hostvars[inventory_hostname] | get_ip(lan_net) }}'
   notify:

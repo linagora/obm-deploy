@@ -1,0 +1,15 @@
+---
+- name: Add Datastax APT GPG key
+  apt_key: >
+    url=http://debian.datastax.com/debian/repo_key
+    state=present
+  tags: cassandra
+
+- name: APT Enable Datastax repository
+  copy: >
+      src=datastax.list
+      dest=/etc/apt/sources.list.d/datastax.list
+      mode=0644
+  notify: Update DEB cache
+  when: ansible_distribution == "Debian"
+  tags: cassandra

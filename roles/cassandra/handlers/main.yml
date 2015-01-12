@@ -1,4 +1,12 @@
 ---
+- name: Start Cassandra server
+  service: name=cassandra state=started
+  tags: cassandra
+
+- name: Stop Cassandra server
+  service: name=cassandra state=stopped
+  tags: cassandra
+
 - name: Restart Cassandra server
   service: name=cassandra state=restarted
   tags: cassandra
@@ -9,4 +17,12 @@
   retries: 60
   delay: 2
   until: command_result.rc != 1
+  tags: cassandra
+
+- name: Update DEB cache
+  apt: update_cache=yes
+  tags: cassandra
+
+- name: Delete Cassandra initial data
+  command: rm -rf /var/lib/cassandra/data/system/*
   tags: cassandra
