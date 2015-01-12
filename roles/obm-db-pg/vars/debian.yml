@@ -1,2 +1,2 @@
 ---
-scriptsdir: "/usr/share/obm/www/scripts/{{ major_version }}"
+obmwww: "/www"
