@@ -1,4 +1,10 @@
 ---
 - name: Install Spushnik Probe 
   yum: pkg=spushnik state=present
+  when: ansible_pkg_mgr == "yum"
+  tags: spushnik
+
+- name: APT Install Spushnik Probe
+  apt: pkg=spushnik state=present
+  when: ansible_pkg_mgr == "apt"
   tags: spushnik
