@@ -1,6 +1,6 @@
 ---
 - name: Deploy pam configuration
-  copy: src=pam dest=/etc/pam.d/{{ item }} backup=yes
+  template: src=pam dest=/etc/pam.d/{{ item }} backup=yes
   with_items:
    - imap
    - sieve
