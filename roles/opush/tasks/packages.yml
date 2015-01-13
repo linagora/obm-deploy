@@ -1,4 +1,10 @@
 ---
-- name: Install OPush server
+- name: YUM Install OPush server
   yum: pkg=opush state=present
+  when: ansible_pkg_mgr == "yum"
+  tags: opush
+
+- name: APT Install OPush server
+  apt: pkg=opush state=present
+  when: ansible_pkg_mgr == "apt"
   tags: opush

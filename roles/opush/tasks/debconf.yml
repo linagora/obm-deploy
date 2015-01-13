@@ -1,0 +1,112 @@
+---
+- name: DEBCONF Configure OBM external url
+  debconf: >
+      name=obm-conf
+      question=obm-conf/externalurl
+      "value={{ external_url }}"
+      vtype=string
+  tags: opush
+
+- name: DEBCONF Configure OBM ldap server
+  debconf: >
+      name=obm-conf
+      question=obm-conf/ldapserver
+      "value={{ ldap_master_host }}"
+      vtype=string
+  tags: opush
+
+- name: DEBCONF Configure OBM db type
+  debconf: >
+      name=obm-conf
+      question=obm-conf/dbtype
+      "value={{ db_type }}"
+      vtype=select
+  tags: opush
+
+- name: DEBCONF Configure OBM db host
+  debconf: >
+      name=obm-conf
+      question=obm-conf/dbhost
+      "value={{ db_host }}"
+      vtype=string
+  tags: opush
+
+- name: DEBCONF Configure OBM db name
+  debconf: >
+      name=obm-conf
+      question=obm-conf/dbname
+      "value={{ db_name }}"
+      vtype=string
+  tags: opush
+
+- name: DEBCONF Configure OBM db user
+  debconf: >
+      name=obm-conf
+      question=obm-conf/dbuser
+      "value={{ db_user }}"
+      vtype=string
+  tags: opush
+
+- name: DEBCONF Configure OBM db password
+  debconf: >
+      name=obm-conf
+      question=obm-conf/dbpasswd
+      "value={{ db_pass }}"
+      vtype=string
+  tags: opush
+
+- name: DEBCONF Configure OBM db password (2)
+  debconf: >
+      name=obm-conf
+      question=obm-conf/dbpasswd_verify
+      "value={{ db_pass }}"
+      vtype=string
+  tags: opush
+
+- name: DEBCONF Configure Opush sync perms
+  debconf: >
+      name=opush
+      question=opush/syncperms
+      "value={{ opush_sync_perms }}"
+      vtype=select
+  tags: opush
+
+- name: DEBCONF Configure Cassandra seeds
+  debconf: >
+      name=opush
+      question=opush/cassandra-seeds
+      "value={{ cassandra_seeds }}"
+      vtype=string
+  tags: opush
+
+- name: DEBCONF Configure Cassandra keyspace
+  debconf: >
+      name=opush
+      question=opush/cassandra-keyspace
+      "value={{ cassandra_keyspace }}"
+      vtype=string
+  tags: opush
+
+- name: DEBCONF Configure Cassandra user
+  debconf: >
+      name=opush
+      question=opush/cassandra-user
+      "value={{ cassandra_user }}"
+      vtype=string
+  tags: opush
+
+- name: DEBCONF Configure Cassandra password
+  debconf: >
+      name=opush
+      question=opush/cassandra-pwd
+      "value={{ cassandra_password }}"
+      vtype=string
+  tags: opush
+
+- name: DEBCONF Configure Cassandra password (2)
+  debconf: >
+      name=opush
+      question=opush/cassandra-pwd-verify
+      "value={{ cassandra_password }}"
+      vtype=string
+  tags: opush

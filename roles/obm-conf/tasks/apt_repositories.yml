@@ -12,3 +12,11 @@
     mode=0644
   notify: Update DEB cache
   tags: obm-conf
+
+- name: Add Opush APT repository
+  copy: >
+    src=opush.list
+    dest=/etc/apt/sources.list.d/opush.list
+    mode=0644
+  notify: Update DEB cache
+  tags: obm-conf

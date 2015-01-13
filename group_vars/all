@@ -69,6 +69,8 @@ autoconf_smtp_host: "{{ obm_autoconf_smtp_host | default(external_url) }}"
 autoconf_imap_host: "{{ obm_autoconf_imap_host | default(external_url) }}"
 autoconf_ldap_host: "{{ obm_autoconf_ldap_host | default(external_url) }}"
 
+opush_sync_perms: "{{ obm_opush_sync_perms |default(True) }}"
+
 prx_protocol: "{{ proxy_protocol | default('http') }}"
 prx_username: "{{ proxy_username | default('') }}"
 prx_password: "{{ proxy_password | default('') }}"
