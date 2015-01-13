@@ -1,8 +1,17 @@
 ---
-- name: Install cyrus-sasl
+- name: YUM Install sasl2
   yum: pkg={{ item }}
   with_items:
    - cyrus-sasl
    - cyrus-sasl-plain
    - pam_ldap
+  when: ansible_pkg_mgr == "yum"
+  tags: sasl
+
+- name: APT Install sasl2
+  apt: pkg={{ item }}
+  with_items:
+    - sasl2-bin
+    - libpam-ldap
+  when: ansible_pkg_mgr == "apt"
   tags: sasl

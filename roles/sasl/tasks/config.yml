@@ -1,8 +1,16 @@
 ---
-- name: Deploy saslauthd configuration
-  template: src=saslauthd dest=/etc/sysconfig/saslauthd backup=yes
+- name: RPM Deploy saslauthd configuration
+  template: src=saslauthd-rpm dest=/etc/sysconfig/saslauthd backup=yes
   notify: 
    - Restart saslauthd
+  when: ansible_os_family == "RedHat"
+  tags: sasl
+
+- name: DEB Deploy saslauthd configuration
+  template: src=saslauthd-deb dest=/etc/default/saslauthd backup=yes
+  notify: 
+   - Restart saslauthd
+  when: ansible_os_family == "Debian"
   tags: sasl
 
 - name: Deploy SASL configuration

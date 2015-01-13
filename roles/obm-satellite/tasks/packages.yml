@@ -1,7 +1,14 @@
 ---
-- name: Install OBM-Satellite Server
+- name: YUM Install OBM-Satellite Server
   yum: pkg=obm-satellite
   register: command_result
+  when: ansible_pkg_mgr == "yum"
+  tags: obm-satellite
+
+- name: APT Install OBM-Satellite Server
+  apt: pkg=obm-satellite
+  register: command_result
+  when: ansible_pkg_mgr == "apt"
   tags: obm-satellite
 
 - name: Enable Postfix SMTP module

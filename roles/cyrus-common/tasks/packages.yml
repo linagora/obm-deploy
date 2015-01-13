@@ -1,6 +1,14 @@
 ---
-- name: Install Cyrus-IMAP Package
+- name: YUM Install Cyrus-IMAP Package
   yum: pkg={{ item }} state=present
   with_items:
    - cyrus-imapd
+  when: ansible_pkg_mgr == "yum"
+  tags: cyrus-common
+
+- name: APT Install Cyrus-IMAP Package
+  apt: pkg={{ item }} state=present
+  with_items:
+      - cyrus-imapd-2.4
+  when: ansible_pkg_mgr == "apt"
   tags: cyrus-common

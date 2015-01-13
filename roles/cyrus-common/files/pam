@@ -1,7 +1,7 @@
 #%PAM-1.0 
-auth            sufficient      /lib64/security/pam_ldap.so config=/etc/pam_ldap_obm.conf
-auth            sufficient      /lib64/security/pam_unix.so
-auth            required        /lib64/security/pam_pwhistory.so shadow nullok
-account         sufficient      /lib64/security/pam_ldap.so
-account         sufficient      /lib64/security/pam_unix.so
-account         required        /lib64/security/pam_pwhistory.so shadow nullok
+auth            sufficient      /{{ lib64_dir }}/security/pam_ldap.so config=/etc/pam_ldap_obm.conf
+auth            sufficient      /{{ lib64_dir }}/security/pam_unix.so
+auth            required        /{{ lib64_dir }}/security/pam_pwhistory.so shadow nullok
+account         sufficient      /{{ lib64_dir }}/security/pam_ldap.so
+account         sufficient      /{{ lib64_dir }}/security/pam_unix.so
+account         required        /{{ lib64_dir }}/security/pam_pwhistory.so shadow nullok
