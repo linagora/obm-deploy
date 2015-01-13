@@ -37,4 +37,5 @@
   user: name=postfix groups=saslauth append=yes
   notify:
    - Restart postfix service
+  when: ansible_os_family == "RedHat"
   tags: postfix
