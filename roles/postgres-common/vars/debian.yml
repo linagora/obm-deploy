@@ -1,2 +1,2 @@
 ---
-datadir: "/var/lib/postgresql/main"
+datadir: "/etc/postgresql/main"

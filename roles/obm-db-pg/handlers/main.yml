@@ -13,7 +13,7 @@
    - lang.sql
   when: major_version | version_compare('3.0', '<')
   delegate_to: "{{ db_master_host }}"
-  tags: obm-db
+  tags: obm-db-pg
 
 - name: Init OBM3 Postgres database
   command: psql -f {{ scriptsdir }}/{{item}}
@@ -32,4 +32,4 @@
    - ../2.5/updates/update-2.5.8~1.pgsql.sql
   when: major_version | version_compare('3.0', '>=')
   delegate_to: "{{ db_master_host }}"
-  tags: obm-db
+  tags: obm-db-pg

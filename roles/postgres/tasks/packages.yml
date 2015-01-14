@@ -2,15 +2,23 @@
 - name: YUM Install PostgreSQL Server
   yum: pkg=postgresql91-server
   register: command_result
+  when: ansible_pkg_mgr == "yum"
+  tags: postgres
+
+- name: APT Install PostgreSQL Server
+  apt: pkg=postgresql
+  register: command_result
+  when: ansible_pkg_mgr == "apt"
   tags: postgres
 
 - name: Initialize PostgreSQL Server
   command: /etc/init.d/postgresql-9.1 initdb en_US.UTF-8
-  when: command_result.changed
+  when: command_result.changed and ansible_os_family == "RedHat"
   tags: postgres
 
 - name: Start PostgreSQL service
   service: name=postgresql-9.1 state=started enabled=yes
+  when: ansible_os_family == "RedHat"
   tags: postgres
 
 - name: Deploy PostgreSQL template1 correction script
@@ -28,4 +36,12 @@
   with_items:
    - { src: '/etc/init.d/postgresql-9.1', dest: '/etc/init.d/postgresql' }
    - { src: '/var/lib/pgsql/9.1/data', dest: '/var/lib/pgsql/data' }
+  when: ansible_os_family == "RedHat"
+  tags: postgres
+
+- name: APT Symlink for obm-admin
+  file: src={{ item.src }} dest={{ item.dest }} state=link
+  with_items:
+   - { src: '/etc/postgresql/9.1/main', dest: '/etc/postgresql/main' }
+  when: ansible_os_family == "Debian"
   tags: postgres
