@@ -16,10 +16,16 @@
   file: name=/etc/imapd_conf.d state=directory
   tags: cyrus-common
 
+
 - name: Deploy imapd.conf BASE common configuration
+  template: >
+      src=10-MAIN_imapd.conf
+      dest=/etc/imapd_conf.d/10-MAIN_imapd.conf
+  tags: cyrus-common
+
+- name: Deploy imapd.conf OTHER common configuration
   copy: src={{ item }} dest=/etc/imapd_conf.d/{{ item }}
   with_items:
-   - 10-MAIN_imapd.conf
    - 20-PARTITIONS_imapd.conf
    - 50-DEBUG_imapd.conf
   tags: cyrus-common

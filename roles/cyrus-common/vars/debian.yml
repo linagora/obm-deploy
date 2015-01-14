@@ -1,2 +1,3 @@
 ---
 lib64_dir: "lib/x86_64-linux-gnu"
+cyrus_lib_dir: "/var/lib/cyrus"

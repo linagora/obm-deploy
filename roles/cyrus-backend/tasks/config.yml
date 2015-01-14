@@ -14,6 +14,17 @@
     - Restart Cyrus-Imapd service
   tags: cyrus-backend
 
+- name: Deploy cyrus.conf LMTP backend configuration
+  template: >
+      src=14-LMTPUNIX_cyrus.conf
+      dest=/etc/cyrus_conf.d/14-LMTPUNIX_cyrus.conf
+      mode=0644
+  notify:
+    - Merge cyrus.conf configuration files
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
+  tags: cyrus-backend
+
 - name: Deploy cyrus.conf MUPDATE backend configuration
   copy: src={{ item }} dest=/etc/cyrus_conf.d/{{ item }} mode=0644
   with_items:

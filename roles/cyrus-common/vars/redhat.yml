@@ -1,2 +1,3 @@
 ---
 lib64_dir: "lib64"
+cyrus_lib_dir: "/var/lib/imap"
