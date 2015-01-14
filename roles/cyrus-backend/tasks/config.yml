@@ -5,7 +5,6 @@
    - 01-IDLE_cyrus.conf
    - 11-IMAP_cyrus.conf
    - 13-SIEVE_cyrus.conf
-   - 14-LMTPUNIX_cyrus.conf
    - 15-LMTPREMOTE_cyrus.conf
    - 21-EVENTS_cyrus.conf
   notify:
