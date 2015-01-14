@@ -19,6 +19,5 @@
 - include: flush.yml
 - include: packages.yml
 - include: hosts.yml
-  when: ansible_os_family == "RedHat"
 - include: sysctl.yml
 - include: iptables.yml
