@@ -1,19 +1,19 @@
 ---
 - name: YUM Install PostgreSQL Server
   yum: pkg=postgresql91-server
-  register: command_result
+  register: yum_command_result
   when: ansible_pkg_mgr == "yum"
   tags: postgres
 
 - name: APT Install PostgreSQL Server
   apt: pkg=postgresql
-  register: command_result
+  register: apt_command_result
   when: ansible_pkg_mgr == "apt"
   tags: postgres
 
 - name: Initialize PostgreSQL Server
   command: /etc/init.d/postgresql-9.1 initdb en_US.UTF-8
-  when: command_result.changed and ansible_os_family == "RedHat"
+  when: yum_command_result.changed and ansible_os_family == "RedHat"
   tags: postgres
 
 - name: Start PostgreSQL service
@@ -23,12 +23,12 @@
 
 - name: Deploy PostgreSQL template1 correction script
   copy: src=correct_pg_template1.sql dest=/tmp/correct_pg_template1.sql
-  when: command_result.changed
+  when: yum_command_result.changed or apt_command_result.changed
   tags: postgres
 
 - name: Correct PostgreSQL default template (template1)
   command: su -l postgres -c "psql -f /tmp/correct_pg_template1.sql"
-  when: command_result.changed
+  when: yum_command_result.changed or apt_command_result.changed
   tags: postgres
 
 - name: YUM Symlink for obm-admin
