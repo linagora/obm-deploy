@@ -2,3 +2,7 @@
 - name: Restart Apache
   service: name={{ apache_service }} state=restarted enabled=yes
   tags: obm-ui
+
+- name: Reload Apache
+  service: name={{ apache_service }} state=reloaded enabled=yes
+  tags: obm-ui
