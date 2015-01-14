@@ -1,4 +1,3 @@
 ---
 ldap_conf_dir: "/etc/openldap"
-ldap_schema_dir: "/etc/openldap/ldap/schema"
 ldap_pid_dir: "/var/run/openldap"

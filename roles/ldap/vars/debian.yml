@@ -1,4 +1,3 @@
 ---
 ldap_conf_dir: "/etc/ldap"
-ldap_schema_dir: "/etc/ldap/schema"
 ldap_pid_dir: "/var/run/slapd"
