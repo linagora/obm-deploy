@@ -3,7 +3,7 @@
   template: >
     src=proxy
     dest=/etc/apt/apt.conf.d/proxy
-    owner= root group=root mode=0644
+    owner=root group=root mode=0644
   when: proxy_host is defined
   tags:
       - common
