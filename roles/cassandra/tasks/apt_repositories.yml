@@ -1,8 +1,16 @@
 ---
-- name: Add Datastax APT GPG key
+- name: Add Datastax APT GPG key [without proxy]
   apt_key: >
     url=http://debian.datastax.com/debian/repo_key
     state=present
+  tags: cassandra
+
+- name: Add Datastax APT GPG key [with proxy]
+  apt_key: >
+    url=http://debian.datastax.com/debian/repo_key
+    state=present
+  environment: proxy_env
+  when: mode == "internet" and proxy_host is defined
   tags: cassandra
 
 - name: APT Enable Datastax repository
