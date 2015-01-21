@@ -3,6 +3,7 @@
   apt_key: >
     url=http://deb.obm.org/obmgpg.pub
     state=present
+  when: mode == "internet" and proxy_host is not defined
   tags: obm-conf
 
 - name: Add OBM APT GPG key [with proxy]

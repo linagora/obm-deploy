@@ -3,6 +3,7 @@
   apt_key: >
     url=http://debian.datastax.com/debian/repo_key
     state=present
+  when: mode == "internet" and proxy_host is not defined
   tags: cassandra
 
 - name: Add Datastax APT GPG key [with proxy]
