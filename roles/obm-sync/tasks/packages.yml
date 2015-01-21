@@ -5,6 +5,6 @@
   tags: obm-sync
 
 - name: APT Install OBM-Sync server
-  apt: pkg=obm-sync state=present
+  apt: name=obm-sync state=present
   when: ansible_pkg_mgr == "apt"
   tags: obm-sync

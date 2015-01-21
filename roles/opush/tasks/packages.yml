@@ -5,6 +5,6 @@
   tags: opush
 
 - name: APT Install OPush server
-  apt: pkg=opush state=present
+  apt: name=opush state=present
   when: ansible_pkg_mgr == "apt"
   tags: opush

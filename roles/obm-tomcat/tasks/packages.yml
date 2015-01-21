@@ -5,7 +5,7 @@
   tags: obm-tomcat
   
 - name: APT Install obm-tomcat
-  apt: pkg=obm-tomcat
+  apt: name=obm-tomcat
   when: ansible_pkg_mgr == "apt"
   tags: obm-tomcat
 

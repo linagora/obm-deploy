@@ -6,7 +6,7 @@
   tags: cassandra
 
 - name: APT Remove Apache Cassandra packages
-  apt: pkg=dsc20 state=absent
+  apt: name=dsc20 state=absent
   register: remove_result
   when: ansible_pkg_mgr == "apt"
   tags: cassandra
@@ -22,7 +22,7 @@
   tags: cassandra
 
 - name: APT Install Apache Cassandra packages
-  apt: pkg={{ item }} state=latest
+  apt: name={{ item }} state=latest
   with_items:
    #- jna
    - dsc21

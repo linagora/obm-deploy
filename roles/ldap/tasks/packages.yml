@@ -5,6 +5,6 @@
   tags: ldap
 
 - name: APT Install OBM LDAP Server
-  apt: pkg=obm-ldap state=present
+  apt: name=obm-ldap state=present
   when: ansible_pkg_mgr == "apt"
   tags: ldap

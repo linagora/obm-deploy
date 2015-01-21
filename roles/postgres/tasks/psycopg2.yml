@@ -5,6 +5,6 @@
   tags: postgres
 
 - name: APT Install Python psycopg2
-  apt: pkg=python-psycopg2
+  apt: name=python-psycopg2
   when: ansible_pkg_mgr == "apt"
   tags: postgres

@@ -5,6 +5,6 @@
   tags: obm-autoconf
 
 - name: APT Install OBM-Autoconf server
-  apt: pkg=obm-autoconf state=present
+  apt: name=obm-autoconf state=present
   when: ansible_pkg_mgr == "apt"
   tags: obm-autoconf

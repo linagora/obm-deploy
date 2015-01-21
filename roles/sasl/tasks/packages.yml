@@ -9,7 +9,7 @@
   tags: sasl
 
 - name: APT Install sasl2
-  apt: pkg={{ item }}
+  apt: name={{ item }}
   with_items:
     - sasl2-bin
     - libpam-ldap

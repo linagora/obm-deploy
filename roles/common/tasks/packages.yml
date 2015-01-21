@@ -8,7 +8,7 @@
       - packages
 
 - name: APT Install some common useful packages
-  apt: pkg={{ item }}
+  apt: name={{ item }}
   with_items: common_packages_list
   when: ansible_pkg_mgr == "apt"
   tags:

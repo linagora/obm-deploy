@@ -11,7 +11,7 @@
   tags: obm-ui
 
 - name: APT Install OBM-UI and Apache server
-  apt: pkg={{ item }}
+  apt: name={{ item }}
   with_items:
    - obm-ui
    - obm-services

@@ -10,7 +10,7 @@
       - ntp
 
 - name: APT Install NTP server
-  apt: pkg=ntp
+  apt: name=ntp
   when: ansible_pkg_mgr == "apt"
   notify:
    - Approximate date using local host

@@ -6,7 +6,7 @@
   tags: postgres
 
 - name: APT Install PostgreSQL Server
-  apt: pkg=postgresql
+  apt: name=postgresql
   register: apt_command_result
   when: ansible_pkg_mgr == "apt"
   tags: postgres

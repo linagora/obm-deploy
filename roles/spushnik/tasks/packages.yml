@@ -5,6 +5,6 @@
   tags: spushnik
 
 - name: APT Install Spushnik Probe
-  apt: pkg=spushnik state=present
+  apt: name=spushnik state=present
   when: ansible_pkg_mgr == "apt"
   tags: spushnik
