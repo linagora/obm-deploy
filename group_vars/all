@@ -8,7 +8,7 @@ lan_net: "{% if lan_net_tmp == 'undefined' %}{{ ansible_default_ipv4['network'] 
 admin_net_tmp: "{{ obm_admin_net | default('undefined') }}"
 admin_net: "{% if admin_net_tmp == 'undefined' %}{{ ansible_default_ipv4['network'] }}{% endif %}"
 
-version: "{{ obm_version | default('3.0.0') }}"
+version: "{{ obm_version | default('3.1.1') }}"
 
 major_version: "{% if version|length == 5 %}{{ version[0:3] }}{% else %}3.0{% endif %}"
 short_version: "{{ major_version | replace('.', '') }}"
