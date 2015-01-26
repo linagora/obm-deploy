@@ -4,6 +4,8 @@
   with_items:
       - ssl
       - proxy
+      - proxy_http
+      - proxy_ajp
       - rewrite
   notify: Restart Apache
   tags: obm-ui
