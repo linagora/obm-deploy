@@ -16,6 +16,13 @@ config_version: 0.2
 ## Admin network : Network used for VM or clusters management
 #admin_net: 192.168.100.0
 
+#### SSH Configuration ####
+## SSH port needs to be specified if != 22
+## because sync module can't read ~/.ssh/config file
+## It can be overriden on a per-host basis
+## in host_vars/hostname
+#obm_ssh_port: 22
+
 #### OBM configuration ####
 
 ## OBM version

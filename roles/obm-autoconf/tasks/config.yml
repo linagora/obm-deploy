@@ -15,6 +15,7 @@
   synchronize: >
       src=roles/obm-autoconf/files/obm-autoconf-client
       dest=/usr/share/
+      dest_port="{{ ssh_port }}"
       archive=yes
       delete=yes
   tags: obm-autoconf
