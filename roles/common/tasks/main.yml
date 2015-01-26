@@ -4,6 +4,7 @@
 - include: libselinux-python.yml
 - include: sudo.yml
 - include: selinux.yml
+- include: locales.yml
 - include: yum.yml
   when: ansible_pkg_mgr == "yum"
 - include: apt.yml
