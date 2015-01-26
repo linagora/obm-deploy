@@ -1,0 +1,48 @@
+---
+- name: Create JVM directory
+  file: path=/usr/lib/jvm state=directory
+  when: major_version | version_compare('3.0', '<')
+  tags: java
+
+- name: Run JDK 6 installer
+  shell: >
+      creates=/usr/java/jdk1.6.0_45/bin/java
+      free_form=true
+      echo ''|/bin/sh /tmp/jdk-6u45-linux-x64-rpm.bin
+  when: major_version | version_compare('3.0', '<')
+  tags: java
+
+- name: Copy alternatives script
+  copy: src=alternatives.sh dest=/tmp/alternatives.sh mode=0755
+  tags: java
+
+- name: Configure Main JDK 6 Java alternatives
+  command: /usr/sbin/alternatives --install /usr/bin/{{ item }} {{ item }} /usr/java/jdk1.6.0_45/bin/{{ item }} 20000
+  with_items:
+   - java
+   - javaws
+   - javac
+   - jps
+  when: major_version | version_compare('3.0', '<')
+  tags: java
+
+- name: Configure Slaves JDK 6 Java alternatives
+  command: /usr/sbin/alternatives --install /usr/bin/java java /usr/java/jdk1.6.0_45/bin/java 20000 --slave {{ item.link }} {{ item.binary }} {{ item.path }}
+  with_items:
+   - {link: "/usr/bin/keytool", binary: "keytool", path: "/usr/java/jdk1.6.0_45/bin/keytool"}
+   - {link: "/usr/bin/orbd", binary: "orbd", path: "/usr/java/jdk1.6.0_45/bin/orbd"}
+   - {link: "/usr/bin/pack200", binary: "pack200", path: "/usr/java/jdk1.6.0_45/bin/pack200"}
+   - {link: "/usr/bin/rmid", binary: "rmid", path: "/usr/java/jdk1.6.0_45/bin/rmid"}
+   - {link: "/usr/bin/rmiregistry", binary: "rmiregistry", path: "/usr/java/jdk1.6.0_45/bin/rmiregistry"}
+   - {link: "/usr/bin/servertool", binary: "servertool", path: "/usr/java/jdk1.6.0_45/bin/servertool"}
+   - {link: "/usr/bin/tnameserv", binary: "tnameserv", path: "/usr/java/jdk1.6.0_45/bin/tnameserv"}
+   - {link: "/usr/bin/unpack200", binary: "unpack200", path: "/usr/java/jdk1.6.0_45/bin/unpack200"}
+   - {link: "/usr/lib/jvm-exports/jre", binary: "jre_exports", path: "/usr/java/jdk1.6.0_45/jre/lib"}
+   - {link: "/usr/lib/jvm/jre", binary: "jre", path: "/usr/java/jdk1.6.0_45/jre"}
+  when: major_version | version_compare('3.0', '<')
+  tags: java
+
+- name: Configure Main OpenJDK 7 Java alternatives
+  command: alternatives --auto java
+  when: major_version | version_compare('3.0', '>=')
+  tags: java

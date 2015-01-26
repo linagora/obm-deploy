@@ -1,0 +1,6 @@
+---
+- name: Config Java alternatives
+  command: >
+      update-java-alternatives -s java-1.7.0-openjdk-amd64
+  when: major_version | version_compare('3.0', '>=')
+  tags: java
