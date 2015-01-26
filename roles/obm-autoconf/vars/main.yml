@@ -9,7 +9,7 @@ entry_point: "{{ inventory_hostname }}"
 autoconf_search_base: ou=users,dc=${obmDomain},{{ ldap_suffix }}
 autoconf_search_fields: cn,mailBox,uid
 autoconf_search_filter: (|(objectClass=obmUser)(objectClass=obmGroup)(objectClass=obmMailShare))
-lightning_xpi_baseurl: http://www.obm.org/mozilla-addons/lightning/stable
+lightning_xpi_baseurl: http://download.obm.org/mozilla-addons/lightning/stable
 obm_xpi_baseurl: http://download.obm.org/mozilla-addons/obm-connector/stable
 xpi_dir: /usr/share/obm-autoconf/xpi
 autoconf_client_dir: /usr/share/obm-autoconf-client
