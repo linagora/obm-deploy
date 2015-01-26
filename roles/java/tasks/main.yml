@@ -1,5 +1,6 @@
 ---
 - include: packages.yml
+  when: ansible_pkg_mgr == "yum"
 - include: config_redhat.yml
   when: ansible_pkg_mgr == "yum"
 - include: config_debian.yml
