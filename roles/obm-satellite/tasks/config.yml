@@ -3,3 +3,11 @@
   template: src=obmSatellite.ini dest=/etc/obm-satellite/obmSatellite.ini backup=yes 
   notify: Restart OBM-Satellite service
   tags: obm-satellite
+
+- name: Set correct Cyrus startup script
+  lineinfile: >
+      dest=/etc/obm-satellite/mods-available/cyrusPartition
+      regexp="^#.*/etc/init.d/cyrus-imapd$"
+      line="cyrusStartupScript = /etc/init.d/cyrus-imapd"
+  notify: Restart OBM-Satellite service
+  tags: obm-satellite
