@@ -21,6 +21,10 @@
   template: >
       src=10-MAIN_imapd.conf
       dest=/etc/imapd_conf.d/10-MAIN_imapd.conf
+  notify:
+    - Merge imapd.conf configuration files
+    - Fix perms on Cyrus configuration files
+    - Restart Cyrus-Imapd service
   tags: cyrus-common
 
 - name: Deploy imapd.conf OTHER common configuration
