@@ -1,6 +1,8 @@
 ---
 - include: include_vars.yml
 - include: packages.yml
+- include: services.yml
+  when: ansible_distribution == "Debian"
 - include: pam.yml
 - include: config.yml
 - include: flush.yml
