@@ -14,3 +14,11 @@
       insertafter="^sysrqd.*4094.*"
       line="sieve           4190/tcp                        # Cyrus imap mail filtering service"
   tags: cyrus-common
+
+- name: Add missing lmtp service in /etc/services
+  lineinfile: >
+      dest=/etc/services
+      regexp="^lmtp.*24.*"
+      insertafter="^telnet.*23.*"
+      line="lmtp            23/tcp                          # Cyrus imap mail filtering service"
+  tags: cyrus-common
