@@ -16,7 +16,6 @@
   file: name=/etc/imapd_conf.d state=directory
   tags: cyrus-common
 
-
 - name: Deploy imapd.conf BASE common configuration
   template: >
       src=10-MAIN_imapd.conf

@@ -1,5 +1,5 @@
 ---
 - name: Install OpenJDK 7
-  apt: name=openjdk-7-jdk
+  apt: name=openjdk-7-jre
   when: major_version | version_compare('3.0', '>=')
   tags: java
