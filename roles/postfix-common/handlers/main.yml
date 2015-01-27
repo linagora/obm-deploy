@@ -1,12 +1,4 @@
 ---
-- name: Fix perms on master.cf
-  file: path=/etc/postfix/master.cf mode=0644
-  tags: postfix-common
-
-- name: Fix perms on main.cf
-  file: path=/etc/postfix/main.cf mode=0644
-  tags: postfix-common
-
 - name: Merge master.cf configuration files
   assemble: src=/etc/master_cf.d dest=/etc/postfix/master.cf backup=yes
   tags: postfix-common
@@ -14,6 +6,14 @@
 - name: Merge main.cf configuration files
   assemble: src=/etc/main_cf.d dest=/etc/postfix/main.cf backup=yes 
 #  when: postfix_file.stat.exists == False
+  tags: postfix-common
+
+- name: Fix perms on master.cf
+  file: path=/etc/postfix/master.cf mode=0644
+  tags: postfix-common
+
+- name: Fix perms on main.cf
+  file: path=/etc/postfix/main.cf mode=0644
   tags: postfix-common
 
 - name: Restart postfix service
