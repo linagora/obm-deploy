@@ -1,0 +1,16 @@
+---
+- name: Add missing mupdate service in /etc/services
+  lineinfile: >
+      dest=/etc/services
+      regexp="^mupdate.*3509.*"
+      insertafter="^svn.*3690.*"
+      line="mupdate         3509/tcp                        # Cyrus imap synchronization service"
+  tags: cyrus-common
+
+- name: Add missing sieve service in /etc/services
+  lineinfile: >
+      dest=/etc/services
+      regexp="^sieve.*4190.*"
+      insertafter="^sysrqd.*4094.*"
+      line="sieve           4190/tcp                        # Cyrus imap mail filtering service"
+  tags: cyrus-common
