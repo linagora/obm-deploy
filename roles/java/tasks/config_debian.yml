@@ -1,6 +1,12 @@
 ---
-- name: Config Java alternatives
+- name: Config Java alternatives (x64)
   command: >
       update-java-alternatives -s java-1.7.0-openjdk-amd64
-  when: major_version | version_compare('3.0', '>=')
+  when: major_version | version_compare('3.0', '>=') and ansible_architecture == "x86_64"
+  tags: java
+
+- name: Config Java alternatives (x86)
+  command: >
+      update-java-alternatives -s java-1.7.0-openjdk-i386
+  when: major_version | version_compare('3.0', '>=') and ansible_architecture != "x86_64"
   tags: java
