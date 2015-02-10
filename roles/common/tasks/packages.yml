@@ -14,3 +14,10 @@
   tags:
       - common
       - packages
+
+- name: APT Remove package libio-socket-ip-perl
+  apt: name=libio-socket-ip-perl
+  when: ansible_pkg_mgr == "apt"
+  tags:
+      - common
+      - packages
