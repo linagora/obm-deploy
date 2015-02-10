@@ -1,8 +1,8 @@
-deb http://ftp.fr.debian.org/debian/ wheezy contrib
+deb http://http.debian.net/debian/ wheezy contrib
 
 deb http://security.debian.org/ wheezy/updates contrib
-deb-src http://security.debian.org/ wheezy/updates contrib
+#deb-src http://security.debian.org/ wheezy/updates contrib
 
 # wheezy-updates, previously known as 'volatile'
-deb http://ftp.fr.debian.org/debian/ wheezy-updates contrib
-deb-src http://ftp.fr.debian.org/debian/ wheezy-updates contrib
+deb http://http.debian.net/debian/ wheezy-updates contrib
+#deb-src http://http.debian.net/debian/ wheezy-updates contrib
