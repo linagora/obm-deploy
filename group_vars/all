@@ -26,7 +26,7 @@ db_user: "{{ obm_db_user | default('obm') }}"
 db_pass: "{{ obm_db_pass | default('obm') }}"
 db_name: "{{ obm_db_name | default('obm') }}"
 
-cassandra_seeds_tmp: "{% if inventory_hostname in groups['obmfullservers'] %}{{ hostvars[inventory_hostname] | get_ip(lan_net) }}{% else %}{{ groups['cassandraservers'][0] | get_ip(lan_net) }}{% endif %}"
+cassandra_seeds_tmp: "{% if inventory_hostname in groups['obmfullservers'] %}{{ hostvars[inventory_hostname] | get_ip(lan_net) }}{% else %}{{ hostvars[groups['cassandraservers'][0]] | get_ip(lan_net) }}{% endif %}"
 cassandra_seeds: "{{ obm_cassandra_seeds | default(cassandra_seeds_tmp) }}"
 cassandra_keyspace: "{{ obm_cassandra_keyspace | default('opush') }}"
 cassandra_user: "{{ obm_cassandra_user | default('opush') }}"

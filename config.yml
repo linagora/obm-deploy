@@ -26,7 +26,7 @@ config_version: 0.2
 #### OBM configuration ####
 
 ## OBM version
-#obm_version: 3.0.0
+#obm_version: 3.1.2
 
 ## Public URL of the OBM web interface
 #obm_external_url: "{{ inventory_hostname }}"
@@ -50,7 +50,7 @@ config_version: 0.2
 
 #### Cassandra cluster configuration
 ## Use it only with OBM 3.x
-#obm_cassandra_seeds: "{{ groups['cassandraservers'][0] }}"
+#obm_cassandra_seeds: "{{ hostvars[groups['syncservers'][0]] | get_ip(lan_net) }}"
 #obm_cassandra_keyspace: opush
 #obm_cassandra_user: opush
 #obm_cassandra_password: opush
