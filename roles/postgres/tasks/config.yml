@@ -8,6 +8,15 @@
   notify: Restart Postgres
   tags: postgres
 
+- name: Set max_connections
+  lineinfile: >
+      dest={{ datadir }}/postgresql.conf
+      line='max_connections = 300'
+      regexp='^max_connections ='
+      state=present
+  notify: Restart Postgres
+  tags: postgres
+
 - name: Create PostgreSQL configuration directory
   file: name={{ datadir }}/pg_hba.d state=directory
   tags: postgres
