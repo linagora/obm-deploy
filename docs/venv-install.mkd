@@ -1,0 +1,108 @@
+<a name="top-page"></a>
+
+If you haven't installed pre-requisistes yet. Please return to [Pre-requisites (all methods)](docs/wrapper-install.mkd#pre-requisites).
+
+#### Table of contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [VirtualenvWrapper installation](#venv-pkg--install)
+  - [Debian GNU/Linux Wheezy](#venv-install-debian)
+  - [CentOS Linux 6](#venv-install-centos)
+- [Virtualenv creation](#virtualenv-creation)
+- [Virtualenv activation](#virtualenv-activation)
+- [Install ansible dependencies](#ansible-dependencies)
+- [Clone ansible repository](#ansible-repository)
+- [Activate ansible environment](#ansible-environment)
+- [Exit from your virtualenv](#exit)
+- [Each time you want to work with OBM-Deploy](#restart)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<a name="venv-pkg-install"></a>
+
+<br />
+Virtualenv installation [&#x25B2;](#top-page "back to top")
+=======================
+
+<a name="venv-install-debian"></a>
+
+Debian GNU/Linux Wheezy
+-----------------------
+
+    $ sudo apt-get install python-virtualenv python-pip
+
+<a name="venv-install-centos"></a>
+
+CentOS Linux 6
+--------------
+
+    $ sudo yum install python-virtualenv python-pip
+
+<a name="virtualenv-creation"></a>
+
+<br />
+Virtualenv creation [&#x25B2;](#top-page "back to top")
+===================
+
+Run following command from the directory where you cloned obm-deploy repository.
+
+    $ virtualenv -p /usr/bin/python2 --no-site-packages env
+
+<a name="virtualenv-activation"></a>
+
+<br />
+Virtualenv activation [&#x25B2;](#top-page "back to top")
+=====================
+
+Run following command from the directory where you cloned obm-deploy repository.
+
+    $ source env/bin/activate
+
+<a name="ansible-dependencies"></a>
+
+<br />
+Install ansible dependencies [&#x25B2;](#top-page "back to top")
+============================
+
+    $ pip install paramiko PyYAML jinja2 pyasn1 pycrypto python-keyczar==0.71b
+
+<a name="ansible-repository"></a>
+
+<br />
+Clone ansible repository [&#x25B2;](#top-page "back to top")
+========================
+
+    $ git clone https://github.com/ansible/ansible -b release1.7.2
+
+<a name="ansible-environment"></a>
+
+<br />
+Activate ansible environment [&#x25B2;](#top-page "back to top")
+============================
+
+    $ source ansible/hacking/env-setup
+
+<a name="exit"></a>
+
+<br />
+Exit from your virtualenv [&#x25B2;](#top-page "back to top")
+=========================
+
+    $ deactivate
+
+<a name="restart"></a>
+
+<br />
+Each time you want to work with OBM-Deploy [&#x25B2;](#top-page "back to top")
+==========================================
+
+Run following commands from the directory where you cloned obm-deploy repository.
+
+
+    $ source env/bin/activate
+    $ source ansible/hacking/env-setup
+
+
+[&#x25B2;](#top-page "back to top")

@@ -1,0 +1,140 @@
+<a name="top-page"></a>
+
+If you haven't installed pre-requisistes yet. Please return to [Pre-requisites (all methods)](docs/wrapper-install.mkd#pre-requisites).
+
+#### Table of contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [VirtualenvWrapper installation](#wrapper-install)
+  - [Debian GNU/Linux Wheezy](#wrapper-install-debian)
+  - [CentOS Linux 6](#wrapper-install-centos)
+- [VirtualenvWrapper configuration](#wrapper-config)
+  - [Using bash](#wrapper-config-bash)
+  - [Using zsh](#wrapper-config-zsh)
+- [Virtualenv creation](#virtualenv-creation)
+- [Install ansible dependencies](#ansible-dependencies)
+- [Clone ansible repository](#ansible-repository)
+- [Activate ansible environment](#ansible-environment)
+- [Auto-activate ansible environment](#ansible-environment-auto)
+- [Exit from your virtualenv](#exit)
+- [Each time you want to work with OBM-Deploy](#restart)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<a name="wrapper-pkg-install"></a>
+
+<br />
+VirtualenvWrapper installation [&#x25B2;](#top-page "back to top")
+==============================
+
+<a name="wrapper-install-debian"></a>
+
+Debian GNU/Linux Wheezy
+-----------------------
+
+    $ sudo apt-get install vrtualenvwrapper
+
+<a name="wrapper-install-centos"></a>
+
+CentOS Linux 6
+--------------
+
+    $ sudo yum install python-virtualenvwrapper
+
+<a name="wrapper-config"></a>
+
+<br />
+VirtualenvWrapper configuration [&#x25B2;](#top-page "back to top")
+===============================
+
+<a name="wrapper-config-bash"></a>
+
+Using bash
+----------
+
+    $ cat >> ~/.bashrc < 'EOF'
+    export WORKON_HOME=$HOME/.virtualenvs
+    export PROJECT_HOME=$HOME/Devel
+    source /usr/local/bin/virtualenvwrapper.sh
+    EOF
+    $ source ~/.bashrc
+
+<a name="wrapper-config-zsh"></a>
+
+Using zsh
+---------
+
+    $ cat >> ~/.zshrc < 'EOF'
+    export WORKON_HOME=$HOME/.virtualenvs
+    export PROJECT_HOME=$HOME/Devel
+    source /usr/local/bin/virtualenvwrapper.sh
+    EOF
+    $ source ~/.zshrc
+
+<a name="virtualenv-creation"></a>
+
+<br />
+Virtualenv creation [&#x25B2;](#top-page "back to top")
+===================
+
+Run following command from the directory where you cloned obm-deploy repository.
+
+    $ mkvirtualenv -p /usr/bin/python2 --no-site-packages obm-deploy
+
+<a name="ansible-dependencies"></a>
+
+<br />
+Install ansible dependencies [&#x25B2;](#top-page "back to top")
+============================
+
+    $ pip install paramiko PyYAML jinja2 pyasn1 pycrypto python-keyczar==0.71b
+
+<a name="ansible-repository"></a>
+
+<br />
+Clone ansible repository [&#x25B2;](#top-page "back to top")
+========================
+
+    $ git clone https://github.com/ansible/ansible -b release1.7.2
+
+<a name="ansible-environment"></a>
+
+<br />
+Activate ansible environment [&#x25B2;](#top-page "back to top")
+============================
+
+    $ source ansible/hacking/env-setup
+
+<a name="ansible-environment-auto"></a>
+
+<br />
+Auto-activate ansible environment [&#x25B2;](#top-page "back to top")
+=================================
+
+    $ cat > ~/.virtualenvs/obm-deploy/bin/postactivate << EOF
+    #!/bin/bash
+    cd $(pwd)
+    source ansible/hacking/env-setup
+    EOF
+    $ chmod +x ~/.virtualenvs/obm-deploy/bin/postactivate
+
+<a name="exit"></a>
+
+<br />
+Exit from your virtualenv [&#x25B2;](#top-page "back to top")
+=========================
+
+    $ deactivate
+
+<a name="restart"></a>
+
+<br />
+Each time you want to work with OBM-Deploy [&#x25B2;](#top-page "back to top")
+==========================================
+
+    $ workon obm-deploy-env
+
+
+[&#x25B2;](#top-page "back to top")
