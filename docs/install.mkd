@@ -29,7 +29,7 @@ Moreover, manual installation mlethod is known to work with almost all Linux or 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 
-*We only test this procedures on Debian Wheezy and CentOS 6 but it probably works well on other  diostros from the same families.*
+*We only test this procedures on Debian Wheezy and CentOS 6 but it probably works well on other distros from the same families.*
 *For exampe, Ubuntu, RedHat Enterprise Linux, Mint, Fedora, ...*
 
 <a name="pre-requisites"></a>
