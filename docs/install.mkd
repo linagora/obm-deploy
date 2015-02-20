@@ -2,9 +2,9 @@
 
 There is two main methods to install obm-deploy the package manager based method and the manual one.
 
-We recommend to use manual installation method because this is the only one we support.
+We recommend to use the manual installation method because this is the only one we support.
 
-Moreover, manual installation mlethod is known to work with almost all Linux or BSD flavors, including OSX.
+Moreover, the manual installation method is known to work with almost all Linux or BSD flavors, including OSX.
 
 #### Table of contents
 

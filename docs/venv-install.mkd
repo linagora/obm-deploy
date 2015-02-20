@@ -56,9 +56,9 @@ Run following command from the directory where you cloned obm-deploy repository.
 Virtualenv activation [&#x25B2;](#top-page "back to top")
 =====================
 
-Run following command from the directory where you cloned obm-deploy repository.
+Run the following command from the directory where you cloned obm-deploy repository.
 
-    $ source env/bin/activate
+    $ . env/bin/activate
 
 <a name="ansible-dependencies"></a>
 

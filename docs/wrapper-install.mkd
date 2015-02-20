@@ -105,7 +105,7 @@ Clone ansible repository [&#x25B2;](#top-page "back to top")
 Activate ansible environment [&#x25B2;](#top-page "back to top")
 ============================
 
-    $ source ansible/hacking/env-setup
+    $ . ansible/hacking/env-setup
 
 <a name="ansible-environment-auto"></a>
 
