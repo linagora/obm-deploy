@@ -39,3 +39,14 @@
    - Restart postfix service
   when: ansible_os_family == "RedHat"
   tags: postfix
+
+- name: Create Postfix sasl directory
+  file: path=/usr/lib/jvm state=directory
+  when: ansible_os_family == "Debian"
+  tags: postfix
+
+- name: Deploy master.cf configuration
+  copy: src=smtpd.conf dest=/etc/postfix/sasl/smtpd.conf mode=0644
+  notify:
+   - Restart postfix service
+  tags: postfix
