@@ -47,6 +47,7 @@
 
 - name: Deploy master.cf configuration
   copy: src=smtpd.conf dest=/etc/postfix/sasl/smtpd.conf mode=0644
+  when: ansible_os_family == "Debian"
   notify:
    - Restart postfix service
   tags: postfix
