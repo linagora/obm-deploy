@@ -10,6 +10,10 @@
       - Restart OPush2
   tags: opush
 
+- name: Deploy Opush main configuration
+  template: src=opush.ini dest=/etc/opush/opush.ini mode=0644 backup=yes
+  tags: opush
+
 - name: Deploy Opush LDAP configuration
   template: src=ldap_conf.ini dest=/etc/opush/ldap_conf.ini mode=0644 backup=yes
   tags: opush

@@ -6,3 +6,7 @@
 - name: Deploy OBM global configuration
   template: src=00-global.ini dest=/etc/obm/conf/00-global.ini
   tags: obm-conf
+
+- name: Merge OBM configuration files
+  assemble: src=/etc/obm/conf dest=/etc/obm/obm_conf.ini backup=yes
+  tags: obm-sync
