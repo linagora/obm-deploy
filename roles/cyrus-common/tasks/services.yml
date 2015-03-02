@@ -24,7 +24,7 @@
       dest=/etc/services
       regexp="^lmtp.*24.*"
       insertafter="^telnet.*23.*"
-      line="lmtp            23/tcp                          # Cyrus imap mail filtering service"
+      line="lmtp            24/tcp                          # Cyrus imap mail filtering service"
   notify:
     - Restart Cyrus-Imapd service
   tags: cyrus-common
