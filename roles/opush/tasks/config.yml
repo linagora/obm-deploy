@@ -32,6 +32,13 @@
       - Restart OPush3
   tags: opush
 
+- name: Cassandra schema initialization
+  command: "ssh admin0:admin@localhost 'schema install'"
+  when: version | version_compare('3.1.2', '>=')
+  notify:
+      - Restart OPush3
+  tags: opush
+
 - name: Start Opush3
   service: name=opush enabled=yes state=started
   when: major_version | version_compare('3.0', '>=')
