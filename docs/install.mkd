@@ -118,12 +118,12 @@ This method is based on [Oliver Welge's article](http://weluse.de/blog/installin
 Using virtualenvwrapper (recommended)
 -------------------------------------
 
-[Virtualenvwrapper based installation page](docs/wrapper-install.mkd) : Virtualenvwrapper based installation page]
+[Virtualenvwrapper based installation page](wrapper-install.mkd) : Virtualenvwrapper based installation page]
 
 <a name="virtualenv-install"></a>
 
 Using PIP and virtualenv
 ------------------------
 
-[Virtualenv based installation page](docs/venv-install.mkd) : Virtualenv based installation page]
+[Virtualenv based installation page](venv-install.mkd) : Virtualenv based installation page]
 
