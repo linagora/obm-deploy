@@ -33,7 +33,7 @@
   tags: opush
 
 - name: Cassandra schema initialization
-  command: "ssh admin0:admin@localhost 'schema install'"
+  command: "ssh -p 5665 admin0:admin@localhost 'schema install'"
   when: version | version_compare('3.1.2', '>=')
   notify:
       - Restart OPush3
