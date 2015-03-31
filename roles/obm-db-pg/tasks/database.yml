@@ -12,6 +12,7 @@
    - setup.sql
    - lang.sql
    - murder_user.sql
+   - crash_admin.sql
   delegate_to: "{{ db_master_host }}"
   tags: obm-db
 
@@ -23,8 +24,13 @@
   sudo: yes
   sudo_user: postgres
   delegate_to: "{{ db_master_host }}"
+  notify:
+    - Merge PostgreSQL configuration files
+    - Reload Postgres
   tags: obm-db
 
+- meta: flush_handlers
+      
 - name: Create OBM database
   postgresql_db:
    name={{ db_name }}
@@ -34,8 +40,15 @@
   sudo_user: postgres
   delegate_to: "{{ db_master_host }}"
   notify:
-    - Merge PostgreSQL configuration files
-    - Reload Postgres
     - Init OBM2 Postgres database
     - Init OBM3 Postgres database
   tags: obm-db
+
+- meta: flush_handlers
+
+- name: Fake task to reload OBM-Locator
+  debug: msg="Fake task to reload OBM-Locator"
+  notify:
+    - Restart OBM-Locator
+  changed_when: true
+  tags: obm-db-pg

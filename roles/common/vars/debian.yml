@@ -25,3 +25,4 @@ common_packages_list:
     - mailutils
     - sharutils
     - libhttp-daemon-ssl-perl
+    - sshpass

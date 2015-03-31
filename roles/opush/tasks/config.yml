@@ -33,7 +33,7 @@
   tags: opush
 
 - name: Cassandra schema initialization
-  command: "ssh -p 5665 admin0:admin@localhost 'schema install'"
+  command: sshpass -p 'admin' ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 5665 -l admin0 localhost 'schema install'
   when: version | version_compare('3.1.2', '>=')
   notify:
       - Restart OPush3

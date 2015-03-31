@@ -1,0 +1,4 @@
+---
+- name: Restart OBM-Locator
+  service: name=obm-locator enabled=true state=restarted
+  tags: obm-locator

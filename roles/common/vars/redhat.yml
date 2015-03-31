@@ -27,3 +27,4 @@ common_packages_list:
     - postfix
     - mailx
     - sharutils
+    - sshpass
