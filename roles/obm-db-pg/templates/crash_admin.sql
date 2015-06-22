@@ -1,7 +1,7 @@
 -- Set admin rights on domains for admin0@global.virt --
 UPDATE profilemodule SET profilemodule_right = 31 WHERE profilemodule_domain_id = 1 AND profilemodule_profile_id = 1 AND profilemodule_module_name = 'domain';
 -- Create an host corresponding to obm-sync --
-insert into host (host_domain_id, host_name, host_ip) values (1, '{{ groups['syncservers'][0] }}', '{{ hostvars[groups['syncservers'][0]] | get_ip(lan_net) }}');
+insert into host (host_domain_id, host_name, host_ip) values (1, '{{ db_host_hostname }}', '{{ hostvars[groups['syncservers'][0]] | get_ip(lan_net) }}');
 -- A kind of magic --
 insert into entity (entity_mailing) values (true);
 -- Create an host entity for this host --
