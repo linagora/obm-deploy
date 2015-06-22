@@ -30,6 +30,5 @@
   tags: ldap
 
 - name: Restart LDAP
-  service: name=slapd state=restarted
-  when: command_result.changed
+  service: name=slapd  enabled=yes state=restarted
   tags: ldap

@@ -1,6 +1,7 @@
 collected_files
 certificates
 ansible
+*-example
 obm-deploy-dev
 ansible.cfg
 docs.ansible.com

@@ -21,7 +21,7 @@ external_url: "{% if external_tmp == 'undefined' %}{{ inventory_hostname }}{% el
 db_type: "{{ obm_db_type | default('PGSQL') }}"
 db_host: "{{ obm_db_host | default(groups['databaseservers'][0]) }}"
 db_master_host: "{{ obm_db_master_host | default(db_host) }}"
-
+db_host_hostname:  "{{ groups['syncservers'][0].split('.')[0] }}"
 db_user: "{{ obm_db_user | default('obm') }}"
 db_pass: "{{ obm_db_pass | default('obm') }}"
 db_name: "{{ obm_db_name | default('obm') }}"
