@@ -1,4 +1,4 @@
 ---
 - name: Restart saslauthd
-  service: name=saslauthd state=restarted
+  service: name=saslauthd enabled=yes state=restarted
   tags: sasl
