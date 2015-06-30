@@ -22,14 +22,13 @@
 - name: RPM Copy ldap sysconfig configuration
   template: src=ldap dest=/etc/sysconfig/ldap backup=yes
   when: ansible_os_family == "RedHat"
+  notify:
+    - Restart LDAP
   tags: ldap
 
 - name: APT Copy ldap default configuration
   template: src=slapd dest=/etc/default/slapd backup=yes
   when: ansible_os_family == "Debian"
-  tags: ldap
-
-- name: Restart LDAP
-  service: name=slapd state=restarted
-  when: command_result.changed
+  notify:
+    - Restart LDAP
   tags: ldap

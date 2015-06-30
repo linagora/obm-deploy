@@ -2,3 +2,4 @@
 - include: packages.yml
 - include: include_vars.yml
 - include: config.yml
+- include: flush.yml

@@ -15,5 +15,5 @@
   tags: cyrus-common
 
 - name: Restart Cyrus-Imapd service
-  service: name=cyrus-imapd state=restarted
+  service: name=cyrus-imapd enabled=yes state=restarted
   tags: cyrus-common
