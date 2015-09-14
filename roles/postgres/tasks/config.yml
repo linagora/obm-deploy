@@ -1,4 +1,13 @@
 ---
+- name: Listen on all interfaces
+  lineinfile: >
+      dest="{{ datadir }}/postgresql.conf"
+      line="listen_addresses = '*'"
+      regexp='^#listen_addresses'
+      state=present
+  notify: Restart Postgres
+  tags: postgres
+
 - name: Disable standard_conforming_strings
   lineinfile: >
       dest={{ datadir }}/postgresql.conf
