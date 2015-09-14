@@ -9,4 +9,8 @@
 
 - name: Merge OBM configuration files
   assemble: src=/etc/obm/conf dest=/etc/obm/obm_conf.ini backup=yes
-  tags: obm-sync
+  tags: obm-conf
+
+- name: Fix perms on obm_conf.ini
+  file: path=/etc/obm/obm_conf.ini mode=0644
+  tags: obm-conf
