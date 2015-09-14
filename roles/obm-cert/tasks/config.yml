@@ -65,8 +65,14 @@
   when: ca_file == default_ca_file or check_cafile.stat.isfile == False
   tags: obm-cert
 
+- name: Create the CA directory
+  file: >
+      path="{{ default_ca_file }}"
+      state=directory
+  tags: obm-cert
+
 - name: Push generic CA file to remote host
-  copy: >
+  file: >
       src=certificates/{{ ca_host }}/{{ default_ca_file | basename }}
       dest={{ default_ca_file }}
       state=file
@@ -74,7 +80,7 @@
   tags: obm-cert
 
 - name: Push custom CA file to remote host
-  copy: >
+  file: >
       src=certificates/{{ ca_host }}/{{ ca_file | basename }}
       dest={{ ca_file }}
       state=file
@@ -88,7 +94,7 @@
   notify:
       - Add a generic CA cert to OBM-Autoconf configuration
       - Build OBM-Autoconf client
-  when: ca_file == default_ca_file or check_cafile.stat.isfile == False
+  when: ( ca_file == default_ca_file or check_cafile.stat.isfile == False ) and inventory_hostname in groups['autoconfservers']
   tags: obm-cert
 
 - name: Push custom CA file to OBM-autoconf
@@ -98,7 +104,7 @@
   notify:
       - Add a generic CA cert to OBM-Autoconf configuration
       - Build OBM-Autoconf client
-  when: ca_file != default_ca_file and check_cafile.stat.isfile == True
+  when: ( ca_file != default_ca_file and check_cafile.stat.isfile == True ) and inventory_hostname in groups['autoconfservers']
   tags: obm-cert
 #########################################################################################
 
@@ -139,7 +145,7 @@
 
 ############################# MANAGE CUSTOM CERTIFICATE FILE #############################
 - name: Push custom certificate to remote host
-  copy: >
+  file: >
       src=certificates/{{ entry_point }}/{{ cert_file | basename }}
       dest={{ cert_file }}
       state=file
@@ -147,7 +153,7 @@
   tags: obm-cert
 
 - name: Push custom key file to remote host
-  copy: >
+  file: >
       src=certificates/{{ entry_point }}/{{ key_file | basename }}
       dest={{ key_file }}
       state=file
