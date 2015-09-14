@@ -3,12 +3,15 @@
   file: name={{ datadir }}/pg_hba.d state=directory
   when: db_master_host in groups['all']
   delegate_to: "{{ db_master_host }}"
-  tags: obm-autoconf
+  tags:
+    - obm-autoconf
 
 - name: Deploy obm-autoconf PostgreSQL permissions
-  template: src=03-remote-obm-autoconf dest={{ datadir }}/pg_hba.d/03-remote-obm-autoconf
+  template: src=03-remote-obm-autoconf dest={{ datadir }}/pg_hba.d/03-remote-{{ inventory_hostname }}
   when: db_master_host in groups['all']
   delegate_to: "{{ db_master_host }}"
   notify:
     - Merge PostgreSQL configuration files
-  tags: obm-autoconf
+  tags:
+    - obm-autoconf
+    - pgperms

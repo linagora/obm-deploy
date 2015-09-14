@@ -34,10 +34,12 @@
   tags: postgres
 
 - name: Deploy PostgreSQL remote configuration
-  copy: src=04-remote-ident dest={{ datadir }}/pg_hba.d/04-remote-ident
+  copy: src=03-remote-ident dest={{ datadir }}/pg_hba.d/03-remote-ident
   notify:
     - Merge PostgreSQL configuration files
-  tags: postgres
+  tags:
+    - postgres
+    - pgperms
 
 - name: Deploy PostgreSQL configuration footer
   copy: src=06-footer dest={{ datadir }}/pg_hba.d/06-footer
