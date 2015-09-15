@@ -1,8 +1,8 @@
 ---
 - name: Deploy opush PostgreSQL permissions
   template: src=03-remote-opush dest={{ datadir }}/pg_hba.d/03-remote-{{ inventory_hostname }}
-  when: db_master_host in groups['all']
-  delegate_to: "{{ db_master_host }}"
+  delegate_to: "{{ item }}"
+  with_items: groups.databaseservers
   notify:
     - Merge PostgreSQL configuration files
   tags:

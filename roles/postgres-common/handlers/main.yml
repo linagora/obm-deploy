@@ -1,17 +1,24 @@
 ---
 - name: Merge PostgreSQL configuration files
   assemble: src={{ datadir }}/pg_hba.d dest={{ datadir }}/pg_hba.conf backup=yes
-  delegate_to: "{{ db_master_host }}"
+  delegate_to: "{{ item }}"
+  with_items: groups.databaservers
   notify: 
     - Reload Postgres
-  tags: postgres-common
+  tags:
+   - postgres-common
+   - pgperms
 
 - name: Reload Postgres
   service: name=postgresql state=reloaded
   delegate_to: "{{ db_master_host }}"
-  tags: postgres-common
+  tags:
+   - postgres-common
+   - pgperms
 
 - name: Restart Postgres
   service: name=postgresql state=restarted
   delegate_to: "{{ db_master_host }}"
-  tags: postgres-common
+  tags:
+   - postgres-common
+   - pgperms
