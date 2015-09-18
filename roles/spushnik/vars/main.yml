@@ -6,4 +6,3 @@
 
 spushnik_port_2x: 8082
 spushnik_port_3x: 8083
-ui_host: "{{ groups['uiservers'][0] | mandatory }}"
