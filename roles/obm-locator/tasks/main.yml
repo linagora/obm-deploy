@@ -2,5 +2,6 @@
 - include: debconf.yml
   when: ansible_pkg_mgr == "apt"
 - include: packages.yml
+- include: pgperms.yml
 - include: config.yml
 - include: flush.yml
