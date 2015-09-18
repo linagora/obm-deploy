@@ -4,7 +4,7 @@
 #
 
 # Don't remove this line
-config_version: 0.3
+config_version: 0.4
 
 #### Networks definition ####
 ## Here, you can explicitly declare your lan network IP
@@ -26,7 +26,7 @@ config_version: 0.3
 #### OBM configuration ####
 
 ## OBM version
-#obm_version: 3.1.4
+#obm_version: 3.1.6
 
 ## Public URL of the OBM web interface
 #obm_external_url: "{{ inventory_hostname }}"
