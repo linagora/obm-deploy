@@ -2,9 +2,9 @@
 # Please don't edit this file
 - include: yml/localhost.yml
 - include: yml/all.yml
-- include: yml/caservers.yml
 - include: yml/databaseservers.yml
 - include: yml/autoconfservers.yml
+- include: yml/caservers.yml
 - include: yml/ldapservers.yml
 - include: yml/uiservers.yml
 - include: yml/syncservers.yml
