@@ -34,7 +34,7 @@ VirtualenvWrapper installation [&#x25B2;](#top-page "back to top")
 Debian GNU/Linux Wheezy
 -----------------------
 
-    $ sudo apt-get install vrtualenvwrapper
+    $ sudo apt-get install virtualenvwrapper
 
 <a name="wrapper-install-centos"></a>
 
@@ -49,12 +49,16 @@ CentOS Linux 6
 VirtualenvWrapper configuration [&#x25B2;](#top-page "back to top")
 ===============================
 
+> **Note**
+> Path to virtualenvwrapper.sh may be different depending on your distribution.
+> Commands bellow are for Centos (and probably RedHat based distros), Debian based distributions uses `/usr/share/virtualenvwrapper/virtualenvwrapper.sh`
+
 <a name="wrapper-config-bash"></a>
 
 Using bash
 ----------
 
-    $ cat >> ~/.bashrc < 'EOF'
+    $ cat <<EOF >> ~/.bashrc
     export WORKON_HOME=$HOME/.virtualenvs
     export PROJECT_HOME=$HOME/Devel
     source /usr/local/bin/virtualenvwrapper.sh
@@ -134,7 +138,7 @@ Exit from your virtualenv [&#x25B2;](#top-page "back to top")
 Each time you want to work with OBM-Deploy [&#x25B2;](#top-page "back to top")
 ==========================================
 
-    $ workon obm-deploy-env
+    $ workon obm-deploy
 
 
 [&#x25B2;](#top-page "back to top")
