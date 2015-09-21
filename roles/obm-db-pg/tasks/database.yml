@@ -1,7 +1,7 @@
 ---
 - name: Deploy local OBM PostgreSQL permissions
   template: src=01-local-obm dest={{ datadir }}/pg_hba.d/01-local-obm
-  delegate_to: "{{ groups['dbmaster'][0] }}"
+  delegate_to: "{{ db_master_host }}"
   notify:
     - Merge PostgreSQL configuration files
   tags: obm-db
@@ -13,7 +13,7 @@
    - lang.sql
    - murder_user.sql
    - crash_admin.sql
-  delegate_to: "{{ groups['dbmaster'][0] }}"
+  delegate_to: "{{ db_master_host }}"
   tags: obm-db
 
 - name: Create OBM postgres user
@@ -23,7 +23,7 @@
    role_attr_flags=CREATEDB,NOSUPERUSER,NOCREATEROLE
   sudo: yes
   sudo_user: postgres
-  delegate_to: "{{ groups['dbmaster'][0] }}"
+  delegate_to: "{{ db_master_host }}"
   notify:
     - Merge PostgreSQL configuration files
     - Reload Postgres
@@ -38,7 +38,7 @@
    encoding='UTF-8'
   sudo: yes
   sudo_user: postgres
-  delegate_to: "{{ groups['dbmaster'][0] }}"
+  delegate_to: "{{ db_master_host }}"
   notify:
     - Init OBM2 Postgres database
     - Init OBM3 Postgres database
