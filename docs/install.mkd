@@ -93,8 +93,8 @@ Packages-based installation  [&#x25B2;](#top-page "back to top")
 
 <a name="packages-debian-gnulinux-wheezy"></a>
 
-Debian GNU/Linux Wheezy
------------------------
+Debian GNU/Linux Stretch
+------------------------
 
     $ sudo aptitude install ansible
 
