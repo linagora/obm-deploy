@@ -8,3 +8,8 @@
   apt: name=obm-locator
   when: ansible_pkg_mgr == "apt"
   tags: obm-locator
+
+- name: APT Remove libio-socket-ip-perl
+  apt: name=libio-socket-ip-perl state=absent
+  when: ansible_pkg_mgr == "apt"
+  tags: obm-locator
