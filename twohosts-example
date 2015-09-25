@@ -16,6 +16,8 @@ obm0.example.com
 [dbservers]
 obm1.example.com
 
+[dbmasters]
+
 [webservers]
 obm0.example.com
 
@@ -48,6 +50,7 @@ javaservers
 [databaseservers:children]
 obmfullservers
 dbservers
+dbmasters
 
 [ldapservers:children]
 obmfullservers

@@ -9,6 +9,7 @@ obm.example.com
 [certservers]
 [nosqlservers]
 [dbservers]
+[dbmasters]
 [webservers]
 [javaservers]
 [cyrusmupdateservers]
@@ -30,6 +31,7 @@ javaservers
 [databaseservers:children]
 obmfullservers
 dbservers
+dbmasters
 
 [ldapservers:children]
 obmfullservers

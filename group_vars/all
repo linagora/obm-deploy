@@ -12,15 +12,15 @@ ssh_port: "{{ obm_ssh_port | default('22') }}"
 
 version: "{{ obm_version | default('3.1.6') }}"
 
-major_version: "{% if version|length == 5 %}{{ version[0:3] }}{% else %}3.0{% endif %}"
+major_version: "{% if version | length == 5 %}{{ version[0:3] }}{% else %}3.0{% endif %}"
 short_version: "{{ major_version | replace('.', '') }}"
 
 external_tmp: "{{ obm_external_url | default('undefined') }}"
 external_url: "{% if external_tmp == 'undefined' %}{{ inventory_hostname }}{% else %}{{ external_tmp }}{% endif %}"
 
 db_type: "{{ obm_db_type | default('PGSQL') }}"
-db_host: "{{ obm_db_host | default(groups['databaseservers'][0]) }}"
-db_master_host: "{{ obm_db_master_host | default(db_host) }}"
+db_host: "{% if groups['dbservers'] | length > 0 %}{{ obm_db_host | default(groups['dbservers'][0]) }}{% else %}{{ obm_db_host | default(groups['databaseservers'][0]) }}{% endif %}"
+db_master_host: "{% if groups['dbmasters'] | length > 0 %}{{ obm_db_host | default(groups['dbmasters'][0]) }}{% else %}{{ obm_db_master_host | default(groups['databaseservers'][0]) }}{% endif %}"
 
 db_user: "{{ obm_db_user | default('obm') }}"
 db_pass: "{{ obm_db_pass | default('obm') }}"

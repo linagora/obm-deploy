@@ -12,7 +12,7 @@
    - obmdb_prefs_values_{{ major_version }}.sql
    - lang.sql
   when: major_version | version_compare('3.0', '<')
-  delegate_to: "{{ groups['dbmaster'][0] }}"
+  delegate_to: "{{ db_master_host }}"
   tags: obm-db-pg
 
 - name: Init OBM3 Postgres database
@@ -33,5 +33,5 @@
    - ../3.0/updates/update-3.0.0~1.pgsql.sql
    - crash_admin.sql
   when: major_version | version_compare('3.0', '>=')
-  delegate_to: "{{ groups['dbmaster'][0] }}"
+  delegate_to: "{{ db_master_host }}"
   tags: obm-db-pg

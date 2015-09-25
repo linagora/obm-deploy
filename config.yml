@@ -35,10 +35,10 @@ config_version: 0.4
 #obm_db_type: PGSQL
 
 ## The server hosting the database or the SQL load balancer
-#obm_db_host: "{{ groups['databaseservers'][0] }}"
+#obm_db_host: "{{ groups['dbservers'][0] }}"
 
 ## The server hosting the database or the master of replication
-#obm_db_master_host: "{{ obm_db_host }}"
+#obm_db_master_host: "{{ groups['dbmasters'][0] }}"
 
 ## Database configuration
 #obm_db_user: obm
