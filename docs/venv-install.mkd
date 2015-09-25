@@ -74,7 +74,7 @@ Install ansible dependencies [&#x25B2;](#top-page "back to top")
 Clone ansible repository [&#x25B2;](#top-page "back to top")
 ========================
 
-    $ git clone https://github.com/ansible/ansible -b release1.7.2
+    $ git clone https://github.com/ansible/ansible -b release1.9.3
 
 <a name="ansible-environment"></a>
 

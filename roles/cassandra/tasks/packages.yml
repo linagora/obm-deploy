@@ -12,7 +12,7 @@
   tags: cassandra
 
 - name: YUM Install Apache Cassandra packages
-  yum: pkg={{ item }} state=latest
+  yum: pkg={{ item }} update_cache=yes state=latest
   with_items:
    #- jna
    - dsc21
@@ -22,11 +22,12 @@
   tags: cassandra
 
 - name: APT Install Apache Cassandra packages
-  apt: name={{ item }} state=latest
+  apt: name={{ item }} update_cache=yes state=present
   with_items:
    #- jna
    - dsc21
-   - cassandra-tools
+   - cassandra-tools=2.1.9
+   - cassandra=2.1.9
   register: install_result
   when: ansible_pkg_mgr == "apt"
   tags: cassandra
