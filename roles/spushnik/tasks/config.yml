@@ -6,7 +6,7 @@
    dest=/etc/init.d/jetty6
    insertafter=".*status -p.*"
   when: major_version | version_compare('3.0', '<')
-  notify: 
+  notify:
       - Restart Jetty
   tags: spushnik
 
@@ -17,4 +17,5 @@
   notify:
    - Merge healthcheck.ini configuration file
    - Fix perms on healthcheck.ini
+   - Restart Spushnik
   tags: spushnik
