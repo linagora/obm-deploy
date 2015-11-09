@@ -21,7 +21,7 @@
     - Merge cyrus.conf configuration files
     - Fix perms on Cyrus configuration files
     - Restart Cyrus-Imapd service
-  when: mupdate_server == ""
+  when: mupdate_server == "" and inventory_hostname in groups['cyrusfrontservers']
   tags: cyrus-frontend
 
 - name: Deploy cyrus.conf POP frontend configuration

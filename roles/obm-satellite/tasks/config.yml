@@ -1,7 +1,18 @@
 ---
-- name: Deploy OBM-Satellite configuration
-  template: src=obmSatellite.ini dest=/etc/obm-satellite/obmSatellite.ini backup=yes 
-  notify: Restart OBM-Satellite service
+- name: Create OBM configuration directory
+  file: path=/etc/obm/conf state=directory
+  tags: obm-satellite
+
+- name: Deploy OBM Automaton configuration
+  template: src=01-automaton.ini dest=/etc/obm/conf/01-automaton.ini
+  tags: obm-satellite
+
+- name: Merge OBM configuration file
+  assemble: src=/etc/obm/conf dest=/etc/obm/obm_conf.ini backup=yes
+  tags: obm-satellite
+
+- name: Fix perms for obm_conf.ini
+  file: path=/etc/obm/obm_conf.ini mode=0644
   tags: obm-satellite
 
 - name: Set correct Cyrus startup script
