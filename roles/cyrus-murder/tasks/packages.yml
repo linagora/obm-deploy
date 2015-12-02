@@ -1,0 +1,8 @@
+---
+- name: APT Install Cyrus-IMAP Package
+  apt: name={{ item }} state=present
+  with_items:
+      - cyrus-murder-2.4
+  when: ansible_pkg_mgr == "apt"
+  tags: cyrus-murder
+
