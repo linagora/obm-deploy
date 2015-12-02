@@ -67,6 +67,7 @@ ca_file:   "{{ obm_ca_file   | default('/var/lib/obm-ca/cacert.pem') }}"
 cert_file: "{{ obm_cert_file | default('/etc/obm/certs/obm_cert.pem') }}"
 key_file:  "{{ obm_key_file  | default('/etc/obm/certs/obm_cert.pem') }}"
 
+autoconf_enable: "{{ obm_autoconf_enable | default(True) }}"
 autoconf_smtp_host: "{{ obm_autoconf_smtp_host | default(external_url) }}"
 autoconf_imap_host: "{{ obm_autoconf_imap_host | default(external_url) }}"
 autoconf_ldap_host: "{{ obm_autoconf_ldap_host | default(external_url) }}"

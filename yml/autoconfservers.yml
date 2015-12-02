@@ -3,4 +3,4 @@
   vars_files:
     - config.yml
   roles:
-    - obm-autoconf
+    - {role: obm-autoconf, when autoconf_enable == True}
