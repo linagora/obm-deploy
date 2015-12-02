@@ -25,9 +25,9 @@
   apt: name={{ item }} update_cache=yes state=present
   with_items:
    #- jna
-   - dsc21
-   - cassandra-tools=2.1.9
-   - cassandra=2.1.9
+   - dsc21=2.1.11-1
+   - cassandra-tools=2.1.11
+   - cassandra=2.1.11
   register: install_result
   when: ansible_pkg_mgr == "apt"
   tags: cassandra
