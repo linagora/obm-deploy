@@ -2,9 +2,9 @@
 - name: Add missing mupdate service in /etc/services
   lineinfile: >
       dest=/etc/services
-      regexp="^mupdate.*3509.*"
+      regexp="^mupdate.*3905.*"
       insertafter="^svn.*3690.*"
-      line="mupdate         3509/tcp                        # Cyrus imap synchronization service"
+      line="mupdate         3905/tcp                        # Cyrus imap synchronization service"
   notify:
     - Restart Cyrus-Imapd service
   tags: cyrus-common

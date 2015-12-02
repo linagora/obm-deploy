@@ -80,7 +80,7 @@ config_version: 0.4
 #obm_sasl_backend: "ldap"
 
 ## SASL search filter
-#obm_sasl_ldap_filter: "(|(&(mailBox=%U@%d)(objectClass=obmUser)(mailAccess=PERMIT))(&(uid=%U)(cn=Administrator Cyrus)(objectClass=posixAccount)))"
+#obm_sasl_ldap_filter: "(|(&(mailBox=%U@%d)(objectClass=obmUser)(mailAccess=PERMIT))(&(uid=%U)(sn=Cyrus)(objectClass=posixAccount)))"
 
 #### IMAP / SMTP configuration ####
 ## Globally enable legacy SSL on Messaging services
@@ -125,6 +125,7 @@ config_version: 0.4
 
 #### OBM-Autoconf ####
 ## Allows you to set hostnames published by autoconf
+#obm_autoconf_enable: True
 #obm_autoconf_smtp_host: "{{ obm_external_url }}"
 #obm_autoconf_imap_host: "{{ obm_external_url }}"
 #obm_autoconf_ldap_host: "{{ obm_external_url }}""
