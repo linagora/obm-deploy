@@ -1,1 +1,1 @@
-local   "{{ obm_db_name }}"             "{{ obm_db_user }}"                                md5
+local   "{{ db_name }}"             "{{ db_user }}"                                md5
