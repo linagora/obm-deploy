@@ -3,7 +3,7 @@
   lineinfile: >
       dest="{{ datadir }}/postgresql.conf"
       line="listen_addresses = '*'"
-      regexp='^#listen_addresses'
+      insertafter='^#listen_addresses'
       state=present
   notify: Restart Postgres
   tags: postgres
@@ -12,7 +12,7 @@
   lineinfile: >
       dest={{ datadir }}/postgresql.conf
       line='standard_conforming_strings = off'
-      regexp='^#standard_conforming_strings'
+      insertafter='^#standard_conforming_strings'
       state=present
   notify: Restart Postgres
   tags: postgres
@@ -21,7 +21,7 @@
   lineinfile: >
       dest={{ datadir }}/postgresql.conf
       line='max_connections = 300'
-      regexp='^max_connections ='
+      insertafter='^max_connections ='
       state=present
   notify: Restart Postgres
   tags: postgres
