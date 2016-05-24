@@ -42,6 +42,13 @@
       - Run Cassandra initialization script
   tags: cassandra
 
+- name: Patch cassandra-env script
+  lineinfile: >
+              dest={{ cassandra_conf_dir }}/cassandra-env.sh
+              regexp='^if \[ \"\$JVM_VERSION\" \\\< \"1\.8\" \]'
+              line='if [ "$JVM_VERSION" \< "1.8" ] && [ "$JVM_PATCH_VERSION" -lt 25 ] ; then'
+  tags: cassandra
+
 - name: Start Cassandra service
   service: name=cassandra enabled=true state=started
   tags: cassandra
