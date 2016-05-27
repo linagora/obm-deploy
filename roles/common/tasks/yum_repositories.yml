@@ -16,7 +16,10 @@
       - repositories
 
 - name: Enable baseurl in repositories (mirror mode)
-  command: sed -i 's/^#baseurl/baseurl/' {{ item }}
+  replace: >
+    dest={{ item }}
+    regexp='^\#(baseurl)'
+    replace='\1'
   when: mode == "mirror" and ansible_distribution == "CentOS"
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
@@ -26,7 +29,10 @@
       - repositories
 
 - name: Disable mirrorlist in repositories (mirror mode)
-  command: sed -i 's/^mirrorlist/#mirrorlist/g' {{ item }}
+  replace: >
+    dest={{ item }}
+    regexp='(^mirrorlist)'
+    replace='#\1'
   when: mode == "mirror" and ansible_distribution == "CentOS"
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
@@ -75,7 +81,10 @@
       - repositories
 
 - name: Disable baseurl in repositories (internet mode)
-  command: sed -i 's/^baseurl/#baseurl/g' {{ item }}
+  replace: >
+    dest={{ item }}
+    regexp='(^baseurl)'
+    replace='#\1'
   when: mode == "internet" and ansible_distribution == "CentOS"
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
@@ -85,7 +94,10 @@
       - repositories
 
 - name: Enable mirrorlist in repositories (internet mode)
-  command: sed -i 's/^#mirrorlist/mirrorlist/g' {{ item }}
+  replace: >
+    dest={{ item }}
+    regexp='^\#(mirrorlist)'
+    replace='\1'
   when: mode == "internet" and ansible_distribution == "CentOS"
   with_items:
    - /etc/yum.repos.d/CentOS-Base.repo
