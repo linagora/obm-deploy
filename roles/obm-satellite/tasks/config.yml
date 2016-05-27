@@ -18,7 +18,7 @@
 - name: Set correct Cyrus startup script
   lineinfile: >
       dest=/etc/obm-satellite/mods-available/cyrusPartition
-      regexp="^#.*/etc/init.d/cyrus-imapd$"
+      insertafter="^#\ default\:\ cyrusStartupScript"
       line="cyrusStartupScript = /etc/init.d/cyrus-imapd"
   notify: Restart OBM-Satellite service
   tags: obm-satellite
