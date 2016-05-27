@@ -38,7 +38,8 @@
 
 - name: Cassandra schema initialization
   shell: sleep 10 && sshpass -p 'admin' ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 5665 -l admin0 localhost 'schema install'
-  when: version | version_compare('3.1.2', '>=')
+  when: (inventory_hostname == groups['opushservers'][0]) and (version | version_compare('3.1.2', '>='))
+  changed_when: "'please restart opush to get the service up' in '{{ schema_init.stdout }}'"
   notify:
       - Restart OPush3
   tags: opush
