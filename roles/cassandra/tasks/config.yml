@@ -45,8 +45,8 @@
 - name: Patch cassandra-env script
   lineinfile: >
               dest={{ cassandra_conf_dir }}/cassandra-env.sh
-              regexp='(.*)(\[ \"\$JVM_PATCH_VERSION\" \\\< \"25\" \])'
-              line='\1 [ "$JVM_PATCH_VERSION" -lt 25 ] ; then'
+              regexp='^if (.*\[ \"\$JVM_PATCH_VERSION\") \\\< "([0-9]*)"(\].*)'
+              line='if \1 -lt \2 \3'
               backrefs=yes
   tags: cassandra
 
