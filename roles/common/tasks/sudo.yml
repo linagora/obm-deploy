@@ -10,8 +10,9 @@
 - name: Disable requiretty
   lineinfile: >
    dest=/etc/sudoers
-   regexp="^Defaults.*requiretty"
-   line="#Defaults    requiretty"
+   regexp="^(Defaults.*requiretty)"
+   line="#\1"
+   backrefs=yes
   tags:
       - common
       - sudo
