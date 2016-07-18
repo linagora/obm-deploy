@@ -19,15 +19,15 @@
   when: mode == "mirror"
   tags: postgres
 
-- name: Enable Postgresql 9.1 Repository for CentOS (internet mode) [with proxy]
+- name: Enable Postgresql 9.1 Repository for CentOS 6 (internet mode) [with proxy]
   yum: name=http://yum.postgresql.org/9.1/redhat/rhel-6-x86_64/pgdg-centos91-9.1-4.noarch.rpm
   environment: proxy_env
-  when: mode == "internet" and proxy_host is defined and  ansible_distribution == "CentOS"
+  when: mode == "internet" and proxy_host is defined and  ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
   tags: postgres
 
-- name: Enable Postgresql 9.1 Repository for CentOS (internet mode) [without proxy]
+- name: Enable Postgresql 9.1 Repository for CentOS 6 (internet mode) [without proxy]
   yum: name=http://yum.postgresql.org/9.1/redhat/rhel-6-x86_64/pgdg-centos91-9.1-4.noarch.rpm
-  when: mode == "internet" and proxy_host is not defined and ansible_distribution == "CentOS"
+  when: mode == "internet" and proxy_host is not defined and ansible_distribution == "CentOS" and ansible_distribution_major_version == "6"
   tags: postgres
 
 - name: Enable Postgresql 9.1 Repository for RedHat (internet mode) [with proxy]
