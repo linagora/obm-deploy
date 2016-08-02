@@ -33,7 +33,8 @@
   tags: cassandra
 
 - name: Notify Cassandra purge handlers
-  debug: "Notifying cassandra purge handlers"
+  debug:
+      msg: "Notifying cassandra purge handlers"
   notify: >
       - Stop Cassandra server
       - Delete Cassandra initial data

@@ -36,8 +36,12 @@
   meta: flush_handlers
   tags: opush
 
+- name: Wait for Opush available
+  wait_for: port=5665 delay=15
+  tags: opush
+
 - name: Cassandra schema initialization
-  shell: sleep 10 && sshpass -p 'admin' ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 5665 -l admin0 localhost 'schema install'
+  shell: sshpass -p 'admin' ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 5665 -l admin0 localhost 'schema install'
   when: version | version_compare('3.1.2', '>=')
   notify:
       - Restart OPush3
