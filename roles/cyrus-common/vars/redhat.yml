@@ -1,3 +1,4 @@
 ---
 lib64_dir: "lib64"
 cyrus_lib_dir: "/var/lib/imap"
+entry_point: "{{ inventory_hostname }}"
