@@ -21,8 +21,8 @@
    name={{ db_user }}
    password={{ db_pass }}
    role_attr_flags=CREATEDB,NOSUPERUSER,NOCREATEROLE
-  sudo: yes
-  sudo_user: postgres
+  become: yes
+  become_user: postgres
   delegate_to: "{{ db_master_host }}"
   notify:
     - Merge PostgreSQL configuration files
@@ -36,8 +36,8 @@
    name={{ db_name }}
    owner={{ db_user }}
    encoding='UTF-8'
-  sudo: yes
-  sudo_user: postgres
+  become: yes
+  become_user: postgres
   delegate_to: "{{ db_master_host }}"
   notify:
     - Init OBM2 Postgres database

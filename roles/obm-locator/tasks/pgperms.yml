@@ -2,17 +2,16 @@
 - name: Create PostgreSQL configuration directory
   file: name={{ datadir }}/pg_hba.d state=directory
   delegate_to: "{{ item }}"
-  with_items: groups.databaseservers
+  with_items: "{{ groups.databaseservers }}"
   tags:
     - obm-locator
 
 - name: Deploy obm-locator PostgreSQL permissions
   template: src=03-remote-obm-locator dest={{ datadir }}/pg_hba.d/03-remote-{{ inventory_hostname }}
   delegate_to: "{{ item }}"
-  with_items: groups.databaseservers
+  with_items: "{{ groups.databaseservers }}"
   notify:
     - Merge PostgreSQL configuration files
   tags:
     - obm-locator
     - pgperms
-

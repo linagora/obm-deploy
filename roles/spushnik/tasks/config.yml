@@ -13,7 +13,7 @@
 - name:  Deploy healthcheck.ini configuration
   template: src=03-SPUSHNIK_healthcheck.ini dest=/etc/obm/healthcheck_ini.d/{{ item }} mode=0644
   delegate_to: "{{ item }}"
-  with_items: groups.uiservers
+  with_items: "{{ groups.uiservers }}"
   notify:
    - Merge healthcheck.ini configuration file
    - Fix perms on healthcheck.ini
