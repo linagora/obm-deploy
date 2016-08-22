@@ -16,5 +16,5 @@
   tags: spushnik
 
 - name: Restart Spushnik
-  service: name=spushnik state=restarted
+  shell: /etc/init.d/spushnik restart
   tags: spushnik
