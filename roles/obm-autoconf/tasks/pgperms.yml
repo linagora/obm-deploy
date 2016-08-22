@@ -2,14 +2,14 @@
 - name: Create PostgreSQL configuration directory
   file: name={{ datadir }}/pg_hba.d state=directory
   delegate_to: "{{ item }}"
-  with_items: groups.databaseservers
+  with_items: "{{ groups.databaseservers }}"
   tags:
     - obm-autoconf
 
 - name: Deploy obm-autoconf PostgreSQL permissions
   template: src=03-remote-obm-autoconf dest={{ datadir }}/pg_hba.d/03-remote-{{ inventory_hostname }}
   delegate_to: "{{ item }}"
-  with_items: groups.databaseservers
+  with_items: "{{ groups.databaseservers }}"
   notify:
     - Merge PostgreSQL configuration files
   tags:

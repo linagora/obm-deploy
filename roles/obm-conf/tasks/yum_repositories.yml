@@ -34,7 +34,7 @@
 
 - name: Enable OBM RPM repository (internet mode) [without proxy]
   yum: name=http://rpm.obm.org/release/obm-release-{{ major_version }}.noarch.rpm
-  environment: proxy_env
+  environment: "{{ proxy_env }}"
   when: mode == "internet" and proxy_host is not defined
   tags: obm-conf
 

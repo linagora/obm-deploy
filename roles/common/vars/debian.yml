@@ -26,3 +26,4 @@ common_packages_list:
     - sharutils
     - libhttp-daemon-ssl-perl
     - sshpass
+    - net-tools
