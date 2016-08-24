@@ -12,22 +12,22 @@
 
 ############################### CHECK CONFIGURATION INTEGRITY ###########################
 - name: Check if certificate is cutomized if CA is customized
-  debug: >
-      msg=You can't customize your CA if you don't customize your certificate
+  debug: 
+      msg: "You can't customize your CA if you don't customize your certificate"
   when: ca_file != default_ca_file and cert_file == default_cert_file
   failed_when: True
   tags: obm-cert
 
 - name: Check if CA is cutomized if certificate is customized
-  debug: >
-      msg=You can't customize your certificate if you don't customize your CA
+  debug: 
+      msg: "You can't customize your certificate if you don't customize your CA"
   when: cert_file != default_cert_file and ca_file == default_ca_file
   failed_when: True
   tags: obm-cert
 
 - name: Check if certificate is cutomized if key is customized
-  debug: >
-      msg=You can't customize your key if you don't customize your certificate
+  debug:
+      msg: "You can't customize your key if you don't customize your certificate"
   when: key_file != default_cert_file and cert_file == default_cert_file
   failed_when: True
   tags: obm-cert

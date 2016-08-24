@@ -30,7 +30,7 @@
   tags: obm-db
 
 - meta: flush_handlers
-      
+
 - name: Create OBM database
   postgresql_db:
    name={{ db_name }}
@@ -47,7 +47,8 @@
 - meta: flush_handlers
 
 - name: Fake task to reload OBM-Locator
-  debug: msg="Fake task to reload OBM-Locator"
+  debug:
+    msg: "Fake task to reload OBM-Locator"
   notify:
     - Restart OBM-Locator
   changed_when: true
