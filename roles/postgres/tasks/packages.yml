@@ -45,6 +45,8 @@
   wait_for: port=5432 delay=2
 
 - name: Correct PostgreSQL default template (template1)
-  command: su -l postgres -c "psql -f /tmp/correct_pg_template1.sql"
+  become: yes
+  become_user: postgres
+  command: psql -f /tmp/correct_pg_template1.sql
   when: yum_command_result.changed or apt_command_result.changed
   tags: postgres

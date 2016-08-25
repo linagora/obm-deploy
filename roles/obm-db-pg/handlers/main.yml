@@ -1,7 +1,7 @@
 ---
 - name: Init OBM2 Postgres database
   command: psql -f {{ scriptsdir }}/{{item}}
-  environment: pg_env
+  environment: "{{ pg_env }}"
   with_items:
    - setup.sql
    - create_obmdb_{{ major_version }}.pgsql.sql
@@ -17,7 +17,7 @@
 
 - name: Init OBM3 Postgres database
   command: psql -f {{ scriptsdir }}/{{item}}
-  environment: pg_env
+  environment: "{{ pg_env }}"
   with_items:
    - setup.sql
    - ../creation/create_obmdb.pgsql.sql
