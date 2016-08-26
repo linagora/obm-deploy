@@ -1,5 +1,5 @@
 ---
-- name: RPM Copy slapd.conf
+- name: Copy slapd.conf
   template: >
       src=slapd.conf
       dest={{ ldap_conf_dir }}/slapd.conf
