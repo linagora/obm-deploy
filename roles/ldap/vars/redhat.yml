@@ -1,3 +1,7 @@
 ---
 ldap_conf_dir: "/etc/openldap"
 ldap_pid_dir: "/var/run/openldap"
+ldap_group: "ldap"
+ldap_conf_dst:
+    '6': "/etc/sysconfig/ldap"
+    '7': "/etc/sysconfig/slapd"
