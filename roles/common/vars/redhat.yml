@@ -28,3 +28,7 @@ common_packages_list:
     - mailx
     - sharutils
     - sshpass
+    - net-tools
+epel_release:
+    '6': "http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm"
+    '7': "http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm"

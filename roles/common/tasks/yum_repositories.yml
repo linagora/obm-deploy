@@ -66,7 +66,7 @@
       - repositories
 
 - name: Enable EPEL repository (internet mode) [with proxy]
-  yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+  yum: name={{ epel_release[ansible_distribution_major_version] }}
   environment: proxy_env
   when: mode == "internet" and proxy_host is defined
   tags:
@@ -74,7 +74,7 @@
       - repositories
 
 - name: Enable EPEL repository (internet mode) [without proxy]
-  yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+  yum: name={{ epel_release[ansible_distribution_major_version] }}
   when: mode == "internet" and proxy_host is not defined
   tags:
       - common

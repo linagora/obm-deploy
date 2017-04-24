@@ -1,4 +1,9 @@
 ---
+- name: Check version Apache
+  shell: sh -c "{{ get_apache_version }}"
+  register: apache_version
+  tags: obm-ui
+
 - name: Deploy OBM VirtualHost
   template: >
       src=obm.conf

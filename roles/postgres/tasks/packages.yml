@@ -1,6 +1,6 @@
 ---
 - name: YUM Install PostgreSQL Server
-  yum: pkg=postgresql91-server
+  yum: pkg={{ postgresql_pkg[ansible_distribution_major_version] }}
   register: yum_command_result
   when: ansible_pkg_mgr == "yum"
   tags: postgres
@@ -11,13 +11,28 @@
   when: ansible_pkg_mgr == "apt"
   tags: postgres
 
+- name: YUM Symlink for obm-admin
+  file: src={{ item.src }} dest={{ item.dest }} state=link
+  with_items:
+   - { src: '/etc/init.d/postgresql-9.1', dest: '/etc/init.d/postgresql' }
+   - { src: '/var/lib/pgsql/9.1/data', dest: '/var/lib/pgsql/data' }
+  when: ansible_os_family == "RedHat" and ansible_distribution_major_version == "6"
+  tags: postgres
+
+- name: APT Symlink for obm-admin
+  file: src={{ item.src }} dest={{ item.dest }} state=link
+  with_items:
+   - { src: '/etc/postgresql/9.1/main', dest: '/etc/postgresql/main' }
+  when: ansible_os_family == "Debian"
+  tags: postgres
+
 - name: Initialize PostgreSQL Server
-  command: /etc/init.d/postgresql-9.1 initdb en_US.UTF-8
+  command: sh -c "{{ postgresql_init[ansible_distribution_major_version] }}"
   when: yum_command_result.changed and ansible_os_family == "RedHat"
   tags: postgres
 
 - name: Start PostgreSQL service
-  service: name=postgresql-9.1 state=started enabled=yes
+  service: name=postgresql state=started enabled=yes
   when: ansible_os_family == "RedHat"
   tags: postgres
 
@@ -26,22 +41,12 @@
   when: yum_command_result.changed or apt_command_result.changed
   tags: postgres
 
+- name: Wait PostgreSQL running
+  wait_for: port=5432 delay=2
+
 - name: Correct PostgreSQL default template (template1)
-  command: su -l postgres -c "psql -f /tmp/correct_pg_template1.sql"
+  become: yes
+  become_user: postgres
+  command: psql -f /tmp/correct_pg_template1.sql
   when: yum_command_result.changed or apt_command_result.changed
-  tags: postgres
-
-- name: YUM Symlink for obm-admin
-  file: src={{ item.src }} dest={{ item.dest }} state=link
-  with_items:
-   - { src: '/etc/init.d/postgresql-9.1', dest: '/etc/init.d/postgresql' }
-   - { src: '/var/lib/pgsql/9.1/data', dest: '/var/lib/pgsql/data' }
-  when: ansible_os_family == "RedHat"
-  tags: postgres
-
-- name: APT Symlink for obm-admin
-  file: src={{ item.src }} dest={{ item.dest }} state=link
-  with_items:
-   - { src: '/etc/postgresql/9.1/main', dest: '/etc/postgresql/main' }
-  when: ansible_os_family == "Debian"
   tags: postgres

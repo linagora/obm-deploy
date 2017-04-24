@@ -1,32 +1,37 @@
 ---
 - name: Check OBM version
-  debug: "msg='Configured OBM version : {{ version }} - major : {{ major_version }} - short : {{ short_version }}'"
-  failed_when: short_version not in ['25', '30', '31']
+  debug:
+      msg: "Configured OBM version : {{ version }} - major : {{ major_version }} - short : {{ short_version }}"
+  failed_when: [" short_version not in ['25', '30', '31', '32'] "]
   tags:
       - common
       - infos
 
 - name: Check LAN IP
-  debug: "msg='LAN IP : {{ hostvars[inventory_hostname] | get_ip(lan_net) }}'"
+  debug:
+      msg: "LAN IP : {{ hostvars[inventory_hostname] | get_ip(lan_net) }}"
   tags:
       - common
       - infos
 
 - name: Check Admin IP
-  debug: "msg='Admin IP : {{ hostvars[inventory_hostname] | get_ip(admin_net) }}'"
+  debug:
+      msg: "Admin IP : {{ hostvars[inventory_hostname] | get_ip(admin_net) }}"
   tags:
       - common
       - infos
 
 - name: Check if we are an obm-full
-  debug: "msg='Your server is an obm-full !'"
+  debug:
+      msg: "Your server is an obm-full !"
   when: groups['obmfullservers'][0] is defined
   tags:
       - common
       - infos
 
 - name: Check if distribution is supported
-  debug: "msg=Your distribution is not supported !!"
+  debug:
+      msg: "Your distribution is not supported !!"
   when: ansible_distribution not in ["CentOS", "RedHat", "Debian"]
   failed_when: True
   tags:

@@ -2,3 +2,4 @@
 apache_service: "apache2"
 obmwww: "/www"
 vdir: "sites-enabled"
+get_apache_version: "dpkg -l {{ apache_service }} | awk '/^ii  apache2/ {print $3}' | cut -d"-" -f1"

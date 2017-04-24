@@ -1,6 +1,6 @@
 ---
 - name: Create applied updates list if needed
-  command: touch {{ updatesdir }}/applied_updates.txt
+  file: path={{ updatesdir }}/applied_updates.txt  state=touch
   changed_when: False
   delegate_to: "{{ db_master_host }}"
   tags: obm-db
@@ -29,8 +29,8 @@
 
 - name: Apply remaining DB updates
   command: psql -f {{ updatesdir }}/{{ item }}
-  environment: pg_env
-  with_items: available_updates.stdout_lines
+  environment: "{{ pg_env }}"
+  with_items: "{{ available_updates.stdout_lines }}"
   when: "item not in applied_updates.stdout_lines"
   register: command_result
   delegate_to: "{{ db_master_host }}"
@@ -41,7 +41,7 @@
    line={{ item }}
    state=present
    dest={{ updatesdir }}/applied_updates.txt
-  with_items: available_updates.stdout_lines
+  with_items: "{{ available_updates.stdout_lines }}"
   when: "item not in applied_updates.stdout_lines"
   delegate_to: "{{ db_master_host }}"
   tags: obm-db

@@ -2,8 +2,8 @@
 - name: Merge PostgreSQL configuration files
   assemble: src={{ datadir }}/pg_hba.d dest={{ datadir }}/pg_hba.conf backup=yes
   delegate_to: "{{ item }}"
-  with_items: groups.databaseservers
-  notify: 
+  with_items: "{{ groups.databaseservers }}"
+  notify:
     - Reload Postgres
   tags:
    - postgres-common

@@ -1,7 +1,7 @@
 ---
 - name: Init OBM2 Postgres database
   command: psql -f {{ scriptsdir }}/{{item}}
-  environment: pg_env
+  environment: "{{ pg_env }}"
   with_items:
    - setup.sql
    - create_obmdb_{{ major_version }}.pgsql.sql
@@ -17,7 +17,7 @@
 
 - name: Init OBM3 Postgres database
   command: psql -f {{ scriptsdir }}/{{item}}
-  environment: pg_env
+  environment: "{{ pg_env }}"
   with_items:
    - setup.sql
    - ../creation/create_obmdb.pgsql.sql
@@ -31,6 +31,13 @@
    - ../2.5/updates/update-2.5.7~2.pgsql.sql
    - ../2.5/updates/update-2.5.8~1.pgsql.sql
    - ../3.0/updates/update-3.0.0~1.pgsql.sql
+   - ../3.1/updates/update-3.1.0~1.pgsql.sql
+   - ../3.1/updates/update-3.1.2~1.pgsql.sql
+   - ../3.1/updates/update-3.1.2~2.pgsql.sql
+   - ../3.1/updates/update-3.1.2~3.pgsql.sql
+   - ../3.1/updates/update-3.1.2~4.pgsql.sql
+   - ../3.1/updates/update-3.1.2~5.pgsql.sql
+   - ../3.1/updates/update-3.1.6~1.pgsql.sql
    - crash_admin.sql
   when: major_version | version_compare('3.0', '>=')
   delegate_to: "{{ db_master_host }}"

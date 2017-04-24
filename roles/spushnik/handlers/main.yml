@@ -2,13 +2,13 @@
 - name: Merge healthcheck.ini configuration file
   assemble: src=/etc/obm/healthcheck_ini.d dest=/etc/obm/healthcheck.ini backup=yes
   delegate_to: "{{ item }}"
-  with_items: groups.uiservers
+  with_items: "{{ groups.uiservers }}"
   tags: spushnik
 
 - name: Fix perms on healthcheck.ini
   file: path=/etc/obm/healthcheck.ini mode=0644
   delegate_to: "{{ item }}"
-  with_items: groups.uiservers
+  with_items: "{{ groups.uiservers }}"
   tags: spushnik
 
 - name: Restart Jetty6
@@ -16,5 +16,5 @@
   tags: spushnik
 
 - name: Restart Spushnik
-  service: name=spushnik state=restarted
+  shell: /etc/init.d/spushnik restart
   tags: spushnik

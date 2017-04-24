@@ -1,4 +1,5 @@
 ---
+- include: include_vars.yml
 - include: psycopg2.yml
 - include: yum_repositories.yml
   when: ansible_pkg_mgr == "yum"

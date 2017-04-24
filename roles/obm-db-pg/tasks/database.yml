@@ -21,8 +21,8 @@
    name={{ db_user }}
    password={{ db_pass }}
    role_attr_flags=CREATEDB,NOSUPERUSER,NOCREATEROLE
-  sudo: yes
-  sudo_user: postgres
+  become: yes
+  become_user: postgres
   delegate_to: "{{ db_master_host }}"
   notify:
     - Merge PostgreSQL configuration files
@@ -30,14 +30,14 @@
   tags: obm-db
 
 - meta: flush_handlers
-      
+
 - name: Create OBM database
   postgresql_db:
    name={{ db_name }}
    owner={{ db_user }}
    encoding='UTF-8'
-  sudo: yes
-  sudo_user: postgres
+  become: yes
+  become_user: postgres
   delegate_to: "{{ db_master_host }}"
   notify:
     - Init OBM2 Postgres database
@@ -47,7 +47,8 @@
 - meta: flush_handlers
 
 - name: Fake task to reload OBM-Locator
-  debug: msg="Fake task to reload OBM-Locator"
+  debug:
+    msg: "Fake task to reload OBM-Locator"
   notify:
     - Restart OBM-Locator
   changed_when: true

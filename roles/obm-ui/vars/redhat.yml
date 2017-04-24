@@ -2,3 +2,4 @@
 apache_service: "httpd"
 obmwww: ""
 vdir: "conf.d"
+get_apache_version: rpm -q {{ apache_service }} | cut -d"-" -f2

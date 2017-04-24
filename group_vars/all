@@ -10,7 +10,7 @@ admin_net: "{% if admin_net_tmp == 'undefined' %}{{ ansible_default_ipv4['networ
 
 ssh_port: "{{ obm_ssh_port | default('22') }}"
 
-version: "{{ obm_version | default('3.1.6') }}"
+version: "{{ obm_version | default('3.2.0') }}"
 
 major_version: "{% if version | length == 5 %}{{ version[0:3] }}{% else %}3.0{% endif %}"
 short_version: "{{ major_version | replace('.', '') }}"
@@ -90,4 +90,3 @@ proxy_env:
 
 healthcheck_login: "{{ obm_healthcheck_login | default('admin') }}"
 healthcheck_pass: "{{ obm_healthcheck_pass | default('linagora') }}"
-
