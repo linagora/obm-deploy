@@ -1,3 +1,5 @@
+![Archived](https://img.shields.io/badge/Current_Status-archived-blue?style=flat)
+
 <a name="top-page"></a>
 
 Ansible based Open Business Management ([**OBM**](http://obm.org "The new generation of collaborative software")) full-featured deployment tool.
